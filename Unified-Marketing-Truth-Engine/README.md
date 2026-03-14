@@ -18,6 +18,17 @@ This codebase is a combination of the best implementations from our contributors
 - **What was used:** Marwa's project structure concepts. 
 - **Why:** Marwa's work highlighted the need for single-responsibility modules (e.g., keeping data loading separate from metrics calculations and LLM clients). While Sarah's pipeline was used for the final execution flow, Marwa's principles heavily guided how the `src/` directory should be strictly separated by distinct responsibilities.
 
+### 4. Feature Reduction Pipeline
+- **What was added:** We integrated a native Pandas feature reduction mechanism (`usecols`) into the root `AdsDataLoader`.
+- **Why:** To improve memory efficiency, speed, and reduce noise, the data loader now strictly extracts only the exact columns designated for the pipeline right at the source, ignoring everything else in the raw CSV. Following extraction, the data is immediately mapped to the uniform Schema using `canonicalize_columns`.
+
+### 5. Two-Stage LLM Inference Engine
+- **What was added:** The LLM prompt logic was decoupled from a single massive operation into a functional two-stage pipeline.
+- **Why:** 
+  1. **Stage 1 (Analysis)**: An Analyst persona ingests the raw JSON campaign metrics and outputs an objective, insight-driven `analysis` payload. It is restricted from giving recommendations.
+  2. **Stage 2 (Recommendation)**: A Strategist persona ingests the `analysis` output from Stage 1, evaluates it against the Campaign targets and Business Domain, and deterministically outputs 5-8 highly actionable `recommendation` cards.
+  This decoupling improves LLM reasoning, reduces token contamination, and creates modular outputs that can be audited individually.
+
 ## How to Run
 
 1. **Install Dependencies:**
