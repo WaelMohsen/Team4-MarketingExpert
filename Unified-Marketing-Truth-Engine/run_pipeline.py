@@ -35,6 +35,8 @@ def main():
         campaign_platforms_data=campaign_platforms_data
     )
     
+    from src.LLMs_and_Prompts.structured_outputs import AnalysisResponse, RecommendationResponse
+    
     print("\n--- Executing Stage 1: Analysis ---")
     
     client = LLMApiClient(
@@ -42,7 +44,7 @@ def main():
         max_output_tokens=1500,
     )
     
-    analysis_result: Dict[str, Any] = client.generate_json(analysis_messages)
+    analysis_result: Dict[str, Any] = client.generate_json(analysis_messages, response_format=AnalysisResponse)
     print("\n=== Stage 1 LLM JSON Response (Analysis) ===\n")
     print(json.dumps(analysis_result, ensure_ascii=False, indent=2))
     
@@ -72,7 +74,7 @@ def main():
     )
 
     print("\n--- Executing Stage 2: Recommendations ---")
-    recommendation_result: Dict[str, Any] = client.generate_json(recommendation_messages)
+    recommendation_result: Dict[str, Any] = client.generate_json(recommendation_messages, response_format=RecommendationResponse)
     
     print("\n=== Stage 2 LLM JSON Response (Recommendations) ===\n")
     print(json.dumps(recommendation_result, ensure_ascii=False, indent=2))
