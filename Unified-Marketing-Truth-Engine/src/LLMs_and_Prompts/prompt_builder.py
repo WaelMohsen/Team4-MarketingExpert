@@ -16,43 +16,59 @@ class PromptBuilder:
 
     loader: PromptLoader
 
-    def build_LLMs_prompt(
+    def build_analysis_prompt(
         self,
-        sysPromptPath: str = "prompt_system.txt",
-        userPromptPath: str = "prompt_user.txt",
+        sysPromptPath: str = "prompt_system_analysis.txt",
+        userPromptPath: str = "prompt_user_analysis.txt",
         *,
-        campaign_target: Dict[str, Any],
-        business_domain: Dict[str, Any],
         campaign_platforms_data: List[Dict[str, Any]],
         strict: bool = True,
     ) -> List[Dict[str, str]]:
-        #print('prompt_builder')
-        # Load prompts (relative to loader.prompts_dir unless you pass absolute paths)
         system_prompt = self.loader.load_prompt_text(sysPromptPath)
         user_prompt_template = self.loader.load_prompt_text(userPromptPath)
 
-        # Serialize dict/list -> JSON strings (so template stays valid JSON)
+        campaign_platforms_data_json = self._to_json(campaign_platforms_data)
+        user_prompt = user_prompt_template.replace("{{CAMPAIGN_PLATFORMS_DATA}}", campaign_platforms_data_json)
+
+        if strict:
+            required = ["{{CAMPAIGN_PLATFORMS_DATA}}"]
+            still_present = [tok for tok in required if tok in user_prompt]
+            if still_present:
+                raise ValueError("User prompt still contains unreplaced placeholder(s): " + ", ".join(still_present))
+
+        return [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+
+    def build_recommendation_prompt(
+        self,
+        sysPromptPath: str = "prompt_system_recommendation.txt",
+        userPromptPath: str = "prompt_user_recommendation.txt",
+        *,
+        campaign_target: Dict[str, Any],
+        business_domain: Dict[str, Any],
+        analysis_json: Dict[str, Any],
+        strict: bool = True,
+    ) -> List[Dict[str, str]]:
+        system_prompt = self.loader.load_prompt_text(sysPromptPath)
+        user_prompt_template = self.loader.load_prompt_text(userPromptPath)
+
         campaign_target_json = self._to_json(campaign_target)
         business_domain_json = self._to_json(business_domain)
-        campaign_platforms_data_json = self._to_json(campaign_platforms_data)
+        analysis_json_str = self._to_json(analysis_json)
+        
         user_prompt = (
             user_prompt_template.replace("{{CAMPAIGN_TARGET}}", campaign_target_json)
             .replace("{{BUSINESS_DOMAIN}}", business_domain_json)
-            .replace("{{CAMPAIGN_PLATFORMS_DATA}}", campaign_platforms_data_json)
+            .replace("{{ANALYSIS_JSON}}", analysis_json_str)
         )
 
         if strict:
-            required = [
-                "{{CAMPAIGN_TARGET}}",
-                "{{BUSINESS_DOMAIN}}",
-                "{{CAMPAIGN_PLATFORMS_DATA}}",
-            ]
+            required = ["{{CAMPAIGN_TARGET}}", "{{BUSINESS_DOMAIN}}", "{{ANALYSIS_JSON}}"]
             still_present = [tok for tok in required if tok in user_prompt]
             if still_present:
-                raise ValueError(
-                    "User prompt still contains unreplaced placeholder(s): "
-                    + ", ".join(still_present)
-                )
+                raise ValueError("User prompt still contains unreplaced placeholder(s): " + ", ".join(still_present))
 
         return [
             {"role": "system", "content": system_prompt},

@@ -1,0 +1,8 @@
+TASK
+Analyze the INPUT JSON and produce OUTPUT JSON that strictly follows the OUTPUT FORMAT.
+- The analysis section must contain NO recommendations.
+
+INPUT JSON
+{
+  "campaign_platforms_data": {{CAMPAIGN_PLATFORMS_DATA}}
+}

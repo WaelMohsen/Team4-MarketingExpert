@@ -25,72 +25,63 @@ def main():
     
     #print(campaign_platforms_data)
 
-    # --- Prompting layer ---
+    # --- Prompting layer : Stage 1 (Analysis) ---
     loader = PromptLoader.from_module_dir()
     builder = PromptBuilder(loader=loader)
     
-    # Load a prompt by passing its relative path manually
-    promptPath = "Prompt 1.txt"
-    prompt = loader.load_prompt_text(path = promptPath)
-
-    # Load a prompt that is inside LLMs_and_Prompts 
-    #prompt = loader.load_text("Prompt 1.txt")
+    analysis_messages = builder.build_analysis_prompt(
+        sysPromptPath="prompt_system_analysis.txt",
+        userPromptPath="prompt_user_analysis.txt",
+        campaign_platforms_data=campaign_platforms_data
+    )
     
-    campaign_target={"primary_goal": "increase qualified leads",
-                    "kpis": ["leads", "cpl"]}
+    print("\n--- Executing Stage 1: Analysis ---")
     
-    business_domain={
-            "industry": "Retail",
-            "offering": "Membership plan",
-            "audience": "People shopping for monthly essentials",
-            "funnel_stage": "conversion",
-        }
-    
-    # IMPORTANT: this should return a list[{"role": "...", "content": "..."}]    
-    messages = builder.build_LLMs_prompt(
-        sysPromptPath="prompt_system.txt",
-        userPromptPath="prompt_user.txt",
-        campaign_target=campaign_target,
-        business_domain=business_domain,
-        campaign_platforms_data = campaign_platforms_data)
-    
-    # messages is what you send to your LLM api_client
-    print("\n--- SYSTEM ---\n")
-    #print(messages[0]["role"], messages[0]["content"][:])
-    print("\n--- USER ---\n")
-    #print(messages[1]["role"], messages[1]["content"][:])
-
-    # Optional: save messages to file for debugging / inspection
-    with open("Data/outputs/messages.json", "w", encoding="utf-8") as f:
-        json.dump(messages, f, ensure_ascii=False, indent=2)
-
-    # Call the LLM via api_client ---
     client = LLMApiClient(
         model="gpt-5-mini",
-        #temperature=0.3,
-        max_output_tokens=1200,
+        max_output_tokens=1500,
+    )
+    
+    analysis_result: Dict[str, Any] = client.generate_json(analysis_messages)
+    print("\n=== Stage 1 LLM JSON Response (Analysis) ===\n")
+    print(json.dumps(analysis_result, ensure_ascii=False, indent=2))
+    
+    # Save intermediate for debugging
+    with open("data/outputs/analysis.json", "w", encoding="utf-8") as f:
+        json.dump(analysis_result, f, ensure_ascii=False, indent=2)
+
+    # --- Prompting layer : Stage 2 (Recommendation) ---
+    campaign_target = {
+        "primary_goal": "increase qualified leads",
+        "kpis": ["leads", "cpl"]
+    }
+    
+    business_domain = {
+        "industry": "Retail",
+        "offering": "Membership plan",
+        "audience": "People shopping for monthly essentials",
+        "funnel_stage": "conversion",
+    }
+    
+    recommendation_messages = builder.build_recommendation_prompt(
+        sysPromptPath="prompt_system_recommendation.txt",
+        userPromptPath="prompt_user_recommendation.txt",
+        campaign_target=campaign_target,
+        business_domain=business_domain,
+        analysis_json=analysis_result
     )
 
-
-    # If your prompt expects normal text output instead, use:
-    # result_text = client.generate(messages)
-    # print(result_text)
-
-
-    # If your prompt expects JSON output:
-    result: Dict[str, Any] = client.generate_json(messages)
-    print("\n=== LLM JSON Response ===\n")
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    # If your prompt expects normal text output instead, use:
-    # result_text = client.generate(messages)
-    # print(result_text)
-
+    print("\n--- Executing Stage 2: Recommendations ---")
+    recommendation_result: Dict[str, Any] = client.generate_json(recommendation_messages)
     
-    return messages
-
-
+    print("\n=== Stage 2 LLM JSON Response (Recommendations) ===\n")
+    print(json.dumps(recommendation_result, ensure_ascii=False, indent=2))
     
+    # Optional: save messages to file for debugging / inspection
+    with open("data/outputs/recommendations.json", "w", encoding="utf-8") as f:
+        json.dump(recommendation_result, f, ensure_ascii=False, indent=2)
+    
+    return recommendation_result
 
 if __name__ == "__main__":
     main()
