@@ -20,6 +20,7 @@ class UnifiedAdsPipeline:
     def transform(
         self,
         source: Source, *,
+        usecols: Optional[list[str]] = None,
         parse_dates: bool = True,
         fill_missing_metrics_with_zero: bool = True,
         remove_duplicates: bool = True,
@@ -32,7 +33,12 @@ class UnifiedAdsPipeline:
         recompute_rates: bool = True,
         campaign_objective: Optional[str] ="Leads"
         ) -> pd.DataFrame:
-        df = self.loader.load(source)  # dataframe becomes "source": DataFrame or path
+        
+        read_kwargs = {"usecols": usecols} if usecols else None
+        df = self.loader.load(source, read_kwargs=read_kwargs)
+
+        # Map to canonical schema immediately
+        df = self.schema.canonicalize_columns(df)
 
         self.schema.validate_required(df)
 

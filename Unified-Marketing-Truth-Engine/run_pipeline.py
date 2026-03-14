@@ -17,7 +17,8 @@ def main():
     # transform() = read -> map -> validate -> types -> duplicates -> compute KPIs
 
     campaign_platforms_data = pipeline.transform(
-        "Data/raw/global_ads_performance_dataset.csv",
+        "data/raw/global_ads_performance_dataset.csv",
+        usecols=["date", "platform", "campaign_type", "impressions", "clicks", "spend", "conversions", "revenue"],
         compute_kpis=True,
         campaign_objective = "Leads"
     )
