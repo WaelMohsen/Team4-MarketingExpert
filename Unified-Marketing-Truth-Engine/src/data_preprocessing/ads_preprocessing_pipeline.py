@@ -24,6 +24,7 @@ class UnifiedAdsPipeline:
         self,
         source: Source,
         *,
+        usecols: Optional[list[str]] = None,
         parse_dates: bool = True,
         fill_missing_metrics_with_zero: bool = True,
         remove_duplicates: bool = True,
@@ -33,6 +34,8 @@ class UnifiedAdsPipeline:
         group_by_date: bool = False,
         time_granularity: Optional[str] = None,
         sum_cols: Optional[list[str]] = None,
+        recompute_rates: bool = True,
+        campaign_objective: Optional[str] = "Leads"
     ) -> pd.DataFrame:
         """
         End-to-end data preparation that returns an aggregated DataFrame.
@@ -42,7 +45,11 @@ class UnifiedAdsPipeline:
         downstream components (e.g. health scoring, platform summaries)
         can operate on the tabular data.
         """
-        df = self.loader.load(source)
+        read_kwargs = {"usecols": usecols} if usecols else None
+        df = self.loader.load(source, read_kwargs=read_kwargs)
+        
+        # Map to canonical schema immediately
+        df = self.schema.canonicalize_columns(df)
 
         self.schema.validate_required(df)
 

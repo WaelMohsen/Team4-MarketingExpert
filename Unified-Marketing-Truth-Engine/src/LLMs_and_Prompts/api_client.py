@@ -1,5 +1,4 @@
-# MY GPT API key
-# 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
+
 from __future__ import annotations
 
 import os
@@ -60,14 +59,14 @@ class LLMApiClient:
         """
 
         try:
-            response = self.client.responses.create(
+            response = self.client.chat.completions.create(
                 model=self.model,
-                input=messages,
+                messages=messages,
                 #temperature=self.temperature,
-                max_output_tokens=self.max_output_tokens,
+                max_completion_tokens=self.max_output_tokens,
             )
 
-            return response.output_text.strip()
+            return response.choices[0].message.content.strip()
 
         except OpenAIError as e:
             raise RuntimeError(f"OpenAI API error: {str(e)}") from e
@@ -78,29 +77,41 @@ class LLMApiClient:
     # ---------------------------------------------------------
     # JSON-enforced call
     # ---------------------------------------------------------
-    def generate_json(self, messages: List[Dict[str, str]]) -> Dict[str, Any]:
+    def generate_json(self, messages: List[Dict[str, str]], response_format: Optional[Any] = None) -> Dict[str, Any]:
         """
         Forces JSON output from the model and returns parsed dict.
         Raises error if invalid JSON.
         """
 
         try:
-            response = self.client.responses.create(
-                model=self.model,
-                input=messages,
-                #temperature=self.temperature,
-                max_output_tokens=self.max_output_tokens,
-                text={"format": {"type": "json_object"}},
-            )
+            if response_format:
+                response = self.client.beta.chat.completions.parse(
+                    model=self.model,
+                    messages=messages,
+                    #temperature=self.temperature,
+                    max_completion_tokens=self.max_output_tokens,
+                    response_format=response_format,
+                )
+                
+                parsed_obj = response.choices[0].message.parsed
+                if parsed_obj:
+                    return parsed_obj.model_dump()
+                else:
+                    return json.loads(response.choices[0].message.content)
+            else:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    #temperature=self.temperature,
+                    max_completion_tokens=self.max_output_tokens,
+                    response_format={"type": "json_object"},
+                )
 
-            raw_text = response.output_text.strip()
-
-            return json.loads(raw_text)
+                raw_text = response.choices[0].message.content.strip()
+                return json.loads(raw_text)
 
         except json.JSONDecodeError as e:
-            raise ValueError(
-                f"Model returned invalid JSON:\n{raw_text}"
-            ) from e
+            raise ValueError("Model returned invalid JSON.") from e
 
         except OpenAIError as e:
             raise RuntimeError(f"OpenAI API error: {str(e)}") from e

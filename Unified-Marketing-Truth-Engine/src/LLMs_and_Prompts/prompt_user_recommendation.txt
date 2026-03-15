@@ -1,0 +1,10 @@
+TASK
+Analyze the INPUT JSON and produce OUTPUT JSON that strictly follows the OUTPUT FORMAT.
+- Provide 5–8 recommendation cards based ONLY on the provided analysis.
+
+INPUT JSON
+{
+  "campaign_target": {{CAMPAIGN_TARGET}},
+  "business_domain": {{BUSINESS_DOMAIN}},
+  "analysis": {{ANALYSIS_JSON}}
+}
