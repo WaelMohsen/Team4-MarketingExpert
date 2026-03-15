@@ -31,17 +31,30 @@ This codebase is a combination of the best implementations from our contributors
 
 ## How to Run
 
-1. **Install Dependencies:**
+1. **Install Dependencies using `uv`:**
+   We recommend using `uv` for fast python package and environment management.
    ```bash
-   pip install -r requirements.txt
+   # Create a new virtual environment
+   uv venv
+
+   # Activate it (Windows)
+   .venv\Scripts\activate
+
+   # Install the dependencies from the unified requirements
+   uv pip install -r requirements.txt
    ```
 
 2. **Setup Environment:**
-   Copy `.env.example` to `.env` and configure your API keys (e.g., `OPENAI_API_KEY` or `GROQ_API_KEY`).
+   Copy `.env.example` to `.env` and configure your API keys (e.g., `OPENAI_API_KEY`).
 
 3. **Run the Pipeline:**
+   If you have your environment activated, you can simply run:
    ```bash
    python run_pipeline.py
+   ```
+   Or explicitly use `uv run` to execute it without activating manually:
+   ```bash
+   uv run python run_pipeline.py
    ```
 
 4. **Explore the Notebooks:**

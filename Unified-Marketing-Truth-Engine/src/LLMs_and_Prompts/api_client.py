@@ -1,5 +1,4 @@
-# MY GPT API key
-# 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
+
 from __future__ import annotations
 
 import os
@@ -64,7 +63,7 @@ class LLMApiClient:
                 model=self.model,
                 messages=messages,
                 #temperature=self.temperature,
-                max_tokens=self.max_output_tokens,
+                max_completion_tokens=self.max_output_tokens,
             )
 
             return response.choices[0].message.content.strip()
@@ -90,7 +89,7 @@ class LLMApiClient:
                     model=self.model,
                     messages=messages,
                     #temperature=self.temperature,
-                    max_tokens=self.max_output_tokens,
+                    max_completion_tokens=self.max_output_tokens,
                     response_format=response_format,
                 )
                 
@@ -104,7 +103,7 @@ class LLMApiClient:
                     model=self.model,
                     messages=messages,
                     #temperature=self.temperature,
-                    max_tokens=self.max_output_tokens,
+                    max_completion_tokens=self.max_output_tokens,
                     response_format={"type": "json_object"},
                 )
 

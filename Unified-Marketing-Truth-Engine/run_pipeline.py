@@ -1,4 +1,6 @@
 import json
+from dotenv import load_dotenv
+load_dotenv()
 from typing                                             import List, Dict, Any
 from src.data_preprocessing.data_loader                 import AdsDataLoader
 from src.data_preprocessing.ads_schema                  import UnifiedAdsSchema
@@ -40,8 +42,8 @@ def main():
     print("\n--- Executing Stage 1: Analysis ---")
     
     client = LLMApiClient(
-        model="gpt-5-mini",
-        max_output_tokens=1500,
+        model="gpt-4o",  # Defaulting to gpt-4o which doesn't use massive hidden reasoning loops, saving tokens
+        max_output_tokens=4000,
     )
     
     analysis_result: Dict[str, Any] = client.generate_json(analysis_messages, response_format=AnalysisResponse)
