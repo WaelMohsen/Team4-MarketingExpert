@@ -1,5 +1,4 @@
-# MY GPT API key
-# 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
+
 from __future__ import annotations
 
 import os
