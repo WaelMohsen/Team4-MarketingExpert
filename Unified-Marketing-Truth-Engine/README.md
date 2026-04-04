@@ -29,6 +29,19 @@ This codebase is a combination of the best implementations from our contributors
   2. **Stage 2 (Recommendation)**: A Strategist persona ingests the `analysis` output from Stage 1, evaluates it against the Campaign targets and Business Domain, and deterministically outputs 5-8 highly actionable `recommendation` cards.
   This decoupling improves LLM reasoning, reduces token contamination, and creates modular outputs that can be audited individually.
 
+## Expected Input Data
+
+For the pipeline to correctly map metrics and compute KPIs, each campaign row in your source CSV should include at least:
+- `platform` (e.g., `"Google Ads"`, `"Meta"`)
+- `objective` (e.g., `"Leads"`) – optional but recommended
+- `impressions`
+- `clicks`
+- `conversions`
+- `revenue`
+- **`spend` _or_ `cost`** (the pipeline automatically normalizes `cost` → `spend`)
+
+The pipeline handles aggregating duplicate rows by `platform` (and `objective`), summing numeric metrics, and computing KPI features (like ROAS = revenue / spend).
+
 ## How to Run
 
 1. **Install Dependencies:**
@@ -37,12 +50,23 @@ This codebase is a combination of the best implementations from our contributors
    ```
 
 2. **Setup Environment:**
-   Copy `.env.example` to `.env` and configure your API keys (e.g., `OPENAI_API_KEY` or `GROQ_API_KEY`).
+   Copy `.env.example` to `.env` and configure your API keys:
+   ```bash
+   OPENAI_API_KEY="<your_openai_api_key_here>"
+   OPENAI_MODEL="gpt-4o-mini"
+   ```
 
 3. **Run the Pipeline:**
+   The pipeline can be customized using CLI arguments:
    ```bash
-   python run_pipeline.py
+   python run_pipeline.py \
+       --input-csv data/raw/global_ads_performance_dataset.csv \
+       --analysis-output data/outputs/analysis.json \
+       --recommendations-output data/outputs/recommendations.json
    ```
 
 4. **Explore the Notebooks:**
-   Launch Jupyter and check out `notebooks/` for interactive step-by-step demonstrations.
+   Launch Jupyter and check out `notebooks/campaign_recommendation_demo.ipynb` for an interactive step-by-step interactive POC using identical modules.
+   ```bash
+   jupyter notebook
+   ```
