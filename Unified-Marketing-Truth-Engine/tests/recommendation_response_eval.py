@@ -9,27 +9,122 @@ except ImportError:
     raise ImportError("DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`.")
 
 # Set up logging for the evaluator
-logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+LOG_DIR = "logs"
+os.makedirs(LOG_DIR, exist_ok=True)
+
+log_file = os.path.join(LOG_DIR, "evaluation.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+    handlers=[
+        logging.FileHandler(log_file, encoding="utf-8"),
+        logging.StreamHandler()  # still prints to console
+    ]
+)
+
 logger = logging.getLogger(__name__)
+
 
 class EvaluateRecommendation(dspy.Signature):
     """
-    Evaluate a marketing recommendation based on clarity, accuracy, and non-redundancy, For non-marketeer end users.
+    Evaluate the quality of a marketing recommendation for non-marketer end users.
+
+    The evaluation should consider:
+    - Clarity: Is the recommendation easy to understand and actionable?
+    - Accuracy: Is it logically correct and grounded in the provided context?
+    - Non-redundancy: Is it specific and avoids generic or repeated advice?
+
+    The evaluator MUST:
+    - Use only the provided inputs (no assumptions).
+    - Be strict and critical (avoid inflated scores).
+    - Justify each score with concrete reasoning.
+    - Return structured, consistent outputs.
     """
-    
-    campaign_target = dspy.InputField(desc="The high-level goal and KPIs for the campaign.")
-    business_domain = dspy.InputField(desc="The industry, offering, target audience, and funnel stage.")
-    analysis_context = dspy.InputField(desc="The detailed analysis insights derived from the data.")
-    recommendation = dspy.InputField(desc="The recommendation response/card to evaluate, typically in JSON format.")
-    
-    clarity_reasoning = dspy.OutputField(desc="Reasoning about the clarity and actionability of the recommendation.")
-    clarity_score = dspy.OutputField(desc="A score between 1 and 5 indicating how clear, understandable, and actionable the recommendation is.")
-    
-    accuracy_reasoning = dspy.OutputField(desc="Reasoning about whether the recommendation is logically valid and grounded in the provided analysis context.")
-    accuracy_score = dspy.OutputField(desc="A score between 1 and 5 indicating logical accuracy and validity based on the context.")
-    
-    redundancy_reasoning = dspy.OutputField(desc="Reasoning about whether this recommendation is unique and avoids repeating generic tropes.")
-    non_redundancy_score = dspy.OutputField(desc="A score between 1 and 5 indicating how unique and non-redundant the recommendation is.")
+
+    # Inputs
+    campaign_target = dspy.InputField(
+        desc="Campaign goal and KPIs (e.g., increase CTR, reduce CPA, improve ROAS)."
+    )
+    business_domain = dspy.InputField(
+        desc="Industry, product/service, audience, and funnel stage."
+    )
+    analysis_context = dspy.InputField(
+        desc="Key insights derived from campaign data (metrics, trends, issues)."
+    )
+    recommendation = dspy.InputField(
+        desc="The recommendation to evaluate (usually structured JSON)."
+    )
+
+    # Clarity
+    clarity_reasoning = dspy.OutputField(
+        desc=(
+            "Explain whether the recommendation is clear, specific, and actionable. "
+            "Mention if steps, metrics, or examples are missing or vague."
+        )
+    )
+    clarity_score = dspy.OutputField(
+        desc=(
+            "Integer score (1-5): "
+            "1=very vague/unusable, 3=somewhat clear but incomplete, 5=very clear and directly actionable."
+        )
+    )
+
+    # Accuracy
+    accuracy_reasoning = dspy.OutputField(
+        desc=(
+            "Explain whether the recommendation logically follows from the analysis_context. "
+            "Highlight mismatches, unsupported claims, or correct data usage."
+        )
+    )
+    accuracy_score = dspy.OutputField(
+        desc=(
+            "Integer score (1-5): "
+            "1=incorrect/misleading, 3=partially correct, 5=fully grounded and logically sound."
+        )
+    )
+
+    # Non-redundancy
+    redundancy_reasoning = dspy.OutputField(
+        desc=(
+            "Explain whether the recommendation is specific vs generic. "
+            "Call out clichés (e.g., 'improve targeting', 'optimize creatives') if not contextualized."
+        )
+    )
+    non_redundancy_score = dspy.OutputField(
+        desc=(
+            "Integer score (1-5): "
+            "1=generic/repetitive, 3=somewhat specific, 5=highly tailored and unique."
+        )
+    )
+
+    # Overall judgment
+    overall_score = dspy.OutputField(
+        desc=(
+            "Weighted overall score (1-5). Prioritize accuracy > clarity > non-redundancy."
+        )
+    )
+
+    verdict = dspy.OutputField(
+        desc=(
+            "Final decision: one of ['reject', 'revise', 'accept']. "
+            "Reject = major issues, Revise = usable but needs improvement, Accept = high quality."
+        )
+    )
+
+    key_issues = dspy.OutputField(
+        desc=(
+            "List of the most critical problems in the recommendation (bullet points)."
+        )
+    )
+
+    improvement_suggestions = dspy.OutputField(
+        desc=(
+            "Concrete suggestions to improve the recommendation (specific rewrites or additions)."
+        )
+    )
+
 
 
 class RecommendationEvaluator(dspy.Module):
@@ -37,44 +132,95 @@ class RecommendationEvaluator(dspy.Module):
         super().__init__()
         self.evaluate = dspy.ChainOfThought(EvaluateRecommendation)
 
-    def forward(self, campaign_target: str, business_domain: str, analysis_context: str, recommendation: str) -> Dict[str, Any]:
+    def _safe_parse_score(self, value, default=0.0):
+        """Robust score parsing (handles int, float, string, None)."""
+        try:
+            return float(value)
+        except (ValueError, TypeError):
+            return default
+
+    def forward(
+        self,
+        campaign_target: str,
+        business_domain: str,
+        analysis_context: str,
+        recommendation: str
+    ) -> Dict[str, Any]:
         """
-        Evaluate a given recommendation card/text using the context of the campaign, business domain, and stage 1 analysis.
+        Evaluate a recommendation using campaign context.
+
+        Returns structured evaluation including:
+        - individual scores
+        - reasoning
+        - overall score (weighted)
+        - verdict
+        - improvement signals
         """
-        # Call the DSPy Module with all context inputs
+
         result = self.evaluate(
             campaign_target=campaign_target,
             business_domain=business_domain,
             analysis_context=analysis_context,
             recommendation=recommendation
         )
-        
-        # Safely parse numeric scores
-        try:
-            clarity_score = float(result.clarity_score)
-        except ValueError:
-            clarity_score = 0.0
-            
-        try:
-            accuracy_score = float(result.accuracy_score)
-        except ValueError:
-            accuracy_score = 0.0
-            
-        try:
-            non_redundancy_score = float(result.non_redundancy_score)
-        except ValueError:
-            non_redundancy_score = 0.0
-            
-        overall_score = (clarity_score + accuracy_score + non_redundancy_score) / 3.0
-            
+
+        # --- Parse scores safely ---
+        clarity_score = self._safe_parse_score(result.clarity_score)
+        accuracy_score = self._safe_parse_score(result.accuracy_score)
+        non_redundancy_score = self._safe_parse_score(result.non_redundancy_score)
+
+        # --- Weighted overall (accuracy > clarity > non-redundancy) ---
+        weighted_overall = (
+            (0.5 * accuracy_score) +
+            (0.3 * clarity_score) +
+            (0.2 * non_redundancy_score)
+        )
+
+        # --- Try to use LLM-provided overall_score if valid ---
+        llm_overall_score = self._safe_parse_score(
+            getattr(result, "overall_score", None),
+            default=None
+        )
+
+        final_overall_score = (
+            llm_overall_score
+            if llm_overall_score is not None and llm_overall_score > 0
+            else weighted_overall
+        )
+
+        # --- Extract optional fields safely ---
+        verdict = getattr(result, "verdict", "unknown")
+
+        key_issues = getattr(result, "key_issues", [])
+        if isinstance(key_issues, str):
+            key_issues = [key_issues]
+
+        improvement_suggestions = getattr(result, "improvement_suggestions", [])
+        if isinstance(improvement_suggestions, str):
+            improvement_suggestions = [improvement_suggestions]
+
+        # --- Final structured output ---
         return {
-            "clarity_score": clarity_score,
-            "clarity_reasoning": result.clarity_reasoning,
-            "accuracy_score": accuracy_score,
-            "accuracy_reasoning": result.accuracy_reasoning,
-            "non_redundancy_score": non_redundancy_score,
-            "redundancy_reasoning": result.redundancy_reasoning,
-            "overall_score": overall_score
+            "scores": {
+                "clarity": clarity_score,
+                "accuracy": accuracy_score,
+                "non_redundancy": non_redundancy_score,
+                "overall": final_overall_score
+            },
+            "reasoning": {
+                "clarity": result.clarity_reasoning,
+                "accuracy": result.accuracy_reasoning,
+                "non_redundancy": result.redundancy_reasoning
+            },
+            "verdict": verdict,
+            "key_issues": key_issues,
+            "improvement_suggestions": improvement_suggestions,
+
+            # Optional debug info (very useful in pipelines)
+            "meta": {
+                "weighted_overall": weighted_overall,
+                "llm_overall_used": llm_overall_score is not None
+            }
         }
 
 
@@ -85,12 +231,15 @@ def evaluate_recommendations(
     analysis_context: Dict[str, Any]
 ) -> List[Dict[str, Any]]:
     """
-    Helper function to iterate through a list of recommendations and evaluate each one in context.
+    Evaluate a list of recommendations using contextual campaign data.
+
+    Returns a list of structured evaluation results.
     """
+
     evaluator = RecommendationEvaluator()
     results = []
     
-    # Convert structures to string once for all evaluations
+    # Convert structures to string once
     campaign_target_str = json.dumps(campaign_target, indent=2)
     business_domain_str = json.dumps(business_domain, indent=2)
     analysis_context_str = json.dumps(analysis_context, indent=2)
@@ -98,32 +247,57 @@ def evaluate_recommendations(
     for idx, rec in enumerate(recommendations_data):
         logger.info(f"Evaluating Recommendation {idx + 1}...")
         
-        # Convert dictionary to string for DSPy to evaluate
         rec_str = json.dumps(rec, indent=2)
         
-        eval_result = evaluator(
-            campaign_target=campaign_target_str,
-            business_domain=business_domain_str,
-            analysis_context=analysis_context_str,
-            recommendation=rec_str
-        )
-        
-        # Merge original with evaluation results
+        try:
+            eval_result = evaluator(
+                campaign_target=campaign_target_str,
+                business_domain=business_domain_str,
+                analysis_context=analysis_context_str,
+                recommendation=rec_str
+            )
+        except Exception as e:
+            logger.error(f"Evaluation failed for recommendation {idx + 1}: {e}")
+            continue
+
+        # Attach metadata
         eval_result["recommendation_index"] = idx
+        eval_result["original_recommendation"] = rec
+
+        # Extract scores safely for logging
+        scores = eval_result.get("scores", {})
+        clarity = scores.get("clarity", 0.0)
+        accuracy = scores.get("accuracy", 0.0)
+        non_redundancy = scores.get("non_redundancy", 0.0)
+        overall = scores.get("overall", 0.0)
+
+        logger.info(
+            f"[Rec {idx + 1}] "
+            f"Clarity: {clarity:.2f} | "
+            f"Accuracy: {accuracy:.2f} | "
+            f"Non-Redundancy: {non_redundancy:.2f} | "
+            f"Overall: {overall:.2f} | "
+            f"Verdict: {eval_result.get('verdict', 'N/A')}"
+        )
+
         results.append(eval_result)
-        
-        logger.info(f"Scores for Rec {idx + 1} - Clarity: {eval_result['clarity_score']}, "
-                    f"Accuracy: {eval_result['accuracy_score']}, "
-                    f"Non-Redundancy: {eval_result['non_redundancy_score']}, "
-                    f"Overall: {eval_result['overall_score']:.2f}\n")
-                    
+
+    # --- Optional: Rank recommendations by overall score ---
+    results = sorted(
+        results,
+        key=lambda x: x.get("scores", {}).get("overall", 0.0),
+        reverse=True
+    )
+
+    logger.info("\nEvaluation completed. Recommendations ranked by overall score.\n")
+
     return results
 
 if __name__ == "__main__":
     from dotenv import load_dotenv
     load_dotenv()
     
-    # Configure the DSPy LM Client Backend
+    # Configure DSPy LM
     try:
         model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
         logger.info(f"Configuring DSPy LM with model: openai/{model}")
@@ -132,7 +306,7 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Failed to configure DSPy LM: {e}")
 
-    # Example Context Payloads: Real E-commerce Holiday Sale Scenario
+    # --- Sample Inputs ---
     sample_campaign_target = {
         "primary_goal": "Maximize ROAS during the Winter Holiday Sale",
         "kpis": ["ROAS", "CPA", "Conversion Volume"]
@@ -168,7 +342,6 @@ if __name__ == "__main__":
         }
     }
 
-    # Example Test Payload replicating RecommendationCard
     sample_recommendations = [
         {
             "title": "Shift Meta Budget to fully fund Google Ads",
@@ -199,15 +372,65 @@ if __name__ == "__main__":
         }
     ]
     
-    logger.info("Executing sample evaluation on 3 recommendations with real-world E-commerce context...\n")
+    # --- Run Evaluation ---
+    logger.info("Executing evaluation...\n")
+
     eval_output = evaluate_recommendations(
         sample_recommendations,
         campaign_target=sample_campaign_target,
         business_domain=sample_business_domain,
         analysis_context=sample_analysis_context
     )
+
+    # --- Pretty Summary ---
+    print("\n" + "="*60)
+    print("           EVALUATION SUMMARY (RANKED)")
+    print("="*60)
+
+    for i, rec in enumerate(eval_output, 1):
+        scores = rec.get("scores", {})
+        title = rec.get("original_recommendation", {}).get("title", "N/A")
+
+        print(f"\n#{i} - {title}")
+        print("-" * 60)
+        print(f"Overall Score : {scores.get('overall', 0):.2f}")
+        print(f"Clarity       : {scores.get('clarity', 0):.2f}")
+        print(f"Accuracy      : {scores.get('accuracy', 0):.2f}")
+        print(f"Non-Redundancy: {scores.get('non_redundancy', 0):.2f}")
+        print(f"Verdict       : {rec.get('verdict', 'N/A')}")
+
+        # Show key issues (top 2 only for readability)
+        issues = rec.get("key_issues", [])[:2]
+        if issues:
+            print("\nKey Issues:")
+            for issue in issues:
+                print(f"- {issue}")
+
+        # Show top suggestion
+        suggestions = rec.get("improvement_suggestions", [])[:1]
+        if suggestions:
+            print("\nTop Improvement:")
+            print(f"-> {suggestions[0]}")
+
+    # --- Aggregate Stats ---
+    print("\n" + "="*60)
+    print("           AGGREGATE METRICS")
+    print("="*60)
+
+    if eval_output:
+        avg_score = sum(r["scores"]["overall"] for r in eval_output) / len(eval_output)
+        accept_count = sum(1 for r in eval_output if r["verdict"] == "accept")
+        revise_count = sum(1 for r in eval_output if r["verdict"] == "revise")
+        reject_count = sum(1 for r in eval_output if r["verdict"] == "reject")
+
+        print(f"Average Score : {avg_score:.2f}")
+        print(f"Accepted      : {accept_count}")
+        print(f"Needs Revision: {revise_count}")
+        print(f"Rejected      : {reject_count}")
+
+    # --- Save Output to File ---
+    output_path = os.path.join(LOG_DIR, "evaluation_results.json")
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(eval_output, f, ensure_ascii=False, indent=2)
     
-    print("\n" + "="*50)
-    print("              EVALUATION SUMMARY")
-    print("="*50)
-    print(json.dumps(eval_output, indent=2))
+    logger.info(f"Evaluation results successfully saved to: {output_path}")
