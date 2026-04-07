@@ -3,26 +3,7 @@ import logging
 import os
 from typing import List, Dict, Any
 
-try:
-    import dspy
-except ImportError:
-    raise ImportError("DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`.")
-
-# Set up logging for the evaluator
-
-LOG_DIR = "logs"
-os.makedirs(LOG_DIR, exist_ok=True)
-
-log_file = os.path.join(LOG_DIR, "evaluation.log")
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-    handlers=[
-        logging.FileHandler(log_file, encoding="utf-8"),
-        logging.StreamHandler()  # still prints to console
-    ]
-)
+import dspy
 
 logger = logging.getLogger(__name__)
 
@@ -182,9 +163,11 @@ class RecommendationEvaluator(dspy.Module):
             default=None
         )
 
+        use_llm_score = llm_overall_score is not None and llm_overall_score > 0
+
         final_overall_score = (
             llm_overall_score
-            if llm_overall_score is not None and llm_overall_score > 0
+            if use_llm_score
             else weighted_overall
         )
 
@@ -219,7 +202,7 @@ class RecommendationEvaluator(dspy.Module):
             # Optional debug info (very useful in pipelines)
             "meta": {
                 "weighted_overall": weighted_overall,
-                "llm_overall_used": llm_overall_score is not None
+                "llm_overall_used": use_llm_score
             }
         }
 
@@ -301,8 +284,26 @@ def evaluate_recommendations(
     return results
 
 if __name__ == "__main__":
+    from pathlib import Path
+    
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    LOG_DIR = BASE_DIR / "logs"
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    
+    log_file = LOG_DIR / "evaluation.log"
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+        handlers=[
+            logging.FileHandler(str(log_file), encoding="utf-8"),
+            logging.StreamHandler()
+        ]
+    )
+
     from dotenv import load_dotenv
     load_dotenv()
+
     
     # Configure DSPy LM
     try:
@@ -437,7 +438,7 @@ if __name__ == "__main__":
         print(f"Rejected      : {reject_count}")
 
     # --- Save Output to File ---
-    output_path = os.path.join(LOG_DIR, "evaluation_results.json")
+    output_path = LOG_DIR / "evaluation_results.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(eval_output, f, ensure_ascii=False, indent=2)
     
