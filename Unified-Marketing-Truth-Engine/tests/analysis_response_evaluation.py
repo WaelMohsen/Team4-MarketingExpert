@@ -22,14 +22,25 @@ logger = logging.getLogger(__name__) # Create a logger instance named after the 
 # Define a DSPy Signature class named "EvaluateAnalysis"
  
 class EvaluateAnalysis(dspy.Signature):
- '''  Describes the input/output schema for evaluation by LLM
+ '''  Describes the input/output schema for evaluation the anlysis insigts by LLM
  '''
 
 
 #input
  analysis_context = dspy.InputField(desc="The analysis insights to evaluate (usually structured JSON).")
- analysis_strucure= dspy.InputField(desc="The structure of anlysis insights include (executive_summary, budget_and_efficiency, results_and_value, cross_channel_patterns_and_risks, channel_notes, missing_info) ")  
+ analysis_strucure= dspy.InputField(desc="The structure of anlysis insights include executive_summary, budget_and_efficiency, results_and_value, cross_channel_patterns_and_risks, channel_notes, and missing_info ")  
 
-#output (Clarity, Follow output structure, Hallucination ) 
+#output (Clarity, Follow output structure, Hallucination) 
 
-
+ clarity_reasoning = dspy.OutputField(
+        desc=(
+            "Explain whether the analysis insights are clear, specific, or vague. "
+            
+        )
+    )
+ clarity_score = dspy.OutputField(
+        desc=(
+            "Integer score (1-3): "
+            "1=very vague/unclear, 2=somewhat clear but incomplete, 3=very clear and specific."
+        )
+    )
