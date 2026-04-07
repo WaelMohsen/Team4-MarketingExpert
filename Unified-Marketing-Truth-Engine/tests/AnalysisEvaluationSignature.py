@@ -6,6 +6,7 @@ try:
     import dspy
 except ImportError:
     raise ImportError("DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`.")
+
 LOG_DIR = "logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 log_file = os.path.join(LOG_DIR, "analysis_evaluation.log")
@@ -19,7 +20,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__) # Create a logger instance named after the current module (for organized logging)
 
-# Define a DSPy Signature class named "EvaluateAnalysis"
+# Define a DSPy Signature class 
  
 class AnalysisEvaluationSignature(dspy.Signature):
  """
