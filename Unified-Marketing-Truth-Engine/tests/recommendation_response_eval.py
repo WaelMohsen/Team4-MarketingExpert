@@ -258,7 +258,14 @@ def evaluate_recommendations(
             )
         except Exception as e:
             logger.error(f"Evaluation failed for recommendation {idx + 1}: {e}")
-            continue
+            eval_result = {
+                "scores": {"clarity": 0.0, "accuracy": 0.0, "non_redundancy": 0.0, "overall": 0.0},
+                "reasoning": {"clarity": "Error", "accuracy": "Error", "non_redundancy": "Error"},
+                "verdict": "error",
+                "key_issues": [f"Evaluation failed with error: {str(e)}"],
+                "improvement_suggestions": [],
+                "meta": {"error": str(e)}
+            }
 
         # Attach metadata
         eval_result["recommendation_index"] = idx
@@ -305,6 +312,7 @@ if __name__ == "__main__":
         dspy.settings.configure(lm=lm)
     except Exception as e:
         logger.error(f"Failed to configure DSPy LM: {e}")
+        raise
 
     # --- Sample Inputs ---
     sample_campaign_target = {
