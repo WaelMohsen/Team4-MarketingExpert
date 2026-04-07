@@ -2,6 +2,7 @@ import json
 import logging
 import os
 from typing import List, Dict, Any
+
 try:
     import dspy
 except ImportError:
@@ -35,50 +36,47 @@ class AnalysisEvaluationSignature(dspy.Signature):
 
 
 #input
- 
- campaign_data = dspy.InputField(desc="The compaign information include platform, objective, and metrics" )
- analysis_context = dspy.InputField(desc="The analysis insights to evaluate (usually structured JSON).")
- analysis_strucure= dspy.InputField(desc="The structure of anlysis insights include executive_summary, budget_and_efficiency, results_and_value, cross_channel_patterns_and_risks, channel_notes, and missing_info ")  
+ campaign_data     = dspy.InputField(desc="The compaign information include platform, objective, and metrics" )
+ analysis_context  = dspy.InputField(desc="The analysis insights to evaluate (usually structured JSON).")
+ analysis_strucure = dspy.InputField(desc="The structure of anlysis insights include executive_summary, budget_and_efficiency, results_and_value, cross_channel_patterns_and_risks, channel_notes, and missing_info ")  
 
 #output (Clarity (1-3), Follow output structure (1-3), Relevance (1–3), Hallucination (Yes/No)) 
 
-
 # --- Clarity ---
-    
  clarity_reasoning = dspy.OutputField(
-        desc="Explain whether the analysis insights are clear, specific, or vague."
+        desc = "Explain whether the analysis insights are clear, specific, or vague."
      )
     
  clarity_score = dspy.OutputField(
-        desc="Integer score (1-3): 1=very vague, 2=partially clear, 3=very clear and complete."
+        desc = "Integer score (1-3): 1=very vague, 2=partially clear, 3=very clear and complete."
     )
 
-    # --- Follow Output Structure ---
+# --- Follow Output Structure ---
     
  structure_reasoning = dspy.OutputField(
-        desc="Explain whether the analysis follows the required structure and includes all expected sections."
+        desc = "Explain whether the analysis follows the required structure and includes all expected sections."
     )
     
  structure_score = dspy.OutputField(
-        desc="Integer score (1-3): 1=missing most sections, 2=partially structured, 3=fully structured and well organized."
+        desc = "Integer score (1-3): 1=missing most sections, 2=partially structured, 3=fully structured and well organized."
     )
 
-    # --- Relevance ---
+# --- Relevance ---
  relevance_reasoning = dspy.OutputField(
-        desc="Explain whether the analysis is relevant to the campaign data, objectives, and KPIs."
+        desc = "Explain whether the analysis is relevant to the campaign data, objectives, and KPIs."
     )
     
  relevance_score = dspy.OutputField(
-        desc="Integer score (1-3): 1=irrelevant, 2=partially relevant, 3=fully aligned with campaign context."
+        desc = "Integer score (1-3): 1=irrelevant, 2=partially relevant, 3=fully aligned with campaign context."
     )
 
-    # --- Hallucination ---
+# --- Hallucination ---
     
  hallucination_reasoning = dspy.OutputField(
-        desc="Explain whether the analysis contains unsupported claims or fabricated insights."
+        desc = "Explain whether the analysis contains unsupported claims or fabricated insights."
     )
     
  hallucination_flag = dspy.OutputField(
-        desc="Yes/No: Yes if hallucination exists, No if all insights are based on the provided data."
+        desc = "Yes/No: Yes if hallucination exists, No if all insights are based on the provided data."
     )
   
