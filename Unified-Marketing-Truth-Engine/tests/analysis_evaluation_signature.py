@@ -38,8 +38,6 @@ class AnalysisEvaluationSignature(dspy.Signature):
 #input
  campaign_data     = dspy.InputField(desc="The compaign information include platform, objective, and metrics" )
  analysis_context  = dspy.InputField(desc="The analysis insights to evaluate (usually structured JSON).")
- analysis_strucure = dspy.InputField(desc="The structure of anlysis insights include executive_summary, budget_and_efficiency, results_and_value, cross_channel_patterns_and_risks, channel_notes, and missing_info ")  
-# New
  campaign_target    = dspy.InputField(desc="The compaign target" )
 
 #output (Clarity (1-3), Follow output structure (1-3), Relevance (1–3), Hallucination (Yes/No)) 
@@ -56,8 +54,8 @@ class AnalysisEvaluationSignature(dspy.Signature):
 # --- Follow Output Structure ---
     
  following_structure_reasoning = dspy.OutputField(
-        desc = "Explain whether the analysis follows the required structure and includes all expected sections."
-    )
+        desc = "Explain whether the analysis follows the required structure and includes include executive_summary, budget_and_efficiency, results_and_value, cross_channel_patterns_and_risks, channel_notes, and missing_info ")  
+
     
             
  following_structure_score = dspy.OutputField(
