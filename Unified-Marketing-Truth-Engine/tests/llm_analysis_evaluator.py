@@ -12,6 +12,7 @@ StructuredInput = Union[str, list, dict]
 
 from analysis_evaluation_signature  import AnalysisEvaluationSignature
 from analysis_evaluator_error_handling import InvalidInputError, EvaluationExecutionError, InvalidEvaluationResultError
+from validation_utils import ValidationUtils              
 
 try:
     import dspy
