@@ -55,11 +55,12 @@ class AnalysisEvaluationSignature(dspy.Signature):
 
 # --- Follow Output Structure ---
     
- structure_reasoning = dspy.OutputField(
+ following_structure_reasoning = dspy.OutputField(
         desc = "Explain whether the analysis follows the required structure and includes all expected sections."
     )
     
- structure_score = dspy.OutputField(
+            
+ following_structure_score = dspy.OutputField(
         desc = "Integer score (1-3): 1=missing most sections, 2=partially structured, 3=fully structured and well organized."
     )
 

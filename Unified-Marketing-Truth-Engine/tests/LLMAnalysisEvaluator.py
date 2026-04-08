@@ -19,7 +19,7 @@ except ImportError:
     raise ImportError("DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`.")
 
 
-class AnalysisEvaluator(dspy.Module):
+class LLMAnalysisEvaluator(dspy.Module):
     """
     An evaluation and normalization layer for LLM-generated analysis using the DSPy framework.
 
@@ -32,20 +32,37 @@ class AnalysisEvaluator(dspy.Module):
             AnalysisEvaluationSignature to perform structured evaluations.
     """
     # Define constants representing weights of each evaluation factor
-    ACCURACY_WEIGHT = 0.5
-    CLARITY_WEIGHT = 0.25
-    RELEVANCE_WEIGHT = 0.25
+    
+    
+
+    CLARITY_WEIGHT = 0.2
+    RELEVANCE_WEIGHT = 0.5
+    STRUCTURE_WEIGHT = 0.3
+   
+
 
     # Initialization
     def __init__(self):
         """
-        Initializes the AnalysisEvaluator by setting up the dspy.ChainOfThought 
+        Initializes the LLMAnalysisEvaluator by setting up the dspy.ChainOfThought 
         pipeline with the required evaluation signature.
         """
         super().__init__()
         # Call the LLM and get structured evaluation fields back
         self.evaluate = dspy.ChainOfThought(AnalysisEvaluationSignature)
 
+    def _compute_weighted_score(self, clarity: float, follow_output_structure: float, relevance: float) -> float:
+
+        """
+        Encapsulated business logic for scoring.
+        """
+        return (
+            
+            (self.CLARITY_WEIGHT * clarity) +
+            (self.STRUCTURE_WEIGHT * follow_output_structure) +
+            (self.RELEVANCE_WEIGHT * relevance)
+        )    
+    # Validation Functions
     def _cast_to_float(self, value: Any, default: float = 0.0) -> float:
         """
         Converts a given input into a float, providing a fallback value on failure.
@@ -69,7 +86,7 @@ class AnalysisEvaluator(dspy.Module):
             return default
 
 
-    def _clamp_score(self, score: float, min_value: float = 0.0, max_value: float = 5.0) -> float:
+    def _clamp_score(self, score: float, min_value: float = 1.0, max_value: float = 3.0) -> float:
         """
         Ensures a score stays within a defined range.
 
@@ -109,15 +126,7 @@ class AnalysisEvaluator(dspy.Module):
             return [value]
         return [value]
     
-    def _compute_weighted_score(self, accuracy: float, clarity: float, relevance: float) -> float:
-        """
-        Encapsulated business logic for scoring.
-        """
-        return (
-            (self.ACCURACY_WEIGHT * accuracy) +
-            (self.CLARITY_WEIGHT * clarity) +
-            (self.RELEVANCE_WEIGHT * relevance)
-        )
+    
 
     def _validate_text_input(self, value: Any, var_name: str) -> str:
         """
@@ -232,23 +241,27 @@ class AnalysisEvaluator(dspy.Module):
                 "DSPy evaluation returned None."
             )
         
+
+
         # Extraction and Casting
         scores = {
-                "accuracy": self._clamp_score(
-                    self._cast_to_float(getattr(result, "accuracy_score", None))
-                ),
+                
                 "clarity": self._clamp_score(
                     self._cast_to_float(getattr(result, "clarity_score", None))
                 ),
                 "relevance": self._clamp_score(
                     self._cast_to_float(getattr(result, "relevance_score", None))
                 ),
+                
+                "following_structure": self._clamp_score(
+                    self._cast_to_float(getattr(result, "following_structure_score", None))
+                )
             }
 
         # Compute weighted overall score (accuracy > clarity > relevance_score) 
         try:
             overall_weighted_score = self._clamp_score(self._compute_weighted_score(
-                scores["accuracy"], scores["clarity"], scores["relevance"]
+                scores["clarity"], scores["relevance"], scores["following_structure"]
             ))
         except Exception as exc:
             raise InvalidEvaluationResultError(
@@ -283,7 +296,7 @@ def main():
 
 
     # 2. Instantiate the Evaluator
-    evaluator = AnalysisEvaluator()
+    evaluator = LLMAnalysisEvaluator()
 
     # 3. Define sample input data
     sample_campaign_data = [
