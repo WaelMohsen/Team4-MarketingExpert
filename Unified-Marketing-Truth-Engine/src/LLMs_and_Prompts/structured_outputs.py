@@ -4,7 +4,6 @@ from typing import List
 # ==========================================
 # STAGE 1: ANALYSIS SCHEMAS
 # ==========================================
-
 class BudgetEfficiencyInsight(BaseModel):
     insight: str = Field(description="what spend allocation/efficiency shows")
     evidence: str = Field(description="which platforms/metrics support it")
@@ -40,7 +39,6 @@ class AnalysisResponse(BaseModel):
 # ==========================================
 # STAGE 2: RECOMMENDATION SCHEMAS
 # ==========================================
-
 class RecommendationCard(BaseModel):
     title: str = Field(description="short, direct, outcome-focused title")
     whats_happening: str = Field(description="simple explanation of issue/opportunity")
@@ -52,3 +50,46 @@ class RecommendationCard(BaseModel):
 
 class RecommendationResponse(BaseModel):
     recommendations: List[RecommendationCard]
+
+
+if __name__ == "__main__":
+    # Example: Generate output object from AnalysisResponse
+    example_analysis = AnalysisResponse(
+        analysis=AnalysisSection(
+            executive_summary="Sample analysis summary",
+            budget_and_efficiency=[
+                BudgetEfficiencyInsight(
+                    insight="High spend on underperforming channel",
+                    evidence="Channel X has 2x higher CAC than benchmark",
+                    business_impact="Reallocating 20% budget could improve overall ROAS"
+                )
+            ],
+            results_and_value=[
+                ResultsValueInsight(
+                    insight="Strong lead generation volume",
+                    evidence="1,500 leads/month at $15 CAC",
+                    business_impact="Supports 30% MoM revenue growth"
+                )
+            ],
+            cross_channel_patterns_and_risks=[
+                CrossChannelPattern(
+                    pattern_or_risk="Attribution overlap between channels",
+                    evidence="30% of converters touched 2+ channels",
+                    why_it_matters="Multi-touch attribution needed for accurate ROI"
+                )
+            ],
+            channel_notes=[
+                ChannelNote(
+                    platform="Google Ads",
+                    what_we_see=["$50K spend", "1,200 conversions"],
+                    what_it_likely_means=["Strong brand search intent", "Mature campaign"],
+                    risks_or_watchouts=["ROAS trending down YoY"]
+                )
+            ],
+            missing_info=["Customer lifetime value", "Competitor spend data"]
+        )
+    )
+    
+    print("Analysis Response object created successfully:")
+    print(example_analysis.model_dump_json(indent=2))
+    print("\nStructured outputs schema definitions loaded successfully.")

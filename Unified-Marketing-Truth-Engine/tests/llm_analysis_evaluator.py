@@ -10,62 +10,69 @@ StructuredInput = Union[str, list, dict]
 # a normalization layer for LLM output
 # Inherits from dspy.Module → this is part of the DSPy framework (used for structured LLM pipelines).
 
-from analysis_evaluation_signature  import AnalysisEvaluationSignature
-from analysis_evaluator_error_handling import InvalidInputError, EvaluationExecutionError, InvalidEvaluationResultError              
-from validation_utils import ValidationUtils        
+from analysis_evaluation_signature import AnalysisEvaluationSignature
+from analysis_evaluator_error_handling import (
+    InvalidInputError,
+    EvaluationExecutionError,
+    InvalidEvaluationResultError,
+)
+from validation_utils import ValidationUtils
+
 try:
     import dspy
 except ImportError:
-    raise ImportError("DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`.")
-
+    raise ImportError(
+        "DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`."
+    )
 
 class LLMAnalysisEvaluator(dspy.Module):
     """
     An evaluation and normalization layer for LLM-generated analysis using the DSPy framework.
 
-    This class serves as a structured post-processing and validation module. It uses 
-    Chain-of-Thought reasoning to evaluate campaign data against specific contexts 
+    This class serves as a structured post-processing and validation module. It uses
+    Chain-of-Thought reasoning to evaluate campaign data against specific contexts
     and structures, providing normalized scores and reasoning.
 
     Attributes:
-        evaluate (dspy.ChainOfThought): The DSPy program configured with 
+        evaluate (dspy.ChainOfThought): The DSPy program configured with
             AnalysisEvaluationSignature to perform structured evaluations.
     """
-    # Define constants representing weights of each evaluation factor
-    
-    
 
+    # Define constants representing weights of each evaluation factor
     CLARITY_WEIGHT = 0.2
     RELEVANCE_WEIGHT = 0.5
     STRUCTURE_WEIGHT = 0.3
-   
-
 
     # Initialization
     def __init__(self):
         """
-        Initializes the LLMAnalysisEvaluator by setting up the dspy.ChainOfThought 
+        Initializes the LLMAnalysisEvaluator by setting up the dspy.ChainOfThought
         pipeline with the required evaluation signature.
         """
         super().__init__()
         # Call the LLM and get structured evaluation fields back
         self.evaluate = dspy.ChainOfThought(AnalysisEvaluationSignature)
-      
 
-    def _compute_weighted_score(self, clarity: float, follow_output_structure: float, relevance: float) -> float:
-
+    def _compute_weighted_score(
+        self, clarity: float, follow_output_structure: float, relevance: float
+    ) -> float:
         """
         Encapsulated business logic for scoring.
         """
         return (
-            
-            (self.CLARITY_WEIGHT * clarity) +
-            (self.STRUCTURE_WEIGHT * follow_output_structure) +
-            (self.RELEVANCE_WEIGHT * relevance)
-        )    
-   
-    #Main Entry Point:
-    def forward(self, campaign_data: StructuredInput , analysis_context: StructuredInput , analysis_structure: str, campaign_target: StructuredInput ) -> Dict[str, Any]:
+            (self.CLARITY_WEIGHT * clarity)
+            + (self.STRUCTURE_WEIGHT * follow_output_structure)
+            + (self.RELEVANCE_WEIGHT * relevance)
+        )
+
+    # Main Entry Point:
+    def run_evaluation_pipeline(
+        self,
+        campaign_data: StructuredInput,
+        analysis_context: StructuredInput,
+        analysis_structure: str,
+        campaign_target: StructuredInput,
+    ) -> Dict[str, Any]:
         """
         Processes the input data through the LLM and normalizes the resulting evaluation.
 
@@ -88,28 +95,32 @@ class LLMAnalysisEvaluator(dspy.Module):
                 - hallucination_flag (bool): Whether a hallucination was detected.
                 - reasoning (dict): Lists of feedback for clarity, structure, relevance, and hallucinations.
         """
-        # Validate inputs to ensure all required strings are valid and non-empty 
+        # Validate inputs to ensure all required strings are valid and non-empty
         validated_campaign_data = ValidationUtils.convert_structure_input_to_string(
-            campaign_data,"campaign_data",
+            campaign_data,
+            "campaign_data",
         )
         validated_analysis_context = ValidationUtils.convert_structure_input_to_string(
-            analysis_context, "analysis_context",
+            analysis_context,
+            "analysis_context",
         )
         validated_analysis_structure = ValidationUtils.validate_text_input(
-            analysis_structure, "analysis_structure",
+            analysis_structure,
+            "analysis_structure",
         )
-        
+
         validated_campaign_target = ValidationUtils.convert_structure_input_to_string(
-            campaign_target,"campaign_target",
+            campaign_target,
+            "campaign_target",
         )
-        
+
         # Call the LLM
         try:
             result = self.evaluate(
-                campaign_data = validated_campaign_data,
-                analysis_context = validated_analysis_context,
-                analysis_structure = validated_analysis_structure,
-                campaign_target = validated_campaign_target
+                campaign_data=validated_campaign_data,
+                analysis_context=validated_analysis_context,
+                analysis_structure=validated_analysis_structure,
+                campaign_target=validated_campaign_target,
             )
         except Exception as exc:
             raise EvaluationExecutionError(
@@ -117,92 +128,103 @@ class LLMAnalysisEvaluator(dspy.Module):
             ) from exc
 
         if result is None:
-            raise InvalidEvaluationResultError(
-                "DSPy evaluation returned None."
-            )
-        
-
+            raise InvalidEvaluationResultError("DSPy evaluation returned None.")
 
         # Extraction and Casting
         scores = {
-                
-                "clarity": ValidationUtils.clamp_score(
-                    ValidationUtils.cast_to_float(getattr(result, "clarity_score", None))
-                ),
-                "relevance": ValidationUtils.clamp_score(
-                    ValidationUtils.cast_to_float(getattr(result, "relevance_score", None))
-                ),
-                
-                "following_structure": ValidationUtils.clamp_score(
-                    ValidationUtils.cast_to_float(getattr(result, "following_structure_score", None))
+            "clarity": ValidationUtils.clamp_score(
+                ValidationUtils.cast_to_float(getattr(result, "clarity_score", None))
+            ),
+            "relevance": ValidationUtils.clamp_score(
+                ValidationUtils.cast_to_float(getattr(result, "relevance_score", None))
+            ),
+            "following_structure": ValidationUtils.clamp_score(
+                ValidationUtils.cast_to_float(
+                    getattr(result, "following_structure_score", None)
                 )
-            }
+            ),
+        }
 
-        # Compute weighted overall score (accuracy > clarity > relevance_score) 
+        # Compute weighted overall score (accuracy > clarity > relevance_score)
         try:
-            overall_weighted_score = ValidationUtils.clamp_score(ValidationUtils.compute_weighted_score(
-                scores["clarity"], scores["relevance"], scores["following_structure"]
-            ))
+            overall_weighted_score = ValidationUtils.clamp_score(
+                self._compute_weighted_score(
+                    scores["clarity"],
+                    scores["relevance"],
+                    scores["following_structure"],
+                )
+            )
         except Exception as exc:
             raise InvalidEvaluationResultError(
                 "Fail to compute overall_weighted_score."
-            ) from exc            
+            ) from exc
 
         # Final Output Structure
         try:
             structured_result = {
                 "scores": {**scores, "overall": overall_weighted_score},
-                "hallucination_flag": ValidationUtils.cast_to_bool(getattr(result, "hallucination_flag", False)),
+                "hallucination_flag": ValidationUtils.cast_to_bool(
+                    getattr(result, "hallucination_flag", False)
+                ),
                 "reasoning": {
-                    "clarity": ValidationUtils.ensure_list(getattr(result, "clarity_reasoning", [])),
-                    "structure": ValidationUtils.ensure_list(getattr(result, "structure_reasoning", [])),
-                    "relevance": ValidationUtils.ensure_list(getattr(result, "relevance_reasoning", [])),
-                    "hallucination": ValidationUtils.ensure_list(getattr(result, "hallucination_reasoning", []))
-                }
+                    "clarity": ValidationUtils.ensure_list(
+                        getattr(result, "clarity_reasoning", [])
+                    ),
+                    "structure": ValidationUtils.ensure_list(
+                        getattr(result, "structure_reasoning", [])
+                    ),
+                    "relevance": ValidationUtils.ensure_list(
+                        getattr(result, "relevance_reasoning", [])
+                    ),
+                    "hallucination": ValidationUtils.ensure_list(
+                        getattr(result, "hallucination_reasoning", [])
+                    ),
+                },
             }
         except Exception as exc:
             raise InvalidEvaluationResultError(
                 "Fail to normalize/handle evaluation result."
-            ) from exc               
-        return   structured_result     
+            ) from exc
+        return structured_result
 
 
 def main():
-
-    # 1. Setup: Usually requires a DSPy language model (LM) configuration    
+    # 1. Setup: Usually requires a DSPy language model (LM) configuration
     model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    # TODO: check for OpenAI API key in env variables and raise warning if not found
     lm = dspy.LM(f"openai/{model}")
     dspy.settings.configure(lm=lm)
-
 
     # 2. Instantiate the Evaluator
     evaluator = LLMAnalysisEvaluator()
 
     # 3. Define sample input data
+    # TODO: read data dynamically from a file or a mock data generator instead of hardcoding
+    # TODO: Use the correct analysis json structure that the LLM expects, this is just a placeholder and may not align with the expected input format of the LLM.
     sample_campaign_data = [
-    {
-        "platform": "Google Ads", 
-        "objective": "Leads", 
-        "spend": 5000, 
-        "impressions": 200000, 
-        "clicks": 8000, 
-        "conversions": 320, 
-        "revenue": 15000, 
-    }, 
-    { 
-        "platform": "Meta", 
-        "objective": "Leads", 
-        "spend": 3000, 
-        "impressions": 150000, 
-        "clicks": 6000, 
-        "conversions": 180, 
-        "revenue": 9000, 
-    }, 
+        {
+            "platform": "Google Ads",
+            "objective": "Leads",
+            "spend": 5000,
+            "impressions": 200000,
+            "clicks": 8000,
+            "conversions": 320,
+            "revenue": 15000,
+        },
+        {
+            "platform": "Meta",
+            "objective": "Leads",
+            "spend": 3000,
+            "impressions": 150000,
+            "clicks": 6000,
+            "conversions": 180,
+            "revenue": 9000,
+        },
     ]
-    
+
     sample_campaign_target = {
         "primary_goal": "Maximize ROAS during the Winter Holiday Sale",
-        "kpis": ["ROAS", "CPA", "Conversion Volume"]
+        "kpis": ["ROAS", "CPA", "Conversion Volume"],
     }
 
     sample_analysis_context = {
@@ -212,7 +234,7 @@ def main():
                 {
                     "insight": "Google Ads budget is capping out daily.",
                     "evidence": "Search impression share lost due to budget is at 45%.",
-                    "business_impact": "Leaving highly profitable conversions on the table."
+                    "business_impact": "Leaving highly profitable conversions on the table.",
                 }
             ],
             "results_and_value": [],
@@ -220,22 +242,19 @@ def main():
                 {
                     "pattern_or_risk": "Meta creative fatigue is dragging down blended return.",
                     "evidence": "Frequency on Meta is over 8, and CTR dropped from 1.5% to 0.6%.",
-                    "why_it_matters": "The largest budget pool is becoming increasingly inefficient."
+                    "why_it_matters": "The largest budget pool is becoming increasingly inefficient.",
                 }
             ],
             "channel_notes": [],
-            "missing_info": []
+            "missing_info": [],
         }
     }
-
-    
-   
 
     # 4. Run the evaluation
     # Note: This will call the LLM if DSPy is configured.
     try:
         print("--- Running Analysis Evaluation ---\n")
-        report = evaluator.forward(
+        report = evaluator.run_evaluation_pipeline(
             campaign_data=sample_campaign_data,
             analysis_context=sample_analysis_context,
             analysis_structure="Standard campaign analysis structure",
@@ -244,18 +263,17 @@ def main():
 
         # 5. Print formatted results
         print(json.dumps(report, indent=4))
-        
+
         # Accessing specific fields
         final_score = report["scores"]["overall"]
         print(f"\nFinal Weighted Score: {final_score:.2f}")
 
     except Exception as e:
         print(f"Error during execution: {e}")
-        print("\nTip: Ensure you have configured a DSPy Language Model (LM) before running.")
+        print(
+            "\nTip: Ensure you have configured a DSPy Language Model (LM) before running."
+        )
 
 
 if __name__ == "__main__":
     main()
-
-
-

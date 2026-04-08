@@ -10,9 +10,7 @@ class ValidationUtils:
     Utility class for validation, normalization, and safe type casting.
     All methods are static and can be used without instantiating the class.
     """
-
     # ---------- Type Casting ----------
-
     @staticmethod
     def cast_to_float(value: Any, default: float = 0.0) -> float:
         """
@@ -45,7 +43,6 @@ class ValidationUtils:
         return default
 
     # ---------- Score Handling ----------
-
     @staticmethod
     def clamp_score(score: float, min_value: float = 1.0, max_value: float = 3.0) -> float:
         """
@@ -67,7 +64,6 @@ class ValidationUtils:
         return min(max(score, min_value), max_value)
 
     # ---------- Structure Helpers ----------
-
     @staticmethod
     def ensure_list(value: Any) -> list:
         """
@@ -82,7 +78,6 @@ class ValidationUtils:
         return [value]
 
     # ---------- Text Validation ----------
-
     @staticmethod
     def validate_text_input(value: Any, var_name: str) -> str:
         """
@@ -100,9 +95,8 @@ class ValidationUtils:
         return cleaned_value
 
     # ---------- Structure → String ----------
-
     @staticmethod
-    def convert_structure_to_string(data: Any, var_name: str) -> str:
+    def convert_structure_input_to_string(data: Any, var_name: str) -> str:
         """
         Converts structured input (str, list, dict) into a clean string.
         """
