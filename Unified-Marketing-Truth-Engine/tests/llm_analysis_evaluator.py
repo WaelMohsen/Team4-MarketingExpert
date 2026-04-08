@@ -11,9 +11,8 @@ StructuredInput = Union[str, list, dict]
 # Inherits from dspy.Module → this is part of the DSPy framework (used for structured LLM pipelines).
 
 from analysis_evaluation_signature  import AnalysisEvaluationSignature
-from analysis_evaluator_error_handling import InvalidInputError, EvaluationExecutionError, InvalidEvaluationResultError
-from validation_utils import ValidationUtils              
-
+from analysis_evaluator_error_handling import InvalidInputError, EvaluationExecutionError, InvalidEvaluationResultError              
+from validation_utils import ValidationUtils        
 try:
     import dspy
 except ImportError:
@@ -51,6 +50,7 @@ class LLMAnalysisEvaluator(dspy.Module):
         super().__init__()
         # Call the LLM and get structured evaluation fields back
         self.evaluate = dspy.ChainOfThought(AnalysisEvaluationSignature)
+        self.validator = ValidationUtils()
 
     def _compute_weighted_score(self, clarity: float, follow_output_structure: float, relevance: float) -> float:
 
@@ -63,128 +63,7 @@ class LLMAnalysisEvaluator(dspy.Module):
             (self.STRUCTURE_WEIGHT * follow_output_structure) +
             (self.RELEVANCE_WEIGHT * relevance)
         )    
-    # Validation Functions
-    def _cast_to_float(self, value: Any, default: float = 0.0) -> float:
-        """
-        Converts a given input into a float, providing a fallback value on failure.
-
-        This method attempts to cast various data types (strings, integers, etc.) 
-        to a float. It is designed to handle "dirty" data or missing values 
-        without raising an exception, ensuring the stability of the processing pipeline.
-
-        Args:
-            value (Any): The input value to be converted. Can be a string, 
-                numeric type, or None.
-            default (float, optional): The value to return if the conversion 
-                fails due to a ValueError or TypeError. Defaults to 0.0.
-
-        Returns:
-            float: The converted float value if successful; otherwise, the default value.
-        """
-        try:
-            return float(value)
-        except (ValueError, TypeError):
-            return default
-
-
-    def _clamp_score(self, score: float, min_value: float = 1.0, max_value: float = 3.0) -> float:
-        """
-        Ensures a score stays within a defined range.
-
-        Args:
-            score (float): The score to validate.
-            min_value (float): Minimum allowed value (default = 0.0).
-            max_value (float): Maximum allowed value (default = 5.0).
-
-        Returns:
-            float: Clamped score within [min_value, max_value].
-        """
-        # Validate bounds
-        if not isinstance(min_value, (int, float)) or not isinstance(max_value, (int, float)):
-            raise ValueError("min_value and max_value must be numeric.")
-
-        if min_value > max_value:
-            raise ValueError(
-                f"min_value ({min_value}) cannot be greater than max_value ({max_value})."
-            )
-
-        # Validate score
-        if not isinstance(score, (int, float)):
-            raise TypeError(
-                f"score must be numeric, got {type(score).__name__}."
-            )
-
-        return min(max(score, min_value), max_value)
-
-    def _ensure_list(self, value: Any) -> list:
-        """ Helper to normalize reasoning fields."""
-
-        if value is None:
-            return []
-        if isinstance(value, list):
-            return value
-        if isinstance(value, str):
-            return [value]
-        return [value]
-    
-    
-
-    def _validate_text_input(self, value: Any, var_name: str) -> str:
-        """
-        Validates that an input field is a non-empty string.
-        """
-        if not isinstance(value, str):
-            raise InvalidInputError(
-                f"{var_name} must be a string, got {type(value).__name__}."
-            )
-        
-        # remove leading and trailing whitespace (or specified characters) from a string.
-        cleaned_value = value.strip()
-        if not cleaned_value:
-            raise InvalidInputError(f"{var_name} cannot be empty.")
-
-        return cleaned_value
-
-
-    def _convert_structure_input_to_string(self, data: Any,  var_name: str) -> str:
-        """
-        Convert structures input formats into a single string for LLM processing.
-
-        This method ensures the LLM receives a clean string regardless of whether 
-        the input is a raw string, a list, or a dictionary.
-        """        
-        if isinstance(data, str):
-            cleaned_value = data.strip()
-            if not cleaned_value:
-                raise InvalidInputError(f"{var_name} cannot be empty.")
-            return cleaned_value
-
-        if isinstance(data, (list, dict)):
-            try:
-                return json.dumps(data, indent=2)
-            except TypeError as exc:
-                raise InvalidInputError(f"{var_name} contains non-serializable values.") from exc
-
-        raise InvalidInputError(
-            f"{var_name} must be a string, list, or dict, got {type(data).__name__}."
-        ) 
-    
-    # Convert to bool data type
-    def _cast_to_bool(self, value: Any, default: bool = False) -> bool:
-        if isinstance(value, bool):
-            return value
-        if isinstance(value, str):
-            normalized = value.strip().lower()
-            if normalized in {"true", "1", "yes"}:
-                return True
-            if normalized in {"false", "0", "no", ""}:
-                return False
-            return default
-        if isinstance(value, (int, float)):
-            return bool(value)
-        
-        return default    
-       
+   
     #Main Entry Point:
     def forward(self, campaign_data: StructuredInput , analysis_context: StructuredInput , analysis_structure: str, campaign_target: StructuredInput ) -> Dict[str, Any]:
         """
@@ -210,17 +89,17 @@ class LLMAnalysisEvaluator(dspy.Module):
                 - reasoning (dict): Lists of feedback for clarity, structure, relevance, and hallucinations.
         """
         # Validate inputs to ensure all required strings are valid and non-empty 
-        validated_campaign_data = self._convert_structure_input_to_string(
+        validated_campaign_data = self.validator.convert_structure_input_to_string(
             campaign_data,"campaign_data",
         )
-        validated_analysis_context = self._convert_structure_input_to_string(
+        validated_analysis_context = self.validator.convert_structure_input_to_string(
             analysis_context, "analysis_context",
         )
-        validated_analysis_structure = self._validate_text_input(
+        validated_analysis_structure = self.validator._validate_text_input(
             analysis_structure, "analysis_structure",
         )
         
-        validated_campaign_target = self._convert_structure_input_to_string(
+        validated_campaign_target = self.validator.convert_structure_input_to_string(
             campaign_target,"campaign_target",
         )
         
@@ -247,21 +126,21 @@ class LLMAnalysisEvaluator(dspy.Module):
         # Extraction and Casting
         scores = {
                 
-                "clarity": self._clamp_score(
-                    self._cast_to_float(getattr(result, "clarity_score", None))
+                "clarity": self.validator.clamp_score(
+                    self.validator._cast_to_float(getattr(result, "clarity_score", None))
                 ),
-                "relevance": self._clamp_score(
-                    self._cast_to_float(getattr(result, "relevance_score", None))
+                "relevance": self.validator.clamp_score(
+                    self.validator._cast_to_float(getattr(result, "relevance_score", None))
                 ),
                 
-                "following_structure": self._clamp_score(
-                    self._cast_to_float(getattr(result, "following_structure_score", None))
+                "following_structure": self.validator.clamp_score(
+                    self.validator._cast_to_float(getattr(result, "following_structure_score", None))
                 )
             }
 
         # Compute weighted overall score (accuracy > clarity > relevance_score) 
         try:
-            overall_weighted_score = self._clamp_score(self._compute_weighted_score(
+            overall_weighted_score = self.validator.clamp_score(self.validator._compute_weighted_score(
                 scores["clarity"], scores["relevance"], scores["following_structure"]
             ))
         except Exception as exc:
@@ -359,7 +238,8 @@ def main():
         report = evaluator.forward(
             campaign_data=sample_campaign_data,
             analysis_context=sample_analysis_context,
-            campaign_target = sample_campaign_target,
+            analysis_structure="Standard campaign analysis structure",
+            campaign_target=sample_campaign_target,
         )
 
         # 5. Print formatted results
