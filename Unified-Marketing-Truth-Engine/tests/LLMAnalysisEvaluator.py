@@ -349,7 +349,7 @@ def main():
     }
 
     
-    sample_structure = "Must include a header, body, and conclusion."
+   
 
     # 4. Run the evaluation
     # Note: This will call the LLM if DSPy is configured.
@@ -358,7 +358,6 @@ def main():
         report = evaluator.forward(
             campaign_data=sample_campaign_data,
             analysis_context=sample_analysis_context,
-            analysis_structure=sample_structure,
             campaign_target = sample_campaign_target,
         )
 
