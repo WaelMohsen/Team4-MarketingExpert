@@ -50,7 +50,7 @@ class LLMAnalysisEvaluator(dspy.Module):
         super().__init__()
         # Call the LLM and get structured evaluation fields back
         self.evaluate = dspy.ChainOfThought(AnalysisEvaluationSignature)
-        self.validator = ValidationUtils()
+      
 
     def _compute_weighted_score(self, clarity: float, follow_output_structure: float, relevance: float) -> float:
 
@@ -89,17 +89,17 @@ class LLMAnalysisEvaluator(dspy.Module):
                 - reasoning (dict): Lists of feedback for clarity, structure, relevance, and hallucinations.
         """
         # Validate inputs to ensure all required strings are valid and non-empty 
-        validated_campaign_data = self.validator.convert_structure_input_to_string(
+        validated_campaign_data = ValidationUtils.convert_structure_input_to_string(
             campaign_data,"campaign_data",
         )
-        validated_analysis_context = self.validator.convert_structure_input_to_string(
+        validated_analysis_context = ValidationUtils.convert_structure_input_to_string(
             analysis_context, "analysis_context",
         )
-        validated_analysis_structure = self.validator._validate_text_input(
+        validated_analysis_structure = ValidationUtils.validate_text_input(
             analysis_structure, "analysis_structure",
         )
         
-        validated_campaign_target = self.validator.convert_structure_input_to_string(
+        validated_campaign_target = ValidationUtils.convert_structure_input_to_string(
             campaign_target,"campaign_target",
         )
         
@@ -126,21 +126,21 @@ class LLMAnalysisEvaluator(dspy.Module):
         # Extraction and Casting
         scores = {
                 
-                "clarity": self.validator.clamp_score(
-                    self.validator._cast_to_float(getattr(result, "clarity_score", None))
+                "clarity": ValidationUtils.clamp_score(
+                    ValidationUtils.cast_to_float(getattr(result, "clarity_score", None))
                 ),
-                "relevance": self.validator.clamp_score(
-                    self.validator._cast_to_float(getattr(result, "relevance_score", None))
+                "relevance": ValidationUtils.clamp_score(
+                    ValidationUtils.cast_to_float(getattr(result, "relevance_score", None))
                 ),
                 
-                "following_structure": self.validator.clamp_score(
-                    self.validator._cast_to_float(getattr(result, "following_structure_score", None))
+                "following_structure": ValidationUtils.clamp_score(
+                    ValidationUtils.cast_to_float(getattr(result, "following_structure_score", None))
                 )
             }
 
         # Compute weighted overall score (accuracy > clarity > relevance_score) 
         try:
-            overall_weighted_score = self.validator.clamp_score(self.validator._compute_weighted_score(
+            overall_weighted_score = ValidationUtils.clamp_score(ValidationUtils.compute_weighted_score(
                 scores["clarity"], scores["relevance"], scores["following_structure"]
             ))
         except Exception as exc:
@@ -152,12 +152,12 @@ class LLMAnalysisEvaluator(dspy.Module):
         try:
             structured_result = {
                 "scores": {**scores, "overall": overall_weighted_score},
-                "hallucination_flag": self._cast_to_bool(getattr(result, "hallucination_flag", False)),
+                "hallucination_flag": ValidationUtils.cast_to_bool(getattr(result, "hallucination_flag", False)),
                 "reasoning": {
-                    "clarity": self._ensure_list(getattr(result, "clarity_reasoning", [])),
-                    "structure": self._ensure_list(getattr(result, "structure_reasoning", [])),
-                    "relevance": self._ensure_list(getattr(result, "relevance_reasoning", [])),
-                    "hallucination": self._ensure_list(getattr(result, "hallucination_reasoning", []))
+                    "clarity": ValidationUtils.ensure_list(getattr(result, "clarity_reasoning", [])),
+                    "structure": ValidationUtils.ensure_list(getattr(result, "structure_reasoning", [])),
+                    "relevance": ValidationUtils.ensure_list(getattr(result, "relevance_reasoning", [])),
+                    "hallucination": ValidationUtils.ensure_list(getattr(result, "hallucination_reasoning", []))
                 }
             }
         except Exception as exc:
