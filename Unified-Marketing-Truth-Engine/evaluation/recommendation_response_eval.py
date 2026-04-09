@@ -290,7 +290,7 @@ if __name__ == "__main__":
     LOG_DIR = BASE_DIR / "logs"
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     
-    log_file = LOG_DIR / "evaluation.log"
+    log_file = LOG_DIR / "recommendation_evaluation.log"
     
     logging.basicConfig(
         level=logging.INFO,

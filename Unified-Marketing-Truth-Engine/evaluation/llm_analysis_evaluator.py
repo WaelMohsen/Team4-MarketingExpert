@@ -1,14 +1,9 @@
 import os
 import json
+import dspy
+import sys
 from typing import Any, Dict, Union
-
 StructuredInput = Union[str, list, dict]
-
-# This class acts as:
-# an evaluation layer
-# a post-processing + validation layer
-# a normalization layer for LLM output
-# Inherits from dspy.Module → this is part of the DSPy framework (used for structured LLM pipelines).
 
 from analysis_evaluation_signature import AnalysisEvaluationSignature
 from analysis_evaluator_error_handling import (
@@ -18,12 +13,16 @@ from analysis_evaluator_error_handling import (
 )
 from validation_utils import ValidationUtils
 
-try:
-    import dspy
-except ImportError:
-    raise ImportError(
-        "DSPy is not installed. Please install it with `pip install dspy-ai` or `uv pip install dspy-ai`."
-    )
+# Find the absolute path to the project root (Unified-Marketing-Truth-Engine)
+# '..' goes up one level from 'evaluation' to the root.
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Add the project root to the Python path
+sys.path.append(PROJECT_ROOT)
+# Configger logging 
+from logs.logging_config import setup_logging
+logger = setup_logging(module_name ='llm_analysis_evaluator')
+from logs.save_llm_results_to_json import save_results_to_json
+
 
 class LLMAnalysisEvaluator(dspy.Module):
     """
@@ -40,8 +39,9 @@ class LLMAnalysisEvaluator(dspy.Module):
 
     # Define constants representing weights of each evaluation factor
     CLARITY_WEIGHT = 0.2
-    RELEVANCE_WEIGHT = 0.5
-    STRUCTURE_WEIGHT = 0.3
+    RELEVANCE_WEIGHT = 0.3
+    STRUCTURE_WEIGHT = 0.2
+    hallucination_WEIGHT = 0.3
 
     # Initialization
     def __init__(self):
@@ -54,7 +54,7 @@ class LLMAnalysisEvaluator(dspy.Module):
         self.evaluate = dspy.ChainOfThought(AnalysisEvaluationSignature)
 
     def _compute_weighted_score(
-        self, clarity: float, follow_output_structure: float, relevance: float
+        self, clarity: float, follow_output_structure: float, relevance: float, hallucination: int
     ) -> float:
         """
         Encapsulated business logic for scoring.
@@ -63,6 +63,7 @@ class LLMAnalysisEvaluator(dspy.Module):
             (self.CLARITY_WEIGHT * clarity)
             + (self.STRUCTURE_WEIGHT * follow_output_structure)
             + (self.RELEVANCE_WEIGHT * relevance)
+            + (self.hallucination_WEIGHT * relevance)
         )
 
     # Main Entry Point:
@@ -70,7 +71,7 @@ class LLMAnalysisEvaluator(dspy.Module):
         self,
         campaign_data: StructuredInput,
         analysis_context: StructuredInput,
-        analysis_structure: str,
+        #analysis_structure: str,
         campaign_target: StructuredInput,
     ) -> Dict[str, Any]:
         """
@@ -95,55 +96,76 @@ class LLMAnalysisEvaluator(dspy.Module):
                 - hallucination_flag (bool): Whether a hallucination was detected.
                 - reasoning (dict): Lists of feedback for clarity, structure, relevance, and hallucinations.
         """
-        # Validate inputs to ensure all required strings are valid and non-empty
-        validated_campaign_data = ValidationUtils.convert_structure_input_to_string(
-            campaign_data,
-            "campaign_data",
-        )
-        validated_analysis_context = ValidationUtils.convert_structure_input_to_string(
-            analysis_context,
-            "analysis_context",
-        )
-        validated_analysis_structure = ValidationUtils.validate_text_input(
-            analysis_structure,
-            "analysis_structure",
-        )
+        
+        logger.info("Starting evaluation pipeline")
+        # Input Validation
+        try:
+            # Validate inputs to ensure all required strings are valid and non-empty
+            validated_campaign_data = ValidationUtils.convert_structure_input_to_string(
+                campaign_data,
+                "campaign_data",
+            )
+            validated_analysis_context = ValidationUtils.convert_structure_input_to_string(
+                analysis_context,
+                "analysis_context",
+            )
+            #validated_analysis_structure = ValidationUtils.validate_text_input(
+            #    analysis_structure,
+            #    "analysis_structure",
+            #)
 
-        validated_campaign_target = ValidationUtils.convert_structure_input_to_string(
-            campaign_target,
-            "campaign_target",
-        )
+            validated_campaign_target = ValidationUtils.convert_structure_input_to_string(
+                campaign_target,
+                "campaign_target",
+            )
+            logger.debug("input validated successfully")
+        except Exception as exc:
+            logger.exception("Input validation failed")
+            raise InvalidInputError("Invalid input provided") from exc
+
 
         # Call the LLM
         try:
+            logger.info("Calling DSPy evaluation")
             result = self.evaluate(
                 campaign_data=validated_campaign_data,
                 analysis_context=validated_analysis_context,
-                analysis_structure=validated_analysis_structure,
+                #analysis_structure=validated_analysis_structure,
                 campaign_target=validated_campaign_target,
             )
+            logger.debug(f"Raw LLM result: {result}")
+
         except Exception as exc:
+            logger.exception("DSPy/Analysis evaluation failed")
             raise EvaluationExecutionError(
-                "Failed to execute DSPy evaluation."
+            "Failed to execute DSPy/Analysis evaluation."
             ) from exc
 
         if result is None:
+            logger.error("DSPy returned None result")
             raise InvalidEvaluationResultError("DSPy evaluation returned None.")
 
         # Extraction and Casting
-        scores = {
-            "clarity": ValidationUtils.clamp_score(
-                ValidationUtils.cast_to_float(getattr(result, "clarity_score", None))
-            ),
-            "relevance": ValidationUtils.clamp_score(
-                ValidationUtils.cast_to_float(getattr(result, "relevance_score", None))
-            ),
-            "following_structure": ValidationUtils.clamp_score(
-                ValidationUtils.cast_to_float(
-                    getattr(result, "following_structure_score", None)
-                )
-            ),
-        }
+        try:
+            scores = {
+                "clarity": ValidationUtils.clamp_score(
+                    ValidationUtils.cast_to_float(getattr(result, "clarity_score", None))
+                ),
+                "relevance": ValidationUtils.clamp_score(
+                    ValidationUtils.cast_to_float(getattr(result, "relevance_score", None))
+                ),
+                "following_structure": ValidationUtils.clamp_score(
+                    ValidationUtils.cast_to_float(
+                        getattr(result, "following_structure_score", None)
+                    )
+                ),
+                "hallucination_flag": getattr(result, "hallucination_flag", None),
+            }
+            logger.debug(f"Extracted scores: {scores}")
+
+        except Exception as exc:
+            logger.exception("Failed to extract valida scores")
+            raise InvalidEvaluationResultError("Invalid score structure") from exc
 
         # Compute weighted overall score (accuracy > clarity > relevance_score)
         try:
@@ -152,11 +174,14 @@ class LLMAnalysisEvaluator(dspy.Module):
                     scores["clarity"],
                     scores["relevance"],
                     scores["following_structure"],
+                    scores["hallucination_flag"],
                 )
             )
+            logger.debug(f"Overall weighted score: {overall_weighted_score}")
         except Exception as exc:
+            logger.exception("Failed computing overall weighted score")
             raise InvalidEvaluationResultError(
-                "Fail to compute overall_weighted_score."
+            "Fail to compute overall_weighted_score."
             ) from exc
 
         # Final Output Structure
@@ -171,7 +196,7 @@ class LLMAnalysisEvaluator(dspy.Module):
                         getattr(result, "clarity_reasoning", [])
                     ),
                     "structure": ValidationUtils.ensure_list(
-                        getattr(result, "structure_reasoning", [])
+                        getattr(result, "following_structure_reasoning", [])
                     ),
                     "relevance": ValidationUtils.ensure_list(
                         getattr(result, "relevance_reasoning", [])
@@ -181,7 +206,9 @@ class LLMAnalysisEvaluator(dspy.Module):
                     ),
                 },
             }
+            logger.info("Evaluation pipeline completed successfully")
         except Exception as exc:
+            logger.exception("Failed to normalize result")
             raise InvalidEvaluationResultError(
                 "Fail to normalize/handle evaluation result."
             ) from exc
@@ -229,24 +256,48 @@ def main():
 
     sample_analysis_context = {
         "analysis": {
-            "executive_summary": "Google Ads is driving a high ROAS of 4.5x but has a limited impression share due to budget caps. Meanwhile, Meta is consuming 70% of the budget but its ROAS has dropped to 1.8x over the last two weeks, strongly indicating ad fatigue on the current creative sets.",
+            "executive_summary": "Sample analysis summary",
             "budget_and_efficiency": [
-                {
-                    "insight": "Google Ads budget is capping out daily.",
-                    "evidence": "Search impression share lost due to budget is at 45%.",
-                    "business_impact": "Leaving highly profitable conversions on the table.",
-                }
+            {
+                "insight": "High spend on underperforming channel",
+                "evidence": "Channel X has 2x higher CAC than benchmark",
+                "business_impact": "Reallocating 20% budget could improve overall ROAS"
+            }
             ],
-            "results_and_value": [],
+            "results_and_value": [
+            {
+                "insight": "Strong lead generation volume",
+                "evidence": "1,500 leads/month at $15 CAC",
+                "business_impact": "Supports 30% MoM revenue growth"
+            }
+            ],
             "cross_channel_patterns_and_risks": [
-                {
-                    "pattern_or_risk": "Meta creative fatigue is dragging down blended return.",
-                    "evidence": "Frequency on Meta is over 8, and CTR dropped from 1.5% to 0.6%.",
-                    "why_it_matters": "The largest budget pool is becoming increasingly inefficient.",
-                }
+            {
+                "pattern_or_risk": "Attribution overlap between channels",
+                "evidence": "30% of converters touched 2+ channels",
+                "why_it_matters": "Multi-touch attribution needed for accurate ROI"
+            }
             ],
-            "channel_notes": [],
-            "missing_info": [],
+            "channel_notes": [
+            {
+                "platform": "Google Ads",
+                "what_we_see": [
+                "$50K spend",
+                "1,200 conversions"
+                ],
+                "what_it_likely_means": [
+                "Strong brand search intent",
+                "Mature campaign"
+                ],
+                "risks_or_watchouts": [
+                "ROAS trending down YoY"
+                ]
+            }
+            ],
+            "missing_info": [
+            "Customer lifetime value",
+            "Competitor spend data"
+            ]
         }
     }
 
@@ -254,13 +305,14 @@ def main():
     # Note: This will call the LLM if DSPy is configured.
     try:
         print("--- Running Analysis Evaluation ---\n")
+        logger.info("Executing evaluation...\n")    
         report = evaluator.run_evaluation_pipeline(
             campaign_data=sample_campaign_data,
             analysis_context=sample_analysis_context,
-            analysis_structure="Standard campaign analysis structure",
+            #analysis_structure="Standard campaign analysis structure",
             campaign_target=sample_campaign_target,
         )
-
+        print("type of report",type(report))
         # 5. Print formatted results
         print(json.dumps(report, indent=4))
 
@@ -273,6 +325,14 @@ def main():
         print(
             "\nTip: Ensure you have configured a DSPy Language Model (LM) before running."
         )
+    
+    # 6. Save Output to File ---
+    from pathlib import Path
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    LOG_DIR = BASE_DIR / "logs"
+    save_results_to_json(report, LOG_DIR)  
+
+    logger.info(f"Evaluation results successfully saved to: {LOG_DIR}")
 
 
 if __name__ == "__main__":
