@@ -1,83 +1,113 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Any, Optional
 
 import pandas as pd
 
-Source = Union[pd.DataFrame, str, Path]
+DataSource = pd.DataFrame | str | Path
+ReadKeywordArguments = dict[str, Any]
 
 
 @dataclass
 class AdsDataLoader:
     """
-    Loads ads analytics data from different sources into a pandas DataFrame.
+    Load ads analytics data into a pandas DataFrame.
 
-    Responsibilities:
-    - Accept pd.DataFrame (pass-through copy)
-    - Accept file paths: .csv, .xlsx/.xls, .json, .parquet
-    - Optional light cleanup: strip column names, drop fully-empty columns
+    Supported inputs:
+    - pandas DataFrame
+    - .csv
+    - .xlsx / .xls
+    - .json
+    - .parquet
+
+    Optional cleanup:
+    - strip whitespace from column names
+    - drop columns that contain only null values
     """
 
     strip_column_whitespace: bool = True
     drop_all_null_columns: bool = True
 
-    def load( self, source: Source, *, read_kwargs: Optional[Dict[str, Any]] = None,) -> pd.DataFrame:
+    def load(
+        self,
+        source: DataSource,
+        *,
+        read_keyword_arguments: Optional[ReadKeywordArguments] = None,
+    ) -> pd.DataFrame:
         """
-        Loads the source into a DataFrame.
-
-        Args:
-            source: DataFrame or path to file.
-            read_kwargs: optional kwargs passed into pandas read_* functions.
-
-        Returns:
-            pd.DataFrame
+        Load data from a DataFrame or file source, then apply optional cleanup.
         """
-        read_kwargs = read_kwargs or {}
+        read_keyword_arguments = read_keyword_arguments or {}
 
-        df = self._read(source, read_kwargs=read_kwargs)
-        df = self._post_process(df)
-        return df
+        dataframe = self.read(
+            source,
+            read_keyword_arguments=read_keyword_arguments,
+        )
 
-    # ----------------------------
-    # Internals
-    # ----------------------------
-    def _read(self, source: Source, *, read_kwargs: Dict[str, Any]) -> pd.DataFrame:
-        """Read from DataFrame or supported file formats."""
+        if self.strip_column_whitespace:
+            dataframe = self.strip_column_names(dataframe)
+
+        if self.drop_all_null_columns:
+            dataframe = self.drop_fully_null_columns(dataframe)
+
+        return dataframe
+
+    def read(
+        self,
+        source: DataSource,
+        *,
+        read_keyword_arguments: ReadKeywordArguments,
+    ) -> pd.DataFrame:
+        """
+        Read data from the given source into a DataFrame.
+        """
         if isinstance(source, pd.DataFrame):
             return source.copy()
 
-        path = Path(source)  # supports str or Path
-        if not path.exists():
-            raise FileNotFoundError(f"File not found: {path}")
+        file_path = Path(source)
 
-        suffix = path.suffix.lower()
+        self._validate_file_exists(file_path)
 
-        if suffix == ".csv":
-            return pd.read_csv(path, **read_kwargs)
+        file_extension = file_path.suffix.lower()
+        reader = self._get_reader(file_extension)
 
-        if suffix in (".xlsx", ".xls"):
-            return pd.read_excel(path, **read_kwargs)
+        return reader(file_path, **read_keyword_arguments)
 
-        if suffix == ".json":
-            # If your JSON is lines-delimited, pass read_kwargs={"lines": True}
-            return pd.read_json(path, **read_kwargs)
+    def strip_column_names(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        """
+        Remove leading and trailing whitespace from column names.
+        """
+        cleaned_dataframe = dataframe.copy()
+        cleaned_dataframe.columns = [
+            str(column_name).strip()
+            for column_name in cleaned_dataframe.columns
+        ]
+        return cleaned_dataframe
 
-        if suffix == ".parquet":
-            return pd.read_parquet(path, **read_kwargs)
+    def drop_fully_null_columns(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        """
+        Remove columns where every value is null.
+        """
+        return dataframe.dropna(axis=1, how="all").copy()
 
-        raise ValueError(
-            f"Unsupported file type '{suffix}'. Supported: .csv, .xlsx/.xls, .json, .parquet"
-        )
+    def _validate_file_exists(self, file_path: Path) -> None:
+        if not file_path.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
 
-    def _post_process(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Light cleanup that is safe for all platforms."""
-        df = df.copy()
+    def _get_reader(self, file_extension: str):
+        readers = {
+            ".csv": pd.read_csv,
+            ".xlsx": pd.read_excel,
+            ".xls": pd.read_excel,
+            ".json": pd.read_json,
+            ".parquet": pd.read_parquet,
+        }
 
-        if self.strip_column_whitespace:
-            # Strip whitespace and normalize weird spacing in headers
-            df.columns = [str(c).strip() for c in df.columns]
+        if file_extension not in readers:
+            supported_extensions = ", ".join(readers.keys())
+            raise ValueError(
+                f"Unsupported file type '{file_extension}'. "
+                f"Supported file types: {supported_extensions}"
+            )
 
-        if self.drop_all_null_columns:
-            df = df.dropna(axis=1, how="all")
-
-        return df
+        return readers[file_extension]

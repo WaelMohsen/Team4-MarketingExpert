@@ -8,4 +8,5 @@ __all__ = [
     "AdsPreprocessor",
     "PlatformFieldMapping",
     "UnifiedAdsPipeline",
+    "UnifiedAdsPipelineConfig"
 ]
