@@ -18,7 +18,7 @@ class AnalysisEvaluationSignature(dspy.Signature):
 
 
     #input
-    campaign_data     = dspy.InputField(desc="The campaign information include platform, objective, and metrics" )
+    campaign_data     = dspy.InputField(desc="The campaign information include platform, target, and metrics" )
     analysis_context  = dspy.InputField(desc="The analysis insights to evaluate (usually structured JSON).")
     campaign_target   = dspy.InputField(desc="The campaign target" )
 
@@ -46,7 +46,7 @@ class AnalysisEvaluationSignature(dspy.Signature):
 
     # --- Relevance ---
     relevance_reasoning = dspy.OutputField(
-        desc = "Explain whether the analysis is relevant to the campaign data, objectives, and KPIs."
+        desc = "Explain whether the analysis is relevant to the campaign data, campaign target, and KPIs."
     )
 
     relevance_score = dspy.OutputField(
@@ -56,7 +56,7 @@ class AnalysisEvaluationSignature(dspy.Signature):
     # --- Hallucination ---
 
     hallucination_reasoning = dspy.OutputField(
-        desc = "Explain whether the analysis contains unsupported claims or fabricated insights."
+        desc = "Explain whether the analysis contains fabricated insights."
     )
 
     hallucination_flag = dspy.OutputField(
