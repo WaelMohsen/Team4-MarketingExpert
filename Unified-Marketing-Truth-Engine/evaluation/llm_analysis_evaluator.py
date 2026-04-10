@@ -320,7 +320,7 @@ def main():
                 logger.info(f"Evaluation for {file_path_obj.name} saved to: {output_path}")
 
             except Exception as e:
-                logger.error(f"Failed to process {file_name}: {e}")
+                logger.error(f"Failed to process {file_path_obj.name}: {e}")
                 continue
 
     else:
