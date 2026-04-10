@@ -86,6 +86,21 @@ class AdsPreprocessor:
             out = out.to_frame().T  # convert Series → single-row DataFrame        
         return out    
     
+    def _get_metric(self, row: pd.Series, *keys: str) -> Optional[float]:
+        """Try to get a numeric value from row using multiple keys (case-insensitive)."""
+        # Create a lowercase map of existing keys for matching
+        row_keys_lower = {str(k).lower(): k for k in row.index}
+        
+        for key in keys:
+            # Check exact match
+            if key in row:
+                return self._num(row[key])
+            # Check case-insensitive match
+            kl = key.lower()
+            if kl in row_keys_lower:
+                return self._num(row[row_keys_lower[kl]])
+        return None
+
     def convert_to_json(
         self,
         df: pd.DataFrame,
@@ -104,31 +119,48 @@ class AdsPreprocessor:
         df = df.copy()
         campaign_platforms_data: List[Dict] = []
 
+        # Define metric columns to exclude from top-level since they are in 'metrics'
+        # These are matched case-insensitively later.
+        metric_cols_base = {
+            "spend", "impressions", "reach", "clicks", "ctr", "cpc", "conversions", 
+            "cvr", "cpa", "conversion_value", "roas", "leads", "cpl", "video_views", 
+            "engagements", "platform", "revenue"
+        }
+
         for _, row in df.iterrows():
 
             metrics = {
-                "spend": self._num(row.get("spend")),
-                "impressions": self._num(row.get("impressions")),
-                "reach": self._num(row.get("reach")),
-                "clicks": self._num(row.get("clicks")),
-                "ctr": self._num(row.get("ctr")),
-                "cpc": self._num(row.get("cpc")),
-                "conversions": self._num(row.get("conversions")),
-                "conversion_rate": self._num(row.get("cvr")),
-                "cpa": self._num(row.get("cpa")),
-                "revenue": self._num(row.get("conversion_value")),
-                "roas": self._num(row.get("roas")),
-                "leads": self._num(row.get("leads")),
-                "cpl": self._num(row.get("cpl")),
-                "video_views": self._num(row.get("video_views")),
-                "engagements": self._num(row.get("engagements")),
+                "spend": self._get_metric(row, "spend"),
+                "impressions": self._get_metric(row, "impressions"),
+                "reach": self._get_metric(row, "reach"),
+                "clicks": self._get_metric(row, "clicks"),
+                "ctr": self._get_metric(row, "ctr", "CTR"),
+                "cpc": self._get_metric(row, "cpc", "CPC"),
+                "conversions": self._get_metric(row, "conversions"),
+                "conversion_rate": self._get_metric(row, "conversion_rate", "cvr", "CVR"),
+                "cpa": self._get_metric(row, "cpa", "CPA"),
+                "revenue": self._get_metric(row, "revenue", "conversion_value", "Revenue"),
+                "roas": self._get_metric(row, "roas", "ROAS"),
+                "leads": self._get_metric(row, "leads"),
+                "cpl": self._get_metric(row, "cpl"),
+                "video_views": self._get_metric(row, "video_views"),
+                "engagements": self._get_metric(row, "engagements"),
             }
 
-            campaign_platforms_data.append({
+            campaign_data = {
                 "platform": str(row.get("platform")),
                 "objective": campaign_objective,
                 "metrics": metrics
-            })
+            }
+
+            # Add any other additional metadata columns available in the row
+            for col in df.columns:
+                # Use case-insensitive check for exclusion
+                if col.lower() not in metric_cols_base:
+                    val = row.get(col)
+                    campaign_data[col] = str(val) if pd.notna(val) else None
+
+            campaign_platforms_data.append(campaign_data)
 
         return campaign_platforms_data
 
