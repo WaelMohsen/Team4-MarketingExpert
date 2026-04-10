@@ -1,0 +1,281 @@
+{
+  "campaign_evaluation": {
+    "overall_score": 4.238571428571428,
+    "verdicts": {
+      "accept": 3,
+      "revise": 4,
+      "reject": 0,
+      "error": 0
+    },
+    "recommendation_count": 7,
+    "timestamp": "2026-04-10T02:14:45.214836"
+  },
+  "recommendation_details": [
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 5.0,
+        "non_redundancy": 5.0,
+        "overall": 4.67
+      },
+      "reasoning": {
+        "clarity": "The recommendation is mostly clear, specific, and actionable. It outlines the steps required to resolve the mismatch in a systematic way. However, it could benefit from examples of what an ideal setup should look like, as well as further clarity on the exact implications of not addressing the mismatch.",
+        "accuracy": "The recommendation logically follows from the analysis context, effectively highlighting a primary issue where the campaign goal does not align with the recorded offering. This is a significant finding in the analysis, and the recommendation is directly relevant to addressing the measurement risks identified.",
+        "non_redundancy": "The recommendation avoids clichés and is tailored to the specific issues found in the campaign analysis. It goes beyond generic advice by being directly relevant to the misalignment of stated goals and KPIs."
+      },
+      "verdict": "accept",
+      "key_issues": [
+        "- Lack of examples for best practices in campaign setup.\n- Insufficient detail on the consequences of failing to address the mismatch.\n- No mention of a timeline or urgency related to making changes."
+      ],
+      "improvement_suggestions": [
+        "- Include examples of correctly labeled campaigns to guide users on best practices.\n- Elaborate on the potential negative consequences of not resolving the mismatch, such as budget misallocation or incorrect decision-making based on faulty data.\n- Suggest a timeline or recommend urgency for implementing the changes mentioned in the recommendation."
+      ],
+      "meta": {
+        "weighted_overall": 4.7,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 0,
+      "original_recommendation": {
+        "title": "Resolve KPI and product mismatch in campaign setup",
+        "whats_happening": "The campaign primary goal references credit card signups while the offering is recorded as Personal Loans, creating a tracking and KPI alignment risk.",
+        "what_you_should_do": [
+          "Audit the campaign naming, goal text, and conversion actions in Google Ads and your reporting dashboards to identify where 'credit card' vs 'personal loans' labels are used.",
+          "Update campaign objective and conversion action names so they explicitly match the actual product you want to measure (e.g., 'Personal Loan - Lead' or 'Credit Card - Signup').",
+          "If multiple products are advertised, create distinct campaigns or conversion actions per product to avoid cross-attribution."
+        ],
+        "why_this_matters": "If conversions are being tracked for the wrong product, ROAS, CPA and lead counts will not reflect the intended business outcome and budget decisions will be based on misleading data.",
+        "priority": "High",
+        "expected_impact": "Restores measurement accuracy so reported ROAS and CPA reflect the right product and supports correct budget and optimization decisions.",
+        "owner_suggestion": "Analytics / Campaign Manager"
+      }
+    },
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 5.0,
+        "non_redundancy": 5.0,
+        "overall": 4.5
+      },
+      "reasoning": {
+        "clarity": "The recommendation outlines specific actions to evaluate the performance of conversions in terms of customer value, which is actionable and relevant to the campaign's goals. However, while the steps provided are quite practical, they could benefit from more detail regarding the implementation of these actions—such as specific software tools or methods for tracking these metrics. Nonetheless, the intent and rationale are communicated well.",
+        "accuracy": "The recommendation logically follows from the analysis provided, which highlighted the absence of necessary downstream performance metrics and the potential mismatch in targeting. The suggestion to tie conversions to customer value metrics directly addresses the identified gaps in the analysis context. The argument made about ROAS not guaranteeing profitability is accurate and grounded in the data presented.",
+        "non_redundancy": "The recommendation avoids generic advice and instead focuses specifically on actionable strategies that are contextually relevant to the campaign's findings about revenue, ROAS, and missing KPIs. Since it does not recycle common phrases without substantial guidance on application, it scores high on specificity."
+      },
+      "verdict": "accept",
+      "key_issues": [
+        "- Lack of implementation details for the suggested actions might make it less straightforward for users to apply them effectively.\n- No mention of potential challenges in integrating Google Ads with CRM systems, which could be a barrier to implementation."
+      ],
+      "improvement_suggestions": [
+        "- Include examples of CRM systems that can integrate with Google Ads or provide a brief outline of the process for linking conversion IDs to CRM records.\n- Suggest potential obstacles in measuring and tracking LTV or conversion rates, along with strategies to overcome them."
+      ],
+      "meta": {
+        "weighted_overall": 4.7,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 2,
+      "original_recommendation": {
+        "title": "Tie conversions to downstream value (quality, conversion-to-customer and LTV)",
+        "whats_happening": "Revenue and ROAS are reported but there is no linkage to customer lifetime value, margins, or lead-to-customer conversion rates.",
+        "what_you_should_do": [
+          "Connect Google Ads conversion IDs to CRM records so you can measure lead-to-funder (or customer) conversion rates and revenue over time.",
+          "Track post-conversion events (approval, funded loan, charged-off status) and calculate LTV or contribution margin for cohorts originating from this campaign.",
+          "Use those downstream metrics to set target CPA or target ROAS that reflect business profitability rather than short-term attributed revenue."
+        ],
+        "why_this_matters": "ROAS >1 alone does not guarantee profitability. Connecting to LTV and downstream outcomes allows deciding whether current CPA and ROAS meet business profitability thresholds.",
+        "priority": "High",
+        "expected_impact": "Improves decision-making on budget, bidding, and allowable CPA by aligning acquisition metrics with real customer value.",
+        "owner_suggestion": "Analytics / CRM / Product"
+      }
+    },
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 5.0,
+        "non_redundancy": 5.0,
+        "overall": 4.5
+      },
+      "reasoning": {
+        "clarity": "The recommendation is quite clear; it explicitly states the problem (null reach data) and outlines actionable steps to resolve it. The steps provided are specific and actionable, focusing on practical implementation within Google Ads. However, more detailed examples or metrics on how success will be measured following these actions could enhance clarity.",
+        "accuracy": "The recommendation logically follows from the analysis context, which identifies missing reach metrics as a key issue that hampers performance measurement and strategic insights. The suggestion to track audience metrics is coherent with the observed challenges and provides a constructive pathway to mitigate them. There are no apparent inaccuracies in the recommendation.",
+        "non_redundancy": "The recommendation is specific and tailored to the identified issues in the campaign analysis. It avoids generic advice and instead focuses on actionable items that relate directly to the context—improving audience metrics rather than stating common advice like \"optimize creatives\" without further detail. Thus, the recommendation is not redundant."
+      },
+      "verdict": "accept",
+      "key_issues": [
+        "- The recommendation could benefit from including specific metrics or KPIs to measure the impact of the proposed actions effectively.\n- Examples of how the recommended steps would lead to improved outcomes need clarification."
+      ],
+      "improvement_suggestions": [
+        "1. Include specific performance metrics that should be monitored post-implementation, such as target reach numbers or expected improvements in conversion rates.\n2. Suggest defining clear thresholds for what constitutes acceptable frequency levels to enhance audience quality further."
+      ],
+      "meta": {
+        "weighted_overall": 4.7,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 6,
+      "original_recommendation": {
+        "title": "Enable reach and audience saturation metrics",
+        "whats_happening": "Reach is null in the data, preventing assessment of audience saturation and frequency for the campaign.",
+        "what_you_should_do": [
+          "Activate reach and frequency reporting where available in Google Ads and track unique reach and impressions per audience cohort.",
+          "Segment performance by audience (new users vs returning, in-market segments) to detect saturation or diminishing returns.",
+          "Apply frequency caps or rotate creative if you identify high frequency with declining CTR or conversion rate."
+        ],
+        "why_this_matters": "Knowing reach and frequency helps balance prospecting and remarketing, avoid audience fatigue, and optimize where additional spend will drive incremental conversions.",
+        "priority": "Medium",
+        "expected_impact": "Improved audience management, reduced wasted impressions from overexposure, and better allocation between prospecting and remarketing.",
+        "owner_suggestion": "Media buyer / Analytics"
+      }
+    },
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 5.0,
+        "non_redundancy": 5.0,
+        "overall": 4.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation is articulated quite clearly. Each step outlined in \"what you should do\" provides a specific action that can be taken to rectify the situation, such as confirming the definition of a lead and validating tracking. However, while the recommendation is actionable, it could benefit from additional clarity regarding the process for backfilling the CPL metric, as more detail could further enhance its precision.",
+        "accuracy": "The recommendation is logically sound and accurately follows from the analysis context, which indicates that the absence of lead counts and CPL prevents effective evaluation of the campaign's performance against its stated objectives. This aligns with the identified key gaps in measurement and highlights a relevant response to the data limitations discussed.",
+        "non_redundancy": "The recommendation is specific and focused on addressing concrete issues within the campaign analysis. It avoids generic advice and clichés, as it directly ties the recommendation to the identified problems (i.e., null fields for leads and CPL). Each suggested action is unique and relevant to the context."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "- The recommendation could provide more clarity on the specifics of backfilling the CPL metric.\n- There is no mention of who will be responsible for ensuring the definition of a 'lead' is confirmed and tracked effectively."
+      ],
+      "improvement_suggestions": [
+        "- Expand the backfill process explanation for CPL to include examples or methods.\n- Suggest involving specific team members or roles responsible for confirming the definition of a 'lead' to ensure accountability."
+      ],
+      "meta": {
+        "weighted_overall": 4.7,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 1,
+      "original_recommendation": {
+        "title": "Populate lead count and cost-per-lead (CPL) in reporting",
+        "whats_happening": "Fields for 'leads' and 'cpl' are null, so lead-level efficiency cannot be evaluated despite having conversions and CPA.",
+        "what_you_should_do": [
+          "Confirm the definition of a 'lead' and ensure the conversion action representing a lead is firing on the site or funnel.",
+          "Add a CPL metric to the reporting pipeline (CPL = Spend / Leads) and backfill if possible for recent reporting windows.",
+          "Validate tracking by creating test leads and confirming they appear in Google Ads and your reports, then monitor leads and CPL daily until stable."
+        ],
+        "why_this_matters": "Lead counts and CPL are primary KPIs for a leads objective. Without them you cannot verify that conversions represent qualifying leads or compare performance to target CPL.",
+        "priority": "High",
+        "expected_impact": "Enables direct comparison of campaign performance to lead-level targets and prevents misinterpretation of conversion data.",
+        "owner_suggestion": "Analytics / Web team"
+      }
+    },
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 5.0,
+        "non_redundancy": 3.0,
+        "overall": 4.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation is fairly clear and actionable, outlining specific steps to take for testing alternative channels. However, it could benefit from more explicit metrics to track for success and clearer definitions of what constitutes a “comparable efficiency” between channels. The suggestion is clear, but could be sharpened with examples or thresholds to evaluate success.",
+        "accuracy": "The recommendation logically follows from the analysis context; it acknowledges the existing single-channel dependency risk and suggests appropriate actions to mitigate it. There are no mismatches or unsupported claims. The information supports the need to explore alternative channels to boost efficiency and mitigate risks.",
+        "non_redundancy": "While the recommendation addresses a specific concern (single-channel dependency), phrases like \"find cheaper or higher-quality leads\" are somewhat generic and could benefit from more contextualization regarding how these alternative channels align with the target audience, especially first-time investors in the fintech domain."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "- Lacks specific metrics or benchmarks for success in channel testing.\n- Could clarify which specific conversion definitions to use across channels.\n- The phrasing of finding \"higher-quality leads\" may be seen as vague without context."
+      ],
+      "improvement_suggestions": [
+        "- Include specific KPIs to measure success, such as target CPA or desired ROAS thresholds for alternative channels.\n- Suggest a timeline for testing and evaluating alternative channels.\n- Provide definitions for what constitutes a comparable efficiency to ensure clear expectations."
+      ],
+      "meta": {
+        "weighted_overall": 4.300000000000001,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 3,
+      "original_recommendation": {
+        "title": "Address single-channel dependency by testing alternative channels",
+        "whats_happening": "Only Google Search data is present, creating risk of over-dependence on a single channel for leads and revenue.",
+        "what_you_should_do": [
+          "Run small, controlled tests (pilot budgets) on at least one other channel (e.g., display, social, or performance networks) to compare CPA and ROAS.",
+          "Measure cost per conversion and attributed revenue consistently across channels using the same conversion definitions.",
+          "If alternatives show comparable or better efficiency, reallocate a portion of budget away from single-channel concentration."
+        ],
+        "why_this_matters": "Relying solely on one channel increases exposure to platform-specific volatility and misses opportunities to find cheaper or higher-quality leads.",
+        "priority": "Medium",
+        "expected_impact": "Reduces risk of performance volatility and may lower average CPA or improve ROAS by finding more efficient channels.",
+        "owner_suggestion": "Media buyer"
+      }
+    },
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 4.0,
+        "non_redundancy": 4.0,
+        "overall": 4.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation is relatively clear as it outlines specific steps to take (running a controlled scale test, incrementally scaling, using experiments in Google Ads). However, it lacks details about how to define and measure success, and there could be more clarity on what constitutes \"top-performing keywords and audiences.\" While actionable, guidance on setting thresholds for \"closely monitoring\" CPA and ROAS is vague.",
+        "accuracy": "The recommendation logically follows from the analysis context, particularly the identified efficiency of the campaign and the positive ROAS reported. However, it somewhat overlooks the critical issue highlighted in the analysis—mismatch between the primary goal and the actual offering—which may affect the interpretation of what a \"conversion\" entails. This could potentially mislead the scaling process if not properly accounted for.",
+        "non_redundancy": "The recommendation specifics distinguish it from generic advice, as it provides a structured approach to scaling. However, phrases like \"monitor CPA and ROAS closely\" could be considered somewhat generic without further contextualization regarding what specific metrics or thresholds should be focused on."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "- Lacks clarity on how to define and measure success metrics for the scaling test.\n- Does not address the core issue of KPI and offering mismatch, which clouds the strategic direction for scaling.\n- Vague in defining \"top-performing keywords and audiences\" for incremental scaling."
+      ],
+      "improvement_suggestions": [
+        "- Specify clear definitions and metrics that indicate success during the controlled testing (e.g., specific CPA thresholds to avoid).\n- Include context on how to ensure that the scaled efforts align with the intended campaign goals, addressing the KPI mismatch.\n- Suggest more actionable and specific means to identify which keywords and audiences perform best for scaling efforts."
+      ],
+      "meta": {
+        "weighted_overall": 4.0,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 4,
+      "original_recommendation": {
+        "title": "Scale search investment cautiously given positive ROAS and low CPA",
+        "whats_happening": "Campaign shows ROAS of 1.8 and a CPA of $16.74 with a 7.5% conversion rate, indicating conversion efficiency that could allow scaled spend.",
+        "what_you_should_do": [
+          "Run a controlled scale test: increase daily budget by a fixed percentage (e.g., 20–30%) for a short test window and monitor CPA and ROAS closely.",
+          "Prefer incremental scaling across top-performing keywords and audiences rather than across the entire campaign.",
+          "Use experiments or drafts in Google Ads to test bidding or budget changes and set clear stop rules if CPA or ROAS deteriorates."
+        ],
+        "why_this_matters": "If the observed efficiency holds when scaled, increasing budget can increase volume of leads and revenue; if it worsens, controlled testing limits wasted spend.",
+        "priority": "High",
+        "expected_impact": "Potential increase in lead volume and attributed revenue while containing downside risk through controlled experiments.",
+        "owner_suggestion": "Media buyer"
+      }
+    },
+    {
+      "scores": {
+        "clarity": 4.0,
+        "accuracy": 4.0,
+        "non_redundancy": 3.0,
+        "overall": 4.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation is relatively clear in its intent and structure, detailing actions that should be taken. However, it lacks specific examples or metrics for success, which would make it more actionable. The recommendation mentions enabling auto-tagging and improving attribution models, but without clear guidance on how to implement these steps, it may leave users uncertain on execution.",
+        "accuracy": "The recommendation logically follows from the stated problems in the analysis context, particularly regarding the risk associated with single-channel reporting and mismatched KPIs. It acknowledges the limitations of the current setup and suggests actionable changes directly related to addressing those limitations. Nonetheless, the recommendation could be considered somewhat tactical rather than strategic, as it assumes that improving the attribution model alone will resolve the overarching issues.",
+        "non_redundancy": "While the recommendation is tailored to the specific issues identified, it includes common phrases like \"better attribution\" and \"improve budget allocation\" that could be seen as somewhat generic. The suggestions also lack context-specific tailoring that directly addresses how these strategies will help mitigate the highlighted risks of KPI mismatches and lack of cross-channel insights."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "- Lacks specific metrics or examples to ensure clarity on implementation.\n- Uses somewhat generic phrases that could benefit from more specific context.\n- Does not explicitly tie back the recommendations to measurable success metrics."
+      ],
+      "improvement_suggestions": [
+        "- Include specific benchmarks or metrics to track the success of improved attribution (e.g., target percentage increase in cross-channel insights).\n- Offer clearer examples of how to implement auto-tagging and data-driven models, potentially with associated timelines or responsibilities.\n- Specify what types of data should be included in the unified dashboard and how this can directly resolve existing gaps identified in the analysis context."
+      ],
+      "meta": {
+        "weighted_overall": 3.8000000000000003,
+        "llm_overall_used": true
+      },
+      "recommendation_index": 5,
+      "original_recommendation": {
+        "title": "Improve attribution and cross-channel reporting setup",
+        "whats_happening": "Analysis likely relies on single-channel (last-click) attribution and lacks cross-channel credit, limiting understanding of true channel contribution.",
+        "what_you_should_do": [
+          "Enable auto-tagging and ensure conversion import and first-party data flows are configured correctly between Google Ads and analytics/CRM.",
+          "Consider a data-driven attribution model or a simple multi-touch model in Google Ads to better reflect assisted conversions.",
+          "Build a unified dashboard that ingests cost and conversion data from other channels so comparisons use consistent definitions."
+        ],
+        "why_this_matters": "Better attribution reduces the chance of over-investing in channels that appear strong under last-click and under-investing in channels that assist conversions.",
+        "priority": "Medium",
+        "expected_impact": "More accurate channel-level performance insights and improved budget allocation across channels.",
+        "owner_suggestion": "Analytics"
+      }
+    }
+  ]
+}
