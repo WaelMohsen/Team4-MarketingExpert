@@ -20,8 +20,8 @@ def save_results_to_json(llms_result: Any, log_dir: str = "logs") -> str:
     os.makedirs(log_dir, exist_ok=True)
 
     # Create timestamped run directory
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_dir = os.path.join(log_dir, f"run_{timestamp}")
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    run_dir = os.path.join(log_dir, date_str)
     os.makedirs(run_dir, exist_ok=True)
 
     # Define output file
