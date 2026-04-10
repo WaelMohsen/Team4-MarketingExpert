@@ -263,9 +263,15 @@ def evaluate_recommendations(
                 "meta": {"error": str(e)}
             }
 
-        # Attach metadata
-        eval_result["recommendation_index"] = idx
-        eval_result["original_recommendation"] = rec
+        # Attach metadata and original objects (as JSON objects, not strings)
+        eval_result = {
+            "campaign_target": campaign_target,
+            "business_domain": business_domain,
+            "analysis_context": analysis_context,
+            "recommendation": rec,
+            "recommendation_index": idx,
+            **eval_result
+        }
         results.append(eval_result)
 
     # --- Rank recommendations by overall score ---
@@ -287,6 +293,9 @@ def evaluate_recommendations(
     logger.info("\nEvaluation completed. Recommendations ranked by overall score.\n")
 
     return {
+        "campaign_target": campaign_target,
+        "business_domain": business_domain,
+        "analysis_context": analysis_context,
         "campaign_evaluation": {
             "overall_score": avg_score,
             "verdicts": verdict_counts,
@@ -355,7 +364,7 @@ if __name__ == "__main__":
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     
     # Create run directory
-    run_dir = LOG_DIR / ("run_" + datetime.now().strftime("%Y-%m-%d"))
+    run_dir = LOG_DIR / datetime.now().strftime("%Y-%m-%d")
     run_dir.mkdir(parents=True, exist_ok=True)
     
     log_file = run_dir / "evaluation.log"
