@@ -170,7 +170,7 @@ Note: `.env.example` also includes `GROQ_API_KEY`, but the current pipeline uses
 ```bash
 ```bash
 python run_pipeline.py \
-  --input-csv data/raw/global_ads_performance_dataset.csv \
+  --input-csv data/raw/ads_data.csv \
   --analysis-output data/outputs/campaign_result.json
 ```
 
