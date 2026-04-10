@@ -63,7 +63,7 @@ class LLMApiClient:
                 model=self.model,
                 messages=messages,
                 #temperature=self.temperature,
-                max_tokens=self.max_output_tokens,
+                max_completion_tokens=self.max_output_tokens,
             )
 
             return response.choices[0].message.content.strip()
@@ -89,7 +89,7 @@ class LLMApiClient:
                     model=self.model,
                     messages=messages,
                     #temperature=self.temperature,
-                    max_tokens=self.max_output_tokens,
+                    max_completion_tokens=self.max_output_tokens,
                     response_format=response_format,
                 )
                 
@@ -103,7 +103,7 @@ class LLMApiClient:
                     model=self.model,
                     messages=messages,
                     #temperature=self.temperature,
-                    max_tokens=self.max_output_tokens,
+                    max_completion_tokens=self.max_output_tokens,
                     response_format={"type": "json_object"},
                 )
 
