@@ -22,6 +22,10 @@ sys.path.append(PROJECT_ROOT)
 from logs.logging_config import setup_logging
 logger = setup_logging(module_name ='llm_analysis_evaluator')
 from logs.save_llm_results_to_json import save_results_to_json
+from pathlib import Path
+from datetime import datetime
+import argparse
+from dotenv import load_dotenv
 
 
 class LLMAnalysisEvaluator(dspy.Module):
@@ -187,6 +191,9 @@ class LLMAnalysisEvaluator(dspy.Module):
         # Final Output Structure
         try:
             structured_result = {
+                "campaign_data": campaign_data,
+                "analysis_context": analysis_context,
+                "campaign_target": campaign_target,
                 "scores": {**scores, "overall": overall_weighted_score},
                 "hallucination_flag": ValidationUtils.cast_to_bool(
                     getattr(result, "hallucination_flag", False)
@@ -215,124 +222,150 @@ class LLMAnalysisEvaluator(dspy.Module):
         return structured_result
 
 
-def main():
-    # 1. Setup: Usually requires a DSPy language model (LM) configuration
-    model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-    # TODO: check for OpenAI API key in env variables and raise warning if not found
-    lm = dspy.LM(f"openai/{model}")
-    dspy.settings.configure(lm=lm)
-
-    # 2. Instantiate the Evaluator
-    evaluator = LLMAnalysisEvaluator()
-
-    # 3. Define sample input data
-    # TODO: read data dynamically from a file or a mock data generator instead of hardcoding
-    # TODO: Use the correct analysis json structure that the LLM expects, this is just a placeholder and may not align with the expected input format of the LLM.
-    sample_campaign_data = [
-        {
-            "platform": "Google Ads",
-            "objective": "Leads",
-            "spend": 5000,
-            "impressions": 200000,
-            "clicks": 8000,
-            "conversions": 320,
-            "revenue": 15000,
-        },
-        {
-            "platform": "Meta",
-            "objective": "Leads",
-            "spend": 3000,
-            "impressions": 150000,
-            "clicks": 6000,
-            "conversions": 180,
-            "revenue": 9000,
-        },
-    ]
-
-    sample_campaign_target = {
-        "primary_goal": "Maximize ROAS during the Winter Holiday Sale",
-        "kpis": ["ROAS", "CPA", "Conversion Volume"],
-    }
-
-    sample_analysis_context = {
-        "analysis": {
-            "executive_summary": "Sample analysis summary",
-            "budget_and_efficiency": [
-            {
-                "insight": "High spend on underperforming channel",
-                "evidence": "Channel X has 2x higher CAC than benchmark",
-                "business_impact": "Reallocating 20% budget could improve overall ROAS"
-            }
-            ],
-            "results_and_value": [
-            {
-                "insight": "Strong lead generation volume",
-                "evidence": "1,500 leads/month at $15 CAC",
-                "business_impact": "Supports 30% MoM revenue growth"
-            }
-            ],
-            "cross_channel_patterns_and_risks": [
-            {
-                "pattern_or_risk": "Attribution overlap between channels",
-                "evidence": "30% of converters touched 2+ channels",
-                "why_it_matters": "Multi-touch attribution needed for accurate ROI"
-            }
-            ],
-            "channel_notes": [
-            {
-                "platform": "Google Ads",
-                "what_we_see": [
-                "$50K spend",
-                "1,200 conversions"
-                ],
-                "what_it_likely_means": [
-                "Strong brand search intent",
-                "Mature campaign"
-                ],
-                "risks_or_watchouts": [
-                "ROAS trending down YoY"
-                ]
-            }
-            ],
-            "missing_info": [
-            "Customer lifetime value",
-            "Competitor spend data"
-            ]
-        }
-    }
-
-    # 4. Run the evaluation
-    # Note: This will call the LLM if DSPy is configured.
-    try:
-        print("--- Running Analysis Evaluation ---\n")
-        logger.info("Executing evaluation...\n")    
-        report = evaluator.run_evaluation_pipeline(
-            campaign_data=sample_campaign_data,
-            analysis_context=sample_analysis_context,
-            #analysis_structure="Standard campaign analysis structure",
-            campaign_target=sample_campaign_target,
-        )
-        print("type of report",type(report))
-        # 5. Print formatted results
-        print(json.dumps(report, indent=4))
-
-        # Accessing specific fields
-        final_score = report["scores"]["overall"]
-        print(f"\nFinal Weighted Score: {final_score:.2f}")
-
-    except Exception as e:
-        print(f"Error during execution: {e}")
-        print(
-            "\nTip: Ensure you have configured a DSPy Language Model (LM) before running."
-        )
+def print_analysis_summary(report: Dict[str, Any], file_name: str = "Sample"):
+    """
+    Prints a pretty summary of the analysis evaluation.
+    """
+    scores = report.get("scores", {})
+    reasoning = report.get("reasoning", {})
     
-    # 6. Save Output to File ---
-    from pathlib import Path
+    print("\n" + "="*60)
+    print(f"           ANALYSIS EVALUATION: {file_name}")
+    print("="*60)
+    print(f"Overall Score            : {scores.get('overall', 0):.2f}")
+    print(f"Clarity                  : {scores.get('clarity', 0):.2f}")
+    print(f"Relevance                : {scores.get('relevance', 0):.2f}")
+    print(f"Following Structure      : {scores.get('following_structure', 0):.2f}")
+    print(f"Hallucination Detected   : {'YES' if report.get('hallucination_flag') is True else 'NO'}")
+    
+    print("\n" + "-"*30 + " TOP REASONING " + "-"*30)
+    
+    # Show first point of each reasoning if exists
+    for key in ["clarity", "relevance", "structure", "hallucination"]:
+        r_list = reasoning.get(key, [])
+        if r_list:
+            # Handle list of strings or single string
+            point = r_list[0] if isinstance(r_list, list) else r_list
+            print(f"{key.capitalize():15}: {point[:150]}{'...' if len(point) > 150 else ''}")
+            
+    print("="*60 + "\n")
+
+
+def main():
+    # 1. CLI Setup
+    load_dotenv()
+    parser = argparse.ArgumentParser(description="Evaluate Marketing Analysis Results")
+    parser.add_argument("--files", nargs="+", help="Specific JSON files to evaluate (e.g. data/outputs/campaign_1_result.json)")
+    args = parser.parse_args()
+
+    # 2. Path Setup
     BASE_DIR = Path(__file__).resolve().parent.parent
     LOG_DIR = BASE_DIR / "logs"
-    save_results_to_json(report, LOG_DIR)  
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Create run directory for the session
+    run_dir = LOG_DIR / datetime.now().strftime("%Y-%m-%d")
+    run_dir.mkdir(parents=True, exist_ok=True)
 
-    logger.info(f"Evaluation results successfully saved to: {LOG_DIR}")
+    # 3. DSPy Setup: Requires a language model (LM) configuration
+    try:
+        model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        logger.info(f"Configuring DSPy LM with model: openai/{model}")
+        lm = dspy.LM(f"openai/{model}")
+        dspy.settings.configure(lm=lm)
+    except Exception as e:
+        logger.error(f"Failed to configure DSPy LM: {e}")
+        raise
+
+    # 4. Instantiate the Evaluator
+    evaluator = LLMAnalysisEvaluator()
+
+    if args.files:
+        # 5. Process Files
+        for file_path in args.files:
+            file_path_obj = Path(file_path)
+            if not file_path_obj.exists():
+                logger.error(f"File not found: {file_path}")
+                continue
+                
+            logger.info(f"--- Evaluating Analysis Product: {file_path_obj.name} ---")
+            try:
+                with open(file_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                
+                # Mapping project JSON structure to Evaluator inputs
+                campaign_data = data.get("input_data")
+                analysis_context = data.get("analysis_response")
+                campaign_target = data.get("campaign_target")
+
+                if not all([campaign_data, analysis_context, campaign_target]):
+                    logger.warning(f"Skipping {file_path_obj.name}: missing required fields (input_data, analysis_response, or campaign_target).")
+                    continue
+
+                report = evaluator.run_evaluation_pipeline(
+                    campaign_data=campaign_data,
+                    analysis_context=analysis_context,
+                    campaign_target=campaign_target,
+                )
+
+                # Pretty Print Summary
+                print_analysis_summary(report, file_path_obj.name)
+
+                # Save individual evaluation result
+                output_name = f"analysis_evaluation_result_{file_path_obj.stem}_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json"
+                output_path = run_dir / output_name
+                with open(output_path, "w", encoding="utf-8") as f:
+                    json.dump(report, f, ensure_ascii=False, indent=2)
+                
+                logger.info(f"Evaluation for {file_path_obj.name} saved to: {output_path}")
+
+            except Exception as e:
+                logger.error(f"Failed to process {file_path_obj.name}: {e}")
+                continue
+
+    else:
+        # 6. Fallback to Sample Run
+        logger.info("No files provided. Running sample evaluation...\n")
+        
+        sample_campaign_data = [
+            {
+                "platform": "Google Ads",
+                "objective": "Leads",
+                "spend": 5000,
+                "conversions": 320,
+            }
+        ]
+
+        sample_campaign_target = {
+            "primary_goal": "Maximize ROAS",
+            "kpis": ["ROAS", "CPL"],
+        }
+
+        sample_analysis_context = {
+            "analysis": {
+                "executive_summary": "High spend on Google Ads, but efficient conversions.",
+                "budget_and_efficiency": [{"insight": "Good ROAS", "evidence": "1.8", "business_impact": "Scale"}]
+            }
+        }
+
+        try:
+            report = evaluator.run_evaluation_pipeline(
+                campaign_data=sample_campaign_data,
+                analysis_context=sample_analysis_context,
+                campaign_target=sample_campaign_target,
+            )
+            
+            print_analysis_summary(report, "Sample Execution")
+            
+            # Save Sample Result
+            output_path = run_dir / "sample_analysis_evaluation.json"
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(report, f, ensure_ascii=False, indent=2)
+            
+            logger.info(f"Sample evaluation results saved to: {output_path}")
+
+        except Exception as e:
+            logger.error(f"Sample execution failed: {e}")
 
 
 if __name__ == "__main__":

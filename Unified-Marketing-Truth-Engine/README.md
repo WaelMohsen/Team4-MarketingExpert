@@ -1,10 +1,11 @@
 # Unified Marketing Truth Engine
 
 A modular Python pipeline that converts raw paid media performance data into structured, business-friendly LLM outputs in two stages:
-1. analysis (what happened and why it matters)
-2. recommendations (what to do next)
+1. Ingestion & Preprocessing (Standardizing raw data)
+2. Intelligence Layer (Analysis & Recommendations)
+3. Evaluation Layer (Quality Control via DSPy)
 
-The project is organized as a layered architecture under `src/` with a CLI entrypoint in `run_pipeline.py`.
+The project is organized as a modular architecture under `src/` with a CLI entrypoint in `run_pipeline.py`, complemented by an automated `evaluation/` engine.
 
 ## What This Application Does
 
@@ -20,12 +21,13 @@ The project is organized as a layered architecture under `src/` with a CLI entry
 ## Architecture Layers
 
 ```mermaid
-flowchart LR
-    A[CLI Entrypoint\nrun_pipeline.py] --> B[Data Preprocessing Layer\nsrc/data_preprocessing]
+flowchart TD
+    A[CLI Entrypoint\nrun_pipeline.py] --> B[Data Preprocessing\nsrc/data_preprocessing]
     B --> C[Feature Layer\nsrc/feature_extraction]
-    C --> D[Prompting Layer\nsrc/LLMs_and_Prompts]
-    D --> E[LLM Inference Layer\nOpenAI Chat Completions]
-    E --> F[Artifacts\nanalysis.json + recommendations.json]
+    C --> D[Intelligence Layer\nsrc/LLMs_and_Prompts]
+    D --> E[Truth Objects\nCampaign JSON Artifacts]
+    E --> F[Evaluation Layer\nevaluation/]
+    F --> G[Quality Reports\nLogs & Scores]
 ```
 
 ### Layer Responsibilities
@@ -46,8 +48,10 @@ flowchart LR
   - `structured_outputs.py`: Pydantic output contracts for stage 1 and stage 2.
   - `LLMApiClient`: OpenAI wrapper for text and schema-parse JSON.
 
-- `tests`
+- `evaluation/`
+  - `llm_analysis_evaluator.py`: DSPy-based quality evaluator for the analysis stage.
   - `recommendation_response_eval.py`: DSPy-based quality evaluator for recommendation cards.
+  - `validation_utils.py`: Shared scoring and data parsing utilities.
 
 ## End-to-End Flow
 
@@ -123,19 +127,15 @@ Also supported at schema/KPI level when present:
 ## Project Structure
 
 ```text
-Unified-Marketing-Truth-Engine/
-  data/
-    raw/
-    outputs/
-  logs/
-  notebooks/
+  evaluation/
+    llm_analysis_evaluator.py
+    recommendation_response_eval.py
   src/
     data_preprocessing/
     feature_extraction/
     LLMs_and_Prompts/
     modeling/
     utils/
-  tests/
   run_pipeline.py
   requirements.txt
   .env.example
@@ -168,28 +168,41 @@ Note: `.env.example` also includes `GROQ_API_KEY`, but the current pipeline uses
 ## Run the Pipeline
 
 ```bash
+```bash
 python run_pipeline.py \
-  --input-csv data/raw/global_ads_performance_dataset.csv \
-  --analysis-output data/outputs/analysis.json \
-  --recommendations-output data/outputs/recommendations.json
+  --input-csv data/raw/ads_data.csv \
+  --analysis-output data/outputs/campaign_result.json
 ```
 
-Generated artifacts:
+**Output Artifact:**
+The pipeline generates a unified "Truth Object" in `data/outputs/campaign_result.json`. This file contains the raw input data, the structured analysis, and the generated recommendation cards in one machine-readable schema.
 
-- `data/outputs/analysis.json`
-- `data/outputs/recommendations.json`
+## Run Evaluation & Testing Flow
 
-## Run Recommendation Evaluation (Optional)
+The system includes a DSPy-powered evaluation layer to grade the quality of the analysis and recommendations. These scripts read directly from the pipeline's output JSON files.
+
+### 1. Analysis Evaluation
+Grades the logic, clarity, and relevance of the performance analysis.
 
 ```bash
-python tests/recommendation_response_eval.py
+python evaluation/llm_analysis_evaluator.py --files data/outputs/campaign_result.json
 ```
 
-Outputs:
+### 2. Recommendation Evaluation
+Grades the clarity, accuracy, and feasibility of the recommendation cards.
 
-- console ranking summary
-- `logs/evaluation_results.json`
-- `logs/evaluation.log`
+```bash
+python evaluation/recommendation_response_eval.py --files data/outputs/campaign_result.json
+```
+
+### 3. Testing the New Flow (Walkthrough)
+
+1.  **Generate Data**: Run the pipeline to produce a new `campaign_result.json`.
+2.  **Run Quality Audit**: Execute both evaluators using the `--files` argument pointing to your newly generated artifact.
+3.  **Inspect Results**:
+    *   **Console Output**: Review the ranked summary and structured verdicts (Accept/Revise/Reject) printed to the terminal.
+    *   **Logs**: Comprehensive session logs and individual result files are saved in `logs/%Y-%m-%d/` for deep-dive auditing.
+    *   **Audit Trail**: Check the reasoning fields in the saved evaluation JSONs to understand the LLM's critique.
 
 ## Constraints and Known Gaps (Current Code)
 

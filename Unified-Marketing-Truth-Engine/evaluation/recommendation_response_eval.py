@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+from datetime import datetime
 from typing import List, Dict, Any
 
 import dspy
@@ -8,19 +9,21 @@ import dspy
 logger = logging.getLogger(__name__)
 
 
-class EvaluateRecommendation(dspy.Signature):
+class ResponsePromptBuilder(dspy.Signature):
     """
     Evaluate the quality of a marketing recommendation for non-marketer end users.
 
     The evaluation should consider:
     - Clarity: Is the recommendation easy to understand and actionable?
     - Accuracy: Is it logically correct and grounded in the provided context?
-    - Non-redundancy: Is it specific and avoids generic or repeated advice?
+    - Output Structure: Does the recommendation follow the required structure (e.g., JSON format with specific fields)?
+    - Feasibility: Is it realistic and implementable given platform capabilities, permissions, and available data?
 
     The evaluator MUST:
     - Use only the provided inputs (no assumptions).
     - Be strict and critical (avoid inflated scores).
     - Justify each score with concrete reasoning.
+    - limit reasoning to 200 characters per reasoning field
     - Return structured, consistent outputs.
     """
 
@@ -37,53 +40,66 @@ class EvaluateRecommendation(dspy.Signature):
     recommendation = dspy.InputField(
         desc="The recommendation to evaluate (usually structured JSON)."
     )
-
     # Clarity
     clarity_reasoning = dspy.OutputField(
         desc=(
-            "Explain whether the recommendation is clear, specific, and actionable. "
+            "Explain whether the recommendation is clear,specific, not vague, and easy to understand for a non-marketer end user. "
             "Mention if steps, metrics, or examples are missing or vague."
         )
     )
     clarity_score = dspy.OutputField(
         desc=(
-            "Integer score (1-5): "
-            "1=very vague/unusable, 3=somewhat clear but incomplete, 5=very clear and directly actionable."
+            "Integer score (1-3): " 
+            "1=very vague/unusable, 2=somewhat clear but incomplete, 3=very clear ."
         )
     )
 
     # Accuracy
     accuracy_reasoning = dspy.OutputField(
         desc=(
-            "Explain whether the recommendation logically follows from the analysis_context. "
-            "Highlight mismatches, unsupported claims, or correct data usage."
+            "Explain whether the recommendation logically follows from the analysis_context, and follows marketing best practices. " 
+            "Highlight mismatches, unsupported claims, or incorrect data usage."
         )
     )
     accuracy_score = dspy.OutputField(
         desc=(
-            "Integer score (1-5): "
-            "1=incorrect/misleading, 3=partially correct, 5=fully grounded and logically sound."
+            "Integer score (1-3): "
+            "1=incorrect/misleading, 2=partially correct, 3=fully grounded and logically sound."
         )
     )
 
-    # Non-redundancy
-    redundancy_reasoning = dspy.OutputField(
+    # Output Structure
+    output_structure_reasoning = dspy.OutputField(
+        desc="Explain whether the recommendation follows the required structure (e.g., JSON format with specific fields)."
+    )
+
+    output_structure_score = dspy.OutputField(
         desc=(
-            "Explain whether the recommendation is specific vs generic. "
-            "Call out clichés (e.g., 'improve targeting', 'optimize creatives') if not contextualized."
+            "Integer score (1-3): "
+            "1=missing most sections, "
+            "2=partially structured, "
+            "3=fully structured and well-formatted."
         )
     )
-    non_redundancy_score = dspy.OutputField(
+
+    # Feasibility
+    feasibility_reasoning = dspy.OutputField(
+        desc="Explain whether the recommendation can be implemented given platform capabilities, permissions, and available data."
+    )
+
+    feasibility_score = dspy.OutputField(
         desc=(
-            "Integer score (1-5): "
-            "1=generic/repetitive, 3=somewhat specific, 5=highly tailored and unique."
+            "Integer score (1-3): "
+            "1=Not feasible (requires unavailable features, permissions, or unrealistic changes), "
+            "2=Partially feasible (requires extra setup, dependencies, or unclear steps), "
+            "3=Fully feasible (directly implementable with current platform and permissions)."
         )
     )
 
     # Overall judgment
     overall_score = dspy.OutputField(
         desc=(
-            "Weighted overall score (1-5). Prioritize accuracy > clarity > non-redundancy."
+            "Weighted overall score (1-3). Prioritize accuracy > clarity > output_structure > feasibility."
         )
     )
 
@@ -96,7 +112,7 @@ class EvaluateRecommendation(dspy.Signature):
 
     key_issues = dspy.OutputField(
         desc=(
-            "List of the most critical problems in the recommendation (bullet points)."
+            "Python list of the most critical problems in the recommendation (bullet points)." # TODO: make sure it is list
         )
     )
 
@@ -111,7 +127,7 @@ class EvaluateRecommendation(dspy.Signature):
 class RecommendationEvaluator(dspy.Module):
     def __init__(self):
         super().__init__()
-        self.evaluate = dspy.ChainOfThought(EvaluateRecommendation)
+        self.evaluate = dspy.ChainOfThought(ResponsePromptBuilder)
 
     def _safe_parse_score(self, value, default=0.0):
         """Robust score parsing (handles int, float, string, None)."""
@@ -148,13 +164,14 @@ class RecommendationEvaluator(dspy.Module):
         # --- Parse scores safely ---
         clarity_score = self._safe_parse_score(result.clarity_score)
         accuracy_score = self._safe_parse_score(result.accuracy_score)
-        non_redundancy_score = self._safe_parse_score(result.non_redundancy_score)
-
-        # --- Weighted overall (accuracy > clarity > non-redundancy) ---
+        output_structure_score = self._safe_parse_score(result.output_structure_score)
+        feasibility_score = self._safe_parse_score(result.feasibility_score)
+        # --- Weighted overall (accuracy > clarity > output_structure > feasibility) ---
         weighted_overall = (
             (0.5 * accuracy_score) +
             (0.3 * clarity_score) +
-            (0.2 * non_redundancy_score)
+            (0.2 * output_structure_score) +
+            (0.1 * feasibility_score)
         )
 
         # --- Try to use LLM-provided overall_score if valid ---
@@ -187,23 +204,20 @@ class RecommendationEvaluator(dspy.Module):
             "scores": {
                 "clarity": clarity_score,
                 "accuracy": accuracy_score,
-                "non_redundancy": non_redundancy_score,
+                "output_structure": output_structure_score,
+                "feasibility": feasibility_score,
                 "overall": final_overall_score
             },
             "reasoning": {
                 "clarity": result.clarity_reasoning,
                 "accuracy": result.accuracy_reasoning,
-                "non_redundancy": result.redundancy_reasoning
+                "output_structure": result.output_structure_reasoning,
+                "feasibility": result.feasibility_reasoning,
             },
             "verdict": verdict,
             "key_issues": key_issues,
             "improvement_suggestions": improvement_suggestions,
 
-            # Optional debug info (very useful in pipelines)
-            "meta": {
-                "weighted_overall": weighted_overall,
-                "llm_overall_used": use_llm_score
-            }
         }
 
 
@@ -212,11 +226,10 @@ def evaluate_recommendations(
     campaign_target: Dict[str, Any], 
     business_domain: Dict[str, Any], 
     analysis_context: Dict[str, Any]
-) -> List[Dict[str, Any]]:
+) -> Dict[str, Any]:
     """
     Evaluate a list of recommendations using contextual campaign data.
-
-    Returns a list of structured evaluation results.
+    Returns a unified campaign evaluation object.
     """
 
     evaluator = RecommendationEvaluator()
@@ -242,161 +255,77 @@ def evaluate_recommendations(
         except Exception as e:
             logger.error(f"Evaluation failed for recommendation {idx + 1}: {e}")
             eval_result = {
-                "scores": {"clarity": 0.0, "accuracy": 0.0, "non_redundancy": 0.0, "overall": 0.0},
-                "reasoning": {"clarity": "Error", "accuracy": "Error", "non_redundancy": "Error"},
+                "scores": {"clarity": 0.0, "accuracy": 0.0, "output_structure": 0.0, "feasibility": 0.0, "overall": 0.0},
+                "reasoning": {"clarity": "Error", "accuracy": "Error", "output_structure": "Error", "feasibility": "Error"},
                 "verdict": "error",
                 "key_issues": [f"Evaluation failed with error: {str(e)}"],
                 "improvement_suggestions": [],
                 "meta": {"error": str(e)}
             }
 
-        # Attach metadata
-        eval_result["recommendation_index"] = idx
-        eval_result["original_recommendation"] = rec
-
-        # Extract scores safely for logging
-        scores = eval_result.get("scores", {})
-        clarity = scores.get("clarity", 0.0)
-        accuracy = scores.get("accuracy", 0.0)
-        non_redundancy = scores.get("non_redundancy", 0.0)
-        overall = scores.get("overall", 0.0)
-
-        logger.info(
-            f"[Rec {idx + 1}] "
-            f"Clarity: {clarity:.2f} | "
-            f"Accuracy: {accuracy:.2f} | "
-            f"Non-Redundancy: {non_redundancy:.2f} | "
-            f"Overall: {overall:.2f} | "
-            f"Verdict: {eval_result.get('verdict', 'N/A')}"
-        )
-
+        # Attach metadata and original objects (as JSON objects, not strings)
+        eval_result = {
+            "campaign_target": campaign_target,
+            "business_domain": business_domain,
+            "analysis_context": analysis_context,
+            "recommendation": rec,
+            "recommendation_index": idx,
+            **eval_result
+        }
         results.append(eval_result)
 
-    # --- Optional: Rank recommendations by overall score ---
+    # --- Rank recommendations by overall score ---
     results = sorted(
         results,
         key=lambda x: x.get("scores", {}).get("overall", 0.0),
         reverse=True
     )
 
+    # --- Aggregate Stats ---
+    avg_score = sum(r["scores"]["overall"] for r in results) / len(results) if results else 0.0
+    verdict_counts = {
+        "accept": sum(1 for r in results if r["verdict"] == "accept"),
+        "revise": sum(1 for r in results if r["verdict"] == "revise"),
+        "reject": sum(1 for r in results if r["verdict"] == "reject"),
+        "error": sum(1 for r in results if r["verdict"] == "error")
+    }
+
     logger.info("\nEvaluation completed. Recommendations ranked by overall score.\n")
 
-    return results
-
-if __name__ == "__main__":
-    from pathlib import Path
-    
-    BASE_DIR = Path(__file__).resolve().parent.parent
-    LOG_DIR = BASE_DIR / "logs"
-    LOG_DIR.mkdir(parents=True, exist_ok=True)
-    
-    log_file = LOG_DIR / "recommendation_evaluation.log"
-    
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-        handlers=[
-            logging.FileHandler(str(log_file), encoding="utf-8"),
-            logging.StreamHandler()
-        ]
-    )
-
-    from dotenv import load_dotenv
-    load_dotenv()
-
-    
-    # Configure DSPy LM
-    try:
-        model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-        logger.info(f"Configuring DSPy LM with model: openai/{model}")
-        lm = dspy.LM(f"openai/{model}")
-        dspy.settings.configure(lm=lm)
-    except Exception as e:
-        logger.error(f"Failed to configure DSPy LM: {e}")
-        raise
-
-    # --- Sample Inputs ---
-    sample_campaign_target = {
-        "primary_goal": "Maximize ROAS during the Winter Holiday Sale",
-        "kpis": ["ROAS", "CPA", "Conversion Volume"]
-    }
-
-    sample_business_domain = {
-        "industry": "E-Commerce",
-        "offering": "Winter clothing and outerwear",
-        "audience": "High-intent seasonal shoppers",
-        "funnel_stage": "conversion"
-    }
-    
-    sample_analysis_context = {
-        "analysis": {
-            "executive_summary": "Google Ads is driving a high ROAS of 4.5x but has a limited impression share due to budget caps. Meanwhile, Meta is consuming 70% of the budget but its ROAS has dropped to 1.8x over the last two weeks, strongly indicating ad fatigue on the current creative sets.",
-            "budget_and_efficiency": [
-                {
-                    "insight": "Google Ads budget is capping out daily.",
-                    "evidence": "Search impression share lost due to budget is at 45%.",
-                    "business_impact": "Leaving highly profitable conversions on the table."
-                }
-            ],
-            "results_and_value": [],
-            "cross_channel_patterns_and_risks": [
-                {
-                    "pattern_or_risk": "Meta creative fatigue is dragging down blended return.",
-                    "evidence": "Frequency on Meta is over 8, and CTR dropped from 1.5% to 0.6%.",
-                    "why_it_matters": "The largest budget pool is becoming increasingly inefficient."
-                }
-            ],
-            "channel_notes": [],
-            "missing_info": []
-        }
-    }
-
-    sample_recommendations = [
-        {
-            "title": "Shift Meta Budget to fully fund Google Ads",
-            "whats_happening": "Google Ads has a 4.5x ROAS but is budget-capped, while Meta's ROAS has dropped to 1.8x.",
-            "what_you_should_do": ["Reduce Meta daily budgets by 30%", "Reallocate that 30% to the top performing Google Search campaigns"],
-            "why_this_matters": "This allows you to capture all existing high-intent demand on Google, immediately lifting overall return.",
-            "priority": "High",
-            "expected_impact": "Improved blended ROAS and higher conversion volume.",
-            "owner_suggestion": "Media buyer"
+    return {
+        "campaign_target": campaign_target,
+        "business_domain": business_domain,
+        "analysis_context": analysis_context,
+        "campaign_evaluation": {
+            "overall_score": avg_score,
+            "verdicts": verdict_counts,
+            "recommendation_count": len(results),
+            "timestamp": datetime.now().isoformat()
         },
-        {
-            "title": "Optimize Meta Targeting Mechanism",
-            "whats_happening": "Performance on Meta is dropping.",
-            "what_you_should_do": ["Go into Ads Manager", "Change the algorithm to look for better users"],
-            "why_this_matters": "It will fix the performance issue.",
-            "priority": "Medium",
-            "expected_impact": "Things should get better.",
-            "owner_suggestion": "Media buyer"
-        },
-        {
-            "title": "Refresh Meta Creatives to Combat Ad Fatigue",
-            "whats_happening": "Meta frequency is high (>8) and CTR has dropped by over half, indicating audience fatigue.",
-            "what_you_should_do": ["Launch 3-5 new video assets highlighting holiday discounts", "Rotate out existing underperforming creatives"],
-            "why_this_matters": "Fresh creatives reset the algorithm and re-engage the audience, recovering Meta's efficiency.",
-            "priority": "High",
-            "expected_impact": "Increased CTR and stabilized CPA on Meta.",
-            "owner_suggestion": "Creative team / Media buyer"
-        }
-    ]
-    
-    # --- Run Evaluation ---
-    logger.info("Executing evaluation...\n")
+        "recommendation_details": results
+    }
 
-    eval_output = evaluate_recommendations(
-        sample_recommendations,
-        campaign_target=sample_campaign_target,
-        business_domain=sample_business_domain,
-        analysis_context=sample_analysis_context
-    )
+def print_evaluation_summary(campaign_eval: Dict[str, Any]):
+    """Prints a pretty summary of the campaign evaluation."""
+    summary = campaign_eval.get("campaign_evaluation", {})
+    recs = campaign_eval.get("recommendation_details", [])
 
-    # --- Pretty Summary ---
     print("\n" + "="*60)
-    print("           EVALUATION SUMMARY (RANKED)")
+    print("           CAMPAIGN EVALUATION SUMMARY")
+    print("="*60)
+    print(f"Overall Score: {summary.get('overall_score', 0):.2f}")
+    print(f"Total Recommendations: {summary.get('recommendation_count', 0)}")
+    
+    verdicts = summary.get("verdicts", {})
+    print(f"Verdicts: Accept ({verdicts.get('accept', 0)}) | "
+          f"Revise ({verdicts.get('revise', 0)}) | "
+          f"Reject ({verdicts.get('reject', 0)})")
+    
+    print("\n" + "="*60)
+    print("           DETAILED RECOMMENDATIONS (RANKED)")
     print("="*60)
 
-    for i, rec in enumerate(eval_output, 1):
+    for i, rec in enumerate(recs, 1):
         scores = rec.get("scores", {})
         title = rec.get("original_recommendation", {}).get("title", "N/A")
 
@@ -405,7 +334,8 @@ if __name__ == "__main__":
         print(f"Overall Score : {scores.get('overall', 0):.2f}")
         print(f"Clarity       : {scores.get('clarity', 0):.2f}")
         print(f"Accuracy      : {scores.get('accuracy', 0):.2f}")
-        print(f"Non-Redundancy: {scores.get('non_redundancy', 0):.2f}")
+        print(f"Output Structure: {scores.get('output_structure', 0):.2f}")
+        print(f"Feasibility   : {scores.get('feasibility', 0):.2f}")
         print(f"Verdict       : {rec.get('verdict', 'N/A')}")
 
         # Show key issues (top 2 only for readability)
@@ -421,25 +351,130 @@ if __name__ == "__main__":
             print("\nTop Improvement:")
             print(f"-> {suggestions[0]}")
 
-    # --- Aggregate Stats ---
-    print("\n" + "="*60)
-    print("           AGGREGATE METRICS")
-    print("="*60)
-
-    if eval_output:
-        avg_score = sum(r["scores"]["overall"] for r in eval_output) / len(eval_output)
-        accept_count = sum(1 for r in eval_output if r["verdict"] == "accept")
-        revise_count = sum(1 for r in eval_output if r["verdict"] == "revise")
-        reject_count = sum(1 for r in eval_output if r["verdict"] == "reject")
-
-        print(f"Average Score : {avg_score:.2f}")
-        print(f"Accepted      : {accept_count}")
-        print(f"Needs Revision: {revise_count}")
-        print(f"Rejected      : {reject_count}")
-
-    # --- Save Output to File ---
-    output_path = LOG_DIR / "evaluation_results.json"
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(eval_output, f, ensure_ascii=False, indent=2)
+if __name__ == "__main__":
+    import argparse
+    from pathlib import Path
     
-    logger.info(f"Evaluation results successfully saved to: {output_path}")
+    parser = argparse.ArgumentParser(description="Evaluate Marketing Recommendations")
+    parser.add_argument("--files", nargs="+", help="Specific JSON files to evaluate (e.g. data/outputs/campaign_1_result.json)")
+    args = parser.parse_args()
+    
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    LOG_DIR = BASE_DIR / "logs"
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Create run directory
+    run_dir = LOG_DIR / datetime.now().strftime("%Y-%m-%d")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    
+    log_file = run_dir / "evaluation.log"
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+        handlers=[
+            logging.FileHandler(str(log_file), encoding="utf-8"),
+            logging.StreamHandler()
+        ]
+    )
+
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    # Configure DSPy LM
+    try:
+        model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        logger.info(f"Configuring DSPy LM with model: openai/{model}")
+        lm = dspy.LM(f"openai/{model}")
+        dspy.settings.configure(lm=lm)
+    except Exception as e:
+        logger.error(f"Failed to configure DSPy LM: {e}")
+        raise
+
+    if args.files:
+        for file_path in args.files:
+            file_path_obj = Path(file_path)
+            if not file_path_obj.exists():
+                logger.error(f"File not found: {file_path}")
+                continue
+                
+            logger.info(f"\n--- Evaluating Campaign Result: {file_path_obj.name} ---")
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            campaign_target = data.get("campaign_target")
+            business_domain = data.get("business_domain")
+            analysis_context = data.get("analysis_response")
+            recommendations_payload = data.get("recommendation_response", {}).get("recommendations", [])
+            
+            if not all([campaign_target, business_domain, analysis_context, recommendations_payload]):
+                logger.warning(f"Skipping {file_path}: missing required fields.")
+                continue
+                
+            eval_output = evaluate_recommendations(
+                recommendations_payload,
+                campaign_target=campaign_target,
+                business_domain=business_domain,
+                analysis_context=analysis_context
+            )
+            
+            # Print Summary
+            print_evaluation_summary(eval_output)
+            
+            # Save individual evaluation result
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            output_name = f"recommendations_evaluation_result_{file_path_obj.stem}_{timestamp}.json"
+            output_path = run_dir / output_name
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(eval_output, f, ensure_ascii=False, indent=2)
+            
+            logger.info(f"Evaluation for {file_path_obj.name} saved to: {output_path}")
+
+    else:
+        # Fallback to Sample Run if no files provided
+        logger.info("No files provided. Running sample evaluation...\n")
+        
+        sample_campaign_target = {
+            "primary_goal": "Maximize ROAS during the Winter Holiday Sale",
+            "kpis": ["ROAS", "CPA", "Conversion Volume"]
+        }
+
+        sample_business_domain = {
+            "industry": "E-Commerce",
+            "offering": "Winter clothing and outerwear",
+            "audience": "High-intent seasonal shoppers",
+            "funnel_stage": "conversion"
+        }
+        
+        sample_analysis_context = {
+            "analysis": {
+                "executive_summary": "Google Ads is driving a high ROAS of 4.5x but has a limited impression share due to budget caps...",
+            }
+        }
+
+        sample_recommendations = [
+            {
+                "title": "Shift Meta Budget to fully fund Google Ads",
+                "whats_happening": "Google Ads has a 4.5x ROAS but is budget-capped...",
+                "what_you_should_do": ["Reduce Meta daily budgets by 30%", "Reallocate to Google"],
+                "why_this_matters": "capture high-intent demand",
+                "priority": "High",
+                "expected_impact": "Improved blended ROAS",
+                "owner_suggestion": "Media buyer"
+            }
+        ]
+
+        eval_output = evaluate_recommendations(
+            sample_recommendations,
+            campaign_target=sample_campaign_target,
+            business_domain=sample_business_domain,
+            analysis_context=sample_analysis_context
+        )
+        
+        print_evaluation_summary(eval_output)
+        # save file with timestamp
+        output_path = run_dir / ("sample_evaluation_" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".json")
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(eval_output, f, ensure_ascii=False, indent=2)
+        
+        logger.info(f"Sample evaluation results saved to: {output_path}")
