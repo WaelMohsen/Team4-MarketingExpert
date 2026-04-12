@@ -3,6 +3,7 @@ import pandas as pd
 
 from .ads_schema import UnifiedAdsSchema
 
+
 class AdsPreprocessor:
     """
     Preprocessing only:
@@ -11,13 +12,28 @@ class AdsPreprocessor:
     - missing-value handling
     - duplicate removal
     """
+
     # Metrics that should be summed when aggregating
-    DEFAULT_SUM_COLS = ["impressions", "clicks", "spend", "conversions", "conversion_value", "reach", "frequency"]
+    DEFAULT_SUM_COLS = [
+        "impressions",
+        "clicks",
+        "spend",
+        "conversions",
+        "conversion_value",
+        "reach",
+        "frequency",
+    ]
 
     def __init__(self, schema: UnifiedAdsSchema):
         self.schema = schema
 
-    def enforce_types(self, df: pd.DataFrame,*, parse_dates: bool = True, fill_missing_metrics_with_zero: bool = True) -> pd.DataFrame:
+    def enforce_types(
+        self,
+        df: pd.DataFrame,
+        *,
+        parse_dates: bool = True,
+        fill_missing_metrics_with_zero: bool = True,
+    ) -> pd.DataFrame:
         df = df.copy()
 
         if parse_dates and "date" in df.columns:
@@ -37,7 +53,11 @@ class AdsPreprocessor:
     def remove_duplicates(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
 
-        keys = [c for c in ["date", "platform", "account_id", "campaign_id", "adset_id", "ad_id"] if c in df.columns]
+        keys = [
+            c
+            for c in ["date", "platform", "account_id", "campaign_id", "adset_id", "ad_id"]
+            if c in df.columns
+        ]
         if keys:
             return df.drop_duplicates(subset=keys, keep="last").reset_index(drop=True)
 
@@ -49,13 +69,12 @@ class AdsPreprocessor:
         *,
         platform_col: str = "platform",
         group_by_date: bool = False,
-        time_granularity: Optional[str] = None,  # e.g. "D", "W", "M" if you want per-day/per-week/per-month
+        time_granularity: Optional[str] = None,  # e.g. "D", "W", "M"
         sum_cols: Optional[List[str]] = None,
     ) -> pd.DataFrame:
         """
-        Aggregates rows accurding to "platform" -> one row per platform
-        time_granularity:
-          - If provided and "date" exists, date is floored to that grain (e.g. "D","W","M")
+        Aggregates rows according to platform (and optionally date)
+        so that the result has one row per platform (and date, if enabled).
         """
         df = df.copy()
 
@@ -68,18 +87,19 @@ class AdsPreprocessor:
                 df["date"] = pd.to_datetime(df["date"], errors="coerce")
             df["date"] = df["date"].dt.to_period(time_granularity).dt.to_timestamp()
 
+        group_keys: List[str] = []
         if platform_col in df.columns:
-            if group_by_date and "date" in df.columns:
-                group_keys.append("date")
-            group_keys = [c for c in ["platform"] if c in df.columns]
+            group_keys.append(platform_col)
+        if group_by_date and "date" in df.columns:
+            group_keys.append("date")
 
-        #if not group_keys:
-        #    raise ValueError("Cannot aggregate: no grouping keys found (need at least 'platform').")
-       
         agg_spec = {c: "sum" for c in sum_cols}
         if group_keys:
-            # Normal grouped aggregation
-            out = df.groupby(group_keys, dropna=False, as_index=False).agg(agg_spec)
+            out = (
+                df.groupby(group_keys, dropna=False, as_index=False)
+                .agg(agg_spec)
+                .reset_index(drop=True)
+            )
         else:
             # No platform column → aggregate entire dataframe into single row
             out = df.agg(agg_spec)
@@ -105,15 +125,16 @@ class AdsPreprocessor:
         self,
         df: pd.DataFrame,
         *,
-        campaign_objective: str = "Leads"
+        campaign_objective: str = "Leads",
     ) -> List[Dict[str, Union[str, Dict[str, Optional[float]]]]]:
         """
-        Convert aggregated platform DataFrame
-        into the LLM-compatible `campaign_platforms_data` structure.
+        Convert aggregated platform DataFrame into the LLM-compatible
+        `campaign_platforms_data` structure.
 
         Assumes:
         - One row per platform (after aggregation)
         - KPI columns may already exist (ctr, cpc, cvr, cpa, etc.)
+        - Optional health columns (health_score, campaign_state, top_action_1..3)
         """
 
         df = df.copy()
@@ -128,7 +149,6 @@ class AdsPreprocessor:
         }
 
         for _, row in df.iterrows():
-
             metrics = {
                 "spend": self._get_metric(row, "spend"),
                 "impressions": self._get_metric(row, "impressions"),
@@ -162,8 +182,21 @@ class AdsPreprocessor:
 
             campaign_platforms_data.append(campaign_data)
 
-        return campaign_platforms_data
+            # Optional categorical health information
+            state = row.get("campaign_state")
+            if isinstance(state, str) and state:
+                payload["campaign_state"] = state
 
+            for i in range(1, 4):
+                col = f"top_action_{i}"
+                if col in df.columns:
+                    val = row.get(col)
+                    if isinstance(val, str) and val:
+                        payload[col] = val
+
+            campaign_platforms_data.append(payload)
+
+        return campaign_platforms_data
 
     @staticmethod
     def _num(value) -> Optional[float]:
@@ -175,4 +208,4 @@ class AdsPreprocessor:
         try:
             return float(value)
         except Exception:
-            return None    
+            return None
