@@ -2,3 +2,4 @@ pandas>=3.0.1
 jupyter>=1.1.1
 openai>=2.24.0
 python-dotenv>=1.0.0
+dspy>=3.0.0

@@ -1,0 +1,150 @@
+{
+  "campaign_data": {
+    "platform": "Google Ads",
+    "objective": "Leads",
+    "metrics": {
+      "spend": 2662.38,
+      "impressions": 59886.0,
+      "reach": null,
+      "clicks": 2113.0,
+      "ctr": 0.03528370570751094,
+      "cpc": 1.26,
+      "conversions": 159.0,
+      "conversion_rate": 0.07524846190250828,
+      "cpa": 16.744528301886792,
+      "revenue": 4803.43,
+      "roas": 1.8,
+      "leads": null,
+      "cpl": null,
+      "video_views": null,
+      "engagements": null
+    },
+    "date": "2024-01-21 00:00:00",
+    "campaign_type": "Search",
+    "industry": "Fintech",
+    "country": "UAE",
+    "primary_goal": "Maximize ROAS on credit card signups",
+    "kpis": "leads,cpl",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "cpm": "44.45746919146378"
+  },
+  "analysis_context": {
+    "analysis": {
+      "executive_summary": "This report covers a single Google Ads (Search) campaign with objective 'Leads'. Spend was $2,662.38 and produced 2,113 clicks, 159 conversions (7.52% conversion rate), revenue of $4,803.43 and an observed ROAS of 1.8. Cost per acquisition (CPA) is $16.74. Key gaps: 'leads' and 'CPL' fields are null, reach is null, and the campaign primary goal references credit card signups while the offering field is 'Personal Loans' — creating a tracking/KPI alignment concern. With the data provided, the campaign generated more revenue than spend (ROAS > 1) but profitability cannot be confirmed without customer value and cost baselines.",
+      "budget_and_efficiency": [
+        {
+          "insight": "Spend produced conversions at a measurable cost per acquisition.",
+          "evidence": "Spend = $2,662.38; Conversions = 159; CPA = $16.74 (calculated/provided).",
+          "business_impact": "Each conversion cost $16.74 on average. This is the direct spend-to-acquisition connection needed to assess acquisition cost versus the value of those conversions."
+        },
+        {
+          "insight": "Campaign generated positive revenue relative to spend (ROAS > 1).",
+          "evidence": "Revenue = $4,803.43; Spend = $2,662.38; ROAS = 1.8 (revenue / spend).",
+          "business_impact": "For every $1 spent the campaign returned $1.80 in attributed revenue. That shows the campaign is returning more revenue than it costs to run, but doesn't establish profitability without lifetime value or margin data."
+        },
+        {
+          "insight": "Efficiency at the click level is visible but incomplete for lead-level KPIs.",
+          "evidence": "Clicks = 2,113; CPC = $1.26; CTR = 3.528% (0.0352837). However 'leads' and 'cpl' are null.",
+          "business_impact": "We can see cost per click and engagement, but because CPL and lead counts are missing we cannot translate click efficiency into lead cost or compare to target CPL."
+        }
+      ],
+      "results_and_value": [
+        {
+          "insight": "Campaign produced a meaningful volume of conversions and engagement.",
+          "evidence": "Impressions = 59,886; Clicks = 2,113; Conversion rate = 7.5248% (0.075248); Conversions = 159.",
+          "business_impact": "The campaign is driving consideration-stage actions at scale (159 conversions), indicating pipeline activity that could convert to customers if conversions map to qualified leads or signups."
+        },
+        {
+          "insight": "Monetary value delivered is measurable but incomplete for lifetime or net contribution analysis.",
+          "evidence": "Revenue attributed = $4,803.43 and ROAS = 1.8, but no customer LTV, margins, or conversion-to-customer percentages are provided.",
+          "business_impact": "Revenue shows short-term value from the campaign; without LTV or margin data we cannot determine long-term contribution to profit or decide if the acquisition cost is acceptable."
+        }
+      ],
+      "cross_channel_patterns_and_risks": [
+        {
+          "pattern_or_risk": "Single-channel reporting limits comparative efficiency analysis.",
+          "evidence": "Only Google Ads (Search) data supplied; no data from other platforms or channels included.",
+          "why_it_matters": "Without other channels we cannot compare cost-per-acquisition or ROAS across channels, increasing risk of over-allocating budget to a single source without knowing alternatives."
+        },
+        {
+          "pattern_or_risk": "KPI and offering mismatch creates measurement risk.",
+          "evidence": "Primary goal = 'Maximize ROAS on credit card signups' while offering = 'Personal Loans' and objective = 'Leads'.",
+          "why_it_matters": "If conversions are being tracked for a different product or KPI than the stated goal, reported ROAS and conversion counts may not reflect the intended business outcome."
+        },
+        {
+          "pattern_or_risk": "Missing funnel metrics reduce confidence in interpreting performance.",
+          "evidence": "'reach', 'leads', and 'cpl' are null in the provided data; only impressions, clicks, conversions, revenue, and ROAS are present.",
+          "why_it_matters": "Key top-of-funnel and lead-level metrics are absent, limiting ability to assess audience saturation, lead quality, and true cost per lead."
+        }
+      ],
+      "channel_notes": [
+        {
+          "platform": "Google Ads",
+          "what_we_see": [
+            "Platform: Google Ads (Search); Objective: Leads; Campaign type: Search; Industry: Fintech; Country: UAE; Funnel stage: consideration.",
+            "Spend = $2,662.38.",
+            "Impressions = 59,886; Clicks = 2,113; CTR = 3.528% (0.0352837).",
+            "CPC = $1.26.",
+            "Conversions = 159; Conversion rate = 7.5248% (0.0752484619); CPA = $16.7445.",
+            "Revenue attributed = $4,803.43; ROAS = 1.8.",
+            "Fields null or missing: reach = null; leads = null; cpl = null; video_views and engagements = null.",
+            "Primary goal text references 'credit card signups' while offering field lists 'Personal Loans'."
+          ],
+          "what_it_likely_means": [
+            "Likely the Search channel is generating bottom-of-funnel actions (conversions) efficiently given a 7.5% conversion rate and relatively low CPC ($1.26).",
+            "Likely the reported conversions are the basis for the reported revenue and ROAS (conversions = 159 → revenue $4,803.43 → ROAS 1.8).",
+            "Likely there is a tracking or configuration mismatch between the stated campaign goal (credit card signups) and the recorded offering (personal loans), which could mean conversions are being attributed to the wrong product type or KPI.",
+            "Likely measurement is focused on last-click or direct attribution since revenue and ROAS are provided per this single platform, but cross-channel credit cannot be confirmed from the data."
+          ],
+          "risks_or_watchouts": [
+            "Leads and CPL are missing, preventing validation of whether conversions map to qualifying leads or sales-ready prospects.",
+            "If the primary goal (credit card signups) is different from what conversions represent, reported ROAS and CPA may not align with business objectives.",
+            "No information on conversion quality or downstream conversion to customers (LTV) — ROAS >1 does not guarantee profitability.",
+            "Single-channel dependency: performance may degrade if other channels are not tested or scaled."
+          ]
+        }
+      ],
+      "missing_info": [
+        "Leads count (field 'leads' is null) — needed to understand raw lead volume versus conversion definition.",
+        "Cost per lead (CPL) — KPI listed but value is null; required to judge lead-level efficiency against targets.",
+        "Reach — null; needed to assess audience saturation and frequency.",
+        "Definition of 'conversion' and whether it equals a lead, credit card signup, loan application, or other business event — required to map conversions to business outcomes.",
+        "Clarification of primary KPI target thresholds (target CPA or target ROAS) — required to judge if performance meets goals.",
+        "Time period / reporting window clarity beyond the single 'date' field — needed to understand whether metrics are for a day, campaign lifetime, or other window.",
+        "Customer lifetime value (LTV) or margin information — required to determine true profitability given the observed CPA and ROAS.",
+        "Data from other channels or the overall marketing budget — required to evaluate cross-channel allocation and comparative efficiency."
+      ]
+    }
+  },
+  "campaign_target": {
+    "primary_goal": "Maximize ROAS on credit card signups",
+    "kpis": [
+      "leads",
+      "cpl"
+    ]
+  },
+  "scores": {
+    "clarity": 2.0,
+    "relevance": 3.0,
+    "following_structure": 3.0,
+    "hallucination_flag": "+1",
+    "overall": 2.8
+  },
+  "hallucination_flag": false,
+  "reasoning": {
+    "clarity": [
+      "The analysis insights are quite clear and specific, providing sound reasoning and concrete evidence for each point made. However, there are sections that note missing data, particularly around leads and CPL, which slightly detract from the overall clarity."
+    ],
+    "structure": [
+      "The analysis follows a structured format, covering the required sections such as executive summary, budget and efficiency, results and value, cross-channel patterns and risks, channel notes, and missing information. Each section includes critical insights and evidence that collectively aid in understanding the campaign's performance. While all sections are present, some could benefit from more extensive detail."
+    ],
+    "relevance": [
+      "The analysis is highly relevant to the campaign data, aligning well with the primary goal of maximizing ROAS on credit card signups, as well as addressing the key performance indicators (KPIs) of leads and cost per lead (CPL). Each point made in the analysis ties back to the underlying data and objectives provided, ensuring that the insights generated are applicable to the specific context of the campaign."
+    ],
+    "hallucination": [
+      "There are no indications of fabricated insights in the analysis. All insights presented are based on the data provided and contextualized within the framework of the campaign's goals and metrics."
+    ]
+  }
+}

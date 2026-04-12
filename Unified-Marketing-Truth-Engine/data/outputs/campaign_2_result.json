@@ -1,0 +1,231 @@
+{
+  "campaign_target": {
+    "primary_goal": "Increase free trial signups",
+    "kpis": [
+      "impressions",
+      "reach"
+    ]
+  },
+  "business_domain": {
+    "industry": "EdTech",
+    "offering": "Language Learning Platform",
+    "audience": "Career changers",
+    "funnel_stage": "retention"
+  },
+  "input_data": {
+    "platform": "TikTok Ads",
+    "objective": "Leads",
+    "metrics": {
+      "spend": 6159.6,
+      "impressions": 135608.0,
+      "reach": null,
+      "clicks": 5220.0,
+      "ctr": 0.038493304229838946,
+      "cpc": 1.1800000000000002,
+      "conversions": 411.0,
+      "conversion_rate": 0.07873563218390804,
+      "cpa": 14.986861313868614,
+      "revenue": 64126.68,
+      "roas": 10.41,
+      "leads": null,
+      "cpl": null,
+      "video_views": null,
+      "engagements": null
+    },
+    "date": "2024-01-22 00:00:00",
+    "campaign_type": "Search",
+    "industry": "EdTech",
+    "country": "UK",
+    "primary_goal": "Increase free trial signups",
+    "kpis": "impressions,reach",
+    "offering": "Language Learning Platform",
+    "audience": "Career changers",
+    "funnel_stage": "retention",
+    "cpm": "45.42209899120996"
+  },
+  "analysis_response": {
+    "analysis": {
+      "executive_summary": "TikTok Ads spent 6,159.60 and generated 411 reported conversions and 64,126.68 in revenue (ROAS 10.41). Key efficiency metrics: CPA 14.99, CPC 1.18, CTR 3.85%, CPM 45.42, conversion rate 7.87%. The campaign objective is Leads and the stated primary goal is to increase free trial signups, but the explicit 'leads' field and reach are not provided.",
+      "budget_and_efficiency": [
+        {
+          "insight": "Spend produced high top-line return relative to cost: ROAS 10.41.",
+          "evidence": "Reported spend 6,159.60 produced revenue 64,126.68, giving ROAS = revenue / spend = 64,126.68 / 6,159.6 = 10.41.",
+          "business_impact": "Every unit of currency spent returned ~10.41 in revenue, indicating the campaign is generating positive return on advertising spend at the channel level."
+        },
+        {
+          "insight": "Acquisition cost is low compared with revenue per conversion.",
+          "evidence": "CPA is 14.99 while average revenue per reported conversion = 64,126.68 / 411 ≈ 156.03.",
+          "business_impact": "Average revenue per conversion (~156.03) substantially exceeds the CPA (14.99), implying strong unit economics for each reported conversion."
+        },
+        {
+          "insight": "Efficiency by attention metrics: CPC and CTR show reasonable engagement but CPM is relatively high.",
+          "evidence": "Metrics show CTR 3.85% (5,220 clicks / 135,608 impressions), CPC 1.18, and CPM 45.42 (6,159.6 spend / 135,608 impressions * 1000).",
+          "business_impact": "Clicks are converting at scale (leading to 411 conversions) but the cost to buy impressions (CPM 45.42) is a material part of spend; this affects how many impressions the current budget can buy."
+        }
+      ],
+      "results_and_value": [
+        {
+          "insight": "The campaign delivered 411 conversions and generated measurable revenue.",
+          "evidence": "Conversions = 411; Revenue = 64,126.68; Conversion rate = 7.87% (411 / 5,220 clicks).",
+          "business_impact": "411 recorded conversion events contributed 64,126.68 in revenue; if conversions map to trial signups or customers, this is a direct contribution to acquisition and revenue."
+        },
+        {
+          "insight": "Click-to-conversion funnel shows meaningful efficiency.",
+          "evidence": "5220 clicks produced 411 conversions, implying a conversion rate of 7.87% and CPA 14.99 based on spend 6,159.6.",
+          "business_impact": "For every 100 clicks, ~8 convert; spend is translating into measurable conversions at a relatively low CPA, supporting acquisition volume from this channel."
+        }
+      ],
+      "cross_channel_patterns_and_risks": [
+        {
+          "pattern_or_risk": "Single-channel reporting prevents cross-channel comparison and diversification assessment.",
+          "evidence": "Input contains only TikTok Ads data; no other platform data provided.",
+          "why_it_matters": "Without other channels' metrics we cannot compare cost-efficiency or spot redundancy; dependence on one channel increases exposure to platform-level changes."
+        },
+        {
+          "pattern_or_risk": "Key attribution and audience overlap cannot be evaluated because reach is missing.",
+          "evidence": "Reach value is null in the TikTok record.",
+          "why_it_matters": "Without reach we cannot determine unique users reached or estimate frequency; this limits understanding of saturation and overlap with other channels or repeats to the same users."
+        },
+        {
+          "pattern_or_risk": "Potential reporting misalignment between funnel stage and objective.",
+          "evidence": "Objective is 'Leads' and primary goal is 'Increase free trial signups' while funnel_stage is listed as 'retention'.",
+          "why_it_matters": "If the campaign is labeled for retention but measured on lead-generation metrics, performance interpretation and targeting may be inconsistent with business goals."
+        }
+      ],
+      "channel_notes": [
+        {
+          "platform": "TikTok Ads",
+          "what_we_see": [
+            "Spend: 6,159.6",
+            "Impressions: 135,608",
+            "Clicks: 5,220 (CTR 3.85%)",
+            "CPC: 1.18",
+            "Conversions: 411 (conversion rate 7.87%)",
+            "CPA: 14.986861313868614",
+            "Revenue: 64,126.68",
+            "ROAS: 10.41",
+            "CPM: 45.42209899120996",
+            "Objective: Leads; Primary goal: Increase free trial signups",
+            "Offering: Language Learning Platform; Audience: Career changers",
+            "Funnel stage reported: retention",
+            "Reach: null; Leads: null"
+          ],
+          "what_it_likely_means": [
+            "Likely the reported conversions are the primary measurable acquisition event (potentially free trial signups) because objective is 'Leads' and primary goal mentions trial signups.",
+            "Likely the channel is profitable at current metrics since average revenue per conversion (~156.03) is much higher than the CPA (14.99), producing reported ROAS 10.41.",
+            "Likely ad creative or targeting is generating engagement given a 3.85% CTR and a near-8% conversion rate from clicks to conversions."
+          ],
+          "risks_or_watchouts": [
+            "Conversions field is present but 'leads' is null — unclear whether conversions equal the business-defined leads or signups (limits quality assessment).",
+            "Reach is missing, so unique audience size and frequency cannot be measured.",
+            "Funnel stage labeled 'retention' may indicate tagging/reporting inconsistencies versus the stated objective of lead generation.",
+            "Only aggregated channel-level metrics provided; no breakdown by campaign/creative/audience segment to identify what is driving results."
+          ]
+        }
+      ],
+      "missing_info": [
+        "Definition of 'conversion' and confirmation whether conversions map to free trial signups (matters to know whether reported conversions meet the stated primary goal).",
+        "Leads count and cost-per-lead (CPL) field (matters to evaluate lead volume and lead-level economics separate from 'conversions').",
+        "Reach and frequency (reach is null; matters to understand unique users reached, frequency, and saturation).",
+        "Reporting period or time-aggregation detail (date field present but unclear if metrics are for that single day or a longer period; matters for pacing and comparability).",
+        "Currency unit confirmation (metrics numeric but currency not explicitly stated; matters for financial comparisons and budgeting).",
+        "Breakdowns by campaign, creative, or audience segment (matters to identify what specifically is driving conversions and where efficiency can be assessed at a granular level)."
+      ]
+    }
+  },
+  "recommendation_response": {
+    "recommendations": [
+      {
+        "title": "Confirm that reported conversions are free trial signups",
+        "whats_happening": "Conversions are reported (411) but 'leads' is null and the definition of 'conversion' is not confirmed, so we don't know if the metric maps to free trial signups.",
+        "what_you_should_do": [
+          "Audit event definitions: confirm what the reported 'conversion' event represents in TikTok Ads and your analytics/CRM (e.g., free trial signup, demo request, purchase).",
+          "Map platform conversion events to your business events (trial signup) and document the mapping in a single source of truth.",
+          "If the conversion does not equal a trial signup, update the ad pixel/event or tracking to record the correct trial-signup event and reprocess recent data where possible."
+        ],
+        "why_this_matters": "If reported conversions are not true trial signups, the campaign may appear effective while not meeting the stated primary goal. Accurate mapping is required to know whether spend is actually increasing trial signups.",
+        "priority": "High",
+        "expected_impact": "Clarifies whether current performance supports the primary goal; prevents misallocation of budget to non-goal events.",
+        "owner_suggestion": "Analytics"
+      },
+      {
+        "title": "Align campaign funnel stage and ad objective",
+        "whats_happening": "The campaign objective is 'Leads' and primary goal is increasing free trials, but funnel_stage is labeled 'retention', indicating a tagging or configuration mismatch.",
+        "what_you_should_do": [
+          "Update internal campaign metadata so funnel_stage reflects acquisition (not retention) for lead-generation campaigns.",
+          "Verify TikTok campaign objective and optimization settings match lead-generation (trial signup) events.",
+          "Communicate the corrected funnel stage to reporting stakeholders and ensure future campaigns are tagged consistently."
+        ],
+        "why_this_matters": "If platform optimization or internal reporting is organized under the wrong funnel stage, delivery and interpretation may be misaligned with business goals, reducing effectiveness and causing incorrect decisions.",
+        "priority": "High",
+        "expected_impact": "Improved campaign optimization toward trial signups and clearer decision-making in reporting.",
+        "owner_suggestion": "Media buyer"
+      },
+      {
+        "title": "Add reach and frequency into regular reporting",
+        "whats_happening": "Reach is missing (null), so unique audience size and frequency cannot be measured or managed.",
+        "what_you_should_do": [
+          "Enable and export reach and frequency metrics from TikTok Ads alongside impressions and clicks.",
+          "Add reach and average frequency columns to the campaign report template and monitor weekly.",
+          "Set and test frequency caps if you see high frequency on the same audience to avoid saturation."
+        ],
+        "why_this_matters": "Knowing reach and frequency reveals whether impressions are hitting unique potential trial signups or repeatedly the same users, which affects both scaling and efficiency.",
+        "priority": "Medium",
+        "expected_impact": "Better control of audience saturation and more accurate planning for impression demand and pacing.",
+        "owner_suggestion": "Media buyer"
+      },
+      {
+        "title": "Break performance down by campaign, creative, and audience segments",
+        "whats_happening": "Only aggregated TikTok channel metrics are available; no breakdowns to identify what specifically drives the 411 conversions and high ROAS.",
+        "what_you_should_do": [
+          "Export ad-level and audience-level breakdowns (campaign, ad set, creative, age, region) from TikTok for the same reporting period.",
+          "Identify top-performing creatives and audience segments by conversion rate and CPA, and document the patterns.",
+          "Reallocate budget to top segments and pause or modify low-performing creatives; run controlled A/B tests on winning elements."
+        ],
+        "why_this_matters": "Segmentation reveals where the profitable conversions originate so you can scale effective creatives/audiences and reduce wasted spend on underperforming combinations.",
+        "priority": "High",
+        "expected_impact": "Improved CPA and scaled conversion volume by focusing budget on proven segments.",
+        "owner_suggestion": "Media buyer, Creative team, Analytics"
+      },
+      {
+        "title": "Standardize reporting fields: leads, date range, and currency",
+        "whats_happening": "Reports lack leads count, reporting period detail, and explicit currency, limiting budgeting and trend analysis.",
+        "what_you_should_do": [
+          "Update the campaign report template to require: leads count (if distinct from 'conversions'), start/end dates, and currency for all channel exports.",
+          "Backfill the missing fields for the current and past reporting periods where possible and annotate any estimates.",
+          "Enforce the template as required for future channel reporting to ensure comparability."
+        ],
+        "why_this_matters": "Complete and standardized reporting prevents misinterpretation of performance and enables accurate pacing, budgeting, and cross-period comparisons.",
+        "priority": "High",
+        "expected_impact": "Faster, more reliable decision-making and reduced risk of budget errors due to misinterpreted data.",
+        "owner_suggestion": "Analytics"
+      },
+      {
+        "title": "Address high CPM to increase impression volume within budget",
+        "whats_happening": "CPM (45.42) is relatively high and affects how many impressions the current budget can buy, even though CPC, CTR, CPA, and ROAS look efficient.",
+        "what_you_should_do": [
+          "Test broader or alternative targeting parameters and different ad placements to reduce CPM.",
+          "Experiment with ad creative formats and length to see if lower-cost inventory responds better (e.g., different aspect ratios or motion vs static).",
+          "Evaluate bidding strategy adjustments (e.g., shift from highest-reach to cost cap or vice versa) in small tests to find lower CPM delivery without harming conversion rate."
+        ],
+        "why_this_matters": "Lowering CPM increases impression and reach capacity for the same spend, enabling more potential trial signups while preserving strong unit economics.",
+        "priority": "Medium",
+        "expected_impact": "Higher reach and potential increase in conversions per budget, while maintaining or improving CPA if targeting and creative remain effective.",
+        "owner_suggestion": "Media buyer"
+      },
+      {
+        "title": "Plan cross-channel tests to reduce single-channel exposure",
+        "whats_happening": "Only TikTok data is provided; single-channel reporting prevents comparison and increases exposure to platform-specific changes.",
+        "what_you_should_do": [
+          "Design a small experiment allocating a defined portion of budget to one or two alternative channels for a limited period to gather comparable CPM/CPA/ROAS metrics.",
+          "Capture the same standardized fields (conversions mapped to trial signup, reach, impressions, CPC, CPA, ROAS) for direct comparison.",
+          "Use results to inform whether to diversify budget for resilience or concentrate where unit economics remain strongest."
+        ],
+        "why_this_matters": "Testing alternate channels reduces risk if TikTok performance changes and may reveal channels with lower CPM or higher reach for career-changer audiences.",
+        "priority": "Medium",
+        "expected_impact": "Reduced platform risk and potential discovery of more scalable or cost-efficient acquisition options.",
+        "owner_suggestion": "Growth/Media buyer"
+      }
+    ]
+  }
+}
