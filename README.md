@@ -19,9 +19,9 @@ The pipeline operates in two distinct phases:
 ### Phase B: Iterative Analysis (Row-by-Row)
 For **each row** in the dataset, the engine executes:
 1. **Enrichment**: Generates a high-density "Campaign Context Case" including identity metadata (audience, industry) and performance metrics.
-2. **Analysis**: Performs deep-dive LLM performance assessment on the individual campaign.
-3. **Recommendation**: Generates actionable cards based specifically on that campaign's data.
-4. **Evaluation**: Audits the quality of the AI outputs using a standardized prompt-based framework (splitting Analysis and Recommendation grades into separate files).
+2. **Analysis**: Performs deep-dive LLM performance assessment on the individual campaign utilizing full unified context (Domain, Targets, Data).
+3. **Recommendation**: Generates actionable cards utilizing the complete context and the preceding Analysis report.
+4. **Evaluation**: Audits the quality of the AI outputs using a standardized prompt-based framework with full 360-degree context awareness (splitting Analysis and Recommendation grades into separate files).
 
 ## 📂 Output Structure
 Every execution creates a timestamped folder: `data/outputs/run_YYYYMMDD_HHMM/`.

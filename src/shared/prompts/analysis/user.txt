@@ -2,5 +2,11 @@ TASK: Analyze the INPUT campaign data and produce an OUTPUT JSON following the r
 - Focus on business performance, budget efficiency, and diagnostic insights.
 - The analysis section must contain NO recommendations.
 
+### BUSINESS DOMAIN
+{{BUSINESS_DOMAIN}}
+
+### CAMPAIGN TARGET
+{{CAMPAIGN_TARGET}}
+
 ### INPUT CAMPAIGN DATA
 {{CAMPAIGN_DATA}}

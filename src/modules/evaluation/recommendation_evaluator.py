@@ -30,14 +30,20 @@ class RecommendationEvaluator:
             max_output_tokens=2000
         )
 
-    def evaluate(self, business_context: Any, analysis_context: Any, recommendation: Any) -> Dict[str, Any]:
+    def evaluate(self, business_context: Any, campaign_target: Any, campaign_data: Any, analysis_context: Any, recommendation: Any) -> Dict[str, Any]:
         """Runs the evaluation."""
         
         sys_text = self.loader.load_prompt_text(PromptRegistry.EVAL_RECOMMENDATION_SYSTEM.value)
         user_text = self.loader.load_prompt_text(PromptRegistry.EVAL_RECOMMENDATION_USER.value)
         
+        combined_context = {
+            "business_domain": business_context,
+            "campaign_target": campaign_target
+        }
+        
         user_text = (
-            user_text.replace("{{BUSINESS_CONTEXT}}", json.dumps(business_context, indent=2))
+            user_text.replace("{{BUSINESS_CONTEXT}}", json.dumps(combined_context, indent=2))
+            .replace("{{RAW_DATA}}", json.dumps(campaign_data, indent=2))
             .replace("{{ANALYSIS_CONTEXT}}", json.dumps(analysis_context, indent=2))
             .replace("{{RECOMMENDATION}}", json.dumps(recommendation, indent=2))
         )

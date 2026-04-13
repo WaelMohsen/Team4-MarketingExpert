@@ -41,6 +41,7 @@ class RecommendationModule(BaseModule):
             "audience": "People shopping for monthly essentials",
             "funnel_stage": "conversion",
         })
+        campaign_data = context.enriched_data.get("campaign_data", {})
 
         # Build prompt
         messages = self.builder.build_recommendation_prompt(
@@ -48,6 +49,7 @@ class RecommendationModule(BaseModule):
             userPromptPath=PromptRegistry.RECOMMENDATION_USER.value,
             campaign_target=campaign_target,
             business_domain=business_domain,
+            campaign_data=campaign_data,
             analysis_json=context.analysis_results
         )
 

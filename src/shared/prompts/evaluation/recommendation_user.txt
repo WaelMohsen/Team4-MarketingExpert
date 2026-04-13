@@ -3,6 +3,9 @@ Please evaluate the following recommendation card.
 ### Business Context & Target
 {{BUSINESS_CONTEXT}}
 
+### Raw Campaign Data
+{{RAW_DATA}}
+
 ### Analysis Context (Basis for Recommendation)
 {{ANALYSIS_CONTEXT}}
 

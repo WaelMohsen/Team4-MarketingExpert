@@ -41,14 +41,14 @@ python run_pipeline.py --input-csv data/raw/your_data.csv --skip-evaluation
 You can run the evaluators independently if you already have analysis or recommendation JSON files and want to grade them without re-running the entire pipeline.
 
 ### Analysis Evaluator
-Grades a specific analysis report against raw campaign data.
+Grades a specific analysis report against raw campaign data, business domain, and campaign targets.
 ```bash
 python -m src.modules.evaluation.analysis_evaluator
 ```
 *Note: Ensure the file paths inside the script's `if __name__ == "__main__"` block point to your target JSON files.*
 
 ### Recommendation Evaluator
-Grades recommendation cards against business context and analysis.
+Grades recommendation cards against raw campaign data, business context, and analysis.
 ```bash
 python -m src.modules.evaluation.recommendation_evaluator
 ```

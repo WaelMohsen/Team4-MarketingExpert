@@ -32,6 +32,8 @@ class AnalysisModule(BaseModule):
 
         # Prepare input data for the LLM
         campaign_data = context.enriched_data.get("campaign_data")
+        business_domain = context.get_metadata("business_domain", {})
+        campaign_target = context.get_metadata("campaign_target", {})
         
         if not campaign_data:
             logger.warning("No campaign data found. Skipping analysis.")
@@ -41,7 +43,9 @@ class AnalysisModule(BaseModule):
         messages = self.builder.build_analysis_prompt(
             sysPromptPath=PromptRegistry.ANALYSIS_SYSTEM.value,
             userPromptPath=PromptRegistry.ANALYSIS_USER.value,
-            campaign_data=campaign_data
+            campaign_data=campaign_data,
+            business_domain=business_domain,
+            campaign_target=campaign_target
         )
 
         # Generate Analysis

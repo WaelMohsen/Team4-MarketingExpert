@@ -31,18 +31,15 @@ class AnalysisEvaluator:
             max_output_tokens=2000
         )
 
-    def evaluate(self, campaign_data: Any, analysis_report: Any, campaign_target: Any) -> Dict[str, Any]:
+    def evaluate(self, campaign_data: Any, analysis_report: Any, campaign_target: Any, business_domain: Any) -> Dict[str, Any]:
         """Runs the evaluation using LLMApiClient."""
         
         # Prepare context strings
         context = {
-            "target": campaign_target
+            "target": campaign_target,
+            "business_domain": business_domain
         }
         
-        messages = self.builder.build_analysis_prompt(
-            sysPromptPath=PromptRegistry.EVAL_ANALYSIS_SYSTEM.value,
-            userPromptPath=PromptRegistry.EVAL_ANALYSIS_USER.value,
-        )
         
         # We'll use a more flexible replacement for evaluation
         sys_text = self.loader.load_prompt_text(PromptRegistry.EVAL_ANALYSIS_SYSTEM.value)

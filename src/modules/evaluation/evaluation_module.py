@@ -24,22 +24,22 @@ class EvaluationModule(BaseModule):
 
     def run(self, context: ExecutionContext) -> ExecutionContext:
         evaluations: Dict[str, Any] = {}
+        
+        business_domain = context.get_metadata("business_domain")
+        campaign_target = context.get_metadata("campaign_target")
+        campaign_data = context.enriched_data.get("processed_df")
+        if campaign_data is not None:
+            campaign_data = context.enriched_data.get("platform_summary", {}).get("platform_summary", [])
 
         # 1. Evaluate Analysis
         if context.analysis_results:
             logger.info("Evaluating Analysis results...")
             try:
-                # Prepare data for evaluator
-                campaign_data = context.enriched_data.get("processed_df")
-                if campaign_data is not None:
-                    # Convert to list of dicts for evaluation if it's a DataFrame
-                    # Using records from platform summary is often cleaner for LLM context
-                    campaign_data = context.enriched_data.get("platform_summary", {}).get("platform_summary", [])
-
                 analysis_eval = self.analysis_evaluator.evaluate(
                     campaign_data=campaign_data,
                     analysis_report=context.analysis_results,
-                    campaign_target=context.get_metadata("campaign_target"),
+                    campaign_target=campaign_target,
+                    business_domain=business_domain,
                 )
                 evaluations["analysis"] = analysis_eval
             except Exception as e:
@@ -52,12 +52,13 @@ class EvaluationModule(BaseModule):
                 recommendations = context.recommendation_results.get("recommendations", [])
                 rec_evals = []
                 
-                business_context = context.get_metadata("business_domain")
                 analysis_context = context.analysis_results
 
                 for rec in recommendations:
                     rec_eval = self.recommendation_evaluator.evaluate(
-                        business_context=business_context,
+                        business_context=business_domain,
+                        campaign_target=campaign_target,
+                        campaign_data=campaign_data,
                         analysis_context=analysis_context,
                         recommendation=rec
                     )

@@ -31,9 +31,10 @@ The system flattens the row into a high-density JSON object. This object include
 #### B. Intelligence (Analysis & Recommendation)
 - Uses **Pydantic Models** (`AnalysisResponse`, `RecommendationResponse`) to ensure LLM outputs are structured and valid.
 - Prompts are loaded from the **Centralized Registry**.
+- Both stages operate with **unified 360-degree context**, receiving the Raw Campaign Data, Business Domain, Campaign Targets, and Previous AI Results (for recommendations) to prevent any blind spots.
 
 #### C. Evaluation (Split Grading)
-The quality of the AI output is audited by a separate LLM process. Results are split into two files for better data segmentation:
+The quality of the AI output is audited by a separate LLM process using the exact same unified context (Data, Target, Domain) used during generation to ensure absolute accuracy. Results are split into two files:
 - `analysis_evaluation_results.json`
 - `recommendation_evaluation_results.json`
 
