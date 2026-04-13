@@ -1,0 +1,108 @@
+2026-04-13 02:29:37,965 | INFO | root | Logging initialized.
+2026-04-13 02:29:38,007 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-13 02:29:38,007 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-13 02:29:38,007 | INFO | src.core.pipeline_engine | Registered module: Enrichment
+2026-04-13 02:29:38,254 | INFO | src.core.pipeline_engine | Registered module: Analysis
+2026-04-13 02:29:38,498 | INFO | src.core.pipeline_engine | Registered module: Recommendation
+2026-04-13 02:29:38,498 | INFO | __main__ | Starting Modular Pipeline...
+2026-04-13 02:29:38,499 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-13 02:29:38,499 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-13 02:29:38,562 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-04-13 02:29:38,593 | INFO | src.core.pipeline_engine | Running module: Enrichment
+2026-04-13 02:29:38,623 | ERROR | src.core.pipeline_engine | Error in module Enrichment: Object of type bool_ is not JSON serializable
+2026-04-13 02:29:38,623 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-13 02:29:38,623 | ERROR | __main__ | Pipeline finished with errors: ['Enrichment: Object of type bool_ is not JSON serializable']
+2026-04-13 02:30:05,231 | INFO | root | Logging initialized.
+2026-04-13 02:30:05,236 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-13 02:30:05,236 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-13 02:30:05,237 | INFO | src.core.pipeline_engine | Registered module: Enrichment
+2026-04-13 02:30:05,457 | INFO | src.core.pipeline_engine | Registered module: Analysis
+2026-04-13 02:30:05,683 | INFO | src.core.pipeline_engine | Registered module: Recommendation
+2026-04-13 02:30:05,683 | INFO | __main__ | Starting Modular Pipeline...
+2026-04-13 02:30:05,683 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-13 02:30:05,684 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-13 02:30:05,700 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-04-13 02:30:05,714 | INFO | src.core.pipeline_engine | Running module: Enrichment
+2026-04-13 02:30:05,736 | INFO | src.core.pipeline_engine | Running module: Analysis
+2026-04-13 02:30:05,831 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-04-13 02:30:06,919 | ERROR | src.core.pipeline_engine | Error in module Analysis: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-04-13 02:30:06,919 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-13 02:30:06,919 | ERROR | __main__ | Pipeline finished with errors: ["Analysis: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}"]
+2026-04-13 02:58:08,646 | INFO | root | Logging initialized.
+2026-04-13 02:58:08,649 | INFO | root | Logging initialized.
+2026-04-13 02:58:08,650 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-13 02:58:08,651 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-13 02:58:08,651 | INFO | src.core.pipeline_engine | Registered module: Enrichment
+2026-04-13 02:58:09,098 | INFO | src.core.pipeline_engine | Registered module: Analysis
+2026-04-13 02:58:09,320 | INFO | src.core.pipeline_engine | Registered module: Recommendation
+2026-04-13 02:58:09,806 | INFO | src.core.pipeline_engine | Registered module: Evaluation
+2026-04-13 02:58:09,806 | INFO | __main__ | Starting Modular Pipeline...
+2026-04-13 02:58:09,806 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-13 02:58:09,806 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-13 02:58:09,821 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-04-13 02:58:09,837 | INFO | src.core.pipeline_engine | Running module: Enrichment
+2026-04-13 02:58:09,948 | INFO | src.core.pipeline_engine | Running module: Analysis
+2026-04-13 02:58:09,948 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-04-13 02:58:11,136 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-04-13 02:58:11,137 | ERROR | src.core.pipeline_engine | Error in module Analysis: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-04-13 02:58:11,137 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-13 02:58:11,137 | ERROR | __main__ | Pipeline finished with errors: ["Analysis: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}"]
+2026-04-13 03:24:53,888 | INFO | root | Logging initialized.
+2026-04-13 03:24:53,920 | INFO | root | Logging initialized.
+2026-04-13 03:24:53,924 | INFO | __main__ | Initialized Run Folder: data/outputs/run_20260413_032453
+2026-04-13 03:24:53,924 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-13 03:24:53,924 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-13 03:24:53,924 | INFO | __main__ | Executing Batch Phase (Ingestion & Preprocessing)...
+2026-04-13 03:24:53,925 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-13 03:24:53,925 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-13 03:24:53,972 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-04-13 03:24:53,998 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-13 03:24:53,998 | INFO | __main__ | Limiting execution to first 2 rows.
+2026-04-13 03:24:54,880 | INFO | __main__ | Starting Granular Processing for 2 campaigns...
+2026-04-13 03:24:54,882 | INFO | __main__ | --- Processing campaign_1 ---
+2026-04-13 03:24:54,890 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-04-13 03:24:55,780 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-04-13 03:24:55,780 | ERROR | __main__ | Error in Analysis for campaign_1: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-04-13 03:24:55,784 | ERROR | __main__ | Error in Recommendation for campaign_1: Analysis results not found in context. Ensure AnalysisModule ran first.
+2026-04-13 03:24:55,880 | INFO | __main__ | --- Processing campaign_2 ---
+2026-04-13 03:24:55,890 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-04-13 03:24:56,131 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-04-13 03:24:56,133 | ERROR | __main__ | Error in Analysis for campaign_2: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-04-13 03:24:56,134 | ERROR | __main__ | Error in Recommendation for campaign_2: Analysis results not found in context. Ensure AnalysisModule ran first.
+2026-04-13 03:24:56,134 | INFO | __main__ | All campaigns processed. Results available in: data/outputs/run_20260413_032453
+2026-04-13 03:41:07,284 | INFO | root | Logging initialized.
+2026-04-13 03:41:07,289 | INFO | root | Logging initialized.
+2026-04-13 03:41:07,424 | INFO | __main__ | Initialized Run Folder: data/outputs/run_20260413_034107
+2026-04-13 03:41:07,424 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-13 03:41:07,424 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-13 03:41:07,424 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-04-13 03:41:07,424 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-13 03:41:07,424 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-13 03:41:07,443 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-04-13 03:41:07,461 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-13 03:41:07,462 | INFO | __main__ | Limiting execution to first 1 rows.
+2026-04-13 03:41:08,112 | INFO | __main__ | Starting Granular Processing for 1 campaigns...
+2026-04-13 03:41:08,113 | INFO | __main__ | --- Processing campaign_1 ---
+2026-04-13 03:41:08,119 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-04-13 03:41:08,871 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-04-13 03:41:08,873 | ERROR | __main__ | Error in Analysis for campaign_1: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-04-13 03:41:08,873 | ERROR | __main__ | Error in Recommendation for campaign_1: Analysis results not found in context. Ensure AnalysisModule ran first.
+2026-04-13 03:41:08,873 | INFO | __main__ | All campaigns processed. Results available in: data/outputs/run_20260413_034107
+2026-04-13 03:49:15,959 | INFO | root | Logging initialized.
+2026-04-13 03:49:15,961 | INFO | root | Logging initialized.
+2026-04-13 03:49:15,963 | INFO | __main__ | Initialized Run Folder: data/outputs/run_20260413_034915
+2026-04-13 03:49:15,963 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-13 03:49:15,963 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-13 03:49:15,963 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-04-13 03:49:15,963 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-13 03:49:15,963 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-13 03:49:15,977 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-04-13 03:49:15,992 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-13 03:49:15,993 | INFO | __main__ | Limiting execution to first 1 rows.
+2026-04-13 03:49:16,642 | INFO | __main__ | Starting Granular Processing for 1 campaigns...
+2026-04-13 03:49:18,442 | INFO | __main__ | --- Processing campaign_1 ---
+2026-04-13 03:49:18,452 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-04-13 03:49:19,350 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-04-13 03:49:19,351 | ERROR | __main__ | Error in Analysis for campaign_1: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-04-13 03:49:19,351 | ERROR | __main__ | Error in Recommendation for campaign_1: Analysis results not found in context. Ensure AnalysisModule ran first.
+2026-04-13 03:49:19,351 | INFO | __main__ | All campaigns processed. Results available in: data/outputs/run_20260413_034915

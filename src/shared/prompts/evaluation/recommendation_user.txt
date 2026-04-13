@@ -1,0 +1,12 @@
+Please evaluate the following recommendation card.
+
+### Business Context & Target
+{{BUSINESS_CONTEXT}}
+
+### Analysis Context (Basis for Recommendation)
+{{ANALYSIS_CONTEXT}}
+
+### Generated Recommendation (To Evaluate)
+{{RECOMMENDATION}}
+
+Strictly check if the recommendation is supported by the analysis context and aligns with the business goals.

@@ -1,0 +1,6 @@
+TASK: Analyze the INPUT campaign data and produce an OUTPUT JSON following the required schema.
+- Focus on business performance, budget efficiency, and diagnostic insights.
+- The analysis section must contain NO recommendations.
+
+### INPUT CAMPAIGN DATA
+{{CAMPAIGN_DATA}}
