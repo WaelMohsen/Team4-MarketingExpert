@@ -92,16 +92,17 @@ def run_evaluation_pipeline(files: List[str]):
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
-        campaign_data = data.get('campaign_data')
+        campaign_data = data.get('input_data') or data.get('campaign_data')
         analysis_report = data.get('analysis_response')
         campaign_target = data.get('campaign_target')
+        business_domain = data.get('business_domain')
 
         if not all([campaign_data, analysis_report]):
             logger.warning(f"Skipping {file_path}: missing required fields.")
             continue
 
         try:
-            comparison_results = evaluator.evaluate(campaign_data, analysis_report, campaign_target)
+            comparison_results = evaluator.evaluate(campaign_data, analysis_report, campaign_target, business_domain)
             
             # Save results
             save_path = save_results_to_json(comparison_results, filename="analysis_evaluation_results.json")

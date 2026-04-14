@@ -36,7 +36,6 @@ class PromptBuilder:
         
         user_prompt = (
             user_prompt_template.replace("{{CAMPAIGN_DATA}}", campaign_data_json)
-            .replace("{{CAMPAIGN_PLATFORMS_DATA}}", campaign_data_json)
             .replace("{{BUSINESS_DOMAIN}}", business_domain_json)
             .replace("{{CAMPAIGN_TARGET}}", campaign_target_json)
         )

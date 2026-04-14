@@ -39,7 +39,7 @@ Inside, results are organized by campaign:
 - **Strict Validation**: All LLM JSON responses are validated against Pydantic models in `src/shared/models/llm_responses.py`.
 
 ## 🚀 Setup & Usage
-For detailed instructions on running the pipeline and standalone evaluators, see the **[Usage Guide](file:///d:/DEV/6AM%20LLM%20Club/Team4-MarketingExpert/USAGE_GUIDE.md)**.
+For detailed instructions on running the pipeline and standalone evaluators, see the **[Usage Guide](./USAGE_GUIDE.md)**.
 
 ### Quick Start
 1. **Install dependencies**: `pip install -r requirements.txt`

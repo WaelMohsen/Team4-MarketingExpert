@@ -27,9 +27,7 @@ class EvaluationModule(BaseModule):
         
         business_domain = context.get_metadata("business_domain")
         campaign_target = context.get_metadata("campaign_target")
-        campaign_data = context.enriched_data.get("processed_df")
-        if campaign_data is not None:
-            campaign_data = context.enriched_data.get("platform_summary", {}).get("platform_summary", [])
+        campaign_data = context.enriched_data.get("campaign_data") or context.enriched_data.get("processed_df")
 
         # 1. Evaluate Analysis
         if context.analysis_results:

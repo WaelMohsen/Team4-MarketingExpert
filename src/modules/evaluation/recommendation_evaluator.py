@@ -90,14 +90,16 @@ def run_recommendation_evaluation(file_path: str):
         data = json.load(f)
 
     # Assuming the file contains recommendation results to evaluate
-    business_context = data.get('business_domain') or data.get('campaign_target')
-    analysis_context = data.get('analysis_results')
-    recommendations = data.get('recommendation_results', {}).get('recommendations', [])
+    business_context = data.get('business_domain')
+    campaign_target = data.get('campaign_target')
+    campaign_data = data.get('input_data') or data.get('campaign_data')
+    analysis_context = data.get('analysis_response')
+    recommendations = data.get('recommendation_response', {}).get('recommendations', [])
 
     results = []
     for rec in recommendations:
         try:
-            eval_res = evaluator.evaluate(business_context, analysis_context, rec)
+            eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, rec)
             results.append({
                 "recommendation_title": rec.get("title"),
                 "evaluation": eval_res
