@@ -5,12 +5,41 @@ A strictly granular, row-by-row Python pipeline that converts raw paid media per
 ## 🏛️ Granular Architecture
 The engine is designed for **high-precision analysis**. Unlike traditional tools that aggregate data, this engine treats every single campaign (row) as an independent case study.
 
+```mermaid
+flowchart TD
+    CORE[src/core/] -->|Orchestrates| PE[PipelineEngine]
+    CORE -->|State Management| EC[ExecutionContext]
+    
+    PE -->|Executes Pipeline| MOD[src/modules/]
+    MOD -->|Global| M1(Ingestion)
+    MOD -->|Global| M2(Preprocessing)
+    MOD -->|Row-by-Row| M3(Enrichment)
+    MOD -->|Row-by-Row| M4(Analysis)
+    MOD -->|Row-by-Row| M5(Recommendation)
+    MOD -->|Row-by-Row| M6(Evaluation)
+```
+
 - **`src/core/`**: The engine's foundation, providing the `PipelineEngine`, `ExecutionContext` (supporting granular persistence), and the `BaseModule` interface.
 - **`src/modules/`**: Discrete processing stages (Ingestion, Preprocessing, Enrichment, Analysis, Recommendation, Evaluation) implemented as independent plugins.
 - **`src/shared/`**: Centralized Pydantic models, prompt templates, and common utility functions.
 
 ## 🧠 Intelligence Workflow
 The pipeline operates in two distinct phases:
+
+```mermaid
+flowchart TD
+    subgraph Phase A: Preparation [Run Once]
+        IN[Ingestion] --> PRE[Preprocessing & Validation]
+    end
+
+    subgraph Phase B: Iterative Analysis [Row-by-Row]
+        PRE --> EN[Enrichment: Campaign Context Case]
+        EN --> AN[Analysis: Context + Performance]
+        AN --> RE[Recommendation: Context + Analysis]
+        AN --> EV[Evaluation: Audits AI Outputs]
+        RE --> EV
+    end
+```
 
 ### Phase A: Preparation (Run Once)
 1. **Ingestion**: Loads the source dataset.
@@ -24,6 +53,19 @@ For **each row** in the dataset, the engine executes:
 4. **Evaluation**: Audits the quality of the AI outputs using a standardized prompt-based framework with full 360-degree context awareness (splitting Analysis and Recommendation grades into separate files).
 
 ## 📂 Output Structure
+
+```mermaid
+graph LR
+    ROOT[(data/outputs/run_YYYYMMDD_HHMM/)] --> CA[campaign_1/]
+    ROOT --> CB[campaign_2/]
+    ROOT --> AUDIT[audit/]
+    
+    CA -.-> A[analysis_result.json]
+    CA -.-> R[recommendation_result.json]
+    CA -.-> AE[analysis_evaluation_results.json]
+    CA -.-> RE[recommendation_evaluation_results.json]
+```
+
 Every execution creates a timestamped folder: `data/outputs/run_YYYYMMDD_HHMM/`.
 Inside, results are organized by campaign:
 - **`campaign_1/`**:
