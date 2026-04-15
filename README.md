@@ -46,7 +46,30 @@ flowchart TD
 2. **Preprocessing**: Validates schema, cleans data, and standardizes columns globally for efficiency.
 
 ### Phase B: Iterative Analysis (Row-by-Row)
+### Phase B: Iterative Analysis (Row-by-Row)
 For **each row** in the dataset, the engine executes:
+
+```mermaid
+sequenceDiagram
+    participant P as Preprocessed Data
+    participant EN as Enrichment
+    participant AN as Analysis
+    participant RE as Recommendation
+    participant EV as Evaluation
+    participant FS as File System
+    
+    P->>EN: Yield next campaign row
+    EN->>AN: Pass "Campaign Context Case" (Row + metadata)
+    AN->>AN: LLM analyzes performance
+    AN->>RE: Pass Context + Analysis Report
+    AN->>EV: Pass Analysis for Quality Audit
+    RE->>RE: LLM generates Actionable Cards
+    RE->>EV: Pass Recommendations for Quality Audit
+    EV->>FS: Save analysis_eval.json & rec_eval.json
+    AN->>FS: Save analysis_result.json
+    RE->>FS: Save recommendation_result.json
+```
+
 1. **Enrichment**: Generates a high-density "Campaign Context Case" including identity metadata (audience, industry) and performance metrics.
 2. **Analysis**: Performs deep-dive LLM performance assessment on the individual campaign utilizing full unified context (Domain, Targets, Data).
 3. **Recommendation**: Generates actionable cards utilizing the complete context and the preceding Analysis report.
