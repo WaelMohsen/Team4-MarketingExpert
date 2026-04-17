@@ -164,9 +164,11 @@ def run_pipeline() -> None:
     3) Run comparison for recommendation
     """
     # Paths
-    base_dir = Path(
-        r"D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1"
-    )
+    from pathlib import Path
+
+    PROJECT_ROOT = Path(__file__).resolve().parents[3]   # adjust level if needed
+
+    base_dir = PROJECT_ROOT / "data" / "outputs" / "run_20260414_004119" / "campaign_1"
 
     analysis_json = base_dir / "analysis_evaluation_results.json"
     recommendation_json = base_dir / "recommendation_evaluation_results.json"

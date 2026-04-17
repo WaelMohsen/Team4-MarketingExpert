@@ -1,10 +1,10 @@
 version,card_title,clarity,accuracy,structure,feasibility,overall
-v1,Refocus Campaign Targeting,3,3,3,3,2.75
-v1,Optimize for Cost per Acquisition,3,2,3,3,2.0
-v1,Enhance Ad Messaging,2,3,2,1,2.25
-v1,Increase Budget for High-Performing Segments,1,1,1,2,2.0
-v1,Gather Missing Performance Metrics,1,2,1,2,2.0
-v1,Monitor Conversion Quality,3,3,2,3,2.5
+v1,Refocus Campaign Targeting,2,3,3,3,2.75
+v1,Optimize for Cost per Acquisition,1,1,3,2,2.0
+v1,Enhance Ad Messaging,2,3,3,2,2.25
+v1,Increase Budget for High-Performing Segments,2,3,2,2,2.0
+v1,Gather Missing Performance Metrics,2,2,1,1,2.0
+v1,Monitor Conversion Quality,2,3,2,3,3
 v2,Refocus Campaign Targeting,2,3,3,3,2.75
 v2,Optimize for Cost per Acquisition,2,2,2,2,2.0
 v2,Enhance Ad Messaging,2,3,2,2,2.25
