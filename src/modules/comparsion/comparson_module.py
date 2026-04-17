@@ -89,3 +89,18 @@ class ComparisonModule(BaseModule):
     def run(self):
         self.ReadJsonAndWriteCsv()
         self.compare_versions(str(self.output_csv)) 
+
+
+def main():
+    INPUT_JSON = "../../../data/outputs/run_20260414_004119/campaign_1/analysis_evaluation_results.json"
+    OUTPUT_CSV = "../../../data/outputs/run_20260414_004119/comparsion_results/analysis_comparson_result.csv"
+    comparison_module = ComparisonModule(
+        input_json=INPUT_JSON,
+        output_csv=OUTPUT_CSV,
+        version="v1"
+    )
+    comparison_module.run()
+
+       
+if __name__ == "__main__":
+    main()  
