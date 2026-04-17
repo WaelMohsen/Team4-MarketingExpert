@@ -1,0 +1,13 @@
+2026-04-08 17:49:19,418 | INFO | __main__ | Configuring DSPy LM with model: openai/gpt-4o-mini
+2026-04-08 17:49:19,419 | INFO | __main__ | Executing evaluation...
+
+2026-04-08 17:49:19,421 | INFO | __main__ | Evaluating Recommendation 1...
+2026-04-08 17:49:27,973 | INFO | __main__ | [Rec 1] Clarity: 4.00 | Accuracy: 5.00 | Non-Redundancy: 4.00 | Overall: 4.00 | Verdict: revise
+2026-04-08 17:49:27,974 | INFO | __main__ | Evaluating Recommendation 2...
+2026-04-08 17:49:34,986 | INFO | __main__ | [Rec 2] Clarity: 2.00 | Accuracy: 3.00 | Non-Redundancy: 3.00 | Overall: 2.00 | Verdict: revise
+2026-04-08 17:49:34,987 | INFO | __main__ | Evaluating Recommendation 3...
+2026-04-08 17:49:41,319 | INFO | __main__ | [Rec 3] Clarity: 4.00 | Accuracy: 5.00 | Non-Redundancy: 3.00 | Overall: 4.00 | Verdict: revise
+2026-04-08 17:49:41,319 | INFO | __main__ | 
+Evaluation completed. Recommendations ranked by overall score.
+
+2026-04-08 17:49:41,323 | INFO | __main__ | Evaluation results successfully saved to: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\Unified-Marketing-Truth-Engine\logs\evaluation_results.json

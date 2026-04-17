@@ -13,9 +13,6 @@ class ComparisonModule(BaseModule):
         self.output_csv = Path(output_csv)
         self.version = version
 
-
-
-
     def ReadJsonAndWriteCsv(self):
         """
         Read analysis_result/ recommendation_result JSON and append metrics to CSV.
@@ -24,15 +21,15 @@ class ComparisonModule(BaseModule):
         if not self.input_json.exists():
             raise FileNotFoundError(f"File not found: {self.input_json}")
 
-        # ensure output directory exists
+        # Ensure full directory path exists (including comparsion_results)
         self.output_csv.parent.mkdir(parents=True, exist_ok=True)
-
+        
         # read JSON
         with open(self.input_json, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         scores = data.get("scores", {})
-
+ 
         row = {
             "version": self.version,
             "clarity": scores.get("clarity"),
@@ -58,12 +55,16 @@ class ComparisonModule(BaseModule):
 
         
 
-    def compare_versions(self, csv_path: str):
+    def compare_versions(self, csv_path: str, module_type:str):
         """
         Compare metrics across different versions and draw charts.
         """
         df = pd.read_csv(csv_path)
-        required_cols = ["version", "clarity", "accuracy", "structure"]
+        if module_type.strip().lower() == 'analysis':
+            required_cols = ["version", "clarity", "accuracy", "structure","overall"]
+        else:
+            required_cols = ["version", "clarity", "accuracy", "structure","feasibility","overall"]
+
         for col in required_cols:
             if col not in df.columns:
                raise ValueError(f"Missing column: {col}")
@@ -71,8 +72,8 @@ class ComparisonModule(BaseModule):
         # draw bar charts for each metric
         # normalize version names
         df["version"] = df["version"].str.lower()
-        metrics = ["clarity", "accuracy", "structure","overall"]
-
+        #metrics = ["clarity", "accuracy", "structure","overall"]
+        metrics = [col for col in required_cols if col != "version"]
         for metric in metrics:
             plt.figure(figsize=(6, 4))
 
