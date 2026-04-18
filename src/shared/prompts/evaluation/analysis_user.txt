@@ -1,0 +1,12 @@
+Please evaluate the following campaign analysis.
+
+### Campaign Context (Target & Domain)
+{{CAMPAIGN_CONTEXT}}
+
+### Raw Campaign Data
+{{RAW_DATA}}
+
+### Generated Analysis Report (To Evaluate)
+{{ANALYSIS_REPORT}}
+
+Analyze the report against the provided context and data. Ensure there are no hallucinations or missing critical insights regarding the campaign goal.
