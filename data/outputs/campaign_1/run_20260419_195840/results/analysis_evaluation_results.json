@@ -1,0 +1,24 @@
+{
+  "scores": {
+    "clarity": 2,
+    "accuracy": 2,
+    "structure": 2,
+    "overall": 2.0
+  },
+  "reasoning": {
+    "clarity": "The report provides a comprehensive overview of campaign performance, but it may confuse readers by not directly addressing the misalignment between campaign goals and execution (e.g., retail focus vs. fintech data). This could lead to misunderstanding the implications of the results.",
+    "accuracy": "The analysis accurately reflects the raw data provided but fails to clarify the discrepancy between the business context (retail) and campaign execution (fintech). There are no hallucinations present, but the presentation of the information could have been clearer regarding goals.",
+    "structure": "The report follows the required sections but could be improved by explicitly linking findings to the primary goal of increasing qualified leads, instead of focusing purely on financial and performance metrics."
+  },
+  "verdict": "revise",
+  "key_issues": [
+    "Misalignment between the campaign's objectives (retail membership) and the provided campaign data (fintech personal loans).",
+    "Inadequate emphasis on the campaign's primary goal of generating qualified leads.",
+    "Missing concrete insights on qualified leads generated."
+  ],
+  "improvement_suggestions": [
+    "Add a section that addresses the discrepancy between campaign objectives and execution.",
+    "Highlight specific metrics related to lead quality in the results and value section.",
+    "Include recommendations for realignment of the campaign to better meet goals."
+  ]
+}
