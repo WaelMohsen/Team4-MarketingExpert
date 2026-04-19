@@ -44,9 +44,9 @@ def main():
 
     # 1. Create a timestamped run folder
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_dir = os.path.join(args.output_base_dir, f"run_{timestamp}")
-    os.makedirs(run_dir, exist_ok=True)
-    logger.info(f"Initialized Run Folder: {run_dir}")
+    global_dir = os.path.join(args.output_base_dir, "_global", timestamp, "results")
+    os.makedirs(global_dir, exist_ok=True)
+    logger.info(f"Initialized Global Run Folder: {global_dir}")
 
     # 2. Phase A: Preparation (Ingestion & Preprocessing)
     # We clean the whole file once to ensure standardized structure
@@ -55,7 +55,7 @@ def main():
     prep_context = ExecutionContext()
     prep_context.set_metadata("input_csv", args.input_csv)
     # Global intermediate data saved to central audit
-    prep_context.set_metadata("output_json_dir", run_dir) 
+    prep_context.set_metadata("output_json_dir", global_dir) 
 
     prep_engine = PipelineEngine()
     prep_engine.add_module(IngestionModule())
@@ -91,7 +91,7 @@ def main():
 
     for i, row in processed_df.iterrows():
         campaign_name = f"campaign_{i+1}"
-        row_dir = os.path.join(run_dir, campaign_name)
+        row_dir = os.path.join(args.output_base_dir, campaign_name, f"run_{timestamp}", "results")
         os.makedirs(row_dir, exist_ok=True)
         
         logger.info(f"--- Processing {campaign_name} ---")
@@ -101,7 +101,7 @@ def main():
         # Pass essential metadata
         row_context.set_metadata("campaign_target", DEFAULT_CAMPAIGN_TARGET)
         row_context.set_metadata("business_domain", DEFAULT_BUSINESS_DOMAIN)
-        row_context.set_metadata("output_json_dir", run_dir) # Base for relative paths
+        row_context.set_metadata("output_json_dir", row_dir) # Base for relative paths
         
         # This is where modules will save their individual results
         row_context.runtime_output_path = row_dir
@@ -119,7 +119,7 @@ def main():
                 logger.error(f"Error in {module.name} for {campaign_name}: {e}")
                 row_context.errors.append(f"{module.name}: {e}")
 
-    logger.info(f"All campaigns processed. Results available in: {run_dir}")
+    logger.info(f"All campaigns processed. Results available under: {args.output_base_dir}")
 
 if __name__ == "__main__":
     main()
