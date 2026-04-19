@@ -509,3 +509,14 @@
 2026-04-19 20:06:24,967 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_2\20260419_200423\results\analysis_evaluation_results.json
 2026-04-19 20:06:24,968 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_2\20260419_200423\results\recommendation_evaluation_results.json
 2026-04-19 20:06:24,968 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-04-19 20:13:16,371 | INFO | root | Logging initialized.
+2026-04-19 20:13:16,372 | INFO | root | Logging initialized.
+2026-04-19 20:13:16,374 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global\run_20260419_201316\results
+2026-04-19 20:13:16,374 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-04-19 20:13:16,374 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-04-19 20:13:16,374 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-04-19 20:13:16,374 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-04-19 20:13:16,374 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-04-19 20:13:16,374 | ERROR | src.core.pipeline_engine | Error in module Ingestion: File not found: data\test_ads_v2.csv
+2026-04-19 20:13:16,374 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-04-19 20:13:16,374 | ERROR | __main__ | Preparation phase failed: ['Ingestion: File not found: data\\test_ads_v2.csv']

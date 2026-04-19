@@ -44,7 +44,7 @@ def main():
 
     # 1. Create a timestamped run folder
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    global_dir = os.path.join(args.output_base_dir, "_global", timestamp, "results")
+    global_dir = os.path.join(args.output_base_dir, "_global", f"run_{timestamp}", "results")
     os.makedirs(global_dir, exist_ok=True)
     logger.info(f"Initialized Global Run Folder: {global_dir}")
 

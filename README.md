@@ -78,26 +78,32 @@ sequenceDiagram
 ## 📂 Output Structure
 
 ```mermaid
-graph LR
-    ROOT[(data/outputs/run_YYYYMMDD_HHMM/)] --> CA[campaign_1/]
-    ROOT --> CB[campaign_2/]
-    ROOT --> AUDIT[audit/]
+graph TD
+    ROOT[data/outputs/] --> GLOBAL[_global/]
+    ROOT --> C1[campaign_1/]
+    ROOT --> C2[campaign_2/]
+
+    GLOBAL --> GR[run_YYYYMMDD_HHMMSS/]
+    GR --> GRES[results/]
+    GRES --> AUDIT[audit/]
+
+    C1 --> C1R[run_YYYYMMDD_HHMMSS/]
+    C1R --> C1RES[results/]
     
-    CA -.-> A[analysis_result.json]
-    CA -.-> R[recommendation_result.json]
-    CA -.-> AE[analysis_evaluation_results.json]
-    CA -.-> RE[recommendation_evaluation_results.json]
+    C2 --> C2R[run_YYYYMMDD_HHMMSS/]
+    C2R --> C2RES[results/]
+    
+    C1RES -.-> A[analysis_result.json]
+    C1RES -.-> R[recommendation_result.json]
 ```
 
-Every execution creates a timestamped folder: `data/outputs/run_YYYYMMDD_HHMM/`.
-Inside, results are organized by campaign:
-- **`campaign_1/`**:
+Every execution creates a nested structure within `data/outputs/`:
+- **`_global/run_TIMESTAMP/results/audit/`**: Contains the globally preprocessed data and raw ingestion records.
+- **`campaign_N/run_TIMESTAMP/results/`**: Isolated results for each campaign, including:
     - `analysis_result.json`
     - `recommendation_result.json`
     - `analysis_evaluation_results.json`
     - `recommendation_evaluation_results.json`
-- **`campaign_2/`**: ... and so on.
-- **`audit/`**: Contains the globally preprocessed data and final enriched records.
 
 ## 🛠️ Developer Features
 - **Prompt Registry**: All LLM prompt paths are managed in `src/shared/utils/prompt_registry.py`. Never hardcode `.txt` paths in your modules.

@@ -17,7 +17,7 @@ Unlike traditional marketing tools that aggregate data into high-level averages,
 ### 1. Preparation (Batch Preparation)
 - **`IngestionModule`**: Loads the source file.
 - **`PreprocessingModule`**: Cleans, standardizes columns, and removes duplicates.
-- **Output**: A global `processed_data.csv` saved in the `audit/` folder of the current run.
+- **Output**: A global `processed_data.csv` saved in the `_global/run_TIMESTAMP/results/audit/` folder.
 
 ### 2. Granular Iteration (The Engine Loop)
 For each row, a new `ExecutionContext` is created, and the following stages are executed:
@@ -52,7 +52,7 @@ The quality of the AI output is audited by a separate LLM process using the exac
 ### 2. Handling Data
 - Avoid `groupby` or `sum()` logic within intelligence modules.
 - Assume the input is a **single-row DataFrame**.
-- Use `context.runtime_output_path` for all `save()` operations to ensure data ends up in the correct `campaign_{i}/` folder.
+- Use `context.runtime_output_path` for all `save()` operations to ensure data ends up in the correct `campaign_{i}/run_TIMESTAMP/results/` folder.
 
 ### 3. Response Schemas
 - Define all LLM output formats in `src/shared/models/llm_responses.py`.
@@ -60,15 +60,19 @@ The quality of the AI output is audited by a separate LLM process using the exac
 
 ---
 
-## 📂 Run Directory Anatomy
 ```text
-data/outputs/run_YYYYMMDD_HHMM/
-├── audit/                  # Global cleaned CSV
-├── campaign_1/             # Isolated results for Row 1
-│   ├── enriched_summary.json
-│   ├── analysis_result.json
-│   ├── recommendation_result.json
-│   ├── analysis_evaluation_results.json
-│   └── recommendation_evaluation_results.json
-└── campaign_2/             # Isolated results for Row 2
+data/outputs/
+├── _global/
+│   └── run_YYYYMMDD_HHMM/
+│       └── results/
+│           └── audit/                  # Global cleaned CSV
+├── campaign_1/                         # Isolated results for Row 1
+│   └── run_YYYYMMDD_HHMM/
+│       └── results/
+│           ├── enriched_summary.json
+│           ├── analysis_result.json
+│           ├── recommendation_result.json
+│           ├── analysis_evaluation_results.json
+│           └── recommendation_evaluation_results.json
+└── campaign_2/                         # Isolated results for Row 2
 ```

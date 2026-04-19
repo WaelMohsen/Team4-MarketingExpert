@@ -56,9 +56,9 @@ python -m src.modules.evaluation.recommendation_evaluator
 ---
 
 ## 4. Understanding Outputs
-After a run, navigate to `data/outputs/run_YYYYMMDD_HHMM/`:
-- **For the whole file**: Check `audit/processed_data.csv`.
-- **For specific rows**: Check `campaign_N/`.
+After a run, navigate to `data/outputs/`:
+- **For global audit data**: Check `_global/run_TIMESTAMP/results/audit/`.
+- **For specific campaign rows**: Check `campaign_N/run_TIMESTAMP/results/`.
 - **For Logs**: All console output is duplicated at `logs/pipeline.log`.
 
 ---
