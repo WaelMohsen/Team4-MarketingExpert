@@ -12,7 +12,7 @@ from src.shared.utils.prompt_registry import PromptRegistry
 # Setup logging
 try:
     from src.shared.utils.logger import setup_logging
-    logger = setup_logging(file_name="recommendation_evaluation.log",module_name ='recommendation_evaluator')
+    logger = setup_logging(module_name ='recommendation_evaluator')
     from src.shared.utils.json_saver import save_results_to_json
 except ImportError:
     import logging
