@@ -108,6 +108,7 @@ Every execution creates a nested structure within `data/outputs/`:
 ## 🛠️ Developer Features
 - **Prompt Registry**: All LLM prompt paths are managed in `src/shared/utils/prompt_registry.py`. Never hardcode `.txt` paths in your modules.
 - **Strict Validation**: All LLM JSON responses are validated against Pydantic models in `src/shared/models/llm_responses.py`.
+- **Comprehensive Testing**: Full unit testing suite ensuring stability across core engine, shared models, and pipeline modules (~85% code coverage).
 
 ## 🚀 Setup & Usage
 For detailed instructions on running the pipeline and standalone evaluators, see the **[Usage Guide](./USAGE_GUIDE.md)**.

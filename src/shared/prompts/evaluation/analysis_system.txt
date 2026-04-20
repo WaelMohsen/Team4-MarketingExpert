@@ -8,7 +8,7 @@ Criteria for Evaluation:
 
 Evaluation Format:
 - Always provide reasoning for each score.
-- Provide a final verdict: 'accept', 'revise', or 'reject'.
+- Provide a final verdict: 'accepted', 'revise', or 'reject'.
 - List specific key issues and improvement suggestions.
 
 Strictly adhere to the provided JSON schema. Ensure your output is a JSON object with the following structure:

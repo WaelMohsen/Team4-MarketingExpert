@@ -63,7 +63,34 @@ After a run, navigate to `data/outputs/`:
 
 ---
 
-## 5. Troubleshooting
+## 5. Running Tests
+The pipeline includes a comprehensive suite of unit and integration tests to ensure data integrity and engine stability.
+
+### Run All Tests
+```bash
+python -m pytest tests/
+```
+
+### Run Tests with Coverage
+```bash
+python -m pytest tests/ --cov=src
+```
+
+### Run Specific Test Suites
+```bash
+# Core engine tests
+python -m pytest tests/core/
+
+# Shared utility tests
+python -m pytest tests/shared/
+
+# Pipeline module tests
+python -m pytest tests/modules/preprocessing/
+```
+
+---
+
+## 6. Troubleshooting
 - **401 Unauthorized**: Check your API key in `.env`.
 - **FileNotFoundError**: Ensure your `--input-csv` path is correct.
 - **JSON Parsing Errors**: This usually happens if the LLM output was cut off (increase `max_output_tokens` in the module if needed).
