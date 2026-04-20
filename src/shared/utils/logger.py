@@ -2,7 +2,7 @@ import os
 import logging
 from datetime import datetime
 
-def setup_logging(module_name: str=__name__):
+def setup_logging(file_name:str, module_name: str=__name__):
     """
     Configures application-wide logging with a timestamped run directory.
     Args:
@@ -21,7 +21,7 @@ def setup_logging(module_name: str=__name__):
 
 
     # Log file inside the run directory
-    log_file = LOG_DIR / "analysis_evaluation.log"
+    log_file = LOG_DIR / file_name
     # Configure logging
     logging.basicConfig(
         level=logging.INFO,

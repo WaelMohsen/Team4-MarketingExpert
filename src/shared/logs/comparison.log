@@ -1,0 +1,40 @@
+2026-04-17 21:59:11,161 | INFO | root | Logging initialized.
+2026-04-17 21:59:11,161 | INFO | Comparison Module | Starting comparison pipeline
+2026-04-17 21:59:11,162 | INFO | Comparison Module | Resolved pipeline paths | base_dir=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1 | output_dir=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results
+2026-04-17 21:59:11,162 | INFO | Comparison Module | Using version=v5
+2026-04-17 21:59:11,162 | INFO | Comparison Module | Step 1: Converting JSON files to CSV
+2026-04-17 21:59:11,163 | INFO | Comparison Module | Analysis CSV created | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\analysis_scores.csv
+2026-04-17 21:59:11,164 | INFO | Comparison Module | Recommendation CSV created | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\recommendation_scores.csv
+2026-04-17 21:59:11,164 | INFO | Comparison Module | Step 2: Running analysis comparison
+2026-04-17 21:59:11,165 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | file to be compared=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\analysis_scores.csv
+2026-04-17 21:59:11,165 | INFO | Comparison Module | Comparison was started | module_type=analysis
+2026-04-17 21:59:11,165 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\analysis_scores.csv
+2026-04-17 21:59:11,172 | INFO | Comparison Module | CSV loaded successfully | rows=6 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-17 21:59:11,172 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-17 21:59:11,172 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-17 21:59:11,175 | INFO | Comparison Module | Comparison was completed | module_type=analysis | rows=5 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-17 21:59:11,176 | INFO | Comparison Module | Analysis summary generated successfully
+2026-04-17 21:59:11,185 | INFO | Comparison Module | Generating comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-17 21:59:11,470 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-04-17 21:59:11,470 | INFO | Comparison Module | Displaying plot interactively
+2026-04-17 21:59:11,663 | INFO | Comparison Module | Step 3: Running recommendation comparison
+2026-04-17 21:59:11,663 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | file to be compared=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\recommendation_scores.csv
+2026-04-17 21:59:11,663 | INFO | Comparison Module | Comparison was started | module_type=recommendation
+2026-04-17 21:59:11,663 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\recommendation_scores.csv
+2026-04-17 21:59:11,706 | INFO | Comparison Module | CSV loaded successfully | rows=36 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-17 21:59:11,707 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-17 21:59:11,709 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-17 21:59:11,722 | INFO | Comparison Module | Comparison was completed | module_type=recommendation | rows=5 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-17 21:59:11,723 | INFO | Comparison Module | Recommendation version summary generated successfully
+2026-04-17 21:59:11,759 | INFO | Comparison Module | Generating comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-17 21:59:12,799 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-04-17 21:59:12,799 | INFO | Comparison Module | Displaying plot interactively
+2026-04-17 21:59:13,723 | INFO | Comparison Module | Step 4: Running recommendation card-level comparison
+2026-04-17 21:59:13,723 | INFO | Comparison Module | Card-level comparison was started | module_type=recommendation
+2026-04-17 21:59:13,723 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\run_20260414_004119\campaign_1\comparison_results\recommendation_scores.csv
+2026-04-17 21:59:13,725 | INFO | Comparison Module | CSV loaded successfully | rows=36 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-17 21:59:13,725 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-17 21:59:13,725 | INFO | Comparison Module | Building card-level comparison | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-17 21:59:13,727 | INFO | Comparison Module | Completed card-level comparison | module_type=recommendation | rows=36
+2026-04-17 21:59:13,735 | INFO | Comparison Module | Step 5: Saving summary CSV files
+2026-04-17 21:59:13,738 | INFO | Comparison Module | All output files saved successfully | analysis_summary=%s | recommendation_summary=%s | card_level=%s

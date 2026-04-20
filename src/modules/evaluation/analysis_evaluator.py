@@ -13,7 +13,7 @@ from src.shared.utils.prompt_registry import PromptRegistry
 # Configure logging using shared structure
 try:
     from src.shared.utils.logger import setup_logging
-    logger = setup_logging(module_name ='llm_analysis_evaluator')
+    logger = setup_logging(file_name= "analysis_evaluation.log", module_name ='llm_analysis_evaluator')
     from src.shared.utils.json_saver import save_results_to_json
 except ImportError:
     import logging
