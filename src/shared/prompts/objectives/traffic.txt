@@ -1,0 +1,4 @@
+Primary Goal: Drive high-quality visits efficiently
+
+Primary KPIs: clicks, ctr, cpc, landing page views 
+Secondary KPIs: cpm , bounce proxy rate,  session quality score

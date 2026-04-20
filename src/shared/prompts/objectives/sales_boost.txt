@@ -1,0 +1,3 @@
+Primary Goal: Maximize revenue and profitable conversions from ad spend
+Primary KPIs: purchases, roas, cpa, revenue, purchase conversion rate
+Secondary KPIs: CTR, CPC, AOV

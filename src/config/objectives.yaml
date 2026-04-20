@@ -1,0 +1,21 @@
+# config/objectives.yaml
+# ─────────────────────────────────────────────────────────────────
+# Each objective key maps to:
+#   prompt_file    : which template to use in config/prompts/
+# ─────────────────────────────────────────────────────────────────
+
+increase_sales:
+  label: "Increase Sales / Conversions"
+  prompt_file: "sales_boost.txt"
+
+brand_awareness:
+  label: "Brand Awareness / Reach"
+  prompt_file: "recommendation/objectives/brand_awareness.txt"
+
+traffic:
+  label: "Traffic"
+  prompt_file: "recommendation/objectives/traffic.txt"
+
+revenue_efficiency:
+  label: "Revenue Efficiency"
+  prompt_file: "recommendation/objectives/revenue_efficiency.txt"
