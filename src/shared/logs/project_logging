@@ -607,3 +607,168 @@ TypeError: run_analysis_comparison() got an unexpected keyword argument 'analysi
 2026-04-21 11:05:06,005 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
 2026-04-21 11:05:06,016 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
 2026-04-21 11:05:06,016 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
+2026-04-21 11:13:39,806 | INFO | root | Logging initialized.
+2026-04-21 11:13:39,806 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=None
+2026-04-21 11:13:39,807 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-04-21 11:13:39,807 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-04-21 11:13:39,808 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\analysis_evaluation_results.json
+2026-04-21 11:13:39,809 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-04-21 11:13:39,810 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\analysis_evaluation_results.json
+2026-04-21 11:13:39,812 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-04-21 11:13:39,812 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:13:39,812 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-04-21 11:13:39,812 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:13:39,822 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:39,823 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-21 11:13:39,823 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:39,827 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:39,830 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:40,109 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-04-21 11:13:40,128 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:13:40,128 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:13:40,128 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-04-21 11:13:40,128 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:13:40,132 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,133 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-21 11:13:40,133 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,137 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,140 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,332 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-04-21 11:13:40,344 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:13:40,345 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-04-21 11:13:40,345 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-04-21 11:13:40,347 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\analysis_evaluation_results.json
+2026-04-21 11:13:40,348 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-04-21 11:13:40,349 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\analysis_evaluation_results.json
+2026-04-21 11:13:40,350 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-04-21 11:13:40,351 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:13:40,351 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-04-21 11:13:40,351 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:13:40,354 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:40,354 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-21 11:13:40,354 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:40,357 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:40,358 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:13:40,548 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
+2026-04-21 11:13:40,559 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:13:40,559 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:13:40,559 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-04-21 11:13:40,559 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:13:40,562 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,562 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-21 11:13:40,562 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,566 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,567 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:13:40,759 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
+2026-04-21 11:13:40,769 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:13:40,769 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
+2026-04-21 11:15:00,658 | INFO | root | Logging initialized.
+2026-04-21 11:15:00,658 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=None
+2026-04-21 11:15:00,659 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-04-21 11:15:00,660 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-04-21 11:15:00,661 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\analysis_evaluation_results.json
+2026-04-21 11:15:00,662 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-04-21 11:15:00,663 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\analysis_evaluation_results.json
+2026-04-21 11:15:00,664 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-04-21 11:15:00,665 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:00,665 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-04-21 11:15:00,665 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:00,675 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:00,675 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-21 11:15:00,675 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:00,679 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:00,682 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:00,983 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-04-21 11:15:01,001 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:01,002 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:01,002 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-04-21 11:15:01,002 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:01,006 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,007 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-21 11:15:01,007 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,011 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,013 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,206 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-04-21 11:15:01,217 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:01,217 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-04-21 11:15:01,218 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-04-21 11:15:01,219 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\analysis_evaluation_results.json
+2026-04-21 11:15:01,220 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-04-21 11:15:01,221 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\analysis_evaluation_results.json
+2026-04-21 11:15:01,222 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-04-21 11:15:01,223 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:01,223 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-04-21 11:15:01,223 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:01,225 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:01,226 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-21 11:15:01,226 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:01,229 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:01,231 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:01,411 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
+2026-04-21 11:15:01,419 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:01,420 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:01,420 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-04-21 11:15:01,420 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:01,435 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,435 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-21 11:15:01,436 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,438 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,439 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:01,620 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
+2026-04-21 11:15:01,630 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:01,631 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
+2026-04-21 11:15:14,447 | INFO | root | Logging initialized.
+2026-04-21 11:15:14,447 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=None
+2026-04-21 11:15:14,448 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-04-21 11:15:14,448 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-04-21 11:15:14,450 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\analysis_evaluation_results.json
+2026-04-21 11:15:14,527 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-04-21 11:15:14,529 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\analysis_evaluation_results.json
+2026-04-21 11:15:14,530 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-04-21 11:15:14,531 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:14,531 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-04-21 11:15:14,531 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:14,541 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:14,541 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-21 11:15:14,541 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:14,547 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:14,551 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:14,823 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-04-21 11:15:14,839 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:14,839 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:14,840 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-04-21 11:15:14,840 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:14,843 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:14,844 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-21 11:15:14,844 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:14,849 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:14,851 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:15,128 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-04-21 11:15:15,140 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:15,140 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-04-21 11:15:15,141 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-04-21 11:15:15,142 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\analysis_evaluation_results.json
+2026-04-21 11:15:15,143 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-04-21 11:15:15,144 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\analysis_evaluation_results.json
+2026-04-21 11:15:15,145 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-04-21 11:15:15,146 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:15,146 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-04-21 11:15:15,146 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:15,148 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:15,149 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-04-21 11:15:15,149 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:15,152 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:15,153 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-04-21 11:15:15,335 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
+2026-04-21 11:15:15,344 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-04-21 11:15:15,344 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:15,345 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-04-21 11:15:15,345 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:15,347 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:15,348 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-04-21 11:15:15,348 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:15,350 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:15,352 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-04-21 11:15:15,527 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
+2026-04-21 11:15:15,536 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-04-21 11:15:15,536 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
