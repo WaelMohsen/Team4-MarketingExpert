@@ -20,6 +20,15 @@ class MetricsCalculator:
             "cpa": self._calculate_cpa,
             "roas": self._calculate_roas,
             "aov": self._calculate_aov,  # Average Order Value
+            "frequency": self._calculate_frequency,
+            "mer": self._calculate_mer,  # Marketing Efficiency Ratio
+            "ltv_to_cac": self.calculate_ltv_to_cac,
+            "cac_payback_period": self.calculate_cac_payback_period,
+            "refund_rate": self._refund_rate,
+            "purchase_conversion_rate": self._calculate_purchase_conversion_rate,
+            "bounce_proxy_rate": self._bounce_proxy_rate,
+            "session_quality_score": self._calculate_session_quality_score,
+            
             "brand_awareness_metric": lambda df: self._calculate_brand_awareness_metric(df, "cpm"),  # Example for brand awareness metric
             "revenue_efficiency_metric": lambda df: self._calculate_revenue_efficiency_metric(df, "mer"),  # Example for revenue efficiency metric  
             "increase_sales_metric": lambda df: self.calculate_increase_sales_metric(df, "roas"),  # Example for increase sales metric
@@ -74,28 +83,51 @@ class MetricsCalculator:
     def _calculate_aov(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """AOV = conversion_value / conversions"""
         return self._safe_div(df, "conversion_value", "conversions")
+    def _calculate_frequency(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """Frequency = impressions / reach"""
+        return self._safe_div(df, "impressions", "reach")
+    def _calculate_mer(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """MER = total_revenue / total_marketing_spend"""
+        return self._safe_div(df, "total_revenue", "total_marketing_spend")
+    def calculate_ltv_to_cac(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """LTV to CAC = lifetime_value / cac"""
+        return self._safe_div(df, "lifetime_value", "cac")
+    def calculate_cac_payback_period(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """CAC Payback Period = cac / monthly_gross_profit_per_customer"""
+        return self._safe_div(df, "cac", "monthly_gross_profit_per_customer")
+    def _refund_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """Refund Rate = refunds / orders"""
+        return self._safe_div(df, "refunds", "orders")
+    def _calculate_purchase_conversion_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """Purchase Conversion Rate = (purchases / landing_page_views) * 100"""
+        return self._safe_div(df, "purchases", "landing_page_views") * 100 if self._safe_div(df, "purchases", "landing_page_views") is not None else None
+    def _bounce_proxy_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:  
+        """Bounce Proxy Rate = 1 - (landing_page_views / clicks)"""
+        return 1 - self._safe_div(df, "landing_page_views", "clicks") if self._safe_div(df, "landing_page_views", "clicks") is not None else None
+    def _calculate_session_quality_score(self, df: pd.DataFrame) -> Optional[pd.Series]:
+        """Session Quality Score = landing_page_views / sessions"""
+        return self._safe_div(df, "landing_page_views", "sessions") if self._safe_div(df, "landing_page_views", "sessions") is not None else None
     
-
-    def _calculate_brand_awareness_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
+    def calculate_brand_awareness_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
         """
         Calculate brand awareness metrics.
 
         Formulas:
         - reach       : unique users reached (direct column)
         - impressions : total ad views (direct column)
-        - cpm         : (spend / impressions) * 1000
+        - cpm         : (spend / impressions) * 1000 
         - frequency   : impressions / reach
         """
         metric_map = {
             "reach": lambda: df.get("reach"),
             "impressions": lambda: df.get("impressions"),
-            "cpm": lambda: self._safe_div(df.get("spend"), df.get("impressions")) * 1000,
-            "frequency": lambda: self._safe_div(df.get("impressions"), df.get("reach")),
+            "cpm": lambda: self._calculate_cpm(df),
+            "frequency": lambda: self._calculate_frequency(df),
         }
         func = metric_map.get(metric_name)
         return func() if func else None
         
-    def _calculate_revenue_efficiency_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
+    def calculate_revenue_efficiency_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
         """
         Calculate revenue efficiency metrics.
 
@@ -108,15 +140,18 @@ class MetricsCalculator:
         - refund_rate        : refunds / orders
         """
         metric_map = {
-            "mer": lambda: self._safe_div(df.get("total_revenue"), df.get("total_marketing_spend")),
-            "ltv_to_cac": lambda: self._safe_div(df.get("lifetime_value"), df.get("cac")),
-            "cac_payback_period": lambda: self._safe_div(df.get("cac"), df.get("monthly_gross_profit_per_customer")),
-            "roas": lambda: self._safe_div(df.get("revenue"), df.get("spend")),
-            "aov": lambda: self._safe_div(df.get("revenue"), df.get("orders")),
-            "refund_rate": lambda: self._safe_div(df.get("refunds"), df.get("orders")),
+            "mer": lambda: self._calculate_mer(df),
+            "ltv_to_cac": lambda: self.calculate_ltv_to_cac(df),
+            "cac_payback_period": lambda: self.calculate_cac_payback_period(df),
+            "roas": lambda: self._calculate_roas(df),
+            "aov": lambda: self._calculate_aov(df),
+            "refund_rate": lambda: self._refund_rate(df),
         }
         func = metric_map.get(metric_name)
         return func() if func else None
+    
+
+
     def calculate_increase_sales_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
         """
         Calculate increase sales metrics.
@@ -133,13 +168,13 @@ class MetricsCalculator:
         """
         metric_map = {
             "purchases": lambda: df.get("purchases"),
-            "roas": lambda: self._safe_div(df.get("revenue"), df.get("spend")),
-            "cpa": lambda: self._safe_div(df.get("spend"), df.get("conversions")),
+            "roas": lambda: self._calculate_roas(df),
+            "cpa": lambda: self._calculate_cpa(df),
             "revenue": lambda: df.get("revenue"),
-            "purchase_conversion_rate": lambda: self._safe_div(df.get("purchases"), df.get("landing_page_views")) * 100,
-            "ctr": lambda: self._safe_div(df.get("clicks"), df.get("impressions")) * 100,
-            "cpc": lambda: self._safe_div(df.get("spend"), df.get("clicks")),
-            "aov": lambda: self._safe_div(df.get("revenue"), df.get("orders")),
+            "purchase_conversion_rate": lambda: self._calculate_purchase_conversion_rate(df),
+            "ctr": lambda: self._calculate_ctr(df),
+            "cpc": lambda: self._calculate_cpc(df),
+            "aov": lambda: self._calculate_aov(df),
         }
         func = metric_map.get(metric_name)
         return func() if func else None
@@ -158,12 +193,12 @@ class MetricsCalculator:
         """
         metric_map = {
             "clicks": lambda: df.get("clicks"),
-            "ctr": lambda: self._safe_div(df.get("clicks"), df.get("impressions")) * 100,
-            "cpc": lambda: self._safe_div(df.get("spend"), df.get("clicks")),
+            "ctr": lambda: self._calculate_ctr(df),
+            "cpc": lambda: self._calculate_cpc(df),
             "landing_page_views": lambda: df.get("landing_page_views"),
-            "cpm": lambda: self._safe_div(df.get("spend"), df.get("impressions")) * 1000,
-            "bounce_proxy_rate": lambda: 1 - self._safe_div(df.get("landing_page_views"), df.get("clicks")),
-            "session_quality_score": lambda: self._safe_div(df.get("landing_page_views"), df.get("sessions")),
+            "cpm": lambda: self._calculate_cpm(df),
+            "bounce_proxy_rate": lambda: self._bounce_proxy_rate(df),
+            "session_quality_score": lambda: self._calculate_session_quality_score(df),
         }
         func = metric_map.get(metric_name)
         return func() if func else None

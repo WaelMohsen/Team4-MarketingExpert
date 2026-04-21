@@ -22,3 +22,9 @@ class PromptRegistry(Enum):
     # Evaluation: Recommendation
     EVAL_RECOMMENDATION_SYSTEM = "evaluation/recommendation_system.txt"
     EVAL_RECOMMENDATION_USER = "evaluation/recommendation_user.txt"
+    #objectives 
+    BRAND_AWARENESS= "objectives/brand_awareness.txt"
+    REVENUE_EFFICIENCY="objectives/revenue_efficiency.txt"
+    SALES_BOOST="objectives/sales_boost.txt"
+    TRAFFIC="objectives/traffic.txt"
+
