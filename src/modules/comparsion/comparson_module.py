@@ -16,20 +16,27 @@ except ImportError:
 
 class ComparisonModule:
     """
-    Comparison Module for Evaluation Results.
+    Version-based Evaluation Comparison Module.
 
-    This module compares evaluation scores across multiple run versions
-    of generated outputs such as analysis and recommendation results.
+    This module performs metric aggregation and comparison across multiple
+    run versions for a given campaign.
+
+    It operates on pre-built CSV inputs (generated from multiple run folders)
+    and produces:
+        - Version-level summary tables (mean scores per metric)
+        - Comparison visualizations (bar charts)
 
     Supported module types:
-        1. analysis
-        2. recommendation
+        - "analysis": compares analysis evaluation metrics
+        - "recommendation": compares recommendation evaluation metrics
+          (aggregated across multiple recommendation cards per version)
 
-    Final outputs per campaign:
-        - analysis_summary.csv
-        - recommendation_summary.csv
-        - analysis_comparison_plot.png
-        - recommendation_comparison_plot.png
+    Typical workflow:
+        1. Load combined CSV (aggregated from multiple runs)
+        2. Validate schema based on module type
+        3. Group results by version
+        4. Compute mean score per metric
+        5. Generate comparison plots
     """
 
     ANALYSIS = "analysis"
@@ -47,14 +54,21 @@ class ComparisonModule:
 
     def get_version_summary(self) -> pd.DataFrame:
         """
-        Return one version-level comparison table.
+        Compute a version-level summary table.
 
-        - Loads the CSV
-        - Validates the schema
-        - Groups by version
-        - Computes average score for each metric
+        This method:
+            - Loads the input CSV containing multiple runs
+            - Validates required columns based on module type
+            - Groups rows by version
+            - Computes the average score for each metric
 
-        For recommendation data, this averages all cards within each version.
+        Notes:
+            - For recommendation data, multiple rows (cards) per version
+              are averaged into a single version-level score.
+            - Output is sorted by version for consistent comparison.
+
+        Returns:
+            pd.DataFrame: Aggregated metrics per version.
         """
         logger.info("Version summary started | module_type=%s", self.module_type)
 
@@ -77,13 +91,25 @@ class ComparisonModule:
         show: bool = False,
     ) -> Path:
         """
-        Plot version-level metric comparison as a bar chart.
+        Generate a bar chart comparing metrics across versions.
 
-        - x-axis: metrics
-        - y-axis: scores
-        - each version appears as a separate bar group
-        - saves plot to disk
-        - optionally displays the plot
+        Visualization structure:
+            - X-axis: evaluation metrics (e.g., clarity, accuracy, etc.)
+            - Y-axis: average scores
+            - Each version is represented as a separate bar group
+
+        Behavior:
+            - Saves the plot to the specified output path
+            - Optionally displays the plot (useful for debugging/local runs)
+
+        Args:
+            version_summary: Output from get_version_summary()
+            output_path: Destination path for the saved plot
+            title: Optional custom title (auto-generated if not provided)
+            show: Whether to display the plot interactively
+
+        Returns:
+            Path: Path to the saved plot file
         """
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -132,6 +158,13 @@ class ComparisonModule:
     def load_data(self) -> pd.DataFrame:
         """
         Load comparison CSV into a DataFrame and validate required columns.
+
+        Returns:
+            pd.DataFrame: Validated comparison data loaded from CSV.
+
+        Raises:
+            FileNotFoundError: If the input CSV does not exist.
+            ValueError: If required columns are missing.
         """
         logger.info("Loading comparison CSV | path=%s", self.input_csv)
 
@@ -152,9 +185,16 @@ class ComparisonModule:
 
     def _build_version_summary(self, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Build a single version-level summary DataFrame.
+        Build a version-level summary DataFrame.
 
-        For each version, compute the mean of all metric columns.
+        For each version, this method computes the mean score of all
+        metric columns relevant to the selected module type.
+
+        Args:
+            df: Input DataFrame containing comparison rows.
+
+        Returns:
+            pd.DataFrame: One aggregated row per version, sorted by version.
         """
         metrics = self._get_metrics()
 
@@ -176,6 +216,12 @@ class ComparisonModule:
     def _get_required_columns(self) -> List[str]:
         """
         Return required CSV columns based on module type.
+
+        Returns:
+            List[str]: Required schema for the selected module type.
+
+        Raises:
+            ValueError: If module_type is not supported.
         """
         if self.module_type == self.ANALYSIS:
             return ["version", "clarity", "accuracy", "structure", "overall"]
@@ -196,7 +242,10 @@ class ComparisonModule:
 
     def _get_metrics(self) -> List[str]:
         """
-        Return only metric columns, excluding identifiers.
+        Return metric columns only, excluding identifier columns.
+
+        Returns:
+            List[str]: Metric column names used for aggregation and plotting.
         """
         return [
             column
@@ -207,6 +256,12 @@ class ComparisonModule:
     def _validate_columns(self, df: pd.DataFrame) -> None:
         """
         Ensure the input CSV contains all required columns.
+
+        Args:
+            df: DataFrame to validate.
+
+        Raises:
+            ValueError: If one or more required columns are missing.
         """
         missing_cols = [
             col for col in self._get_required_columns() if col not in df.columns
@@ -228,21 +283,36 @@ class ComparisonModule:
 
 def get_project_root() -> Path:
     """
-    Resolve project root from current file path.
+    Resolve the project root directory from the current file location.
+
+    Returns:
+        Path: Project root path.
     """
     return Path(__file__).resolve().parents[3]
 
 
 def get_outputs_dir() -> Path:
     """
-    Return data/outputs directory.
+    Return the main outputs directory.
+
+    Returns:
+        Path: Path to data/outputs.
     """
     return get_project_root() / "data" / "outputs"
 
 
 def find_campaign_dirs(outputs_dir: Path) -> List[Path]:
     """
-    Return all campaign_* directories.
+    Return all campaign directories under the outputs folder.
+
+    A valid campaign directory is any folder whose name starts with
+    'campaign_'.
+
+    Args:
+        outputs_dir: Root outputs directory.
+
+    Returns:
+        List[Path]: Sorted list of campaign directories.
     """
     return sorted(
         path for path in outputs_dir.iterdir()
@@ -252,7 +322,16 @@ def find_campaign_dirs(outputs_dir: Path) -> List[Path]:
 
 def find_run_result_dirs(campaign_dir: Path) -> List[Path]:
     """
-    Return all run_*/results directories sorted from oldest to newest.
+    Return all run results directories for a campaign.
+
+    This function scans a campaign directory, finds all folders named
+    'run_*', and returns their nested 'results' directories.
+
+    Args:
+        campaign_dir: Campaign directory path.
+
+    Returns:
+        List[Path]: Sorted results directories from oldest to newest.
     """
     return sorted(
         run_dir / "results"
@@ -265,17 +344,23 @@ def find_run_result_dirs(campaign_dir: Path) -> List[Path]:
 
 def find_last_n_run_result_dirs(campaign_dir: Path, last_n: int | None = None) -> List[Path]:
     """
-    Return the most recent run_*/results directories for one campaign.
+    Retrieve result directories for the most recent runs in a campaign.
+
+    This function enables flexible comparison scope:
+        - All runs (full historical comparison)
+        - Last N runs (focused comparison on recent experiments)
 
     Args:
-        campaign_dir: path like data/outputs/campaign_1
+        campaign_dir: Path to a campaign directory (e.g., data/outputs/campaign_1)
         last_n:
-            - None -> return all runs
-            - positive integer -> return only the last n runs
+            - None → return all available runs
+            - Positive integer → return only the most recent N runs
 
     Returns:
-        A list of result directories sorted from oldest to newest.
-        If last_n is given, only the most recent n runs are returned.
+        List[Path]: Sorted list of result directories (oldest → newest)
+
+    Raises:
+        ValueError: If last_n is not positive
     """
     result_dirs = find_run_result_dirs(campaign_dir)
 
@@ -290,7 +375,10 @@ def find_last_n_run_result_dirs(campaign_dir: Path, last_n: int | None = None) -
 
 def delete_file_if_exists(file_path: Path) -> None:
     """
-    Delete file if it exists.
+    Delete a file if it exists.
+
+    Args:
+        file_path: Path of the file to remove.
     """
     if file_path.exists():
         file_path.unlink()
@@ -303,10 +391,34 @@ def build_campaign_temp_csvs(
     last_n: int | None = None,
 ) -> tuple[Path, Path]:
     """
-    Build temporary CSV files from the selected run folders inside one campaign.
+    Construct temporary CSV inputs by aggregating evaluation JSON files
+    across selected run folders within a campaign.
 
-    These CSV files are intermediate inputs only and will be deleted after
-    summary CSVs and plots are created.
+    Workflow:
+        1. Select runs using last_n logic
+        2. Extract evaluation JSONs from each run
+        3. Convert JSON → CSV using JsonToCsvWriter
+        4. Append results into unified temporary CSV files
+
+    Outputs:
+        - One temporary CSV for analysis results
+        - One temporary CSV for recommendation results
+
+    Notes:
+        - These files are intermediate artifacts
+        - They are deleted after final summaries and plots are generated
+
+    Args:
+        campaign_dir: Campaign directory containing run folders
+        comparison_dir: Directory to store temporary and final outputs
+        last_n: Controls how many recent runs are included
+
+    Returns:
+        tuple[Path, Path]:
+            (analysis_temp_csv, recommendation_temp_csv)
+
+    Raises:
+        FileNotFoundError: If no valid run results are found
     """
     result_dirs = find_last_n_run_result_dirs(campaign_dir, last_n=last_n)
 
@@ -359,7 +471,15 @@ def build_campaign_temp_csvs(
 
 def run_analysis_comparison(analysis_input_csv: Path, comparison_dir: Path) -> None:
     """
-    Generate analysis summary CSV and plot, then delete temp input CSV.
+    Generate the final analysis summary CSV and comparison plot.
+
+    This function reads the temporary analysis CSV, aggregates metrics by
+    version, saves the final summary CSV, generates a plot, and removes
+    the intermediate input file.
+
+    Args:
+        analysis_input_csv: Temporary CSV built from analysis evaluation JSON files.
+        comparison_dir: Output directory for final comparison results.
     """
     if not analysis_input_csv.exists():
         logger.warning("Analysis input CSV not found: %s", analysis_input_csv)
@@ -385,7 +505,15 @@ def run_analysis_comparison(analysis_input_csv: Path, comparison_dir: Path) -> N
 
 def run_recommendation_comparison(recommendation_input_csv: Path, comparison_dir: Path) -> None:
     """
-    Generate recommendation summary CSV and plot, then delete temp input CSV.
+    Generate the final recommendation summary CSV and comparison plot.
+
+    This function reads the temporary recommendation CSV, aggregates metrics
+    by version, saves the final summary CSV, generates a plot, and removes
+    the intermediate input file.
+
+    Args:
+        recommendation_input_csv: Temporary CSV built from recommendation evaluation JSON files.
+        comparison_dir: Output directory for final comparison results.
     """
     if not recommendation_input_csv.exists():
         logger.warning("Recommendation input CSV not found: %s", recommendation_input_csv)
@@ -414,12 +542,38 @@ def run_recommendation_comparison(recommendation_input_csv: Path, comparison_dir
 
 def run_pipeline(last_n: int | None = None) -> None:
     """
-    Run comparison across all campaigns.
+    Execute the full multi-campaign comparison pipeline.
+
+    This pipeline:
+        - Iterates over all campaign directories
+        - Selects runs (all or last N)
+        - Builds temporary CSV datasets from JSON evaluation outputs
+        - Computes version-level summaries
+        - Generates comparison plots
+        - Cleans up intermediate files
+
+    Processing hierarchy:
+        data/outputs/
+            ├── campaign_1/
+            │     ├── run_*/
+            │     └── comparison_results/
+            ├── campaign_2/
+            ...
 
     Args:
         last_n:
-            - None -> compare all runs in each campaign
-            - positive integer -> compare only the last n runs in each campaign
+            - None → include all runs in each campaign
+            - Positive integer → include only the most recent N runs
+
+    Output per campaign:
+        - analysis_summary.csv
+        - recommendation_summary.csv
+        - analysis_comparison_plot.png
+        - recommendation_comparison_plot.png
+
+    Raises:
+        FileNotFoundError: If expected directories or data are missing
+        Exception: For any pipeline execution failure
     """
     logger.info("Starting multi-campaign comparison pipeline | last_n=%s", last_n)
 
@@ -468,8 +622,7 @@ def run_pipeline(last_n: int | None = None) -> None:
 
 
 if __name__ == "__main__":
-    # To define the number of last runs to be compared, use last_n 
-    #run_pipeline(last_n=2)
-    # To compare all the run, use last_n = None or run_pipeline()
+    # Compare the last 2 runs:
+    # run_pipeline(last_n=2)
+    # Compare all runs:
     run_pipeline(last_n=None)
-    
