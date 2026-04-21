@@ -86,16 +86,14 @@ class MetricsCalculator:
         - cpm         : (spend / impressions) * 1000
         - frequency   : impressions / reach
         """
-        if metric_name == "reach":
-            return df.get("reach")
-        elif metric_name == "impressions":
-            return df.get("impressions")
-        elif metric_name == "cpm":
-            return self._safe_div(df.get("spend"), df.get("impressions")) * 1000
-        elif metric_name == "frequency":
-            return self._safe_div(df.get("impressions"), df.get("reach"))
-        else:
-            return None
+        metric_map = {
+            "reach": lambda: df.get("reach"),
+            "impressions": lambda: df.get("impressions"),
+            "cpm": lambda: self._safe_div(df.get("spend"), df.get("impressions")) * 1000,
+            "frequency": lambda: self._safe_div(df.get("impressions"), df.get("reach")),
+        }
+        func = metric_map.get(metric_name)
+        return func() if func else None
         
     def _calculate_revenue_efficiency_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
         """
@@ -109,20 +107,16 @@ class MetricsCalculator:
         - aov                : revenue / orders
         - refund_rate        : refunds / orders
         """
-        if metric_name == "mer":
-            return self._safe_div(df.get("total_revenue"), df.get("total_marketing_spend"))
-        elif metric_name == "ltv_to_cac":
-            return self._safe_div(df.get("lifetime_value"), df.get("cac"))
-        elif metric_name == "cac_payback_period":
-            return self._safe_div(df.get("cac"), df.get("monthly_gross_profit_per_customer"))
-        elif metric_name == "roas":
-            return self._safe_div(df.get("revenue"), df.get("spend"))
-        elif metric_name == "aov":
-            return self._safe_div(df.get("revenue"), df.get("orders"))
-        elif metric_name == "refund_rate":
-            return self._safe_div(df.get("refunds"), df.get("orders"))
-        else:
-            return None
+        metric_map = {
+            "mer": lambda: self._safe_div(df.get("total_revenue"), df.get("total_marketing_spend")),
+            "ltv_to_cac": lambda: self._safe_div(df.get("lifetime_value"), df.get("cac")),
+            "cac_payback_period": lambda: self._safe_div(df.get("cac"), df.get("monthly_gross_profit_per_customer")),
+            "roas": lambda: self._safe_div(df.get("revenue"), df.get("spend")),
+            "aov": lambda: self._safe_div(df.get("revenue"), df.get("orders")),
+            "refund_rate": lambda: self._safe_div(df.get("refunds"), df.get("orders")),
+        }
+        func = metric_map.get(metric_name)
+        return func() if func else None
     def calculate_increase_sales_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
         """
         Calculate increase sales metrics.
@@ -137,24 +131,18 @@ class MetricsCalculator:
         - cpc                       : spend / clicks
         - aov                       : revenue / orders
         """
-        if metric_name == "purchases":
-            return df.get("purchases")
-        elif metric_name == "roas":
-            return self._safe_div(df.get("revenue"), df.get("spend"))
-        elif metric_name == "cpa":
-            return self._safe_div(df.get("spend"), df.get("conversions"))
-        elif metric_name == "revenue":
-            return df.get("revenue")
-        elif metric_name == "purchase_conversion_rate":
-            return self._safe_div(df.get("purchases"), df.get("landing_page_views")) * 100
-        elif metric_name == "ctr":
-            return self._safe_div(df.get("clicks"), df.get("impressions")) * 100
-        elif metric_name == "cpc":
-            return self._safe_div(df.get("spend"), df.get("clicks"))
-        elif metric_name == "aov":
-            return self._safe_div(df.get("revenue"), df.get("orders"))
-        else:
-            return None
+        metric_map = {
+            "purchases": lambda: df.get("purchases"),
+            "roas": lambda: self._safe_div(df.get("revenue"), df.get("spend")),
+            "cpa": lambda: self._safe_div(df.get("spend"), df.get("conversions")),
+            "revenue": lambda: df.get("revenue"),
+            "purchase_conversion_rate": lambda: self._safe_div(df.get("purchases"), df.get("landing_page_views")) * 100,
+            "ctr": lambda: self._safe_div(df.get("clicks"), df.get("impressions")) * 100,
+            "cpc": lambda: self._safe_div(df.get("spend"), df.get("clicks")),
+            "aov": lambda: self._safe_div(df.get("revenue"), df.get("orders")),
+        }
+        func = metric_map.get(metric_name)
+        return func() if func else None
     def calculate_traffic_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
         """
         Calculate traffic metrics.
@@ -168,22 +156,17 @@ class MetricsCalculator:
         - bounce_proxy_rate     : 1 - (landing_page_views / clicks)
         - session_quality_score : landing_page_views / sessions
         """
-        if metric_name == "clicks":
-            return df.get("clicks")
-        elif metric_name == "ctr":
-            return self._safe_div(df.get("clicks"), df.get("impressions")) * 100
-        elif metric_name == "cpc":
-            return self._safe_div(df.get("spend"), df.get("clicks"))
-        elif metric_name == "landing_page_views":
-            return df.get("landing_page_views")
-        elif metric_name == "cpm":
-            return self._safe_div(df.get("spend"), df.get("impressions")) * 1000
-        elif metric_name == "bounce_proxy_rate":
-            return 1 - self._safe_div(df.get("landing_page_views"), df.get("clicks"))
-        elif metric_name == "session_quality_score":
-            return self._safe_div(df.get("landing_page_views"), df.get("sessions"))
-        else:
-            return None
+        metric_map = {
+            "clicks": lambda: df.get("clicks"),
+            "ctr": lambda: self._safe_div(df.get("clicks"), df.get("impressions")) * 100,
+            "cpc": lambda: self._safe_div(df.get("spend"), df.get("clicks")),
+            "landing_page_views": lambda: df.get("landing_page_views"),
+            "cpm": lambda: self._safe_div(df.get("spend"), df.get("impressions")) * 1000,
+            "bounce_proxy_rate": lambda: 1 - self._safe_div(df.get("landing_page_views"), df.get("clicks")),
+            "session_quality_score": lambda: self._safe_div(df.get("landing_page_views"), df.get("sessions")),
+        }
+        func = metric_map.get(metric_name)
+        return func() if func else None
     # ---------- Helpers ----------
 
     @staticmethod
