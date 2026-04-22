@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional, Dict
+from pydantic import BaseModel, Field, ValidationError
+from typing import List, Optional, Dict, Literal, Any
 
 # ==========================================
 # STAGE 1: ANALYSIS SCHEMAS
@@ -21,20 +21,27 @@ class CrossChannelPattern(BaseModel):
 
 class ChannelNote(BaseModel):
     platform: str
-    what_we_see: List[str] = Field(description="Factual observations")
-    what_it_likely_means: List[str] = Field(description="Hypotheses tied to observations")
+    what_we_see: List[str] = Field(..., min_length=1, description="Factual observations")
+    what_it_likely_means: List[str] = Field(..., min_length=1, description="Hypotheses tied to observations")
     risks_or_watchouts: List[str]
 
 class AnalysisSection(BaseModel):
-    executive_summary: str = Field(description="plain English, business-focused summary")
+    executive_summary: str = Field(..., min_length=10, description="plain English, business-focused summary")
     budget_and_efficiency: List[BudgetEfficiencyInsight]
     results_and_value: List[ResultsValueInsight]
     cross_channel_patterns_and_risks: List[CrossChannelPattern]
-    channel_notes: List[ChannelNote]
+    channel_notes: List[ChannelNote] = Field(..., min_length=1)
     missing_info: List[str] = Field(description="missing element + why it matters")
 
 class AnalysisResponse(BaseModel):
     analysis: AnalysisSection
+
+def validate_analysis_output(output: Dict[str, Any]) -> bool:
+    try:
+        AnalysisResponse.model_validate(output)
+        return True
+    except ValidationError:
+        return False
 
 # ==========================================
 # STAGE 2: RECOMMENDATION SCHEMAS
@@ -42,14 +49,21 @@ class AnalysisResponse(BaseModel):
 class RecommendationCard(BaseModel):
     title: str = Field(description="short, direct, outcome-focused title")
     whats_happening: str = Field(description="simple explanation of issue/opportunity")
-    what_you_should_do: List[str] = Field(description="actionable steps")
+    what_you_should_do: List[str] = Field(..., min_length=1, description="actionable steps")
     why_this_matters: str = Field(description="business impact in plain English")
-    priority: str = Field(description="High, Medium, or Low")
+    priority: Literal["High", "Medium", "Low"] = Field(description="High, Medium, or Low")
     expected_impact: str = Field(description="directional improvement, no numeric promises unless supported")
     owner_suggestion: str = Field(description="e.g., 'Media buyer', 'Creative team', 'Web team', 'Analytics'")
 
 class RecommendationResponse(BaseModel):
-    recommendations: List[RecommendationCard]
+    recommendations: List[RecommendationCard] = Field(..., min_length=5, max_length=8)
+
+def validate_recommendation_output(output: Dict[str, Any]) -> bool:
+    try:
+        RecommendationResponse.model_validate(output)
+        return True
+    except ValidationError:
+        return False
 
 
 # ==========================================
