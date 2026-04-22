@@ -1,0 +1,24 @@
+{
+  "scores": {
+    "clarity": 2,
+    "accuracy": 2,
+    "structure": 2,
+    "overall": 2.0
+  },
+  "reasoning": {
+    "clarity": "The analysis is mostly clear but contains some industry discrepancies that may confuse the reader about campaign context versus performance metrics.",
+    "accuracy": "The analysis accurately states key metrics and insights but it misaligns its discussion around the wrong business context, suggesting possible hallucinations in audience focus and offering.",
+    "structure": "The analysis follows the required sections; however, 'cross_channel_patterns_and_risks' is not clearly defined as the required 'Risks' section."
+  },
+  "verdict": "revise",
+  "key_issues": [
+    "Misalignment of campaign context: The report discusses a TikTok campaign intended for a different audience than stated in the campaign context.",
+    "Missing critical insights regarding the primary goal of increasing qualified leads due to lack of assessment of lead data.",
+    "Not adhering to the structured section naming, with 'cross_channel_patterns_and_risks' being improperly defined from a structural standpoint."
+  ],
+  "improvement_suggestions": [
+    "Incorporate correct audience demographics and objectives directly from the context in the insights.",
+    "Include detailed insight on lead generation or lack thereof, ensuring it specifically responds to the primary goal of increasing qualified leads.",
+    "Rename 'cross_channel_patterns_and_risks' to 'Risks' to clearly align with the required structure."
+  ]
+}

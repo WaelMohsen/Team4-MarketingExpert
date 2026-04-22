@@ -1,0 +1,153 @@
+[
+  {
+    "card_title": "Align Campaign Details with Business Domain",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 3,
+        "structure": 3,
+        "feasibility": 3,
+        "overall": 2.75
+      },
+      "reasoning": {
+        "clarity": "The recommendation is clear and outlines specific actions to take, such as updating targeting and revising messaging. However, it could be more concise by using simpler language for non-marketers.",
+        "accuracy": "The recommendation accurately reflects the issues identified in the analysis, specifically the misalignment between the campaign's current audience and the intended audience of shoppers for a membership plan.",
+        "structure": "The recommendation follows a structured format, including a title, explanation of the current issue, actionable steps, importance of the actions, priority level, and expected results, fulfilling the standardized card format.",
+        "feasibility": "The suggested actions are realistic within the capabilities of most digital advertising strategies and Google Ads functionalities. Adjusting targeting and messaging is a common practice."
+      },
+      "verdict": "accept",
+      "key_issues": [],
+      "improvement_suggestions": [
+        "Simplify language to ensure that it remains accessible for a non-marketer audience.",
+        "Consider providing examples of how to revise the campaign messaging for better clarity."
+      ]
+    }
+  },
+  {
+    "card_title": "Enhance Ad Copy and Creative",
+    "evaluation": {
+      "scores": {
+        "clarity": 3,
+        "accuracy": 3,
+        "structure": 3,
+        "feasibility": 3,
+        "overall": 3.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation clearly states the issue with the current ad's performance and provides actionable steps to improve it, making it understandable for a non-marketer.",
+        "accuracy": "The recommendation accurately reflects the analysis, pointing out the ad's shortcomings in engagement and aligning with the business goal of increasing qualified leads.",
+        "structure": "The recommendation follows the required format well, addressing each section clearly including title, what's happening, what to do, why it matters, priority, and expected impact.",
+        "feasibility": "The suggested actions (revising ad copy and testing visuals) are realistic and feasible within the capabilities of most digital marketing platforms."
+      },
+      "verdict": "accept",
+      "key_issues": [],
+      "improvement_suggestions": []
+    }
+  },
+  {
+    "card_title": "Improve Targeting Precision",
+    "evaluation": {
+      "scores": {
+        "clarity": 3,
+        "accuracy": 3,
+        "structure": 3,
+        "feasibility": 3,
+        "overall": 3.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation clearly states the current issue of targeting misalignment which is easy for a non-marketer to understand. The suggested actions are straightforward and actionable.",
+        "accuracy": "The recommendation directly addresses the misalignment issue highlighted in the analysis. It aligns well with the need to improve targeting to match the intended audience for the membership plan.",
+        "structure": "The recommendation follows the required card format well with all key sections clearly defined: Title, What's Happening, What to Do, Why it Matters, Priority, and Expected Impact.",
+        "feasibility": "The suggested actions, such as conducting audience segmentation and refining targeting settings, are realistic and within the capabilities of the Google Ads platform."
+      },
+      "verdict": "accept",
+      "key_issues": [],
+      "improvement_suggestions": []
+    }
+  },
+  {
+    "card_title": "Track Conversion Paths",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 2,
+        "structure": 3,
+        "feasibility": 2,
+        "overall": 2.25
+      },
+      "reasoning": {
+        "clarity": "The recommendation is generally clear, but terms like 'tracking mechanisms' may require further explanation for a non-marketer audience. Overall, the actionable steps are straightforward to understand.",
+        "accuracy": "The recommendation logically aligns with the analysis that indicates a need for better understanding of conversion paths, given the low conversion rates. However, it does not address the direct misalignment with the intended audience, which could also be a contributing factor.",
+        "structure": "The recommendation follows the standardized card format well. It includes all necessary sections, making it easy to digest for the end user.",
+        "feasibility": "Implementing tracking mechanisms is generally feasible within most digital environments. However, the exact nature of 'bottlenecks' may depend on resources and technical capability, suggesting partially realistic execution."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "Does not address misalignment between campaign target audience and current execution.",
+        "The term 'tracking mechanisms' may not be clear to a non-marketer."
+      ],
+      "improvement_suggestions": [
+        "Include more context regarding audience alignment and potential solutions to address it.",
+        "Simplify technical language, such as 'tracking mechanisms', to be more user-friendly.",
+        "Add a suggestion on how to conduct audience research to better target campaigns."
+      ]
+    }
+  },
+  {
+    "card_title": "Monitor for Ad Fatigue",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 2,
+        "structure": 2,
+        "feasibility": 3,
+        "overall": 2.25
+      },
+      "reasoning": {
+        "clarity": "The recommendation is relatively clear in its intent and suggested actions, but the phrasing could be more straightforward. Phrases like 'Monitor for Ad Fatigue' might be confusing for someone unfamiliar with marketing terminology. More specific actionable language would improve clarity.",
+        "accuracy": "The recommendation aligns with the insights provided in the analysis context regarding potential ad fatigue. However, it fails to address the misalignment between the campaign goals and target audience, which is a critical issue highlighted in the analysis.",
+        "structure": "The recommendation follows a structured format; however, it does not explicitly mention a 'What to Do' section in the title, which could confuse the reader. The components are there but require clearer separation and labeling.",
+        "feasibility": "The actions suggested are feasible within Google Ads and realistic given platform capabilities. Setting up performance monitoring and refreshing ad creatives is standard practice in ad management."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "Recommendation does not address the misalignment between the campaign and its intended audience.",
+        "Clarity could be enhanced for non-marketers."
+      ],
+      "improvement_suggestions": [
+        "Rephrase the recommendation for broader clarity, focusing on what a non-marketer would understand.",
+        "Add specifics on how to monitor ad fatigue with examples or metrics that should trigger actions.",
+        "Include a note about aligning the campaign goals with the audience for a more comprehensive recommendation."
+      ]
+    }
+  },
+  {
+    "card_title": "Adjust Spend Strategy Based on Performance",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 2,
+        "structure": 2,
+        "feasibility": 2,
+        "overall": 2.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation itself is clear and actionable, providing specific steps on what the user should do. However, the terminology like 'Reallocate budget' may need further clarification for a non-marketer.",
+        "accuracy": "While the recommendation addresses budget adjustments, the campaign's misalignment with the intended audience mitigates its effectiveness. The recommendation lacks context on aligning the strategy with the correct audience.",
+        "structure": "The card follows a structured format with clear sections. However, the 'whats_happening' section could better reference specific data points from the analysis for stronger alignment.",
+        "feasibility": "The suggested actions are feasible within Google Ads capabilities, assuming the user has access to performance data and the ability to adjust budget allocations. However, implementation might be challenged by the user's level of expertise."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "Misalignment of campaign goals with the recommendation context.",
+        "Lack of guidance on how to analyze performance data for non-marketers.",
+        "Terminology used may not be familiar to a non-marketing audience."
+      ],
+      "improvement_suggestions": [
+        "Provide a brief explanation or definition of terms like 'reallocate budget' for better understanding.",
+        "Include specific audience segments to analyze based on data for clearer direction.",
+        "Adjust the recommendation to better align with the business domain of retail rather than fintech."
+      ]
+    }
+  }
+]
