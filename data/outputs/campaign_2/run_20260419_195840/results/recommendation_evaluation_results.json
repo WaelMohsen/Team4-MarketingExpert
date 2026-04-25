@@ -1,0 +1,157 @@
+[
+  {
+    "card_title": "Realign Campaign Targeting",
+    "evaluation": {
+      "scores": {
+        "clarity": 3,
+        "accuracy": 3,
+        "structure": 3,
+        "feasibility": 3,
+        "overall": 3.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation is clear and directly addresses the misalignment of the campaign's targeting with the intended audience.",
+        "accuracy": "The recommendation is logically grounded as it directly stems from the analysis, which highlights a significant misalignment in targeting that affects the primary objective of increasing qualified leads.",
+        "structure": "The recommendation follows the required structure well, including a title, a description of current issues, actionable steps, reasons for importance, priority level, and expected impact.",
+        "feasibility": "The proposed action of adjusting audience targeting is feasible given TikTok's platform capabilities and advertising features, which allow for detailed audience adjustments."
+      },
+      "verdict": "accept",
+      "key_issues": [],
+      "improvement_suggestions": []
+    }
+  },
+  {
+    "card_title": "Enhance Conversion Tactics",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 2,
+        "structure": 2,
+        "feasibility": 3,
+        "overall": 2.25
+      },
+      "reasoning": {
+        "clarity": "The recommendation is generally clear, providing actionable items such as testing different calls-to-action and implementing A/B testing. However, it lacks specifics on how to implement these tactics effectively, which could lead to varying interpretations.",
+        "accuracy": "The recommendation logically follows from the analysis, which identifies a high click-through rate but low conversion rate. However, it does not address the misalignment between the current campaign's audience/goal and the desired membership target audience, which is critical for actionable recommendations.",
+        "structure": "The recommendation follows the basic format but the title does not clearly signify that it relates to the conversion goal. Moreover, the 'owner_suggestion' could have been integrated within the main structure to improve readability.",
+        "feasibility": "The proposed actions, such as testing calls-to-action and A/B testing, are realistic and can be implemented on the TikTok Ads platform, which supports these marketing strategies."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "Lack of alignment between recommendation and the core business goal of increasing qualified leads.",
+        "Insufficient specificity in actionable items, leading to possible misinterpretation.",
+        "The title does not effectively represent the recommendation's focus."
+      ],
+      "improvement_suggestions": [
+        "Revise the title to reflect a clearer focus on improving lead generation rather than just enhancing conversion tactics.",
+        "Include more detailed steps or examples for executing the recommended tactics.",
+        "Consider a more tailored recommendation that aligns better with the business's target audience and goals."
+      ]
+    }
+  },
+  {
+    "card_title": "Evaluate Budget Efficiency for Target Audience",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 3,
+        "structure": 3,
+        "feasibility": 2,
+        "overall": 2.5
+      },
+      "reasoning": {
+        "clarity": "The recommendation is relatively clear, providing a straightforward view of what actions need to be taken. However, phrases like 'more strategic campaigns' could be overly vague for a non-marketer.",
+        "accuracy": "The recommendation correctly identifies the misalignment between the current campaign performance and the primary goal of increasing qualified leads. It suggests necessary adjustments based on this analysis.",
+        "structure": "The recommendation card follows the standardized format well, including a clear title, summary of the issue, actionable steps, rationale, priority, and expected impact.",
+        "feasibility": "The recommendation is generally feasible, as reallocating budget is a common strategy in digital marketing. However, without specific data on audience response, targeting adjustments may be more challenging to implement effectively."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "The recommendation lacks specificity in targeting adjustments which may lead to confusion.",
+        "Vague terms could confuse non-marketers about the necessary actions."
+      ],
+      "improvement_suggestions": [
+        "Define what 'more strategic campaigns' entails by providing examples or criteria to identify these campaigns.",
+        "Clarify the methods for audience targeting adjustment to help the user understand actionable steps better.",
+        "Include a brief explanation of how reallocating budget can be effectively monitored post-implementation."
+      ]
+    }
+  },
+  {
+    "card_title": "Monitor Engagement Without Conversion",
+    "evaluation": {
+      "scores": {
+        "clarity": 2,
+        "accuracy": 2,
+        "structure": 2,
+        "feasibility": 2,
+        "overall": 2.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation is fairly straightforward, advising to monitor engagement and conversion metrics. However, the phrasing could be clearer as some users may not readily understand what 'monitor engagement' entails.",
+        "accuracy": "The recommendation aligns with the analysis, acknowledging the mismatch between engagement and conversion which is crucial for enhancing future performance. It does not directly relate to the defined goal of increasing qualified leads but does touch on the current inefficacies.",
+        "structure": "The card adheres mostly to the standardized format. However, some headings like 'What you should do' could be better formatted to enhance readability.",
+        "feasibility": "Setting up regular monitoring of metrics is feasible with analytics tools available on TikTok Ads. However, the suggestion to investigate reasons for lack of conversion might require additional resources or analysis, which is more complex."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "The recommendation doesn't directly address the goal of increasing qualified leads.",
+        "Lacks clarity in guiding the user on specific metrics to monitor.",
+        "Could benefit from improved formatting for readability."
+      ],
+      "improvement_suggestions": [
+        "Revise the recommendation to explicitly connect monitoring to increasing qualified leads.",
+        "Provide specific examples of engagement metrics and conversion metrics to track.",
+        "Enhance clarity by simplifying language and structuring information for readability."
+      ]
+    }
+  },
+  {
+    "card_title": "Clarify Campaign Goals",
+    "evaluation": {
+      "scores": {
+        "clarity": 3,
+        "accuracy": 3,
+        "structure": 2,
+        "feasibility": 3,
+        "overall": 2.75
+      },
+      "reasoning": {
+        "clarity": "The recommendation is clear and actionable. The user can easily understand what they need to do to address the campaign's misalignment with business goals.",
+        "accuracy": "The recommendations are rooted in the campaign analysis, which shows a clear disconnect between the campaign’s focus and the business goals aimed at generating qualified leads.",
+        "structure": "The recommendation follows the format well, with a title, explanation of the situation, actionable steps, rationale, priority level, and expected impact. However, the owner suggestion is a bit out of place since it is not a standard part of the format.",
+        "feasibility": "The recommendations are realistic and feasible, as they involve internal documentation and strategy alignment efforts that can be handled by a campaign manager."
+      },
+      "verdict": "revise",
+      "key_issues": [
+        "The recommendation lacks detailed execution steps for the action items provided, which may lead to ambiguity in implementation.",
+        "The inclusion of an 'owner suggestion' is atypical in standardized recommendations and can lead to confusion."
+      ],
+      "improvement_suggestions": [
+        "Clarify and expand on actionable steps, providing specific examples of metrics to establish beyond revenue.",
+        "Remove or integrate the 'owner suggestion' into the recommendation in a way that enhances clarity or instruction."
+      ]
+    }
+  },
+  {
+    "card_title": "Gather Missing Audience Insights",
+    "evaluation": {
+      "scores": {
+        "clarity": 3,
+        "accuracy": 3,
+        "structure": 3,
+        "feasibility": 3,
+        "overall": 3.0
+      },
+      "reasoning": {
+        "clarity": "The recommendation provides clear actions (conducting market research and gathering data) that are straightforward for a non-marketer to understand.",
+        "accuracy": "The recommendation accurate reflects the issues identified in the analysis regarding the lack of insights about audience targeting and leads, which is crucial for aligning with the business goal.",
+        "structure": "The recommendation follows a clear format with a title, explanation of the issue, actionable steps, rationale for importance, priority level, and expected impact, fitting the standardized card format.",
+        "feasibility": "The actions suggested are practical and achievable by a research team, making the recommendation feasible given typical market research capabilities."
+      },
+      "verdict": "accept",
+      "key_issues": [],
+      "improvement_suggestions": []
+    }
+  }
+]

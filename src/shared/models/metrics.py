@@ -217,6 +217,7 @@ class MetricsCalculator:
         d = pd.to_numeric(df[denominator], errors="coerce")
         
         # Protect against division by zero
-        return n.divide(d.replace(0, np.nan))
+        return n.divide(d.replace(0, np.nan)).round(2)
+
 # Global instance for easy access
 metrics_calculator = MetricsCalculator()

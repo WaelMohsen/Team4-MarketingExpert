@@ -1,0 +1,75 @@
+{
+  "recommendations": [
+    {
+      "title": "Realign Campaign Targeting",
+      "whats_happening": "The current TikTok campaign is targeting career changers for a language learning platform instead of people shopping for monthly essentials.",
+      "what_you_should_do": [
+        "Adjust the audience targeting to focus on essential shoppers who are likely to be interested in the membership plan."
+      ],
+      "why_this_matters": "Aligning targeting with the desired audience will likely increase the relevance of the ads, leading to more qualified leads.",
+      "priority": "High",
+      "expected_impact": "Potential increase in qualified leads and higher conversion rates.",
+      "owner_suggestion": "Media buyer"
+    },
+    {
+      "title": "Enhance Conversion Tactics",
+      "whats_happening": "The campaign has a relatively high click-through rate but low conversion rate.",
+      "what_you_should_do": [
+        "Test different call-to-action phrases and ad creatives to better convert clicks into leads.",
+        "Implement A/B testing for landing pages to identify more effective layouts."
+      ],
+      "why_this_matters": "Improving the conversion tactics can optimize the use of existing traffic to capture more leads.",
+      "priority": "High",
+      "expected_impact": "Increased conversion rate from clicks to qualified leads.",
+      "owner_suggestion": "Creative team"
+    },
+    {
+      "title": "Evaluate Budget Efficiency for Target Audience",
+      "whats_happening": "While the campaign shows high revenue efficiency, it doesn't serve the primary goal of generating qualified leads.",
+      "what_you_should_do": [
+        "Review the budget allocation and adjust spending to more strategic campaigns that directly target the desired audience.",
+        "Consider reallocating budget from underperforming ads."
+      ],
+      "why_this_matters": "Reallocating funds can enhance the effectiveness of campaigns aimed at generating qualified leads.",
+      "priority": "Medium",
+      "expected_impact": "More effective lead generation through optimized spending.",
+      "owner_suggestion": "Analytics"
+    },
+    {
+      "title": "Monitor Engagement Without Conversion",
+      "whats_happening": "There’s a significant amount of initial engagement that does not lead to conversions.",
+      "what_you_should_do": [
+        "Set up regular monitoring of engagement metrics alongside conversion rates.",
+        "Investigate reasons for the lack of conversion despite clicks."
+      ],
+      "why_this_matters": "Understanding the gap between engagement and conversion can help refine future campaigns and improve performance.",
+      "priority": "Medium",
+      "expected_impact": "Reduced wasted budget and improved conversion strategies.",
+      "owner_suggestion": "Analytics"
+    },
+    {
+      "title": "Clarify Campaign Goals",
+      "whats_happening": "There is a disconnect between the campaign performance and the specific goal of increasing qualified leads.",
+      "what_you_should_do": [
+        "Revise campaign documentation to emphasize the goal of increasing qualified leads and ensure all stakeholders understand this focus.",
+        "Establish clear metrics for success beyond revenue."
+      ],
+      "why_this_matters": "Clarifying goals ensures that all campaign activities are aligned with desired business outcomes.",
+      "priority": "Medium",
+      "expected_impact": "Stronger focus on lead generation across all campaign activities.",
+      "owner_suggestion": "Campaign manager"
+    },
+    {
+      "title": "Gather Missing Audience Insights",
+      "whats_happening": "There is missing information on leads generated and audience targeting effectiveness.",
+      "what_you_should_do": [
+        "Conduct market research to identify specific interests and behaviors of essential shoppers.",
+        "Gather data on audience response to refine targeting strategies."
+      ],
+      "why_this_matters": "Improving audience understanding can enhance ad relevance and lead generation efforts.",
+      "priority": "Low",
+      "expected_impact": "More informed targeting and messaging strategies.",
+      "owner_suggestion": "Research team"
+    }
+  ]
+}

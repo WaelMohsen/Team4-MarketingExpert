@@ -1,0 +1,30 @@
+{
+  "campaign_identity": {
+    "platform": "TikTok Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-22 00:00:00",
+    "industry": "EdTech",
+    "offering": "Language Learning Platform",
+    "audience": "Career changers",
+    "funnel_stage": "retention"
+  },
+  "performance_metrics": {
+    "spend": 6159.6,
+    "revenue": 64126.68,
+    "impressions": 135608,
+    "clicks": 5220,
+    "conversions": 411,
+    "roas": 10.41,
+    "cpa": 14.99,
+    "cvr": 0.08,
+    "ctr": 0.04
+  },
+  "automated_diagnostics": {
+    "high_clicks_low_conversions": false,
+    "low_clicks_high_cvr": false,
+    "spend_with_zero_clicks": false,
+    "fatigue_risk": null,
+    "ctr": 0.0385,
+    "cvr": 0.0787
+  }
+}
