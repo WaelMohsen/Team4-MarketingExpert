@@ -10,7 +10,10 @@ flowchart TD
     CORE[src/core/] -->|Orchestrates| PE[PipelineEngine]
     CORE -->|State Management| EC[ExecutionContext]
     
-    PE -->|Executes Pipeline| MOD[src/modules/]
+    API[src/api/] -->|Exposes| END[REST Endpoints]
+    END -->|Invokes| MOD[src/modules/]
+    
+    PE -->|Executes Pipeline| MOD
     MOD -->|Global| M1(Ingestion)
     MOD -->|Global| M2(Preprocessing)
     MOD -->|Row-by-Row| M3(Enrichment)
@@ -20,6 +23,7 @@ flowchart TD
 ```
 
 - **`src/core/`**: The engine's foundation, providing the `PipelineEngine`, `ExecutionContext` (supporting granular persistence), and the `BaseModule` interface.
+- **`src/api/`**: FastAPI implementation providing synchronous access to Analysis and Recommendation workflows.
 - **`src/modules/`**: Discrete processing stages (Ingestion, Preprocessing, Enrichment, Analysis, Recommendation, Evaluation) implemented as independent plugins.
 - **`src/shared/`**: Centralized Pydantic models, prompt templates, and common utility functions.
 
@@ -120,6 +124,13 @@ For detailed instructions on running the pipeline and standalone evaluators, see
    ```bash
    python run_pipeline.py --input-csv data/raw/ads_data.csv --row-limit 5
    ```
+4. **Start the API**:
+   ```bash
+   python -m src.api.app
+   ```
+   Access the interactive documentation at `http://localhost:8000/docs`.
+
+---
 
 ---
 
