@@ -21,7 +21,7 @@ def setup_logging(module_name: str=__name__):
 
 
     # Log file inside the run directory
-    log_file = LOG_DIR / "analysis_evaluation.log"
+    log_file = LOG_DIR / "project_logging"
     # Configure logging
     logging.basicConfig(
         level=logging.INFO,
