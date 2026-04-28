@@ -87,12 +87,83 @@ class PromptBuilder:
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ]
+    def build_analysis_evaluation_prompt(
+        self,
+        sysPromptPath: str = PromptRegistry.EVAL_ANALYSIS_SYSTEM.value,
+        userPromptPath: str = PromptRegistry.EVAL_ANALYSIS_USER.value,
+        *,
+        campaign_data: Dict[str, Any],
+        analysis_report: Dict[str, Any],
+        campaign_target: Dict[str, Any],
+        business_domain: Dict[str, Any],
+        strict: bool = True,
+    ) -> List[Dict[str, str]]:
+        system_prompt = self.loader.load_prompt_text(sysPromptPath)
+        user_prompt_template = self.loader.load_prompt_text(userPromptPath)
+
+        campaign_context = {
+            "target": campaign_target,
+            "business_domain": business_domain
+        }
+        
+        user_prompt = (
+            user_prompt_template.replace("{{CAMPAIGN_CONTEXT}}", self._to_json(campaign_context))
+            .replace("{{RAW_DATA}}", self._to_json(campaign_data))
+            .replace("{{ANALYSIS_REPORT}}", self._to_json(analysis_report))
+        )
+
+        if strict:
+            required = ["{{CAMPAIGN_CONTEXT}}", "{{RAW_DATA}}", "{{ANALYSIS_REPORT}}"]
+            still_present = [tok for tok in required if tok in user_prompt]
+            if still_present:
+                raise ValueError("User prompt still contains unreplaced placeholder(s): " + ", ".join(still_present))
+
+        return [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+
+    def build_recommendation_evaluation_prompt(
+        self,
+        sysPromptPath: str = PromptRegistry.EVAL_RECOMMENDATION_SYSTEM.value,
+        userPromptPath: str = PromptRegistry.EVAL_RECOMMENDATION_USER.value,
+        *,
+        business_domain: Dict[str, Any],
+        campaign_target: Dict[str, Any],
+        campaign_data: Dict[str, Any],
+        analysis_context: Dict[str, Any],
+        recommendation: Dict[str, Any],
+        strict: bool = True,
+    ) -> List[Dict[str, str]]:
+        system_prompt = self.loader.load_prompt_text(sysPromptPath)
+        user_prompt_template = self.loader.load_prompt_text(userPromptPath)
+
+        business_context = {
+            "business_domain": business_domain,
+            "campaign_target": campaign_target
+        }
+        
+        user_prompt = (
+            user_prompt_template.replace("{{BUSINESS_CONTEXT}}", self._to_json(business_context))
+            .replace("{{RAW_DATA}}", self._to_json(campaign_data))
+            .replace("{{ANALYSIS_CONTEXT}}", self._to_json(analysis_context))
+            .replace("{{RECOMMENDATION}}", self._to_json(recommendation))
+        )
+
+        if strict:
+            required = ["{{BUSINESS_CONTEXT}}", "{{RAW_DATA}}", "{{ANALYSIS_CONTEXT}}", "{{RECOMMENDATION}}"]
+            still_present = [tok for tok in required if tok in user_prompt]
+            if still_present:
+                raise ValueError("User prompt still contains unreplaced placeholder(s): " + ", ".join(still_present))
+
+        return [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+
     #--------------------------------------------------
-    # Hepler methods
+    # Helper methods
     #--------------------------------------------------
     @staticmethod
     def _to_json(value: Any) -> str:
-        return  json.dumps(value, ensure_ascii=False, default=str, indent=2)
-        #return json.dumps(value, ensure_ascii=False, default=str)
-    
-    
+        return json.dumps(value, ensure_ascii=False, default=str, indent=2)
