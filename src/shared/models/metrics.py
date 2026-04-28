@@ -89,19 +89,19 @@ class MetricsCalculator:
     def _calculate_mer(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """MER = total_revenue / total_marketing_spend"""
         return self._safe_div(df, "total_revenue", "total_marketing_spend")
-    def calculate_ltv_to_cac(self, df: pd.DataFrame) -> Optional[pd.Series]:
+    def _calculate_ltv_to_cac(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """LTV to CAC = lifetime_value / cac"""
         return self._safe_div(df, "lifetime_value", "cac")
-    def calculate_cac_payback_period(self, df: pd.DataFrame) -> Optional[pd.Series]:
+    def _calculate_cac_payback_period(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """CAC Payback Period = cac / monthly_gross_profit_per_customer"""
         return self._safe_div(df, "cac", "monthly_gross_profit_per_customer")
-    def _refund_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:
+    def _calculate_refund_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """Refund Rate = refunds / orders"""
         return self._safe_div(df, "refunds", "orders")
     def _calculate_purchase_conversion_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """Purchase Conversion Rate = (purchases / landing_page_views) * 100"""
         return self._safe_div(df, "purchases", "landing_page_views") * 100 if self._safe_div(df, "purchases", "landing_page_views") is not None else None
-    def _bounce_proxy_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:  
+    def _calculate_bounce_proxy_rate(self, df: pd.DataFrame) -> Optional[pd.Series]:  
         """Bounce Proxy Rate = 1 - (landing_page_views / clicks)"""
         return 1 - self._safe_div(df, "landing_page_views", "clicks") if self._safe_div(df, "landing_page_views", "clicks") is not None else None
     def _calculate_session_quality_score(self, df: pd.DataFrame) -> Optional[pd.Series]:
@@ -141,8 +141,8 @@ class MetricsCalculator:
         """
         metric_map = {
             "mer": lambda: self._calculate_mer(df),
-            "ltv_to_cac": lambda: self.calculate_ltv_to_cac(df),
-            "cac_payback_period": lambda: self.calculate_cac_payback_period(df),
+            "ltv_to_cac": lambda: self._calculate_ltv_to_cac(df),
+            "cac_payback_period": lambda: self._calculate_cac_payback_period(df),
             "roas": lambda: self._calculate_roas(df),
             "aov": lambda: self._calculate_aov(df),
             "refund_rate": lambda: self._refund_rate(df),
@@ -197,7 +197,7 @@ class MetricsCalculator:
             "cpc": lambda: self._calculate_cpc(df),
             "landing_page_views": lambda: df.get("landing_page_views"),
             "cpm": lambda: self._calculate_cpm(df),
-            "bounce_proxy_rate": lambda: self._bounce_proxy_rate(df),
+            "bounce_proxy_rate": lambda: self._calculate_bounce_proxy_rate(df),
             "session_quality_score": lambda: self._calculate_session_quality_score(df),
         }
         func = metric_map.get(metric_name)

@@ -39,6 +39,26 @@ def build_platform_summary(df: pd.DataFrame) -> Dict[str, Any]:
         "cvr": _round(row.get("cvr")),
         "ctr": _round(row.get("ctr")),
     }
+    # if df.campaign_type== "Increase Sales":
+    #     metrics.appeend(metrics_calculator.calculate_increase_sales_metric(df))
+    # elif df.campaign_type== "Brand Awareness":
+    #     metrics.appeend(metrics_calculator.calculate_brand_awareness_metric(df))
+    # elif df.campaign_type== "Traffic":
+    #     metrics.appeend(metrics_calculator.calculate_traffic_metric(df))    
+    # elif df.campaign_type== "Revenue Efficiency":
+    #     metrics.appeend(metrics_calculator.calculate_revenue_efficiency_metric(df))    
+    
+    # We can add more campaign-type specific metrics here as needed
+    campaign_type = row.get("campaign_type")
+    if campaign_type == "Increase Sales" :
+
+        metrics.update(metrics_calculator.calculate_increase_sales_metric(row))
+    elif campaign_type == "Brand Awareness":
+        metrics.update(metrics_calculator.calculate_brand_awareness_metric(row))
+    elif campaign_type == "Traffic":
+        metrics.update(metrics_calculator.calculate_traffic_metric(row))
+    elif campaign_type == "Revenue Efficiency":
+        metrics.update(metrics_calculator.calculate_revenue_efficiency_metric(row))    
 
     return {
         "campaign_identity": identity,
