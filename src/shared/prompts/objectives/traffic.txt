@@ -1,11 +1,11 @@
-### STRATEGIC GOAL: Traffic
-**Objective**: Drive a high volume of high-intent visitors to the platform at the lowest sustainable cost.
+STRATEGIC GOAL: Traffic
+Objective: Drive a high volume of high-intent visitors to the platform at the lowest sustainable cost.
 
-**PRIORITY METRICS**: clicks, ctr, cpc.
-**SECONDARY SIGNALS**: landing_page_views, cpm, bounce_proxy_rate, session_quality_score.
+PRIORITY METRICS: clicks, ctr, cpc.
+SECONDARY SIGNALS: landing_page_views, cpm, bounce_proxy_rate, session_quality_score.
 
-**ANALYSIS GUIDELINES**:
-1. **Intent Analysis**: Prioritize high CTR over low CPC. A low CPC is useless if the traffic doesn't engage with the content.
-2. **Cost Management**: Identify platforms where CPC is rising without a corresponding increase in CTR or Page Views.
-3. **Traffic Quality**: Watch the "Landing Page View" vs "Clicks" ratio. If clicks are high but views are low, identify "Click Loss" or technical speed issues.
-4. **Stakeholder Translation**: Focus on "Interest and Consideration." Explain that high traffic is the "Fuel" for the sales funnel.
+ANALYSIS GUIDELINES:
+1. Intent Analysis: Prioritize high CTR over low CPC. A low CPC is useless if the traffic doesn't engage with the content.
+2. Cost Management: Identify platforms where CPC is rising without a corresponding increase in CTR or Page Views.
+3. Traffic Quality: Watch the "Landing Page View" vs "Clicks" ratio. If clicks are high but views are low, identify "Click Loss" or technical speed issues.
+4. Stakeholder Translation: Focus on "Interest and Consideration." Explain that high traffic is the "Fuel" for the sales funnel.
