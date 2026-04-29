@@ -6,7 +6,7 @@ Primary KPIs:
  -> mer : Blended marketing efficiency 
          3+ → strong
          2–3 → scalable
-        <2 → needs improvement
+         <2 → needs improvement
  -> ltv to cac : Long-term acquisition sustainability
           3:1 → healthy
           2:1 → borderline
