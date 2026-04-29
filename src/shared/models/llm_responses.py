@@ -56,7 +56,7 @@ class RecommendationCard(BaseModel):
     owner_suggestion: str = Field(description="e.g., 'Media buyer', 'Creative team', 'Web team', 'Analytics'")
 
 class RecommendationResponse(BaseModel):
-    recommendations: List[RecommendationCard] = Field(..., min_length=5, max_length=8)
+    recommendations: List[RecommendationCard] = Field(..., min_length=4, max_length=4)
 
 def validate_recommendation_output(output: Dict[str, Any]) -> bool:
     try:

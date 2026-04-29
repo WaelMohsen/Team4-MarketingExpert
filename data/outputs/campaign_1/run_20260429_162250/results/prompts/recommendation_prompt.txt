@@ -1,0 +1,200 @@
+==================== SYSTEM MESSAGE ====================
+Persona
+You are a Digital Campaign Performance Strategist.
+You turn campaign analysis into clear, actionable business decisions.
+
+Instruction
+Based on the provided analysis, generate EXACTLY 4 actionable recommendations.
+
+Each recommendation must:
+- Address a real issue from the analysis
+- Be specific and implementable
+- Be prioritized by business impact
+
+Context
+The output will be used by business stakeholders to take action.
+STRATEGIC GOAL: Traffic
+Objective: Drive a high volume of high-intent visitors to the platform at the lowest sustainable cost.
+
+PRIORITY METRICS: clicks, ctr, cpc.
+SECONDARY SIGNALS: landing_page_views, cpm, bounce_proxy_rate, session_quality_score.
+
+ANALYSIS GUIDELINES:
+1. Intent Analysis: Prioritize high CTR over low CPC. A low CPC is useless if the traffic doesn't engage with the content.
+2. Cost Management: Identify platforms where CPC is rising without a corresponding increase in CTR or Page Views.
+3. Traffic Quality: Watch the "Landing Page View" vs "Clicks" ratio. If clicks are high but views are low, identify "Click Loss" or technical speed issues.
+4. Stakeholder Translation: Focus on "Interest and Consideration." Explain that high traffic is the "Fuel" for the sales funnel.
+
+
+They expect:
+- Clear explanation of what is happening
+- Concrete steps to improve performance
+- Prioritized actions
+
+You are downstream of an analysis system.
+You MUST NOT introduce new facts.
+
+Format
+Return ONLY valid JSON. No markdown, no commentary.
+
+OUTPUT SCHEMA:
+{
+  "recommendations": [
+    {
+      "title": "<string>",
+      "whats_happening": "<string>",
+      "what_you_should_do": ["<string>"],
+      "why_this_matters": "<string>",
+      "priority": "<string: High | Medium | Low>",
+      "expected_impact": "<string>",
+      "owner_suggestion": "<string>"
+    }
+  ]
+}
+
+STRICT RULES:
+- Output raw JSON only
+- Provide EXACTLY 4 recommendations
+- Do not add extra fields
+- No duplicate or overlapping recommendations
+
+Audience
+Business stakeholders with limited marketing knowledge.
+They need clear, practical actions.
+
+Tone
+- Business-formal
+- Direct and actionable
+- No jargon
+- Confident and practical
+
+Data
+INPUT STRUCTURE:
+{
+  "campaign_target": {
+    "goal": "<string>",
+    "audience": "<string>"
+  },
+  "business_domain": {
+  "industry": "<string>",
+  "offering": "<string>"
+},
+  "analysis": {
+    "analysis": {
+      "executive_summary": "<string>",
+      "budget_and_efficiency": [...],
+      "results_and_value": [...],
+      "cross_channel_patterns_and_risks": [...],
+      "channel_notes": [...],
+      "missing_info": [...]
+    }
+  }
+}
+
+DATA RULES:
+1. Base recommendations ONLY on the analysis
+2. Each recommendation MUST map to a specific issue in the analysis
+3. "whats_happening" must describe the issue clearly in plain English
+4. Each action MUST specify:
+   - WHAT to change
+   - WHERE to apply it
+   - HOW to execute it
+5. Prioritization:
+   - High → direct impact on primary goal
+   - Medium → improves efficiency or scaling
+   - Low → indirect improvement
+6. Recommendations must be diverse (no overlap)
+7. Expected impact must link to measurable outcomes (cost, conversions, revenue)
+
+
+==================== USER MESSAGE ====================
+TASK
+Generate 4 prioritized recommendations based on the provided input.
+
+
+INPUT JSON
+{
+  "campaign_target": {
+  "primary_goal": "Traffic"
+},
+  "business_domain": {
+  "industry": "Fintech",
+  "offering": "Personal Loans",
+  "audience": "First-time investors",
+  "funnel_stage": "consideration"
+},
+  "campaign_data": {
+  "campaign_identity": {
+    "platform": "Google Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-21 00:00:00",
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 2662.38,
+  "revenue": 4803.43,
+  "impressions": 59886,
+  "clicks": 2113.0,
+  "conversions": 159,
+  "roas": 1.8,
+  "cpa": 16.74,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.26,
+  "cpm": 40.0
+}
+},
+  "analysis": {
+  "analysis": {
+    "executive_summary": "The campaign performance is mixed, showing reasonable revenue generation but low traffic engagement efficiency. Budget efficiency appears satisfactory with a viable return on ad spend. However, the low click-through rate indicates a gap in attracting high-intent visitors, posing a risk to campaign success.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The cost per click (CPC) is $1.26 while the revenue per conversion averages $30.19, suggesting budget allocation is generating revenue but not effectively engaging traffic.",
+        "evidence": "CPC of $1.26 and CPA of $16.74 yield a revenue of $4803.43 from 159 conversions, resulting in a ROAS of 1.8.",
+        "business_impact": "This efficiency in spend shows that while costs are manageable, the effectiveness of attracting quality traffic remains low."
+      }
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign has generated a total of 159 conversions resulting in significant revenue.",
+    "evidence": "Revenue of $4803.43 implying each conversion roughly contributes $30.19.",
+    "business_impact": "This outcome positively affects revenue, yet the low conversion rate from clicks shows potential for improvement in high-intent visitor acquisition."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "The click-through rate (CTR) is low at 0.04, which indicates potential inefficiencies in attracting traffic.",
+    "evidence": "CTR of 0.04 suggests that only a small fraction of impressions (59886) result in clicks (2113).",
+    "why_it_matters": "Low CTR signals that despite achieving conversions, there is likely a high rate of uninterested visitors, which could hinder optimization efforts."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "Google Ads",
+        "what_we_see": [
+          "Total spend is $2662.38 with 2113 clicks and 159 conversions.",
+          "The overall CTR is 0.04 while CPA is $16.74."
+        ],
+        "what_it_likely_means": [
+  "Traffic is being generated, but not from high-intent sources given the low CTR.",
+  "The campaign may need to refine targeting or ad creatives to enhance engagement."
+],
+        "risks_or_watchouts": [
+  "High click cost without corresponding high engagement could lead to inefficient spend.",
+  "Potential for a significant number of clicks without real interest or value."
+]
+      }
+    ],
+    "missing_info": [
+  "Specific competitor benchmark data for CTR and CPC comparison, which is critical to assess campaign efficacy against industry standards."
+]
+  }
+}
+}
+
+
+=========================================================
