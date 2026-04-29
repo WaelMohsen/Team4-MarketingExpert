@@ -14,6 +14,7 @@ DO NOT provide recommendations.
 Context
 This analysis will be used by business stakeholders to understand campaign performance.
 They are not marketing experts.
+{{GOAL_INSTRUCTIONS}}
 
 This output feeds a downstream recommendation system.
 Accuracy, clarity, and traceability to input data are critical.

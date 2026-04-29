@@ -12,6 +12,7 @@ Each recommendation must:
 
 Context
 The output will be used by business stakeholders to take action.
+{{GOAL_INSTRUCTIONS}}
 
 They expect:
 - Clear explanation of what is happening
