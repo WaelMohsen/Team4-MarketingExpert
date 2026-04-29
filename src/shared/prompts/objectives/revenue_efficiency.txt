@@ -1,4 +1,51 @@
+Objective name : Revenue Efficiency
+
 Primary Goal: Improve blended profitability and scalable growth
 
-Primary KPIs: mer,  ltv to cac, cac payback period
-Secondary KPIs: roas , aov, refund rate
+Primary KPIs: 
+ -> mer : Blended marketing efficiency 
+         3+ → strong
+         2–3 → scalable
+        <2 → needs improvement
+ -> ltv to cac : Long-term acquisition sustainability
+          3:1 → healthy
+          2:1 → borderline
+          <2:1 → risky
+ -> cac payback period :Time to recover acquisition spend
+            <60 days → excellent
+            60–90 days → good
+            120 days → problematic
+
+
+What do we Usually Want to improve? 
+   Increase LTV (better retention + monetization)
+   Reduce CAC without hurting quality
+   Shorten payback period (faster cash recovery)
+   Improve MER by scaling profitable channels
+   Shift toward higher-margin products/customers
+
+Diagnostic Metrics
+
+    Blended CAC (total spend / total new customers)
+    AOV (Average Order Value)
+    Gross Margin %
+    Contribution Margin (after marketing)
+    Retention Rate (30 / 60 / 90 days)
+    Repeat Purchase Rate
+    Revenue per User (ARPU)
+    Cohort Performance (LTV by acquisition period)
+    Channel-level CAC vs LTV
+
+Common Performance Problems : 
+    Low MER → revenue not keeping up with spend
+    LTV ≈ CAC or < CAC → unprofitable acquisition
+    Long Payback Period (>90–120 days) → cash flow pressure
+    High CAC due to inefficient targeting or rising competition
+    Low retention → weak product-market fit or onboarding
+    Low AOV → under-monetization
+    Scaling breaks efficiency → good at small spend, fails at scale
+
+Recommended Actions : 
+ ->Use blended reporting, rebalance the budget, and improve the high-margin mix
+ ->Improve retention, AOV, upsells, and reduce CAC
+ ->Improve pricing, retention, early monetization, and margin control
