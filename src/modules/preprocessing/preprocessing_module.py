@@ -4,7 +4,6 @@ from src.core.base_module import BaseModule
 from src.core.execution_context import ExecutionContext
 from .preprocessor import Preprocessor
 from src.shared.models.ads_schema import UnifiedAdsSchema
-from src.shared.models.metrics import metrics_calculator
 
 class PreprocessingModule(BaseModule):
     """
@@ -33,10 +32,6 @@ class PreprocessingModule(BaseModule):
         # Remove duplicates
         if context.get_metadata("remove_duplicates", True):
             df = self.preprocessor.remove_duplicates(df)
-
-        # Compute basic metrics
-        if context.get_metadata("compute_kpis", True):
-            df = metrics_calculator.compute_all(df)
 
         context.processed_df = df
         return context

@@ -1,6 +1,6 @@
 TASK
-Analyze the INPUT JSON and produce OUTPUT JSON that strictly follows the OUTPUT FORMAT.
-- Provide 5–8 recommendation cards based ONLY on the provided analysis.
+Generate 4 prioritized recommendations based on the provided input.
+
 
 INPUT JSON
 {

@@ -26,7 +26,7 @@ class RecommendationEvaluator:
         self.loader = PromptLoader.from_module_dir()
         self.builder = PromptBuilder(loader=self.loader)
         self.client = LLMApiClient(
-            model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+            model=os.getenv("EVALUATION_MODEL", "gpt-4.1-nano-2025-04-14"),
             max_output_tokens=2000
         )
 

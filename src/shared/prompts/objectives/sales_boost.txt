@@ -1,0 +1,11 @@
+STRATEGIC GOAL: Increase Sales
+Objective: Drive maximum transaction volume and revenue while maintaining a healthy ROAS (Return on Ad Spend).
+
+PRIORITY METRICS: purchases, revenue, roas, cpa.
+SECONDARY SIGNALS: cvr, ctr, cpc, aov.
+
+ANALYSIS GUIDELINES:
+1. Efficiency Filter: Identify channels where CPA is lower than the target or industry average. These are your "Scale Targets."
+2. Profitability Check: Compare ROAS against the break-even point. Flag any platform that is driving sales but losing money.
+3. Funnel Friction: If clicks are high but purchases are low, investigate "Conversion Rate" as a primary bottleneck.
+4. Stakeholder Translation: Focus on "Return on Investment" (ROI). Every dollar spent must be connected to a direct revenue outcome.

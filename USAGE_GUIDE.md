@@ -63,7 +63,105 @@ After a run, navigate to `data/outputs/`:
 
 ---
 
-## 5. Troubleshooting
+## 5. Running the API
+The pipeline can also be accessed via a REST API using FastAPI.
+
+### Start the API Server
+```bash
+python -m src.api.app
+```
+By default, the server will be available at `http://localhost:8000`. You can access the interactive API documentation at `http://localhost:8000/docs`.
+
+### API Endpoints
+
+#### POST `/api/v1/analysis`
+Performs Stage 1 Analysis on campaign data.
+
+**Sample Request:**
+```bash
+curl -X POST "http://localhost:8000/api/v1/analysis" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "campaign_data": {
+         "campaign_name": "Summer Sale",
+         "platform": "Google Ads",
+         "spend": 1250.50,
+         "clicks": 450,
+         "impressions": 12000,
+         "conversions": 15,
+         "conversion_value": 3000.00
+       },
+       "business_domain": {"industry": "SaaS"},
+       "campaign_target": {"primary_goal": "efficiency"}
+     }'
+```
+
+#### POST `/api/v1/recommendation`
+Performs Stage 2 Recommendations based on analysis results and raw campaign metrics.
+
+**Note:** If `analysis_results` is omitted, the API will automatically trigger the Stage 1 Analysis internally first.
+
+**Sample Request (Automatic Analysis):**
+```bash
+curl -X POST "http://localhost:8000/api/v1/recommendation" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "campaign_data": {
+         "campaign_name": "Summer Sale",
+         "platform": "Google Ads",
+         "spend": 1250.50,
+         "clicks": 450,
+         "impressions": 12000,
+         "conversions": 15,
+         "conversion_value": 3000.00
+       },
+       "business_domain": {"industry": "SaaS"},
+       "campaign_target": {"primary_goal": "efficiency"}
+     }'
+```
+
+**Sample Request (With Provided Analysis):**
+```bash
+curl -X POST "http://localhost:8000/api/v1/recommendation" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "analysis_results": {"analysis": {"executive_summary": "..."}},
+       "campaign_data": { ... },
+       "business_domain": {"industry": "SaaS"},
+       "campaign_target": {"primary_goal": "efficiency"}
+     }'
+```
+
+---
+
+## 6. Running Tests
+The pipeline includes a comprehensive suite of unit and integration tests to ensure data integrity and engine stability.
+
+### Run All Tests
+```bash
+python -m pytest tests/
+```
+
+### Run Tests with Coverage
+```bash
+python -m pytest tests/ --cov=src
+```
+
+### Run Specific Test Suites
+```bash
+# Core engine tests
+python -m pytest tests/core/
+
+# Shared utility tests
+python -m pytest tests/shared/
+
+# Pipeline module tests
+python -m pytest tests/modules/preprocessing/
+```
+
+---
+
+## 6. Troubleshooting
 - **401 Unauthorized**: Check your API key in `.env`.
 - **FileNotFoundError**: Ensure your `--input-csv` path is correct.
 - **JSON Parsing Errors**: This usually happens if the LLM output was cut off (increase `max_output_tokens` in the module if needed).

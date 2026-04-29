@@ -60,6 +60,23 @@ The quality of the AI output is audited by a separate LLM process using the exac
 
 ---
 
+## 🧪 Testing Standards
+The project uses `pytest` for automated testing. Ensuring high test coverage is critical for maintaining engine reliability in granular processing.
+
+### 1. Test Organization
+- Test files must mirror the `src/` directory structure under `tests/`.
+- File names must be prefixed with `test_` (e.g., `tests/core/test_pipeline_engine.py`).
+
+### 2. Mocking Guidelines
+- **Always mock API calls**: Use `monkeypatch` or `unittest.mock.patch` to isolate `LLMApiClient` calls. Never run actual LLM calls in the unit test suite.
+- **Fixtures**: Use `tests/conftest.py` for shared fixtures like `empty_context` or `mock_campaign_data`.
+
+### 3. Writing New Tests
+- When adding a new module or utility, create a corresponding test file in `tests/`.
+- Aim for at least 80% line coverage for new code.
+
+---
+
 ```text
 data/outputs/
 ├── _global/
