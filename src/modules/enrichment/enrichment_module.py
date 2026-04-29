@@ -3,7 +3,6 @@ import json
 import pandas as pd
 from src.core.base_module import BaseModule
 from src.core.execution_context import ExecutionContext
-from .extractor import FeatureExtractor
 from .platform_summary import build_platform_summary
 from src.modules.preprocessing.preprocessor import Preprocessor
 from src.shared.models.ads_schema import UnifiedAdsSchema
@@ -17,7 +16,6 @@ class EnrichmentModule(BaseModule):
     def __init__(self, name: str = "Enrichment"):
         super().__init__(name)
         self.schema = UnifiedAdsSchema()
-        self.extractor = FeatureExtractor()
 
     def run(self, context: ExecutionContext) -> ExecutionContext:
         if context.processed_df is None:
@@ -25,17 +23,16 @@ class EnrichmentModule(BaseModule):
 
         df = context.processed_df.copy()
 
+        # 0. Retrieve primary_goal from context metadata
+        campaign_target = context.get_metadata("campaign_target", {})
+        primary_goal = campaign_target.get("primary_goal")
+
         # 1. Build the flat identity and metrics summary
-        base_summary = build_platform_summary(df)
+        base_summary = build_platform_summary(df, primary_goal=primary_goal)
 
-        # 2. Extract advanced diagnostics
-        features = self.extractor.extract(df)
-
-        # 3. Merge into a unified, high-density campaign data object
-        # We prioritize metrics from build_platform_summary but take diagnostics from features
+        # 2. Merge into a unified, high-density campaign data object
         enriched_payload = {
-            **base_summary,
-            "automated_diagnostics": features.get("diagnostics", {})
+            **base_summary
         }
 
         context.enriched_data = {

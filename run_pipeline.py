@@ -19,17 +19,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(name)s | %(message)s')
 logger = logging.getLogger(__name__)
 
-DEFAULT_CAMPAIGN_TARGET = {
-    "primary_goal": "increase qualified leads",
-    "kpis": ["leads", "cpl"]
-}
 
-DEFAULT_BUSINESS_DOMAIN = {
-    "industry": "Retail",
-    "offering": "Membership plan",
-    "audience": "People shopping for monthly essentials",
-    "funnel_stage": "conversion",
-}
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Modular Ads Pipeline Engine - Strict Row-by-Row")
@@ -98,9 +88,22 @@ def main():
         
         # Create a fresh context for this specific row
         row_context = ExecutionContext()
+        
+        # Pull campaign target from row data if available, fallback to defaults
+        campaign_target = {
+            "primary_goal": str(row.get("primary_goal", "Unknown")),
+        }
+        
+        business_domain = {
+            "industry": str(row.get("industry", "Unknown")),
+            "offering": str(row.get("offering", "Unknown")),
+            "audience": str(row.get("audience", "Unknown")),
+            "funnel_stage": str(row.get("funnel_stage", "Unknown")),
+        }
+        
         # Pass essential metadata
-        row_context.set_metadata("campaign_target", DEFAULT_CAMPAIGN_TARGET)
-        row_context.set_metadata("business_domain", DEFAULT_BUSINESS_DOMAIN)
+        row_context.set_metadata("campaign_target", campaign_target)
+        row_context.set_metadata("business_domain", business_domain)
         row_context.set_metadata("output_json_dir", row_dir) # Base for relative paths
         
         # This is where modules will save their individual results
