@@ -1,4 +1,11 @@
-Primary Goal: Maximize qualified visibility and efficient brand exposure
+### STRATEGIC GOAL: Brand Awareness
+**Objective**: Maximize qualified visibility and efficient brand exposure across target audiences.
 
-Primary KPIs: Reach, Impressions, CPM, Frequency
-Secondary KPIs: Video View Rate, Video Completion Rate
+**PRIORITY METRICS**: reach, impressions, cpm, frequency.
+**SECONDARY SIGNALS**: video_view_rate, engagement_rate.
+
+**ANALYSIS GUIDELINES**:
+1. **Saturation Check**: Analyze if Frequency is too high (above 4-5). If so, identify "Ad Fatigue" as a risk.
+2. **Cost Efficiency**: Evaluate CPM trends. Identify if we are overpaying for impressions compared to industry benchmarks.
+3. **Visibility vs. Quality**: High impressions are good, but prioritize high Video Completion Rates or Engagement over raw views.
+4. **Stakeholder Translation**: Explain how "Visibility" today builds the foundation for "Sales" tomorrow.

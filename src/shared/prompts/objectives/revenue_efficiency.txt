@@ -1,4 +1,12 @@
-Primary Goal: Improve blended profitability and scalable growth
+### STRATEGIC GOAL: Revenue Efficiency
+**Objective**: Optimize blended profitability and ensure sustainable, long-term business growth.
 
-Primary KPIs: mer,  ltv to cac, cac payback period
-Secondary KPIs: roas , aov, refund rate
+**PRIORITY METRICS**: mer, ltv_to_cac, cac_payback_period.
+**SECONDARY SIGNALS**: roas, aov, refund_rate.
+
+**ANALYSIS GUIDELINES**:
+1. **Profitability Health**: Act like a CFO. Analyze if the current MER is sustainable for the business's bottom line.
+2. **Customer Value**: Look at the LTV-to-CAC ratio. If it's below 3:1, identify this as a long-term sustainability risk.
+3. **Cash Flow Check**: Evaluate the Payback Period. If it takes too long to recover the CAC, recommend shifting budget to higher-velocity channels.
+4. **Waste Reduction**: Identify high refund rates or low AOV segments that are dragging down overall efficiency.
+5. **Stakeholder Translation**: Focus on "Business Health and Sustainability." Connect marketing spend directly to the company's financial stability.
