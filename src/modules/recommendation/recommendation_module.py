@@ -31,17 +31,19 @@ class RecommendationModule(BaseModule):
             raise ValueError("Analysis results not found in context. Ensure AnalysisModule ran first.")
 
         # Extract metadata for targeting
-        campaign_target = context.get_metadata("campaign_target", {
-            "primary_goal": "increase qualified leads",
-            "kpis": ["leads", "cpl"]
-        })
-        business_domain = context.get_metadata("business_domain", {
-            "industry": "Retail",
-            "offering": "Membership plan",
-            "audience": "People shopping for monthly essentials",
-            "funnel_stage": "conversion",
-        })
+        campaign_target = context.get_metadata("campaign_target", {})
+        business_domain = context.get_metadata("business_domain", {})
         campaign_data = context.enriched_data.get("campaign_data", {})
+
+        # Load goal-specific instructions
+        primary_goal = campaign_target.get("primary_goal")
+        goal_prompt_path = PromptRegistry.get_objective_prompt(primary_goal)
+        goal_instructions = ""
+        if goal_prompt_path:
+            try:
+                goal_instructions = self.loader.load_prompt_text(goal_prompt_path)
+            except Exception as e:
+                logger.warning(f"Could not load goal-specific prompt for '{primary_goal}': {e}")
 
         # Build prompt
         messages = self.builder.build_recommendation_prompt(
@@ -50,7 +52,8 @@ class RecommendationModule(BaseModule):
             campaign_target=campaign_target,
             business_domain=business_domain,
             campaign_data=campaign_data,
-            analysis_json=context.analysis_results
+            analysis_json=context.analysis_results,
+            goal_instructions=goal_instructions
         )
 
         # Generate Recommendations

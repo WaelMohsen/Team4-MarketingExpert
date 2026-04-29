@@ -25,10 +25,13 @@ class PromptBuilder:
         campaign_data: Dict[str, Any],
         business_domain: Dict[str, Any],
         campaign_target: Dict[str, Any],
+        goal_instructions: str = "",
         strict: bool = True,
     ) -> List[Dict[str, str]]:
-        system_prompt = self.loader.load_prompt_text(sysPromptPath)
+        system_prompt_template = self.loader.load_prompt_text(sysPromptPath)
         user_prompt_template = self.loader.load_prompt_text(userPromptPath)
+
+        system_prompt = system_prompt_template.replace("{{GOAL_INSTRUCTIONS}}", goal_instructions)
 
         campaign_data_json = self._to_json(campaign_data)
         business_domain_json = self._to_json(business_domain)
@@ -60,10 +63,13 @@ class PromptBuilder:
         business_domain: Dict[str, Any],
         campaign_data: Dict[str, Any],
         analysis_json: Dict[str, Any],
+        goal_instructions: str = "",
         strict: bool = True,
     ) -> List[Dict[str, str]]:
-        system_prompt = self.loader.load_prompt_text(sysPromptPath)
+        system_prompt_template = self.loader.load_prompt_text(sysPromptPath)
         user_prompt_template = self.loader.load_prompt_text(userPromptPath)
+
+        system_prompt = system_prompt_template.replace("{{GOAL_INSTRUCTIONS}}", goal_instructions)
 
         campaign_target_json = self._to_json(campaign_target)
         business_domain_json = self._to_json(business_domain)

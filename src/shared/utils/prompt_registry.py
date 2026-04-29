@@ -28,3 +28,16 @@ class PromptRegistry(Enum):
     SALES_BOOST="objectives/sales_boost.txt"
     TRAFFIC="objectives/traffic.txt"
 
+    @classmethod
+    def get_objective_prompt(cls, goal: str) -> str:
+        """
+        Maps a primary_goal string to its corresponding prompt file path.
+        """
+        mapping = {
+            "Increase Sales": cls.SALES_BOOST.value,
+            "Brand Awareness": cls.BRAND_AWARENESS.value,
+            "Revenue Efficiency": cls.REVENUE_EFFICIENCY.value,
+            "Traffic": cls.TRAFFIC.value
+        }
+        return mapping.get(goal, "") # Return empty if no specific goal prompt exists
+

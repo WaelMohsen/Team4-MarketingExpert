@@ -39,13 +39,24 @@ class AnalysisModule(BaseModule):
             logger.warning("No campaign data found. Skipping analysis.")
             return context
 
+        # Load goal-specific instructions
+        primary_goal = campaign_target.get("primary_goal")
+        goal_prompt_path = PromptRegistry.get_objective_prompt(primary_goal)
+        goal_instructions = ""
+        if goal_prompt_path:
+            try:
+                goal_instructions = self.loader.load_prompt_text(goal_prompt_path)
+            except Exception as e:
+                logger.warning(f"Could not load goal-specific prompt for '{primary_goal}': {e}")
+
         # Build prompt
         messages = self.builder.build_analysis_prompt(
             sysPromptPath=PromptRegistry.ANALYSIS_SYSTEM.value,
             userPromptPath=PromptRegistry.ANALYSIS_USER.value,
             campaign_data=campaign_data,
             business_domain=business_domain,
-            campaign_target=campaign_target
+            campaign_target=campaign_target,
+            goal_instructions=goal_instructions
         )
 
         # Generate Analysis

@@ -3,7 +3,7 @@ from typing import Dict, Any
 from src.shared.models.metrics import metrics_calculator
 
 
-def build_platform_summary(df: pd.DataFrame) -> Dict[str, Any]:
+def build_platform_summary(df: pd.DataFrame, primary_goal: str = None) -> Dict[str, Any]:
     """
     Build a flat, high-density summary for a single campaign row.
     Includes identity, metrics, and metadata.
@@ -11,12 +11,20 @@ def build_platform_summary(df: pd.DataFrame) -> Dict[str, Any]:
     if df.empty:
         return {}
 
-    # Ensure all KPIs are computed
-    df = metrics_calculator.compute_all(df)
+    # 0. Identify metrics to compute
+    # Core standard metrics needed for the summary
+    core_metrics = ["roas", "cpa", "cvr", "ctr", "cpc"]
+    # Goal-specific metrics
+    goal_metrics = metrics_calculator.get_goal_metric_names(primary_goal) if primary_goal else []
+    
+    # Combined list of metrics to calculate
+    metrics_to_compute = list(set(core_metrics + goal_metrics))
+
+    # 1. Compute only targeted KPIs
+    df = metrics_calculator.compute_metrics(df, metrics_to_compute=metrics_to_compute)
     row = df.iloc[0]
 
-    # 1. Identity & Metadata
-    # We pull everything that isn't a core numeric metric to provide context
+    # 2. Identity & Metadata
     identity = {
         "platform": str(row.get("platform", "Unknown")),
         "campaign_name": str(row.get("campaign_name", "Unknown")),
@@ -25,9 +33,11 @@ def build_platform_summary(df: pd.DataFrame) -> Dict[str, Any]:
         "offering": str(row.get("offering", "Unknown")),
         "audience": str(row.get("audience", "Unknown")),
         "funnel_stage": str(row.get("funnel_stage", "Unknown")),
+        "primary_goal": primary_goal or str(row.get("primary_goal", "Unknown")),
     }
 
-    # 2. Performance Metrics
+    # 3. Performance Metrics
+    # Populate standard metrics dictionary
     metrics = {
         "spend": _round(row.get("spend")),
         "revenue": _round(row.get("conversion_value")),
@@ -39,26 +49,11 @@ def build_platform_summary(df: pd.DataFrame) -> Dict[str, Any]:
         "cvr": _round(row.get("cvr")),
         "ctr": _round(row.get("ctr")),
     }
-    # if df.campaign_type== "Increase Sales":
-    #     metrics.appeend(metrics_calculator.calculate_increase_sales_metric(df))
-    # elif df.campaign_type== "Brand Awareness":
-    #     metrics.appeend(metrics_calculator.calculate_brand_awareness_metric(df))
-    # elif df.campaign_type== "Traffic":
-    #     metrics.appeend(metrics_calculator.calculate_traffic_metric(df))    
-    # elif df.campaign_type== "Revenue Efficiency":
-    #     metrics.appeend(metrics_calculator.calculate_revenue_efficiency_metric(df))    
     
-    # We can add more campaign-type specific metrics here as needed
-    campaign_type = row.get("campaign_type")
-    if campaign_type == "Increase Sales" :
-
-        metrics.update(metrics_calculator.calculate_increase_sales_metric(row))
-    elif campaign_type == "Brand Awareness":
-        metrics.update(metrics_calculator.calculate_brand_awareness_metric(row))
-    elif campaign_type == "Traffic":
-        metrics.update(metrics_calculator.calculate_traffic_metric(row))
-    elif campaign_type == "Revenue Efficiency":
-        metrics.update(metrics_calculator.calculate_revenue_efficiency_metric(row))    
+    # Add any additional goal-specific KPIs to the summary dictionary
+    if primary_goal:
+        goal_kpis = metrics_calculator.get_goal_metrics(row, primary_goal)
+        metrics.update(goal_kpis)
 
     return {
         "campaign_identity": identity,

@@ -12,40 +12,58 @@ class MetricsCalculator:
     def __init__(self):
         # Default registry of metric functions
         # Each function takes a DataFrame and returns a Series or None
+        # Unified Registry: Core KPIs + Raw Data Columns
         self._registry: Dict[str, Callable[[pd.DataFrame], Optional[pd.Series]]] = {
+            # --- Calculated KPIs ---
             "ctr": self._calculate_ctr,
             "cpc": self._calculate_cpc,
             "cpm": self._calculate_cpm,
             "cvr": self._calculate_cvr,
             "cpa": self._calculate_cpa,
             "roas": self._calculate_roas,
-            "aov": self._calculate_aov,  # Average Order Value
+            "aov": self._calculate_aov,
             "frequency": self._calculate_frequency,
-            "mer": self._calculate_mer,  # Marketing Efficiency Ratio
-            "ltv_to_cac": self.calculate_ltv_to_cac,
-            "cac_payback_period": self.calculate_cac_payback_period,
-            "refund_rate": self._refund_rate,
+            "mer": self._calculate_mer,
+            "ltv_to_cac": self._calculate_ltv_to_cac,
+            "cac_payback_period": self._calculate_cac_payback_period,
+            "refund_rate": self._calculate_refund_rate,
             "purchase_conversion_rate": self._calculate_purchase_conversion_rate,
-            "bounce_proxy_rate": self._bounce_proxy_rate,
+            "bounce_proxy_rate": self._calculate_bounce_proxy_rate,
             "session_quality_score": self._calculate_session_quality_score,
-            
-            "brand_awareness_metric": lambda df: self._calculate_brand_awareness_metric(df, "cpm"),  # Example for brand awareness metric
-            "revenue_efficiency_metric": lambda df: self._calculate_revenue_efficiency_metric(df, "mer"),  # Example for revenue efficiency metric  
-            "increase_sales_metric": lambda df: self.calculate_increase_sales_metric(df, "roas"),  # Example for increase sales metric
-            "traffic_metric": lambda df: self.calculate_traffic_metric(df, "ctr"),
+
+            # --- Raw Data Columns (Standardized Getters) ---
+            "spend": lambda df: df.get("spend"),
+            "revenue": lambda df: df.get("revenue") if "revenue" in df.columns else df.get("conversion_value"),
+            "conversion_value": lambda df: df.get("conversion_value"),
+            "impressions": lambda df: df.get("impressions"),
+            "clicks": lambda df: df.get("clicks"),
+            "conversions": lambda df: df.get("conversions"),
+            "purchases": lambda df: df.get("purchases"),
+            "reach": lambda df: df.get("reach"),
+            "frequency_raw": lambda df: df.get("frequency"),
+            "landing_page_views": lambda df: df.get("landing_page_views"),
+            "sessions": lambda df: df.get("sessions"),
         }
 
     def register_metric(self, name: str, func: Callable[[pd.DataFrame], Optional[pd.Series]]):
         """Register a new metric calculation function."""
         self._registry[name] = func
 
-    def compute_all(self, df: pd.DataFrame, *, overwrite: bool = False) -> pd.DataFrame:
+    def compute_metrics(self, df: pd.DataFrame, *, metrics_to_compute: List[str] = None, overwrite: bool = False) -> pd.DataFrame:
         """
-        Compute all registered metrics and add them to the DataFrame.
+        Compute registered metrics and add them to the DataFrame.
+        If metrics_to_compute is provided, only those metrics will be calculated.
         """
         df = df.copy()
         
-        for name, func in self._registry.items():
+        # Determine which metrics to run
+        target_metrics = metrics_to_compute if metrics_to_compute is not None else self._registry.keys()
+        
+        for name in target_metrics:
+            func = self._registry.get(name)
+            if not func:
+                continue
+                
             if overwrite or name not in df.columns:
                 result = func(df)
                 if result is not None:
@@ -107,101 +125,49 @@ class MetricsCalculator:
     def _calculate_session_quality_score(self, df: pd.DataFrame) -> Optional[pd.Series]:
         """Session Quality Score = landing_page_views / sessions"""
         return self._safe_div(df, "landing_page_views", "sessions") if self._safe_div(df, "landing_page_views", "sessions") is not None else None
-    
-    def calculate_brand_awareness_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
-        """
-        Calculate brand awareness metrics.
 
-        Formulas:
-        - reach       : unique users reached (direct column)
-        - impressions : total ad views (direct column)
-        - cpm         : (spend / impressions) * 1000 
-        - frequency   : impressions / reach
+    # Map primary goals to their specific KPI keys
+    GOAL_MAP = {
+        "Increase Sales": ["roas", "cpa", "cvr", "ctr", "cpc", "aov", "revenue", "purchases"],
+        "Brand Awareness": ["cpm", "reach", "impressions", "frequency"],
+        "Revenue Efficiency": ["mer", "ltv_to_cac", "cac_payback_period", "roas", "aov", "refund_rate"],
+        "Traffic": ["clicks", "ctr", "cpc", "landing_page_views", "cpm", "bounce_proxy_rate", "session_quality_score"]
+    }
+
+    def get_goal_metrics(self, df: pd.DataFrame, goal: str) -> Dict[str, float]:
         """
-        metric_map = {
-            "reach": lambda: df.get("reach"),
-            "impressions": lambda: df.get("impressions"),
-            "cpm": lambda: self._calculate_cpm(df),
-            "frequency": lambda: self._calculate_frequency(df),
-        }
-        func = metric_map.get(metric_name)
-        return func() if func else None
+        Returns a dictionary of all relevant metrics for a given goal.
+        """
+        relevant_keys = self.get_goal_metric_names(goal)
+        results = {}
         
-    def calculate_revenue_efficiency_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
-        """
-        Calculate revenue efficiency metrics.
+        # Determine if we are handling a Series (single row) or DataFrame
+        is_series = isinstance(df, pd.Series)
+        
+        for key in relevant_keys:
+            func = self._registry.get(key)
+            if not func:
+                continue
+                
+            # Execute calculation
+            val = func(df if not is_series else pd.DataFrame([df]))
+            
+            # Extract value from Series if needed
+            if isinstance(val, pd.Series):
+                val = val.iloc[0] if not val.empty else None
+            
+            # Clean up NaN/None
+            if val is not None and not (isinstance(val, (float, int)) and pd.isna(val)):
+                results[key] = float(val)
+                
+        return results
 
-        Formulas:
-        - mer                : total_revenue / total_marketing_spend
-        - ltv_to_cac         : lifetime_value / cac
-        - cac_payback_period : cac / monthly_gross_profit_per_customer
-        - roas               : revenue / spend
-        - aov                : revenue / orders
-        - refund_rate        : refunds / orders
+    def get_goal_metric_names(self, goal: str) -> List[str]:
         """
-        metric_map = {
-            "mer": lambda: self._calculate_mer(df),
-            "ltv_to_cac": lambda: self._calculate_ltv_to_cac(df),
-            "cac_payback_period": lambda: self._calculate_cac_payback_period(df),
-            "roas": lambda: self._calculate_roas(df),
-            "aov": lambda: self._calculate_aov(df),
-            "refund_rate": lambda: self._refund_rate(df),
-        }
-        func = metric_map.get(metric_name)
-        return func() if func else None
-    
+        Returns the list of KPI names relevant to a given goal.
+        """
+        return self.GOAL_MAP.get(goal, [])
 
-
-    def calculate_increase_sales_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
-        """
-        Calculate increase sales metrics.
-
-        Formulas:
-        - purchases                 : total completed purchases (direct column)
-        - roas                      : revenue / spend
-        - cpa                       : spend / conversions
-        - revenue                   : sum of purchase value (direct column)
-        - purchase_conversion_rate  : (purchases / landing_page_views) * 100
-        - ctr                       : (clicks / impressions) * 100
-        - cpc                       : spend / clicks
-        - aov                       : revenue / orders
-        """
-        metric_map = {
-            "purchases": lambda: df.get("purchases"),
-            "roas": lambda: self._calculate_roas(df),
-            "cpa": lambda: self._calculate_cpa(df),
-            "revenue": lambda: df.get("revenue"),
-            "purchase_conversion_rate": lambda: self._calculate_purchase_conversion_rate(df),
-            "ctr": lambda: self._calculate_ctr(df),
-            "cpc": lambda: self._calculate_cpc(df),
-            "aov": lambda: self._calculate_aov(df),
-        }
-        func = metric_map.get(metric_name)
-        return func() if func else None
-    def calculate_traffic_metric(self, df: pd.DataFrame, metric_name: str) -> Optional[pd.Series]:
-        """
-        Calculate traffic metrics.
-
-        Formulas:
-        - clicks                : total clicks (direct column)
-        - ctr                   : (clicks / impressions) * 100
-        - cpc                   : spend / clicks
-        - landing_page_views    : total LPVs (direct column)
-        - cpm                   : (spend / impressions) * 1000
-        - bounce_proxy_rate     : 1 - (landing_page_views / clicks)
-        - session_quality_score : landing_page_views / sessions
-        """
-        metric_map = {
-            "clicks": lambda: df.get("clicks"),
-            "ctr": lambda: self._calculate_ctr(df),
-            "cpc": lambda: self._calculate_cpc(df),
-            "landing_page_views": lambda: df.get("landing_page_views"),
-            "cpm": lambda: self._calculate_cpm(df),
-            "bounce_proxy_rate": lambda: self._calculate_bounce_proxy_rate(df),
-            "session_quality_score": lambda: self._calculate_session_quality_score(df),
-        }
-        func = metric_map.get(metric_name)
-        return func() if func else None
     # ---------- Helpers ----------
 
     @staticmethod
@@ -210,14 +176,25 @@ class MetricsCalculator:
         Calculates numerator / denominator safely (vectorized).
         Returns None if columns are missing. Returns NaN for division by zero.
         """
-        if numerator not in df.columns or denominator not in df.columns:
-            return None
+        # Handle both DataFrame and Series
+        if hasattr(df, "columns"):
+            if numerator not in df.columns or denominator not in df.columns:
+                return None
+        else:
+            if numerator not in df.index or denominator not in df.index:
+                return None
             
         n = pd.to_numeric(df[numerator], errors="coerce")
         d = pd.to_numeric(df[denominator], errors="coerce")
         
-        # Protect against division by zero
-        return n.divide(d.replace(0, np.nan)).round(2)
+        if hasattr(n, "divide"):
+            # Vectorized case (DataFrame)
+            return n.divide(d.replace(0, np.nan)).round(2)
+        else:
+            # Scalar case (Series/Row)
+            if d == 0 or pd.isna(d) or pd.isna(n):
+                return None
+            return round(float(n / d), 2)
 
 # Global instance for easy access
 metrics_calculator = MetricsCalculator()
