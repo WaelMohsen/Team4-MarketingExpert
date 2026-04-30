@@ -61,7 +61,12 @@ class AnalysisModule(BaseModule):
 
         # Generate Analysis
         logger.info("Executing Stage 1: Analysis...")
-        analysis_result = self.client.generate_json(messages, response_format=AnalysisResponse)
+        analysis_result = self.client.generate_json(
+            messages, 
+            response_format=AnalysisResponse,
+            save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None,
+            prompt_name="analysis_prompt"
+        )
         
         context.analysis_results = analysis_result
         return context

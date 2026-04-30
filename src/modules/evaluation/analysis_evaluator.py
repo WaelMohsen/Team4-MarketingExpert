@@ -2,7 +2,7 @@ import json
 import logging
 import os
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from src.shared.utils.prompt_loader import PromptLoader
 from src.shared.utils.prompt_builder import PromptBuilder
@@ -31,7 +31,7 @@ class AnalysisEvaluator:
             max_output_tokens=2000
         )
 
-    def evaluate(self, campaign_data: Any, analysis_report: Any, campaign_target: Any, business_domain: Any) -> Dict[str, Any]:
+    def evaluate(self, campaign_data: Any, analysis_report: Any, campaign_target: Any, business_domain: Any, save_dir: Optional[str] = None) -> Dict[str, Any]:
         """Runs the evaluation using LLMApiClient."""
         
         # Prepare context strings
@@ -55,9 +55,14 @@ class AnalysisEvaluator:
             {"role": "system", "content": sys_text},
             {"role": "user", "content": user_text}
         ]
-
+ 
         logger.info("Executing Analysis Evaluation...")
-        result = self.client.generate_json(messages, response_format=AnalysisEvaluationResponse)
+        result = self.client.generate_json(
+            messages, 
+            response_format=AnalysisEvaluationResponse,
+            save_dir=save_dir,
+            prompt_name="evaluation_analysis_prompt"
+        )
         
         # Structure it for the existing reporter
         eval_data = result.get("evaluation", {})

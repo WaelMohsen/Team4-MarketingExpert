@@ -38,6 +38,7 @@ class EvaluationModule(BaseModule):
                     analysis_report=context.analysis_results,
                     campaign_target=campaign_target,
                     business_domain=business_domain,
+                    save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None
                 )
                 evaluations["analysis"] = analysis_eval
             except Exception as e:
@@ -58,7 +59,8 @@ class EvaluationModule(BaseModule):
                         campaign_target=campaign_target,
                         campaign_data=campaign_data,
                         analysis_context=analysis_context,
-                        recommendation=rec
+                        recommendation=rec,
+                        save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None
                     )
                     rec_evals.append({
                         "card_title": rec.get("title"),

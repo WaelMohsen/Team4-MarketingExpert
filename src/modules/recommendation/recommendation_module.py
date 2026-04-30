@@ -58,7 +58,12 @@ class RecommendationModule(BaseModule):
 
         # Generate Recommendations
         logger.info("Executing Stage 2: Recommendations...")
-        recommendation_result = self.client.generate_json(messages, response_format=RecommendationResponse)
+        recommendation_result = self.client.generate_json(
+            messages, 
+            response_format=RecommendationResponse,
+            save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None,
+            prompt_name="recommendation_prompt"
+        )
         
         context.recommendation_results = recommendation_result
         return context
