@@ -5,33 +5,72 @@ from typing import List, Optional, Dict, Literal, Any
 # STAGE 1: ANALYSIS SCHEMAS
 # ==========================================
 class BudgetEfficiencyInsight(BaseModel):
-    insight: str = Field(description="what spend allocation/efficiency shows")
-    evidence: str = Field(description="which platforms/metrics support it")
-    business_impact: str = Field(description="why it matters to the target")
+    insight: str = Field(
+        description="What the spend pattern shows — must reference at least 2 metrics"
+    )
+    evidence: str = Field(
+        description="The specific metric values that support the insight, e.g. 'CPC $1.26, ROAS 1.8'"
+    )
+    business_impact: str = Field(
+        description="Why this efficiency finding matters to the campaign goal in plain English"
+    )
 
 class ResultsValueInsight(BaseModel):
-    insight: str = Field(description="what outcomes are being generated")
-    evidence: str = Field(description="leads/customers/revenue/ROAS/CAC as available")
-    business_impact: str = Field(description="link to acquisition and revenue impact")
+    insight: str = Field(
+        description="What outcomes the campaign produced — must reference at least 2 metrics"
+    )
+    evidence: str = Field(
+        description="The specific metric values that support the insight, e.g. '159 conversions at $16.74 CPA'"
+    )
+    business_impact: str = Field(
+        description="Link to acquisition, revenue, or funnel impact in plain English"
+    )
 
 class CrossChannelPattern(BaseModel):
-    pattern_or_risk: str
-    evidence: str
-    why_it_matters: str
+    pattern_or_risk: str = Field(
+        description="The anomaly, trend, or risk observed across channels — fact or labeled hypothesis"
+    )
+    evidence: str = Field(
+        description="The specific metrics or channel data that surface this pattern"
+    )
+    why_it_matters: str = Field(
+        description="Business consequence if this pattern continues or goes unaddressed"
+    )
 
 class ChannelNote(BaseModel):
-    platform: str
-    what_we_see: List[str] = Field(..., min_length=1, description="Factual observations")
-    what_it_likely_means: List[str] = Field(..., min_length=1, description="Hypotheses tied to observations")
-    risks_or_watchouts: List[str]
+    platform: str = Field(description="Platform name, e.g. 'Google Ads', 'Meta'")
+    what_we_see: List[str] = Field(
+        ..., min_length=1,
+        description="Factual observations with metric values — no interpretation"
+    )
+    what_it_likely_means: List[str] = Field(
+        ..., min_length=1,
+        description="Hypotheses tied to observations — prefix assumptions with 'likely' or 'suggests'"
+    )
+    risks_or_watchouts: List[str] = Field(
+        ..., min_length=1,
+        description="Risks or flags for downstream recommendation system"
+    )
 
 class AnalysisSection(BaseModel):
-    executive_summary: str = Field(..., min_length=10, description="plain English, business-focused summary")
+    executive_summary: str = Field(
+        ..., min_length=10,
+        description=(
+            "Plain-English verdict covering: overall performance (strong/mixed/weak), "
+            "budget efficiency, outcome quality, and the single most important risk or gap"
+        )
+    )
     budget_and_efficiency: List[BudgetEfficiencyInsight]
     results_and_value: List[ResultsValueInsight]
     cross_channel_patterns_and_risks: List[CrossChannelPattern]
     channel_notes: List[ChannelNote] = Field(..., min_length=1)
-    missing_info: List[str] = Field(description="missing element + why it matters")
+    missing_info: List[str] = Field(
+        default_factory=list,
+        description=(
+            "Data absent from the input that would materially change the analysis — "
+            "state what is missing and why it matters"
+        )
+    )
 
 class AnalysisResponse(BaseModel):
     analysis: AnalysisSection
@@ -47,16 +86,45 @@ def validate_analysis_output(output: Dict[str, Any]) -> bool:
 # STAGE 2: RECOMMENDATION SCHEMAS
 # ==========================================
 class RecommendationCard(BaseModel):
-    title: str = Field(description="short, direct, outcome-focused title")
-    whats_happening: str = Field(description="simple explanation of issue/opportunity")
-    what_you_should_do: List[str] = Field(..., min_length=1, description="actionable steps")
-    why_this_matters: str = Field(description="business impact in plain English")
-    priority: Literal["High", "Medium", "Low"] = Field(description="High, Medium, or Low")
-    expected_impact: str = Field(description="directional improvement, no numeric promises unless supported")
-    owner_suggestion: str = Field(description="e.g., 'Media buyer', 'Creative team', 'Web team', 'Analytics'")
+    title: str = Field(
+        description="Short imperative phrase, e.g. 'Fix Click Loss on Landing Page'"
+    )
+    whats_happening: str = Field(
+        description=(
+            "Plain-English description of the issue, "
+            "referencing the specific metric or finding from the analysis."
+        )
+    )
+    what_you_should_do: List[str] = Field(
+        ...,
+        min_length=1,
+        description=(
+            "Each action must answer WHAT to change, "
+            "WHERE to apply it, and HOW to execute it."
+        ),
+    )
+    why_this_matters: str = Field(
+        description="Business consequence of inaction, tied to the campaign goal."
+    )
+    priority: Literal["High", "Medium", "Low"]
+    expected_impact: str = Field(
+        description=(
+            "Directional or quantified outcome tied to a metric, "
+            "e.g. 'Estimated 15–25% CTR improvement' or 'Reduce CPC by ~$0.20'."
+        )
+    )
+    owner_suggestion: str = Field(
+        description=(
+            "Job role or team responsible, "
+            "e.g. 'Paid Media Manager', 'Growth Team', 'Web/Tech Team'."
+        )
+    )
 
 class RecommendationResponse(BaseModel):
-    recommendations: List[RecommendationCard] = Field(..., min_length=4, max_length=4)
+    recommendations: List[RecommendationCard] = Field(
+        ..., min_length=4, max_length=4,
+        description="Always exactly 4 recommendations."
+    )
 
 def validate_recommendation_output(output: Dict[str, Any]) -> bool:
     try:
