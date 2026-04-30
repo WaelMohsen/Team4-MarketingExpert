@@ -1,4 +1,19 @@
-Primary Goal: Drive high-quality visits efficiently
+Objective name : Traffic
 
-Primary KPIs: clicks, ctr, cpc, landing page views 
-Secondary KPIs: cpm , bounce proxy rate,  session quality score
+Primary Goal: Drive users to the site or landing page
+
+Primary KPIs:
+ the main KPI you should use but  you can use more according   to case 
+  -> clicks
+  -> ctr
+  -> cpc
+  -> landing page views 
+
+What do we Usually Want to improve? 
+ Generate more high-quality visits at a lower cost
+
+Recommended Actions : 
+ -> Rewrite headlines and CTAs
+ -> align creative with landing page promise
+ -> improve page speed
+you can recommend more according  to case 

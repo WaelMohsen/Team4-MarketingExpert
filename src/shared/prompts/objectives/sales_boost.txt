@@ -1,3 +1,30 @@
+
+Objective name : Increase Sales
 Primary Goal: Maximize revenue and profitable conversions from ad spend
-Primary KPIs: purchases, roas, cpa, revenue, purchase conversion rate
-Secondary KPIs: CTR, CPC, AOV
+
+Primary KPIs: 
+the main KPI you should use but  you can use more according  to case 
+ -> purchases
+ -> roas
+ ->cpa
+ ->revenue 
+ ->purchase 
+ ->conversion rate
+
+
+What do we Usually Want to improve? 
+Increase profitable conversions, not just clicks
+you can add more according  to case 
+
+
+Recommended Actions : 
+ -> Improve product page and checkout UX
+ -> retarget cart abandoners
+ -> sharpen offer 
+ -> test bundles/discounts
+ -> refine lookalikes and high-intent audiences
+ -> exclude poor segments, optimize by product category
+ -> use dynamic product ads, improve tracking quality
+ -> shift budget to profitable ad sets
+ you can recommend more according  to case 
+

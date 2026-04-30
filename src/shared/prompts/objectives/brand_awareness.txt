@@ -3,43 +3,17 @@ Objective Name : Brand Awarness
 Primary Goal: Maximize qualified visibility and efficient exposure 
 
 Primary KPIs:
- ->  Reach :  Aim to reach 60–80% of your target audience within campaign duration
+ ->  Reach 
  -> Impressions
-       -> Should scale proportionally with reach
-       -> Usually 2x–4x your reach (depending on frequency goal)
- -> CPM (Cost per 1,000 Impressions) Good range (varies by region/industry):
-      -$1 – $5 → Excellent
-      - $5 – $10 → Acceptable
-      - $10+ → Needs optimization
- -> Frequency : Ideal range:
-      - 1.5 – 3 → Healthy awareness
-      - >4 → Risk of ad fatigue
+ -> CPM 
+ -> Frequency 
+ you can add more according   to case 
 
 What do we Usually Want to improve? 
  -> Reach more qualified people efficiently without overexposing the same users 
 
-Diagnostic Metrics : 
- -> Audience size
- -> unique reach ratio : 
-      - Target: 30% – 60% 
-      - Lower = overexposure
-      - Higher = efficient reach
- -> video plays
-      - 20% – 40%+ completion = good
- -> view rate
-    -  15% – 30%+ = strong creative
-    - <10% = weak hook
- -> placement delivery
-      - No single placement should dominate >70% unless proven efficient
- -> share of spend by audience/placement 
-      Minimum viable: 500K – 2M+ for scalable awareness
 
-Common Performance Problems : 
- -> High CPM : > $10 (or above account average by 30%+)
- -> low reach too much frequency : Reach not growing despite increasing spend
- -> narrow audience
- -> weak creatives
- -> causing poor attention
+
 
 Recommended Actions : 
  -> Broaden audience segments
@@ -50,3 +24,4 @@ Recommended Actions :
  -> use short high-impact visuals
  -> test video vs static
  -> allocate more budget to efficient reach placements
+ you can recommend more according   to case 
