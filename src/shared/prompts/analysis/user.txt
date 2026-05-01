@@ -1,12 +1,10 @@
-TASK:
-Analyze the campaign data and return JSON matching the required schema.
 INPUT:
-{INPUT_JSON}
+
 ### BUSINESS DOMAIN
 {{BUSINESS_DOMAIN}}
 
 ### CAMPAIGN TARGET
 {{CAMPAIGN_TARGET}}
 
-### INPUT CAMPAIGN DATA
+### CAMPAIGN DATA
 {{CAMPAIGN_DATA}}

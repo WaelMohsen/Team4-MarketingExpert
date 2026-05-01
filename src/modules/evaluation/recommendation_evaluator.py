@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from src.shared.utils.prompt_loader import PromptLoader
 from src.shared.utils.prompt_builder import PromptBuilder
@@ -30,7 +30,7 @@ class RecommendationEvaluator:
             max_output_tokens=2000
         )
 
-    def evaluate(self, business_context: Any, campaign_target: Any, campaign_data: Any, analysis_context: Any, recommendation: Any) -> Dict[str, Any]:
+    def evaluate(self, business_context: Any, campaign_target: Any, campaign_data: Any, analysis_context: Any, recommendation: Any, save_dir: Optional[str] = None) -> Dict[str, Any]:
         """Runs the evaluation."""
         
         sys_text = self.loader.load_prompt_text(PromptRegistry.EVAL_RECOMMENDATION_SYSTEM.value)
@@ -52,9 +52,14 @@ class RecommendationEvaluator:
             {"role": "system", "content": sys_text},
             {"role": "user", "content": user_text}
         ]
-
+ 
         logger.info("Executing Recommendation Evaluation...")
-        result = self.client.generate_json(messages, response_format=RecommendationEvaluationResponse)
+        result = self.client.generate_json(
+            messages, 
+            response_format=RecommendationEvaluationResponse,
+            save_dir=save_dir,
+            prompt_name="evaluation_recommendation_prompt"
+        )
         
         eval_data = result.get("evaluation", {})
         

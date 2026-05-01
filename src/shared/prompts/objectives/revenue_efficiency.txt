@@ -1,12 +1,28 @@
 STRATEGIC GOAL: Revenue Efficiency
-Objective: Optimize blended profitability and ensure sustainable, long-term business growth.
 
-PRIORITY METRICS: mer, ltv_to_cac, cac_payback_period.
-SECONDARY SIGNALS: roas, aov, refund_rate.
+PRIORITY METRICS: mer, ltv_to_cac, cac_payback_period
 
-ANALYSIS GUIDELINES:
-1. Profitability Health: Act like a CFO. Analyze if the current MER is sustainable for the business's bottom line.
-2. Customer Value: Look at the LTV-to-CAC ratio. If it's below 3:1, identify this as a long-term sustainability risk.
-3. Cash Flow Check: Evaluate the Payback Period. If it takes too long to recover the CAC, recommend shifting budget to higher-velocity channels.
-4. Waste Reduction: Identify high refund rates or low AOV segments that are dragging down overall efficiency.
-5. Stakeholder Translation: Focus on "Business Health and Sustainability." Connect marketing spend directly to the company's financial stability.
+RULES
+1. Profitability Health Check
+- Evaluate MER as a high-level indicator of overall efficiency
+- Flag declining MER as a structural business risk
+
+2. Customer Value Quality
+- Monitor LTV-to-CAC ratio
+- If below 3:1, highlight long-term sustainability concerns
+
+3. Cash Flow Efficiency
+- Analyze CAC payback period
+- Recommend shifting budget away from slow-recovery channels
+
+4. Value Leakage Detection
+- Identify high refund rates or low AOV segments
+- Flag them as margin erosion risks
+
+5. Business Interpretation
+- Translate all findings into “business sustainability and unit economics”
+- Focus on long-term financial health, not short-term performance spikes
+
+MISSING DATA
+- Do not infer LTV, CAC, or MER when not provided
+- Explicitly state limitations in financial interpretation

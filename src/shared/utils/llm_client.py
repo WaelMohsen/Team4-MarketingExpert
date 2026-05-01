@@ -5,6 +5,8 @@ import os
 import json
 from typing import List, Dict, Any, Optional
 
+from .prompt_saver import save_llm_prompt
+
 from openai import OpenAI
 from openai import OpenAIError
 
@@ -53,7 +55,7 @@ class LLMApiClient:
     # ---------------------------------------------------------
     # Core call (raw text)
     # ---------------------------------------------------------
-    def generate(self, messages: List[Dict[str, str]]) -> str:
+    def generate(self, messages: List[Dict[str, str]], save_dir: Optional[str] = None, prompt_name: str = "prompt") -> str:
         """
         Sends chat-style messages to the model and returns raw text output.
         """
@@ -66,7 +68,12 @@ class LLMApiClient:
                 max_completion_tokens=self.max_output_tokens,
             )
 
-            return response.choices[0].message.content.strip()
+            result = response.choices[0].message.content.strip()
+            
+            if save_dir:
+                save_llm_prompt(messages, save_dir, filename_prefix=prompt_name)
+
+            return result
 
         except OpenAIError as e:
             raise RuntimeError(f"OpenAI API error: {str(e)}") from e
@@ -77,7 +84,7 @@ class LLMApiClient:
     # ---------------------------------------------------------
     # JSON-enforced call
     # ---------------------------------------------------------
-    def generate_json(self, messages: List[Dict[str, str]], response_format: Optional[Any] = None) -> Dict[str, Any]:
+    def generate_json(self, messages: List[Dict[str, str]], response_format: Optional[Any] = None, save_dir: Optional[str] = None, prompt_name: str = "prompt") -> Dict[str, Any]:
         """
         Forces JSON output from the model and returns parsed dict.
         Raises error if invalid JSON.
@@ -94,10 +101,12 @@ class LLMApiClient:
                 )
                 
                 parsed_obj = response.choices[0].message.parsed
-                if parsed_obj:
-                    return parsed_obj.model_dump()
-                else:
-                    return json.loads(response.choices[0].message.content)
+                result = parsed_obj.model_dump() if parsed_obj else json.loads(response.choices[0].message.content)
+                
+                if save_dir:
+                    save_llm_prompt(messages, save_dir, filename_prefix=prompt_name)
+                
+                return result
             else:
                 response = self.client.chat.completions.create(
                     model=self.model,
@@ -108,7 +117,12 @@ class LLMApiClient:
                 )
 
                 raw_text = response.choices[0].message.content.strip()
-                return json.loads(raw_text)
+                result = json.loads(raw_text)
+                
+                if save_dir:
+                    save_llm_prompt(messages, save_dir, filename_prefix=prompt_name)
+                    
+                return result
 
         except json.JSONDecodeError as e:
             raise ValueError("Model returned invalid JSON.") from e

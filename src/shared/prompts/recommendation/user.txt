@@ -1,7 +1,3 @@
-TASK
-Generate 4 prioritized recommendations based on the provided input.
-
-
 INPUT JSON
 {
   "campaign_target": {{CAMPAIGN_TARGET}},
