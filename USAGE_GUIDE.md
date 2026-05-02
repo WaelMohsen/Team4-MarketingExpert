@@ -45,7 +45,7 @@ Grades a specific analysis report against raw campaign data, business domain, an
 ```bash
 python -m src.modules.evaluation.analysis_evaluator
 ```
-*Note: Ensure the file paths inside the script's `if __name__ == "__main__"` block point to your target JSON files.*
+*Note: Ensure the file paths inside the script's `if __name__ == "__main__"` block point to your target JSON files. The evaluator is robust enough to automatically load `enriched_summary.json` as a fallback if the target JSON lacks the full campaign context.*
 
 ### Recommendation Evaluator
 Grades recommendation cards against raw campaign data, business context, and analysis.

@@ -101,6 +101,39 @@ def run_recommendation_evaluation(file_path: str):
     analysis_context = data.get('analysis_response')
     recommendations = data.get('recommendation_response', {}).get('recommendations', [])
 
+    if not recommendations and 'recommendations' in data:
+        recommendations = data['recommendations']
+        
+    if not campaign_data:
+        dir_name = os.path.dirname(file_path)
+        enriched_summary_path = os.path.join(dir_name, 'enriched_summary.json')
+        analysis_result_path = os.path.join(dir_name, 'analysis_result.json')
+        
+        if os.path.exists(enriched_summary_path):
+            try:
+                with open(enriched_summary_path, 'r', encoding='utf-8') as ef:
+                    enriched_data = json.load(ef)
+                    campaign_data = enriched_data
+                    if not business_context:
+                        identity = enriched_data.get('campaign_identity', {})
+                        business_context = {
+                            "industry": identity.get("industry", "Unknown"),
+                            "offering": identity.get("offering", "Unknown"),
+                            "audience": identity.get("audience", "Unknown"),
+                            "funnel_stage": identity.get("funnel_stage", "Unknown")
+                        }
+                    if not campaign_target:
+                        campaign_target = {"primary_goal": "Unknown"}
+            except Exception as e:
+                logger.warning(f"Could not load context from {enriched_summary_path}: {e}")
+                
+        if not analysis_context and os.path.exists(analysis_result_path):
+            try:
+                with open(analysis_result_path, 'r', encoding='utf-8') as af:
+                    analysis_context = json.load(af)
+            except Exception as e:
+                logger.warning(f"Could not load analysis from {analysis_result_path}: {e}")
+
     results = []
     for rec in recommendations:
         try:

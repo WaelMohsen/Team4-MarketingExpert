@@ -34,7 +34,7 @@ The system flattens the row into a high-density JSON object. This object include
 - Both stages operate with **unified 360-degree context**, receiving the Raw Campaign Data, Business Domain, Campaign Targets, and Previous AI Results (for recommendations) to prevent any blind spots.
 
 #### C. Evaluation (Split Grading)
-The quality of the AI output is audited by a separate LLM process using the exact same unified context (Data, Target, Domain) used during generation to ensure absolute accuracy. Results are split into two files:
+The quality of the AI output is audited by a separate LLM process using the exact same unified context (Data, Target, Domain) used during generation to ensure absolute accuracy. If the generated output files (e.g., `analysis_result.json`) are missing original context fields like `campaign_data`, the evaluator will automatically fallback to loading `enriched_summary.json` from the same campaign run directory to reconstruct the full context. Results are split into two files:
 - `analysis_evaluation_results.json`
 - `recommendation_evaluation_results.json`
 

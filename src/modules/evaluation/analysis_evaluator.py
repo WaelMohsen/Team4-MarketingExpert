@@ -102,9 +102,40 @@ def run_evaluation_pipeline(files: List[str]):
         campaign_target = data.get('campaign_target')
         business_domain = data.get('business_domain')
 
+        # Fallback: if data is from data/outputs/.. directory structure
+        if analysis_report is None and 'analysis' in data:
+            analysis_report = data
+        
+        if campaign_data is None:
+            # Try to load enriched_summary.json from the same directory
+            dir_name = os.path.dirname(file_path)
+            enriched_summary_path = os.path.join(dir_name, 'enriched_summary.json')
+            if os.path.exists(enriched_summary_path):
+                try:
+                    with open(enriched_summary_path, 'r', encoding='utf-8') as ef:
+                        enriched_data = json.load(ef)
+                        campaign_data = enriched_data
+                        
+                        # Infer business domain and campaign target from enriched_data if missing
+                        if not business_domain:
+                            identity = enriched_data.get('campaign_identity', {})
+                            business_domain = {
+                                "industry": identity.get("industry", "Unknown"),
+                                "offering": identity.get("offering", "Unknown"),
+                                "audience": identity.get("audience", "Unknown"),
+                                "funnel_stage": identity.get("funnel_stage", "Unknown")
+                            }
+                        if not campaign_target:
+                            campaign_target = {
+                                "primary_goal": "Unknown" # Default if not found
+                            }
+                except Exception as e:
+                    logger.warning(f"Could not load context from {enriched_summary_path}: {e}")
+
         if not all([campaign_data, analysis_report]):
             logger.warning(f"Skipping {file_path}: missing required fields.")
             continue
+
 
         try:
             comparison_results = evaluator.evaluate(campaign_data, analysis_report, campaign_target, business_domain)
