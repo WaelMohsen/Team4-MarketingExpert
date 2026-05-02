@@ -65,18 +65,28 @@ class RecommendationEvaluator:
         
         return {
             "scores": {
-                "clarity": eval_data.get("clarity_score", 0),
-                "accuracy": eval_data.get("accuracy_score", 0),
-                "structure": eval_data.get("structure_score", 0),
-                "feasibility": eval_data.get("feasibility_score", 0),
-                "overall": (eval_data.get("clarity_score", 0) + eval_data.get("accuracy_score", 0) + 
-                           eval_data.get("structure_score", 0) + eval_data.get("feasibility_score", 0)) / 4
+                "Structure": eval_data.get("structure_score", 0),
+                "Feasibility": eval_data.get("feasibility_score", 0),
+                "Recommendation_Count": eval_data.get("Recommendation_Count_score", 0),
+                "Analysis_Grounding": eval_data.get("Analysis_Grounding_score", 0),
+                "Action_Step_Completeness": eval_data.get("Action_Step_Completeness_score", 0),
+                "Priority_Alignment": eval_data.get("Priority_Alignment_score", 0),
+                "Tone_&_Audience_Compliance": eval_data.get("Tone_&_Audience_Compliance_score", 0),
+                "Expected_Impact_Quality": eval_data.get("Expected_Impact_Quality_score", 0),
+                "Overall": (eval_data.get("structure_score", 0) + eval_data.get("feasibility_score", 0) + 
+                           eval_data.get("Recommendation_Count_score", 0) + eval_data.get("Analysis_Grounding_score", 0)) +
+                           (eval_data.get("Action_Step_Completeness_score", 0) + eval_data.get("Priority_Alignment_score", 0) + 
+                            eval_data.get("Tone_&_Audience_Compliance_score", 0) + eval_data.get("Expected_Impact_Quality_score", 0)) / 8
             },
             "reasoning": {
-                "clarity": eval_data.get("clarity_reasoning"),
-                "accuracy": eval_data.get("accuracy_reasoning"),
-                "structure": eval_data.get("structure_reasoning"),
-                "feasibility": eval_data.get("feasibility_reasoning"),
+                "Structure": eval_data.get("clarity_reasoning"),
+                "Feasibility": eval_data.get("accuracy_reasoning"),
+                "Recommendation_Count": eval_data.get("structure_reasoning"),
+                "Analysis_Grounding": eval_data.get("feasibility_reasoning"),
+                "Action_Step_Completeness": eval_data.get("Action_Step_Completeness_reasoning"),
+                "Priority_Alignment": eval_data.get("Priority_Alignment_reasoning"),
+                "Tone_&_Audience_Compliance": eval_data.get("Tone_&_Audience_Compliance_reasoning"),
+                "Expected_Impact_Quality": eval_data.get("Expected_Impact_Quality_reasoning"),
             },
             "verdict": eval_data.get("verdict"),
             "key_issues": eval_data.get("key_issues"),
