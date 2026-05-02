@@ -138,15 +138,32 @@ def validate_recommendation_output(output: Dict[str, Any]) -> bool:
 # STAGE 3: EVALUATION SCHEMAS
 # ==========================================
 class EvaluationSection(BaseModel):
-    clarity_reasoning: str
-    clarity_score: int = Field(ge=1, le=3)
-    accuracy_reasoning: str
-    accuracy_score: int = Field(ge=1, le=3)
     structure_reasoning: str
     structure_score: int = Field(ge=1, le=3)
-    feasibility_reasoning: Optional[str] = None
-    feasibility_score: Optional[int] = Field(None, ge=1, le=3)
-    verdict: str = Field(description="reject, revise, or accept")
+
+    feasibility_reasoning: str
+    feasibility_score: int = Field(ge=1, le=3)
+
+    analysis_grounding_reasoning: str
+    analysis_grounding_score: int = Field(ge=1, le=3)
+
+    action_step_completeness_reasoning: str
+    action_step_completeness_score: int = Field(ge=1, le=3)
+
+    priority_alignment_reasoning: str
+    priority_alignment_score: int = Field(ge=1, le=3)
+
+    tone_audience_reasoning: str
+    tone_audience_score: int = Field(ge=1, le=3)
+
+    expected_impact_reasoning: str
+    expected_impact_score: int = Field(ge=1, le=3)
+
+    instruction_adherence_reasoning: str
+    instruction_adherence_score: int = Field(ge=1, le=3)
+
+    verdict: str = Field(description="accept, revise, or reject")
+
     key_issues: List[str]
     improvement_suggestions: List[str]
 

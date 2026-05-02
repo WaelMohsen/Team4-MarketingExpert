@@ -55,36 +55,35 @@
     "scores": {
       "Structure": 3,
       "Feasibility": 3,
-      "Analysis_Grounding": 0,
-      "Action_Step_Completeness": 0,
-      "Priority_Alignment": 0,
-      "Tone_Audience": 0,
-      "Expected_Impact": 0,
-      "Instruction_Adherence": 0,
-      "Overall": 0.75
+      "Analysis_Grounding": 3,
+      "Action_Step_Completeness": 3,
+      "Priority_Alignment": 3,
+      "Tone_Audience": 3,
+      "Expected_Impact": 3,
+      "Instruction_Adherence": 3,
+      "Overall": 3.0
     },
     "reasoning": {
-      "Structure": "The output contains exactly four recommendations, each with all required fields, no extras, and each addressing a distinct root cause as per instructions.",
-      "Feasibility": "The suggested actions involve standard digital marketing tactics using existing tools like Google Ads and website analytics, making them practical and executable.",
-      "Analysis_Grounding": null,
-      "Action_Step_Completeness": null,
-      "Priority_Alignment": null,
-      "Tone_Audience": null,
-      "Expected_Impact": null,
-      "Instruction_Adherence": null
+      "Structure": "All recommendations follow the required schema with fields: title, whats_happening, what_you_should_do, why_this_matters, priority, expected_impact, and owner_suggestion. There are no extraneous fields, and each recommendation is a standalone object within the array.",
+      "Feasibility": "All actions involve standard platform operations such as audience analysis, creative testing, bid adjustments, and tracking implementation, which are executable with existing Google Ads and web analytics capabilities without special permissions.",
+      "Analysis_Grounding": "Each recommendation explicitly relates to the analysis context: CTR, CPC, and creative resonance are mentioned as issues, and the recommendations directly target these gaps (targeting, creative, CPC management). The recommendations do not introduce assumptions outside the analysis data and insights.",
+      "Action_Step_Completeness": "Each action clearly specifies WHERE (platform or asset such as ad set, creatives, keywords, or landing page) and HOW (specific steps like analyzing targeting, developing new creatives, adjusting bids, implementing tracking pixels). For example, the first recommendation details analyzing current audience settings and testing new segments in Google Ads.",
+      "Priority_Alignment": "High priority is assigned to improving CTR and creative engagement because they directly impact traffic quality and conversions, aligning with the business goal of maximizing ROAS. Control of CPC is medium priority, and data gathering on landing page views is low, which matches the potential impact and urgency suggested by the analysis.",
+      "Tone_Audience": "The language is clear, business-formal, jargon-free, and directed at a non-marketer, providing straightforward and actionable steps. The phrasing avoids hedging or ambiguous language.",
+      "Expected_Impact": "Recommendations specify expected impacts such as CTR improvement to 0.06, increased engagement, 10% CPC reduction, and better traffic quality—these are tangible and related to the campaign's metrics and objectives.",
+      "Instruction_Adherence": "All instructions are followed diligently: schema is correct, 4 recommendations are listed, no extra fields exist, each maps to a unique root cause, and actions follow the prescribed WHAT/WHERE/HOW format. The priority logic is consistent with the analysis, emphasizing high-impact areas."
     },
     "verdict": "accept",
     "key_issues": [
-      "Recommendations are well-grounded in analysis but do not address the critical KPI mismatch (credit card signups vs. personal loans) noted in the analysis.",
-      "The recommendations do not consider the measurement inconsistency regarding 'leads' and 'CPL' as data fields are missing.",
-      "Lack of targeting or messaging suggestions tailored to the campaign's primary goal of credit card signups, despite the current focus on targeting ad engagement.",
-      "No recommendations for addressing missing audience or conversion quality data, which are key gaps identified."
+      "Some recommendations target high-priority issues (CTR, creative effectiveness) grounded in the analysis.",
+      "Recommendations for tracking and data gathering are appropriate but less urgent, which is reflected in lower priority.",
+      "All recommendations are consistent with the analysis context and business goals."
     ],
     "improvement_suggestions": [
-      "Include advice on aligning KPI tracking with campaign goals, such as clarifying and fixing the KPI mismatch.",
-      "Add recommendations on improving KPI data collection, especially 'leads' and 'CPL', to better evaluate campaign performance.",
-      "Incorporate suggestions for refining messaging or offer relevance to the stated primary goal of credit card signups.",
-      "Address data gaps by recommending the implementation of tracking for reach, leads, and conversion quality to enable more comprehensive performance analysis."
+      "Include specific target metrics for CTR and CPC improvements to quantify success.",
+      "Add details on how to access or implement audience analysis tools for better targeting insights.",
+      "Clarify the basis for setting the expected impact percentages, such as historical averages or industry benchmarks.",
+      "Ensure that the landing page tracking setup is prioritized if landing page data is critical for conversion analysis."
     ]
   }
 }
