@@ -16,8 +16,8 @@ class PromptRegistry(Enum):
     RECOMMENDATION_USER = "recommendation/user.txt"
 
     # Evaluation: Analysis
-    EVAL_ANALYSIS_SYSTEM = "evaluation/analysis_system.txt"
-    EVAL_ANALYSIS_USER = "evaluation/analysis_user.txt"
+    EVAL_ANALYSIS_SYSTEM = "evaluation/analysis_system.md"
+    EVAL_ANALYSIS_USER = "evaluation/analysis_user.md"
 
     # Evaluation: Recommendation
     EVAL_RECOMMENDATION_SYSTEM = "evaluation/recommendation_system.txt"

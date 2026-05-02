@@ -1,0 +1,22 @@
+{
+  "scores": {
+    "clarity": 3,
+    "accuracy": 3,
+    "hallucination": 0,
+    "structure": 3,
+    "kpi_alignment": 0,
+    "total": 9,
+    "overall": 1.8
+  },
+  "reasoning": {
+    "clarity": "The report clearly states that revenue generated is $4,803.43 with a ROAS of 1.8 and provides figures for spend, conversions, and CPC, which are specific and business-relevant.",
+    "accuracy": "The revenue of $4,803.43, spend of $2,662.38, and ROAS of 1.8 are consistent with raw data figures.",
+    "hallucination": null,
+    "structure": "All required sections are present; the report has executive summary, detailed insights, channel notes, and discussion of missing info.",
+    "kpi_alignment": null
+  },
+  "hallucination_checklist": {},
+  "verdict": "accept",
+  "key_issues": [],
+  "improvement_suggestions": []
+}

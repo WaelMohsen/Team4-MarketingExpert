@@ -920,3 +920,209 @@ TypeError: run_analysis_comparison() got an unexpected keyword argument 'analysi
 2026-04-29 16:23:35,541 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1\run_20260429_162250\results\analysis_evaluation_results.json
 2026-04-29 16:23:35,541 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1\run_20260429_162250\results\recommendation_evaluation_results.json
 2026-04-29 16:23:35,541 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-01 15:04:43,615 | INFO | root | Logging initialized.
+2026-05-01 15:04:43,615 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=None
+2026-05-01 15:04:43,616 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-05-01 15:04:43,617 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-05-01 15:04:43,650 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\analysis_evaluation_results.json
+2026-05-01 15:04:43,667 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-05-01 15:04:43,677 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\analysis_evaluation_results.json
+2026-05-01 15:04:43,739 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-05-01 15:04:43,740 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-01 15:04:43,740 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-01 15:04:43,740 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-01 15:04:43,838 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:43,839 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-01 15:04:43,840 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:44,119 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:44,213 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:45,974 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-05-01 15:04:45,994 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-01 15:04:45,994 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-01 15:04:45,995 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-01 15:04:45,995 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-01 15:04:46,006 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,006 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-01 15:04:46,006 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,009 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,011 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,187 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-05-01 15:04:46,197 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-01 15:04:46,197 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-05-01 15:04:46,198 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-05-01 15:04:46,225 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\analysis_evaluation_results.json
+2026-05-01 15:04:46,258 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\recommendation_evaluation_results.json
+2026-05-01 15:04:46,267 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\analysis_evaluation_results.json
+2026-05-01 15:04:46,276 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\recommendation_evaluation_results.json
+2026-05-01 15:04:46,276 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-01 15:04:46,277 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-01 15:04:46,277 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-01 15:04:46,279 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:46,279 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-01 15:04:46,279 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:46,281 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:46,283 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-01 15:04:46,455 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
+2026-05-01 15:04:46,465 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-01 15:04:46,466 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-01 15:04:46,466 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-01 15:04:46,466 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-01 15:04:46,474 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,474 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-01 15:04:46,474 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,476 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,478 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
+2026-05-01 15:04:46,642 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
+2026-05-01 15:04:46,651 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-01 15:04:46,651 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
+2026-05-01 15:06:13,388 | INFO | root | Logging initialized.
+2026-05-01 15:07:55,622 | INFO | root | Logging initialized.
+2026-05-01 15:11:30,621 | INFO | root | Logging initialized.
+2026-05-01 15:12:22,467 | INFO | root | Logging initialized.
+2026-05-01 16:05:42,858 | INFO | root | Logging initialized.
+2026-05-01 16:10:47,519 | INFO | root | Logging initialized.
+2026-05-01 16:10:48,339 | INFO | llm_analysis_evaluator | Processing file: data\evaluation_runs\campaign_1_result.json
+2026-05-01 16:10:48,347 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
+2026-05-01 16:10:51,341 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-01 16:10:51,351 | ERROR | llm_analysis_evaluator | Failed to evaluate data\evaluation_runs\campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-01 16:16:02,823 | INFO | root | Logging initialized.
+2026-05-01 16:16:03,061 | INFO | llm_analysis_evaluator | Processing file: data\evaluation_runs\campaign_1_result.json
+2026-05-01 16:16:03,062 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
+2026-05-01 16:16:03,556 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-01 16:16:03,557 | ERROR | llm_analysis_evaluator | Failed to evaluate data\evaluation_runs\campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-01 16:16:14,704 | INFO | root | Logging initialized.
+2026-05-01 16:16:14,955 | INFO | llm_analysis_evaluator | Processing file: data\evaluation_runs\campaign_1_result.json
+2026-05-01 16:16:14,955 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
+2026-05-01 16:16:15,437 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-01 16:16:15,437 | ERROR | llm_analysis_evaluator | Failed to evaluate data\evaluation_runs\campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-01 16:18:36,506 | INFO | root | Logging initialized.
+2026-05-01 16:18:36,745 | INFO | llm_analysis_evaluator | Processing file: data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json
+2026-05-01 16:18:36,745 | WARNING | llm_analysis_evaluator | Skipping data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json: missing campaign data or analysis report.
+2026-05-01 16:20:03,919 | INFO | root | Logging initialized.
+2026-05-01 16:20:04,195 | INFO | llm_analysis_evaluator | Processing file: data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json
+2026-05-01 16:20:04,196 | WARNING | llm_analysis_evaluator | Skipping data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json: missing campaign data or analysis report.
+2026-05-01 16:34:08,791 | INFO | root | Logging initialized.
+2026-05-01 16:34:09,040 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 16:34:09,047 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 16:34:09,530 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-01 16:34:09,531 | ERROR | llm_analysis_evaluator | Failed to evaluate data/evaluation_runs/campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-01 16:36:42,430 | INFO | root | Logging initialized.
+2026-05-01 16:36:42,692 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 16:36:42,693 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 16:36:46,316 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 16:36:46,461 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 16:37:38,695 | INFO | root | Logging initialized.
+2026-05-01 16:37:38,930 | INFO | llm_analysis_evaluator | Processing file: data/evaluation_runs/campaign_1_result.json
+2026-05-01 16:37:38,931 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
+2026-05-01 16:37:42,576 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 16:37:42,675 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 16:40:23,992 | INFO | root | Logging initialized.
+2026-05-01 16:40:24,233 | INFO | llm_analysis_evaluator | Processing file: data/evaluation_runs/campaign_2_result.json
+2026-05-01 16:40:24,234 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
+2026-05-01 16:40:29,167 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 16:40:29,182 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:14:36,719 | INFO | root | Logging initialized.
+2026-05-01 17:14:36,965 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_2_result.json
+2026-05-01 17:14:36,974 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:14:41,146 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:14:41,156 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:15:21,334 | INFO | root | Logging initialized.
+2026-05-01 17:15:21,585 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_2_result.json
+2026-05-01 17:15:21,588 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:15:26,619 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:15:26,629 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:15:36,869 | INFO | root | Logging initialized.
+2026-05-01 17:15:37,122 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:15:37,123 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:15:39,885 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:15:39,903 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:16:49,164 | INFO | root | Logging initialized.
+2026-05-01 17:16:49,441 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:16:49,442 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:16:53,357 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:16:53,373 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:17:22,328 | INFO | root | Logging initialized.
+2026-05-01 17:17:22,627 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:17:22,628 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:17:27,158 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:17:27,181 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:18:18,903 | INFO | root | Logging initialized.
+2026-05-01 17:18:19,172 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:18:19,173 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:18:22,264 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:18:22,290 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:19:20,252 | INFO | root | Logging initialized.
+2026-05-01 17:19:20,493 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:19:20,495 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:19:23,222 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:19:23,240 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:19:31,633 | INFO | root | Logging initialized.
+2026-05-01 17:19:31,880 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:19:31,881 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:19:34,969 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:19:34,979 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:21:13,322 | INFO | root | Logging initialized.
+2026-05-01 17:21:13,582 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:21:13,585 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-01 17:21:17,647 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:21:17,660 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-01 17:21:49,930 | INFO | root | Logging initialized.
+2026-05-01 17:21:50,227 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-01 17:21:50,228 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-01 17:21:52,337 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-01 17:21:52,351 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
+2026-05-02 11:13:23,384 | INFO | root | Logging initialized.
+2026-05-02 11:13:24,256 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 11:13:24,323 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 11:13:31,205 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 11:13:31,340 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 11:30:33,772 | INFO | root | Logging initialized.
+2026-05-02 11:30:34,038 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 11:30:34,040 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 11:30:39,445 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 11:30:39,546 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:08:30,728 | INFO | root | Logging initialized.
+2026-05-02 12:08:31,231 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:08:31,279 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:08:37,093 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:08:37,262 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:09:52,373 | INFO | root | Logging initialized.
+2026-05-02 12:09:52,639 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:09:52,641 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:09:56,918 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:09:56,930 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:24:47,990 | INFO | root | Logging initialized.
+2026-05-02 12:24:48,292 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:24:48,293 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:24:53,041 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:24:53,072 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:34:29,713 | INFO | root | Logging initialized.
+2026-05-02 12:34:29,975 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:34:29,976 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-02 12:34:33,850 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:34:33,861 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:34:42,285 | INFO | root | Logging initialized.
+2026-05-02 12:34:42,546 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:34:42,548 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:34:45,854 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:34:45,870 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:40:53,741 | INFO | root | Logging initialized.
+2026-05-02 12:40:53,990 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:40:53,991 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:40:58,020 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:40:58,121 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:52:07,339 | INFO | root | Logging initialized.
+2026-05-02 12:52:07,585 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:52:07,586 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:52:11,853 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:52:11,868 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:54:19,553 | INFO | root | Logging initialized.
+2026-05-02 12:54:19,815 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:54:19,816 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-02 12:54:23,925 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:54:23,943 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-02 12:54:33,452 | INFO | root | Logging initialized.
+2026-05-02 12:54:33,723 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-02 12:54:33,725 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-02 12:54:38,361 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 12:54:38,373 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
