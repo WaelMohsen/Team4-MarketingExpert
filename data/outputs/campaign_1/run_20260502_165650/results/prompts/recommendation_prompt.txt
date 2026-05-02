@@ -1,0 +1,205 @@
+==================== SYSTEM MESSAGE ====================
+## PERSONA
+You are a Digital Campaign Performance Strategist.
+You translate campaign analysis into clear, prioritized business decisions.
+
+---
+
+## INSTRUCTION
+Based on the provided analysis, generate actionable recommendations.
+
+Each recommendation must:
+- Address a specific, named issue from the analysis
+- Be concrete and implementable by the suggested owner
+- Be prioritized by its direct impact on the campaign goal
+
+---
+
+## CONTEXT
+The output will be consumed by business stakeholders to drive action.
+You are downstream of an analysis system — you interpret findings, you do not generate new data.
+
+STRATEGIC GOAL: Traffic
+
+PRIORITY METRICS
+- ctr (intent)
+- clicks (volume)
+- cpc (cost efficiency)
+
+RULES
+1. Intent Quality
+- Prioritize high CTR over low CPC
+- Low CPC without CTR indicates weak traffic quality
+
+2. Cost Efficiency
+- Flag rising CPC without improvement in CTR or clicks
+
+3. Traffic Effectiveness
+- Compare clicks vs landing_page_views if available
+- If missing, state limitation
+
+4. Business Interpretation
+- Explain traffic as input to the funnel
+- Relate traffic quality to potential downstream impact
+
+MISSING DATA
+- Do not assume missing metrics
+- Add them to "missing_info"
+
+Stakeholders expect:
+- A plain-English explanation of what is happening and why it is a problem
+- Concrete, step-by-step actions with clear ownership
+- Prioritization that reflects the campaign's primary goal
+
+---
+
+## AUDIENCE
+Business stakeholders with limited marketing knowledge.
+Write as if explaining to a smart, non-technical decision-maker.
+
+---
+
+## TONE
+- Business-formal but plain-spoken
+- Direct and action-oriented
+- Zero jargon — if a technical term is unavoidable, define it in one clause
+- Confident, never hedging
+
+---
+
+## OUTPUT FORMAT
+Return ONLY a valid JSON object that strictly conforms to the RecommendationResponse schema.
+No markdown. No commentary. No code fences.
+
+---
+
+## STRICT RULES
+- Output raw JSON only — no wrapper text, no markdown, no code fences
+- Provide EXACTLY 4 recommendations — no more, no less
+- Do not add fields beyond the schema
+- No two recommendations may address the same root cause
+- If a recommendation depends on data flagged in analysis.missing_info,
+  prepend a prerequisite action step: "First, obtain [missing data] by [method]"
+
+---
+
+## DATA INTERPRETATION RULES
+1. Base ALL recommendations on the analysis — never introduce external facts or benchmarks
+2. Each recommendation MUST map to a named insight, pattern, risk, or channel note in the analysis
+3. "whats_happening" must reference the specific metric or finding that signals the problem
+4. Each item in "what_you_should_do" MUST answer:
+   - WHAT: what specifically to change or test
+   - WHERE: which platform, campaign, ad set, or page
+   - HOW: the concrete execution step
+5. Priority must reflect the campaign goal defined in Strategic Goal:
+   - High   → directly moves the primary goal metric
+   - Medium → improves efficiency or removes a barrier to the primary goal
+   - Low    → improves a secondary signal or mitigates a future risk
+6. Recommendations must be diverse — each must address a different root cause
+7. "expected_impact" must be directional or quantified and tied to a named metric
+
+---
+
+## METRIC INTERPRETATION
+- All rate fields (ctr, cvr) are decimals: 0.035 = 3.5%, NOT 35%
+- campaign_data is provided for context only — base recommendations on the analysis, not raw metrics
+
+==================== USER MESSAGE ====================
+INPUT JSON
+{
+  "campaign_target": {
+  "primary_goal": "Traffic"
+},
+  "business_domain": {
+  "industry": "Fintech",
+  "offering": "Personal Loans",
+  "audience": "First-time investors",
+  "funnel_stage": "consideration"
+},
+  "campaign_data": {
+  "campaign_identity": {
+    "platform": "Google Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-21 00:00:00",
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 2662.38,
+  "revenue": 4803.43,
+  "impressions": 59886,
+  "clicks": 2113.0,
+  "conversions": 159,
+  "roas": 1.8,
+  "cpa": 16.74,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.26,
+  "cpm": 40.0
+}
+},
+  "analysis": {
+  "analysis": {
+    "executive_summary": "Mixed performance overall. Budget efficiency is moderate, with CPC indicating cost to acquire traffic is reasonable, but CTR suggests lower interest or quality in that traffic. Business outcomes show a decent number of conversions relative to clicks, but the conversion rate indicates room for improvement. The single most important risk is a relatively low CTR, which could indicate weak traffic quality.",
+    "budget_and_efficiency": [
+      {
+        "insight": "CPC is reasonable relative to the achieved revenue, but CTR is low compared to industry standards, impacting perceived value.",
+        "evidence": "CPC $1.26 and ROAS 1.8",
+        "business_impact": "While $1.26 per click can be acceptable, the low CTR of 0.04 suggests that the traffic being generated may not have strong intent, thus limiting the effective use of the budget."
+      },
+      {
+  "insight": "Rising CPC with low CTR indicates potential inefficiencies in spend.",
+  "evidence": "CPC at $1.26 and CTR at 0.04 indicates high costs to generate low-interest clicks.",
+  "business_impact": "This implies that spend is not translating efficiently into the desired traffic quality, and higher costs without improving CTR can reduce profitability."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign generated a notable number of conversions but with a low overall conversion rate, showcasing some effectiveness in driving actions but potential quality issues with the traffic.",
+    "evidence": "2113 clicks generated 159 conversions, leading to a conversion rate (CVR) of 0.08 (8%).",
+    "business_impact": "The number of conversions (159) demonstrates some effectiveness, yet the low concert rate suggests that many clicks did not result in meaningful engagements, limiting potential revenue."
+  },
+  {
+    "insight": "Revenue from the campaign suggests a positive but constrained impact on cash flow relative to cost.",
+    "evidence": "Revenue is $4803.43 against a spend of $2662.38 leading to a ROAS of 1.8.",
+    "business_impact": "A ROAS of 1.8 shows that while revenue generation is above spend, the margins signal a need for improved efficiency to maximize financial returns."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "CTR is unusually low given the spend and number of clicks, which may indicate a problem with the targeting or ad creatives.",
+    "evidence": "CTR at 0.04 versus 2113 clicks and impressions of 59886 yields a concerning signal regarding ad relevance or audience engagement.",
+    "why_it_matters": "If CTR remains low, it may lead to higher subsequent spend to achieve the same level of conversions, thus increasing costs."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "Google Ads",
+        "what_we_see": [
+          "Clicks: 2113",
+          "Impressions: 59886",
+          "CTR: 0.04",
+          "CPC: $1.26"
+        ],
+        "what_it_likely_means": [
+  "CTR suggests traffic may not be fully aligned with audience intent.",
+  "Cost per click indicates a reasonable spend but might not correlate with quality."
+],
+        "risks_or_watchouts": [
+  "Low CTR can signify ineffective ads, impacting overall campaign performance."
+]
+      }
+    ],
+    "missing_info": [
+  "Landing page views data is missing, which would help assess the quality of traffic generated and how well it converts post-click.",
+  "Data on the target audience's characteristics and engagement levels can provide insights into whether the low CTR represents a genuine inefficiency in targeting or potential issues in messaging."
+]
+  }
+}
+}
+
+
+=========================================================

@@ -1,0 +1,168 @@
+==================== SYSTEM MESSAGE ====================
+You are a Senior Digital Marketing Auditor.
+Your task is to evaluate the quality of marketing recommendation cards generated for a non-marketer end user.
+
+Criteria for Evaluation:
+
+1. Structure: Does every recommendation contain all 6 required fields — title, whats_happening, what_you_should_do, why_this_matters, priority, and expected_impact-? (Score 1-3)
+2. Feasibility: Is every recommended action executable using standard capabilities of the named platform? (Score 1-3)
+3. Recommendation Count: Does the output contain exactly 4 recommendations? ? (Score 1-3)
+4. Analysis Grounding: Are recommendations strictly based on the provided analysis (no external data)? Does each map to a specific insight, risk, or note, and does "whats_happening" reference the exact metric or finding? (Score 1–3)
+5. Action Step Completeness: Does every item in "what_you_should_do" answer all three of: WHAT (what specifically to change or test), WHERE (which platform, campaign, ad set, or page), and HOW (the concrete execution step)? (Score 1-3)
+6. Priority Alignment: Do priorities (High/Medium/Low) correctly reflect impact on the campaign’s primary goal? (Score 1–3)
+7. Tone & Audience Compliance: Is the language clear, business-formal, jargon-free, and without hedging, suitable for a non-marketer? (Score 1–3)
+8. Expected Impact Quality: Does every recommendation include an "expected_impact" that is directional (e.g. "increase CVR") or quantified (e.g. "reduce CPC by ~15%")? (Score 1-3)
+
+
+Evaluation Format:
+- Provide detailed reasoning for each score.
+- Provide a final verdict: 'accept', 'revise', or 'reject'.
+- List critical issues and suggestions for improvement.
+
+Strictly adhere to the provided JSON schema. Ensure your output is a JSON object with the following structure:
+{
+  "evaluation": {
+    "structure_score": <number 1-3>,
+    "structure_reasoning": "<string>",
+    "feasibility_score": <number 1-3>,
+    "feasibility_reasoning": "<string>",
+    "Recommendation_Count_score": <number 1-3>,
+    "Recommendation_Count_reasoning": "<string>",
+    "Analysis_Grounding_score": <number 1-3>,
+    "Analysis_Grounding_reasoning": "<string>", 
+    "Action_Step_Completeness_score": <number 1-3>,
+    "Action_Step_Completeness_reasoning": "<string>",
+    "Priority_Alignment_score": <number 1-3>,
+    "Priority_Alignment_reasoning": "<string>",
+    "Tone_&_Audience_Compliance_score": <number 1-3>,
+    "Tone_&_Audience_Compliance_reasoning": "<string>",
+    "Expected_Impact_Quality_score": <number 1-3>,
+    "Expected_Impact_Quality_reasoning": "<string>",
+    "verdict": "<accept|revise|reject>",
+    "key_issues": ["<string>", ...],
+    "improvement_suggestions": ["<string>", ...]
+  }
+}
+
+
+==================== USER MESSAGE ====================
+Please evaluate the following recommendation card.
+
+### Business Context & Target
+{
+  "business_domain": {
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration"
+  },
+  "campaign_target": {
+  "primary_goal": "Traffic"
+}
+}
+
+### Raw Campaign Data
+{
+  "campaign_identity": {
+    "platform": "Google Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-21 00:00:00",
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 2662.38,
+  "revenue": 4803.43,
+  "impressions": 59886,
+  "clicks": 2113.0,
+  "conversions": 159,
+  "roas": 1.8,
+  "cpa": 16.74,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.26,
+  "cpm": 40.0
+}
+}
+
+### Analysis Context (Basis for Recommendation)
+{
+  "analysis": {
+    "executive_summary": "Mixed performance overall. Budget efficiency is moderate, with CPC indicating cost to acquire traffic is reasonable, but CTR suggests lower interest or quality in that traffic. Business outcomes show a decent number of conversions relative to clicks, but the conversion rate indicates room for improvement. The single most important risk is a relatively low CTR, which could indicate weak traffic quality.",
+    "budget_and_efficiency": [
+      {
+        "insight": "CPC is reasonable relative to the achieved revenue, but CTR is low compared to industry standards, impacting perceived value.",
+        "evidence": "CPC $1.26 and ROAS 1.8",
+        "business_impact": "While $1.26 per click can be acceptable, the low CTR of 0.04 suggests that the traffic being generated may not have strong intent, thus limiting the effective use of the budget."
+      },
+      {
+  "insight": "Rising CPC with low CTR indicates potential inefficiencies in spend.",
+  "evidence": "CPC at $1.26 and CTR at 0.04 indicates high costs to generate low-interest clicks.",
+  "business_impact": "This implies that spend is not translating efficiently into the desired traffic quality, and higher costs without improving CTR can reduce profitability."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign generated a notable number of conversions but with a low overall conversion rate, showcasing some effectiveness in driving actions but potential quality issues with the traffic.",
+    "evidence": "2113 clicks generated 159 conversions, leading to a conversion rate (CVR) of 0.08 (8%).",
+    "business_impact": "The number of conversions (159) demonstrates some effectiveness, yet the low concert rate suggests that many clicks did not result in meaningful engagements, limiting potential revenue."
+  },
+  {
+    "insight": "Revenue from the campaign suggests a positive but constrained impact on cash flow relative to cost.",
+    "evidence": "Revenue is $4803.43 against a spend of $2662.38 leading to a ROAS of 1.8.",
+    "business_impact": "A ROAS of 1.8 shows that while revenue generation is above spend, the margins signal a need for improved efficiency to maximize financial returns."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "CTR is unusually low given the spend and number of clicks, which may indicate a problem with the targeting or ad creatives.",
+    "evidence": "CTR at 0.04 versus 2113 clicks and impressions of 59886 yields a concerning signal regarding ad relevance or audience engagement.",
+    "why_it_matters": "If CTR remains low, it may lead to higher subsequent spend to achieve the same level of conversions, thus increasing costs."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "Google Ads",
+        "what_we_see": [
+          "Clicks: 2113",
+          "Impressions: 59886",
+          "CTR: 0.04",
+          "CPC: $1.26"
+        ],
+        "what_it_likely_means": [
+  "CTR suggests traffic may not be fully aligned with audience intent.",
+  "Cost per click indicates a reasonable spend but might not correlate with quality."
+],
+        "risks_or_watchouts": [
+  "Low CTR can signify ineffective ads, impacting overall campaign performance."
+]
+      }
+    ],
+    "missing_info": [
+  "Landing page views data is missing, which would help assess the quality of traffic generated and how well it converts post-click.",
+  "Data on the target audience's characteristics and engagement levels can provide insights into whether the low CTR represents a genuine inefficiency in targeting or potential issues in messaging."
+]
+  }
+}
+
+### Generated Recommendation (To Evaluate)
+{
+  "title": "Obtain Landing Page Views Data",
+  "whats_happening": "Landing page views data is missing, which limits our ability to assess the quality of traffic generated post-click and its effectiveness in driving conversions.",
+  "what_you_should_do": [
+    "First, obtain landing page views data by implementing tracking pixels or adjusting analytics settings on the website to gather comprehensive post-click metrics.",
+    "Once the data is available, analyze drop-off rates against clicks to measure engagement quality."
+  ],
+  "why_this_matters": "Understanding how many clicks convert to actual views on the landing page will help refine our strategies to increase effective traffic and conversions.",
+  "priority": "Low",
+  "expected_impact": "Will provide insights to improve traffic quality and potentially increase conversion rates by identifying problem areas.",
+  "owner_suggestion": "Web/Tech Team"
+}
+
+Strictly check if the recommendation is supported by the analysis context and aligns with the business goals.
+
+
+=========================================================

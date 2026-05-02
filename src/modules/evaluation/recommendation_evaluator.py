@@ -64,34 +64,53 @@ class RecommendationEvaluator:
         eval_data = result.get("evaluation", {})
         
         return {
-            "scores": {
-                "Structure": eval_data.get("structure_score", 0),
-                "Feasibility": eval_data.get("feasibility_score", 0),
-                "Recommendation_Count": eval_data.get("Recommendation_Count_score", 0),
-                "Analysis_Grounding": eval_data.get("Analysis_Grounding_score", 0),
-                "Action_Step_Completeness": eval_data.get("Action_Step_Completeness_score", 0),
-                "Priority_Alignment": eval_data.get("Priority_Alignment_score", 0),
-                "Tone_&_Audience_Compliance": eval_data.get("Tone_&_Audience_Compliance_score", 0),
-                "Expected_Impact_Quality": eval_data.get("Expected_Impact_Quality_score", 0),
-                "Overall": (eval_data.get("structure_score", 0) + eval_data.get("feasibility_score", 0) + 
-                           eval_data.get("Recommendation_Count_score", 0) + eval_data.get("Analysis_Grounding_score", 0)) +
-                           (eval_data.get("Action_Step_Completeness_score", 0) + eval_data.get("Priority_Alignment_score", 0) + 
-                            eval_data.get("Tone_&_Audience_Compliance_score", 0) + eval_data.get("Expected_Impact_Quality_score", 0)) / 8
+             "scores": {
+                 "Structure": eval_data.get("structure_score", 0),
+                 "Feasibility": eval_data.get("feasibility_score", 0),
+                 "Analysis_Grounding": eval_data.get("analysis_grounding_score", 0),
+                 "Action_Step_Completeness": eval_data.get("action_step_completeness_score", 0),
+                 "Priority_Alignment": eval_data.get("priority_alignment_score", 0),
+                 "Tone_Audience": eval_data.get("tone_audience_score", 0),
+                 "Expected_Impact": eval_data.get("expected_impact_score", 0),
+                 "Instruction_Adherence": eval_data.get("instruction_adherence_score", 0),
+                 # Correct overall calculation
+                 "Overall": (
+                     eval_data.get("structure_score", 0)+ eval_data.get("feasibility_score", 0)+
+                     eval_data.get("analysis_grounding_score", 0)+ eval_data.get("action_step_completeness_score", 0)+
+                     eval_data.get("priority_alignment_score", 0) + eval_data.get("tone_audience_score", 0)+
+                     eval_data.get("expected_impact_score", 0)+ eval_data.get("instruction_adherence_score", 0) ) / 8
+
             },
             "reasoning": {
-                "Structure": eval_data.get("clarity_reasoning"),
-                "Feasibility": eval_data.get("accuracy_reasoning"),
-                "Recommendation_Count": eval_data.get("structure_reasoning"),
-                "Analysis_Grounding": eval_data.get("feasibility_reasoning"),
-                "Action_Step_Completeness": eval_data.get("Action_Step_Completeness_reasoning"),
-                "Priority_Alignment": eval_data.get("Priority_Alignment_reasoning"),
-                "Tone_&_Audience_Compliance": eval_data.get("Tone_&_Audience_Compliance_reasoning"),
-                "Expected_Impact_Quality": eval_data.get("Expected_Impact_Quality_reasoning"),
+                "Structure": eval_data.get("structure_reasoning"),
+                "Feasibility": eval_data.get("feasibility_reasoning"),
+                "Analysis_Grounding": eval_data.get("analysis_grounding_reasoning"),
+                "Action_Step_Completeness": eval_data.get("action_step_completeness_reasoning"),
+                "Priority_Alignment": eval_data.get("priority_alignment_reasoning"),
+                "Tone_Audience": eval_data.get("tone_audience_reasoning"),
+                "Expected_Impact": eval_data.get("expected_impact_reasoning"),
+                "Instruction_Adherence": eval_data.get("instruction_adherence_reasoning"),
             },
             "verdict": eval_data.get("verdict"),
             "key_issues": eval_data.get("key_issues"),
             "improvement_suggestions": eval_data.get("improvement_suggestions"),
         }
+       
+
+    
+
+
+
+
+#for rec in recommendations:
+     #   try:
+       #     eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, rec)
+         #   results.append({
+         #       "recommendation_title": rec.get("title"),
+         #       "evaluation": eval_res
+         #   })
+        #except Exception as e:
+        #    logger.error(f"Failed to evaluate recommendation '{rec.get('title')}': {e}")
 
 def run_recommendation_evaluation(file_path: str):
     """Main execution loop for recommendation evaluation."""
@@ -112,15 +131,22 @@ def run_recommendation_evaluation(file_path: str):
     recommendations = data.get('recommendation_response', {}).get('recommendations', [])
 
     results = []
-    for rec in recommendations:
-        try:
-            eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, rec)
-            results.append({
-                "recommendation_title": rec.get("title"),
-                "evaluation": eval_res
-            })
-        except Exception as e:
-            logger.error(f"Failed to evaluate recommendation '{rec.get('title')}': {e}")
+    try:
+        eval_res = evaluator.evaluate(
+            business_context,
+            campaign_target,
+            campaign_data,
+            analysis_context,
+            recommendations   # ← pass full list
+        )
+
+        results = {
+            "recommendations": recommendations,
+            "evaluation": eval_res
+        }
+
+    except Exception as e:
+       logger.error(f"Failed to evaluate recommendations batch: {e}")        
 
     if results:
         save_path = save_results_to_json(results, filename="recommendation_evaluation_results.json")
