@@ -4,7 +4,7 @@ import pandas as pd
 from .ads_preprocessor import AdsPreprocessor
 from .ads_schema import UnifiedAdsSchema
 from src.feature_extraction.ads_kpi_features import AdsKpiFeatures
-from .data_loader import AdsDataLoader, Source
+from .data_loader import AdsDataLoader, DataSource as Source
 
 
 class UnifiedAdsPipeline:
@@ -46,7 +46,7 @@ class UnifiedAdsPipeline:
         can operate on the tabular data.
         """
         read_kwargs = {"usecols": usecols} if usecols else None
-        df = self.loader.load(source, read_kwargs=read_kwargs)
+        df = self.loader.load(source, read_keyword_arguments=read_kwargs)
         
         # Map to canonical schema immediately
         df = self.schema.canonicalize_columns(df)

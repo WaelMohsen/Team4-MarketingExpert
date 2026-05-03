@@ -182,19 +182,17 @@ class AdsPreprocessor:
 
             campaign_platforms_data.append(campaign_data)
 
-            # Optional categorical health information
+            # Optional categorical health information — attach to campaign_data before append
             state = row.get("campaign_state")
             if isinstance(state, str) and state:
-                payload["campaign_state"] = state
+                campaign_data["campaign_state"] = state
 
             for i in range(1, 4):
                 col = f"top_action_{i}"
                 if col in df.columns:
                     val = row.get(col)
                     if isinstance(val, str) and val:
-                        payload[col] = val
-
-            campaign_platforms_data.append(payload)
+                        campaign_data[col] = val
 
         return campaign_platforms_data
 
