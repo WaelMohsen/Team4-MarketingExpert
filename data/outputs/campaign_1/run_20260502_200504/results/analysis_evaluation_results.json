@@ -1,0 +1,22 @@
+{
+  "scores": {
+    "clarity": 3,
+    "accuracy": 3,
+    "structure": 3,
+    "overall": 3.0
+  },
+  "reasoning": {
+    "clarity": "The analysis is presented in clear, straightforward language and logically ties each insight to specific metrics such as ROAS, CTR, CPC, and CVR. It avoids jargon and explains the implications of each performance indicator in a way that is easy to understand.",
+    "accuracy": "The analysis accurately interprets the raw data, correctly noting the ROAS of 1.8, CTR of 0.04, CVR of 0.08, and CPC of 1.26. It appropriately relates these metrics to the campaign's performance and potential issues without introducing unsupported assumptions or hallucinations.",
+    "structure": "The report covers all key sections: an executive summary, details on budget and efficiency, results and value, cross-channel risks and patterns, channel notes, and missing info. Each section logically follows from the previous, providing a comprehensive review of the campaign."
+  },
+  "verdict": "accept",
+  "key_issues": [
+    "The analysis could include more specific recommendations for improving CTR and CVR.",
+    "It mentions that landing page views are missing, but does not suggest potential ways to address this data gap."
+  ],
+  "improvement_suggestions": [
+    "Add specific strategies for increasing traffic relevance and engagement, such as refining audience targeting or ad creatives.",
+    "Include recommendations for tracking landing page views or other user engagement metrics to better understand the conversion funnel."
+  ]
+}
