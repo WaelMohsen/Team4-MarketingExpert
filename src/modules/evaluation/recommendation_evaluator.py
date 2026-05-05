@@ -98,6 +98,22 @@ class RecommendationEvaluator:
             "key_issues": eval_data.get("key_issues"),
             "improvement_suggestions": eval_data.get("improvement_suggestions"),
         }
+       
+
+    
+
+
+
+
+#for rec in recommendations:
+     #   try:
+       #     eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, rec)
+         #   results.append({
+         #       "recommendation_title": rec.get("title"),
+         #       "evaluation": eval_res
+         #   })
+        #except Exception as e:
+        #    logger.error(f"Failed to evaluate recommendation '{rec.get('title')}': {e}")
 
 def run_recommendation_evaluation(file_path: str):
     """Main execution loop for recommendation evaluation."""

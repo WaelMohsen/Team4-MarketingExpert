@@ -1,0 +1,24 @@
+{
+  "scores": {
+    "clarity": 3,
+    "accuracy": 3,
+    "structure": 3,
+    "overall": 3.0
+  },
+  "reasoning": {
+    "clarity": "The analysis clearly summarizes the campaign's performance based on the metrics provided. It explicitly connects insights like CPC, CTR, and ROAS to the campaign context, making it easy to understand the evaluation of efficiency and results.",
+    "accuracy": "The analysis logically interprets the raw data, correctly identifying low CTR as a potential issue and relating CPC and ROAS sensibly. It avoids hallucinating or overstating findings, sticking closely to the provided figures.",
+    "structure": "The report follows a consistent structure with sections like Executive Summary, Budget & Efficiency, Results & Value, Risks, and Channel Notes. It covers all expected areas systematically, aligning well with standard campaign review formats."
+  },
+  "verdict": "revise",
+  "key_issues": [
+    "Misleading phrasing in the executive summary stating 'Mixed performance overall' may understate some issues like the very low CTR.",
+    "Lack of specific comparisons to industry benchmarks for CTR and CVR, which are important for context.",
+    "The analysis mentions 'low conversion rate' but should clarify what is considered acceptable in this industry or funnel stage."
+  ],
+  "improvement_suggestions": [
+    "Include industry benchmark benchmarks for CTR, CVR to contextualize findings.",
+    "Clarify what constitutes a 'good' or 'bad' performance for key metrics like CTR and CVR in the fintech personal loans segment.",
+    "Reframe the executive summary to more explicitly link the low CTR to specific potential causes and strategic implications."
+  ]
+}
