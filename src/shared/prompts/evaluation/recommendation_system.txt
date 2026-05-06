@@ -19,6 +19,7 @@ Does "whats_happening" reference a concrete metric or finding?
 
 4. Action Step Completeness  
 Does every action step in every "what_you_should_do" list answer all three of the following:
+- WHAT (the specific change, test, or asset to act on)
 - WHERE (which platform/campaign/ad set/page)
 - HOW (exact execution steps)
 
@@ -55,10 +56,6 @@ Use:
 ## VERDICT LOGIC
 
 Apply in order:
-
-1. If any HARD VALIDATION RULE fails → verdict = "reject"
-
-2. Otherwise:
    - If all scores = 3 → "accept"
    - If any score = 1 → "reject"
    - Else → "revise"

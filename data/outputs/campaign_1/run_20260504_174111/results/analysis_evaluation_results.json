@@ -1,0 +1,24 @@
+{
+  "scores": {
+    "clarity": 0,
+    "accuracy": 0,
+    "structure": 3,
+    "overall": 1.0
+  },
+  "reasoning": {
+    "clarity": null,
+    "accuracy": null,
+    "structure": "The analysis report follows a logical structure, covering all required sections: Executive Summary, Budget & Efficiency, Results & Value, Risks, and Channel Notes. It systematically discusses each aspect with clear subpoints and evidence, maintaining coherence and completeness."
+  },
+  "verdict": "revise",
+  "key_issues": [
+    "Lack of specific recommended actions or next steps to improve campaign performance.",
+    "Absence of landing page view data, which limits understanding user engagement post-click.",
+    "No segmentation analysis to identify which demographics or keywords perform better."
+  ],
+  "improvement_suggestions": [
+    "Add concrete optimization recommendations, such as audience refinement or creative testing.",
+    "Include landing page engagement metrics if available to assess user quality after clicks.",
+    "Suggest segmentation or targeting strategies to improve CTR and conversion rates."
+  ]
+}

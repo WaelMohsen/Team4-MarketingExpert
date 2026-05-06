@@ -1,0 +1,25 @@
+{
+  "campaign_identity": {
+    "platform": "Google Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-21 00:00:00",
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+    "spend": 2662.38,
+    "revenue": 4803.43,
+    "impressions": 59886,
+    "clicks": 2113.0,
+    "conversions": 159,
+    "roas": 1.8,
+    "cpa": 16.74,
+    "cvr": 0.08,
+    "ctr": 0.04,
+    "cpc": 1.26,
+    "cpm": 40.0
+  }
+}

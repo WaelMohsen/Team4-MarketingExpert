@@ -1,0 +1,272 @@
+==================== SYSTEM MESSAGE ====================
+You are a Senior Digital Marketing Auditor.
+
+Your task is to evaluate a SET of marketing recommendation cards generated for a non-marketer end user.
+
+
+
+## EVALUATION CRITERIA (Score 1–3)
+
+1. Structure  
+Do all recommendations strictly follow the required schema (title, whats_happening, what_you_should_do, why_this_matters, priority, expected_impact)with no missing or extra fields?
+
+2. Feasibility  
+Are all actions executable using standard platform capabilities without requiring unavailable tools or permissions?
+
+3. Analysis Grounding  
+Are all recommendations strictly based on the analysis context (no assumptions)?  
+Does each map to a specific insight, pattern, risk, or note?  
+Does "whats_happening" reference a concrete metric or finding?
+
+4. Action Step Completeness  
+Does every action step in every "what_you_should_do" list answer all three of the following:
+- WHERE (which platform/campaign/ad set/page)
+- HOW (exact execution steps)
+
+5. Priority Alignment  
+ Does every recommendation carry the correct priority level relative to the Business Context & Target?
+
+6. Tone & Audience Compliance  
+Is the language clear, business-formal, jargon-free, and suitable for a non-marketer?  
+No hedging language allowed (e.g. "might", "could").
+
+7. Expected Impact Quality  
+Does each recommendation include a clear directional or quantified impact tied to a specific metric?
+
+8. Instruction Adherence  
+Does the output strictly follow ALL system instructions:
+- Valid JSON or match schema
+- Exactly 4 recommendations
+- No extra fields
+- Each recommendation maps to a unique root cause
+- Actions follow WHAT/WHERE/HOW
+- Priority logic is correct
+
+---
+
+## SCORING RULE
+
+Use:
+1 = Poor / Violates requirement  
+2 = Partial / Some issues  
+3 = Fully compliant  
+
+---
+
+## VERDICT LOGIC
+
+Apply in order:
+
+1. If any HARD VALIDATION RULE fails → verdict = "reject"
+
+2. Otherwise:
+   - If all scores = 3 → "accept"
+   - If any score = 1 → "reject"
+   - Else → "revise"
+
+---
+
+## OUTPUT FORMAT (STRICT JSON ONLY)
+
+{
+  "evaluation": {
+    "structure_score": <1-3>,
+    "structure_reasoning": "<string>",
+
+    "feasibility_score": <1-3>,
+    "feasibility_reasoning": "<string>",
+
+    "analysis_grounding_score": <1-3>,
+    "analysis_grounding_reasoning": "<string>",
+
+    "action_step_completeness_score": <1-3>,
+    "action_step_completeness_reasoning": "<string>",
+
+    "priority_alignment_score": <1-3>,
+    "priority_alignment_reasoning": "<string>",
+
+    "tone_audience_score": <1-3>,
+    "tone_audience_reasoning": "<string>",
+
+    "expected_impact_score": <1-3>,
+    "expected_impact_reasoning": "<string>",
+
+    "instruction_adherence_score": <1-3>,
+    "instruction_adherence_reasoning": "<string>",
+
+    "verdict": "<accept|revise|reject>",
+
+    "key_issues": ["<string>", ...],
+    "improvement_suggestions": ["<string>", ...]
+  }
+}
+
+
+==================== USER MESSAGE ====================
+Please evaluate the following recommendation card.
+
+### Business Context & Target
+{
+  "business_domain": {
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration"
+  },
+  "campaign_target": {
+  "primary_goal": "Traffic"
+}
+}
+
+### Raw Campaign Data
+{
+  "campaign_identity": {
+    "platform": "Google Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-21 00:00:00",
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 2662.38,
+  "revenue": 4803.43,
+  "impressions": 59886,
+  "clicks": 2113.0,
+  "conversions": 159,
+  "roas": 1.8,
+  "cpa": 16.74,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.26,
+  "cpm": 40.0
+}
+}
+
+### Analysis Context (Basis for Recommendation)
+{
+  "analysis": {
+    "executive_summary": "Mixed performance observed in this campaign. Spend indicates decent efficiency, yet traffic quality indicated by CTR is low. The principal risk relates to conversion rates, which may indicate quality issues.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The spending has produced a satisfactory return on advertising spend (ROAS) relative to the cost per click (CPC).",
+        "evidence": "CPC is $1.26, ROAS is 1.8.",
+        "business_impact": "This efficiency suggests that the budget is effectively generating revenue relative to the cost of acquiring clicks."
+      },
+      {
+  "insight": "A rising cost per conversion relative to the overall spend indicates potential inefficiency in converting traffic to actual leads.",
+  "evidence": "CPC is $1.26 and CPA is $16.74 with 159 conversions.",
+  "business_impact": "Higher CPA suggests that while traffic is generated, the effectiveness of that traffic at converting is questionable."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign achieved a significant number of clicks and conversions, though the quality of traffic is questionable.",
+    "evidence": "2113 clicks and 159 conversions with a conversion rate of 0.08.",
+    "business_impact": "This indicates that, while volume is present, the low conversion rate raises concerns about the quality of leads being targeted."
+  },
+  {
+    "insight": "The campaign generated more revenue than it spent, indicating a positive financial outcome, but the quality of that revenue is uncertain.",
+    "evidence": "Revenue of $4803.43 against a spend of $2662.38 with a ROAS of 1.8.",
+    "business_impact": "Positive ROI shows financial viability but depends significantly on conversion characteristics for future profitability."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "The low click-through rate (CTR) combined with a reasonable cost per click (CPC) suggest potential issues with traffic quality or target audience alignment.",
+    "evidence": "CTR is 0.04, CPC is $1.26.",
+    "why_it_matters": "If clicks are not aligned with intent, the downstream conversion rates may suffer, leading to a reduction in overall effectiveness."
+  },
+  {
+    "pattern_or_risk": "High volume of clicks does not translate into a proportionate conversion rate, indicating possible attribution gaps or mismatched targeting.",
+    "evidence": "2113 clicks and a conversion rate of 0.08.",
+    "why_it_matters": "This may signal that efforts are misdirected, leading to wasted ad spend without achieving desired results."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "Google Ads",
+        "what_we_see": [
+          "Spend is $2662.38",
+          "Total clicks are 2113",
+          "CTR stands at 0.04",
+          "CPC is $1.26"
+        ],
+        "what_it_likely_means": [
+  "Traffic generated is not translating effectively into high-quality leads.",
+  "The audience targeting needs review to align better with the campaign objectives."
+],
+        "risks_or_watchouts": [
+  "Low CTR suggests that ads may not resonate with the target audience."
+]
+      }
+    ],
+    "missing_info": [
+  "Landing page views data is not available, which limits the insight into engagement beyond clicks.",
+  "Absence of customer feedback or post-click metrics hinders quality assessment of conversions."
+]
+  }
+}
+
+### Generated Recommendation (To Evaluate)
+[
+  {
+    "title": "Optimize Ad Creatives for Better CTR",
+    "whats_happening": "The campaign's CTR is low at 0.04, suggesting the ads are not resonating well with the target audience.",
+    "what_you_should_do": [
+      "Revise ad copy to make it more engaging and relevant to first-time investors.",
+      "Test different headlines and calls to action in the Google Ads campaign.",
+      "Use responsive ads to dynamically adjust content based on performance."
+    ],
+    "why_this_matters": "Improving CTR will likely enhance the traffic quality, increasing potential conversions and sales.",
+    "priority": "High",
+    "expected_impact": "Estimate a 15-25% improvement in CTR.",
+    "owner_suggestion": "Paid Media Manager"
+  },
+  {
+  "title": "Review Audience Targeting",
+  "whats_happening": "The volume of clicks (2113) has not translated into a high conversion rate (0.08), indicating potential misalignment in audience targeting.",
+  "what_you_should_do": [
+    "Analyze the demographics and interests of the current audience setup in Google Ads.",
+    "Adjust the targeting to focus on more relevant segments of first-time investors based on expected behavior.",
+    "Implement remarketing strategies to engage users who have shown interest previously."
+  ],
+  "why_this_matters": "Aligning the audience with more suitable segments is crucial for encouraging higher-quality leads and improved ROI.",
+  "priority": "High",
+  "expected_impact": "Potential to improve conversion rates significantly by aligning audience with targeted offers.",
+  "owner_suggestion": "Audience Insights Team"
+},
+  {
+  "title": "Monitor and Adjust Cost per Conversion",
+  "whats_happening": "CPC is $1.26 and CPA stands at $16.74, with rising CPA indicating inefficiencies in converting clicks to leads.",
+  "what_you_should_do": [
+    "Set up regular reviews of CPA against PPC metrics to identify trends in efficiency.",
+    "Consider lowering bids on underperforming keywords that have high CPA but low conversion rates.",
+    "Increase budget allocation to high-performing segments that yield better conversion rates without significantly increasing CPA."
+  ],
+  "why_this_matters": "Maintaining an efficient CPA is crucial for sustainable ad spend and improved profitability in the campaign.",
+  "priority": "Medium",
+  "expected_impact": "Aim to reduce CPA by ~$2.00 without sacrificing overall click volume.",
+  "owner_suggestion": "Paid Media Analyst"
+},
+  {
+  "title": "Gather Missing Engagement Data",
+  "whats_happening": "We lack landing page views data, which severely limits our insight into user engagement and quality after clicks; data on customer feedback is also missing.",
+  "what_you_should_do": [
+    "First, obtain landing page views data by integrating analytics tools such as Google Analytics on the landing page.",
+    "Surveys should be distributed to users post-click to gather feedback on their experience.",
+    "Implement tracking mechanisms to measure specific customer interactions post-click."
+  ],
+  "why_this_matters": "Understanding user engagement post-click is vital to pinpoint areas for improvement and enhance conversion strategies.",
+  "priority": "Low",
+  "expected_impact": "Enable comprehensive analysis of post-click performance to identify conversion barriers and improvement areas.",
+  "owner_suggestion": "Web/Tech Team"
+}
+]
+
+Strictly check if the recommendation is supported by the analysis context and aligns with the business goals.
+
+
+=========================================================

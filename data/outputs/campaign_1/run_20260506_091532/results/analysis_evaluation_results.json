@@ -1,0 +1,20 @@
+{
+  "scores": {
+    "clarity": 0,
+    "accuracy": 0,
+    "structure": 3,
+    "overall": 1.0
+  },
+  "reasoning": {
+    "clarity": null,
+    "accuracy": null,
+    "structure": "The report covers all typical sections expected in a campaign analysis: executive summary, budget & efficiency, results & value, risks, and channel notes. Each section logically follows from the data, providing insights aligned with the raw metrics, and the structure is clear and comprehensive."
+  },
+  "verdict": "accept",
+  "key_issues": [],
+  "improvement_suggestions": [
+    "Include landing page view metrics to better assess traffic quality.",
+    "Recommend specific creative or targeting adjustments based on low CTR.",
+    "Discuss potential optimization strategies for audience targeting or ad copy."
+  ]
+}
