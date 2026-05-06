@@ -1126,3 +1126,54 @@ TypeError: run_analysis_comparison() got an unexpected keyword argument 'analysi
 2026-05-02 12:54:33,725 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
 2026-05-02 12:54:38,361 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2026-05-02 12:54:38,373 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
+2026-05-06 09:31:11,750 | INFO | root | Logging initialized.
+2026-05-06 09:31:12,690 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:31:12,767 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:31:23,639 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:31:23,898 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'save_dir'
+2026-05-06 09:32:23,632 | INFO | root | Logging initialized.
+2026-05-06 09:32:23,887 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:32:23,888 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:32:31,422 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:32:31,433 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'save_dir'
+2026-05-06 09:33:13,005 | INFO | root | Logging initialized.
+2026-05-06 09:33:13,251 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:33:13,252 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:33:21,365 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:33:21,486 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'save_dir'
+2026-05-06 09:43:27,216 | INFO | root | Logging initialized.
+2026-05-06 09:43:27,458 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:43:27,460 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:43:33,418 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:43:33,437 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'output_dir'
+2026-05-06 09:43:33,437 | INFO | llm_analysis_evaluator_v2 | Processing File: \
+2026-05-06 09:43:57,830 | INFO | root | Logging initialized.
+2026-05-06 09:43:58,091 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:43:58,093 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:44:05,142 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:44:05,156 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'output_dir'
+2026-05-06 09:48:54,220 | INFO | root | Logging initialized.
+2026-05-06 09:48:54,461 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:48:54,462 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:49:01,393 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:49:01,419 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'output_dir'
+2026-05-06 09:49:35,283 | INFO | root | Logging initialized.
+2026-05-06 09:49:35,539 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 09:49:35,541 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 09:49:43,747 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:49:43,759 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
+2026-05-06 10:04:16,573 | INFO | root | Logging initialized.
+2026-05-06 10:04:16,893 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 10:04:16,895 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 10:04:23,734 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:04:23,757 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
+2026-05-06 10:04:35,206 | INFO | root | Logging initialized.
+2026-05-06 10:04:35,460 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 10:04:35,461 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 10:04:43,600 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:04:43,620 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
+2026-05-06 10:21:53,168 | INFO | root | Logging initialized.
+2026-05-06 10:21:53,421 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
+2026-05-06 10:21:53,423 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
+2026-05-06 10:22:00,216 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:22:00,228 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json

@@ -137,7 +137,7 @@ def validate_recommendation_output(output: Dict[str, Any]) -> bool:
 # ==========================================
 # STAGE 3: EVALUATION SCHEMAS
 # ==========================================
-class EvaluationSection(BaseModel):
+class EvaluationSectionV1(BaseModel):
     clarity_reasoning: str
     clarity_score: int = Field(ge=1, le=3)
     accuracy_reasoning: str
@@ -149,6 +149,76 @@ class EvaluationSection(BaseModel):
     verdict: str = Field(description="reject, revise, or accept")
     key_issues: List[str]
     improvement_suggestions: List[str]
+
+
+class EvaluationSection(BaseModel):
+    # Step 1: Hallucination checklist (run before scoring)
+    hallucination_checklist: HallucinationChecklist
+
+    # Criterion 1: Clarity (1–5)
+    clarity_score: int = Field(ge=1, le=5)
+    clarity_reasoning: str = Field(
+        description="Cite the specific report section and metric that informed this score."
+    )
+
+    # Criterion 2: Accuracy (1–5)
+    accuracy_score: int = Field(ge=1, le=5)
+    accuracy_reasoning: str = Field(
+        description="Cite the specific figure verified or refuted against the raw data."
+    )
+
+    # Criterion 3: Hallucination (1–5)
+    hallucination_score: int = Field(ge=1, le=5)
+    hallucination_reasoning: str = Field(
+        description="Reference checklist results and any specific unsupported claims found."
+    )
+
+    # Criterion 4: Structure (1–5)
+    structure_score: int = Field(ge=1, le=5)
+    structure_reasoning: str = Field(
+        description="Cite which required sections are present or missing."
+    )
+
+    # Criterion 5: KPI Alignment (1–5)
+    kpi_alignment_score: int = Field(ge=1, le=5)
+    kpi_alignment_reasoning: str = Field(
+        description="State whether the primary goal and each KPI were explicitly addressed, and whether null KPI fields were flagged."
+    )
+
+    # Total score
+    total_score: int = Field(
+        description="Sum of all five criterion scores"
+    )
+    # Verdict — applied mechanically per rules:
+    # accept: all scores >= 4 and no score = 1
+    # revise: any score = 3 OR total <= 18 with no score = 1
+    # reject: any score <= 2
+    verdict: Literal["accept", "revise", "reject"]
+
+    key_issues: List[str] = Field(
+        description="Specific claim or section with the identified problem."
+    )
+    improvement_suggestions: List[str] = Field(
+        description="Targeted fix referencing the specific issue."
+    )
+# Prevent drift / hallucinated totals
+@model_validator(mode="after")
+def validate_total_score(self):
+    expected = (
+        self.clarity_score
+        + self.accuracy_score
+        + self.hallucination_score
+        + self.structure_score
+        + self.kpi_alignment_score
+    )
+    if self.total_score != expected:
+        raise ValueError(
+            f"total_score must equal sum of scores ({expected}), got {self.total_score}"
+        )
+    return self
+
+
+
 
 class AnalysisEvaluationResponse(BaseModel):
     evaluation: EvaluationSection
