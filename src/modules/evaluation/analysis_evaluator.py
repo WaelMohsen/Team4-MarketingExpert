@@ -7,7 +7,7 @@ from typing import List, Dict, Any, Optional
 from ...shared.utils.prompt_loader import PromptLoader
 from src.shared.utils.prompt_builder import PromptBuilder
 from src.shared.utils.llm_client import LLMApiClient
-from src.shared.models.llm_responses_v2 import AnalysisEvaluationResponse
+from src.shared.models.llm_responses import AnalysisEvaluationResponse
 from src.shared.utils.prompt_registry import PromptRegistry
 
 # Configure logging using shared structure

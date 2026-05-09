@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field, ValidationError, model_validator
 from typing import List, Optional, Dict, Literal, Any
 
 # ==========================================
@@ -153,7 +153,7 @@ class EvaluationSectionV1(BaseModel):
 
 class EvaluationSection(BaseModel):
     # Step 1: Hallucination checklist (run before scoring)
-    hallucination_checklist: HallucinationChecklist
+    #hallucination_checklist: HallucinationChecklist
 
     # Criterion 1: Clarity (1–5)
     clarity_score: int = Field(ge=1, le=5)
