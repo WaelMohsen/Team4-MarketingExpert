@@ -35,7 +35,8 @@ class JsonToCsvWriter:
         json_type = self._detect_json_type(data)
         rows = self._extract_rows(data, json_type)
         fieldnames = self._get_fieldnames(json_type)
-
+        print(rows)
+        print(fieldnames)
         if not rows:
             raise ValueError("No rows could be extracted from the JSON file.")
 
@@ -54,24 +55,63 @@ class JsonToCsvWriter:
             return json.load(file)
 
     def _detect_json_type(self, data: Any) -> str:
-        """
-        Detect whether JSON is:
-        - analysis JSON: dict with top-level 'scores'
-        - recommendation JSON: list of cards with nested 'evaluation'
-        """
-        if isinstance(data, dict) and "scores" in data:
-            return self.ANALYSIS_TYPE
 
-        if isinstance(data, list) and all(
-            isinstance(item, dict) and "evaluation" in item for item in data
-        ):
-            return self.RECOMMENDATION_TYPE
+      """
+      Detect whether JSON is:
+       - analysis evaluation JSON:
+        dict with top-level 'scores' containing:
+        clarity, accuracy, structure, overall
 
-        raise ValueError("Could not determine JSON type from the provided data.")
+       - recommendation evaluation JSON:
+        dict with top-level 'scores' containing:
+        Feasibility, Recommendation_Count, Analysis_Grounding,
+        Action_Step_Completeness, Priority_Alignment,
+        Tone_Audience_Compliance, Expected_Impact_Quality, Overall
+     """
+
+      if not isinstance(data, dict):
+        raise ValueError("Invalid JSON format. Expected a dictionary.")
+
+      scores = data.get("scores")
+
+      if not isinstance(scores, dict):
+        raise ValueError("Could not determine JSON type: missing or invalid 'scores' section.")
+
+      analysis_score_keys = {
+        "clarity",
+        "accuracy",
+        "structure",
+        "overall",
+      }
+
+      recommendation_score_keys = {
+        "Structure",
+        "Feasibility",
+        "Recommendation_Count",
+        "Analysis_Grounding",
+        "Action_Step_Completeness",
+        "Priority_Alignment",
+        "Tone_Audience_Compliance",
+        "Expected_Impact_Quality",
+        "Overall",
+      }
+
+      score_keys = set(scores.keys())
+
+      if analysis_score_keys.issubset(score_keys):
+        return self.ANALYSIS_TYPE
+
+      if recommendation_score_keys.issubset(score_keys):
+        return self.RECOMMENDATION_TYPE
+
+      raise ValueError(
+        f"Could not determine JSON type from score keys: {sorted(score_keys)}"
+    )
 
     def _extract_rows(self, data: Any, json_type: str) -> List[Dict[str, Any]]:
         if json_type == self.ANALYSIS_TYPE:
-            return [self._build_analysis_row(data)]
+            return self._build_analysis_row(data)
+        
 
         if json_type == self.RECOMMENDATION_TYPE:
             return self._build_recommendation_rows(data)
@@ -88,13 +128,15 @@ class JsonToCsvWriter:
         if json_type == self.RECOMMENDATION_TYPE:
             return [
                 "version",
-                "card_title",
-                "clarity",
-                "accuracy",
-                "structure",
-                "feasibility",
-                "overall",
-            ]
+                "Structure",
+                "Feasibility",
+                "Recommendation_Count",
+                "Analysis_Grounding",
+                "Action_Step_Completeness",
+                "Priority_Alignment",
+                "Tone_Audience_Compliance",
+                "Expected_Impact_Quality",
+                "Overall"]
 
         raise ValueError(f"Unsupported JSON type: {json_type}")
 
@@ -109,41 +151,41 @@ class JsonToCsvWriter:
             "overall": scores.get("overall"),
         }
 
-    def _build_recommendation_rows(self, data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        rows: List[Dict[str, Any]] = []
+  
+    def _build_recommendation_rows(self, data: Dict[str, Any]) ->Dict[str, Any]:
+         scores = data.get("scores", {})
 
-        for item in data:
-            evaluation = item.get("evaluation", {})
-            scores = evaluation.get("scores", {})
+         return  {
+            "version": self.version,
+            "Structure": scores.get("Structure"),
+            "Feasibility": scores.get("Feasibility"),
+            "Recommendation_Count": scores.get("Recommendation_Count"),
+            "Analysis_Grounding": scores.get("Analysis_Grounding"),
+            "Action_Step_Completeness": scores.get("Action_Step_Completeness"),
+            "Priority_Alignment": scores.get("Priority_Alignment"),
+            "Tone_Audience_Compliance": scores.get("Tone_Audience_Compliance"),
+            "Expected_Impact_Quality": scores.get("Expected_Impact_Quality"),
+            "Overall": scores.get("Overall"),
+          }
+       
 
-            rows.append(
-                {
-                    "version": self.version,
-                    "card_title": item.get("card_title"),
-                    "clarity": scores.get("clarity"),
-                    "accuracy": scores.get("accuracy"),
-                    "structure": scores.get("structure"),
-                    "feasibility": scores.get("feasibility"),
-                    "overall": scores.get("overall"),
-                }
-            )
-
-        return rows
+     
 
     def _append_rows_to_csv(
         self,
-        rows: List[Dict[str, Any]],
+        row: Dict[str, Any],
         fieldnames: List[str],
     ) -> None:
         """
         Append rows to CSV using the correct header.
         """
         file_exists = self.output_csv.exists()
-
+        print( "this row"+str(row))
         with open(self.output_csv, "a", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
 
             if not file_exists:
                 writer.writeheader()
 
-            writer.writerows(rows)
+            writer.writerow(row)
+   

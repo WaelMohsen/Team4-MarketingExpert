@@ -1,0 +1,142 @@
+==================== SYSTEM MESSAGE ====================
+You are a Senior Digital Marketing Analyst and Quality Auditor. 
+Your task is to evaluate the quality of a generated campaign analysis report.
+
+Criteria for Evaluation:
+1. Clarity: Is the analysis easy to understand and specifically tied to the provided metrics? (Score 1-3)
+2. Accuracy: Does the analysis logically follow from the raw campaign data? Does it avoid hallucinations? (Score 1-3)
+3. Structure: Does the analysis follow the required sections (Executive Summary, Budget & Efficiency, Results & Value, Risks, Channel Notes)? (Score 1-3)
+
+Evaluation Format:
+- Always provide reasoning for each score.
+- Provide a final verdict: 'accepted', 'revise', or 'reject'.
+- List specific key issues and improvement suggestions.
+
+Strictly adhere to the provided JSON schema. Ensure your output is a JSON object with the following structure:
+{
+  "evaluation": {
+    "clarity_score": <number 1-3>,
+    "clarity_reasoning": "<string>",
+    "accuracy_score": <number 1-3>,
+    "accuracy_reasoning": "<string>",
+    "structure_score": <number 1-3>,
+    "structure_reasoning": "<string>",
+    "verdict": "<accept|revise|reject>",
+    "key_issues": ["<string>", ...],
+    "improvement_suggestions": ["<string>", ...]
+  }
+}
+
+
+==================== USER MESSAGE ====================
+Please evaluate the following campaign analysis.
+
+### Campaign Context (Target & Domain)
+{
+  "target": {
+    "primary_goal": "Traffic"
+  },
+  "business_domain": {
+  "industry": "Fintech",
+  "offering": "Personal Loans",
+  "audience": "First-time investors",
+  "funnel_stage": "consideration"
+}
+}
+
+### Raw Campaign Data
+{
+  "campaign_identity": {
+    "platform": "Google Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-21 00:00:00",
+    "industry": "Fintech",
+    "offering": "Personal Loans",
+    "audience": "First-time investors",
+    "funnel_stage": "consideration",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 2662.38,
+  "revenue": 4803.43,
+  "impressions": 59886,
+  "clicks": 2113.0,
+  "conversions": 159,
+  "roas": 1.8,
+  "cpa": 16.74,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.26,
+  "cpm": 40.0
+}
+}
+
+### Generated Analysis Report (To Evaluate)
+{
+  "analysis": {
+    "executive_summary": "Mixed performance observed in this campaign. Spend indicates decent efficiency, yet traffic quality indicated by CTR is low. The principal risk relates to conversion rates, which may indicate quality issues.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The spending has produced a satisfactory return on advertising spend (ROAS) relative to the cost per click (CPC).",
+        "evidence": "CPC is $1.26, ROAS is 1.8.",
+        "business_impact": "This efficiency suggests that the budget is effectively generating revenue relative to the cost of acquiring clicks."
+      },
+      {
+  "insight": "A rising cost per conversion relative to the overall spend indicates potential inefficiency in converting traffic to actual leads.",
+  "evidence": "CPC is $1.26 and CPA is $16.74 with 159 conversions.",
+  "business_impact": "Higher CPA suggests that while traffic is generated, the effectiveness of that traffic at converting is questionable."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign achieved a significant number of clicks and conversions, though the quality of traffic is questionable.",
+    "evidence": "2113 clicks and 159 conversions with a conversion rate of 0.08.",
+    "business_impact": "This indicates that, while volume is present, the low conversion rate raises concerns about the quality of leads being targeted."
+  },
+  {
+    "insight": "The campaign generated more revenue than it spent, indicating a positive financial outcome, but the quality of that revenue is uncertain.",
+    "evidence": "Revenue of $4803.43 against a spend of $2662.38 with a ROAS of 1.8.",
+    "business_impact": "Positive ROI shows financial viability but depends significantly on conversion characteristics for future profitability."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "The low click-through rate (CTR) combined with a reasonable cost per click (CPC) suggest potential issues with traffic quality or target audience alignment.",
+    "evidence": "CTR is 0.04, CPC is $1.26.",
+    "why_it_matters": "If clicks are not aligned with intent, the downstream conversion rates may suffer, leading to a reduction in overall effectiveness."
+  },
+  {
+    "pattern_or_risk": "High volume of clicks does not translate into a proportionate conversion rate, indicating possible attribution gaps or mismatched targeting.",
+    "evidence": "2113 clicks and a conversion rate of 0.08.",
+    "why_it_matters": "This may signal that efforts are misdirected, leading to wasted ad spend without achieving desired results."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "Google Ads",
+        "what_we_see": [
+          "Spend is $2662.38",
+          "Total clicks are 2113",
+          "CTR stands at 0.04",
+          "CPC is $1.26"
+        ],
+        "what_it_likely_means": [
+  "Traffic generated is not translating effectively into high-quality leads.",
+  "The audience targeting needs review to align better with the campaign objectives."
+],
+        "risks_or_watchouts": [
+  "Low CTR suggests that ads may not resonate with the target audience."
+]
+      }
+    ],
+    "missing_info": [
+  "Landing page views data is not available, which limits the insight into engagement beyond clicks.",
+  "Absence of customer feedback or post-click metrics hinders quality assessment of conversions."
+]
+  }
+}
+
+Analyze the report against the provided context and data. Ensure there are no hallucinations or missing critical insights regarding the campaign goal.
+
+
+=========================================================

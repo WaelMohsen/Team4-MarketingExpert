@@ -49,24 +49,16 @@ class EvaluationModule(BaseModule):
             logger.info("Evaluating Recommendation cards...")
             try:
                 recommendations = context.recommendation_results.get("recommendations", [])
-                rec_evals = []
-                
                 analysis_context = context.analysis_results
 
-                for rec in recommendations:
-                    rec_eval = self.recommendation_evaluator.evaluate(
-                        business_context=business_domain,
-                        campaign_target=campaign_target,
-                        campaign_data=campaign_data,
-                        analysis_context=analysis_context,
-                        recommendation=rec,
-                        save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None
-                    )
-                    rec_evals.append({
-                        "card_title": rec.get("title"),
-                        "evaluation": rec_eval
-                    })
-                evaluations["recommendations"] = rec_evals
+                evaluations["recommendations"] = self.recommendation_evaluator.evaluate(
+                    business_context=business_domain,
+                    campaign_target=campaign_target,
+                    campaign_data=campaign_data,
+                    analysis_context=analysis_context,
+                    recommendations=recommendations,
+                    save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None
+                )
             except Exception as e:
                 logger.error(f"Recommendation evaluation failed: {e}")
 

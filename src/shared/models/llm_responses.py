@@ -140,16 +140,44 @@ def validate_recommendation_output(output: Dict[str, Any]) -> bool:
 class EvaluationSectionV1(BaseModel):
     clarity_reasoning: str
     clarity_score: int = Field(ge=1, le=3)
+
     accuracy_reasoning: str
     accuracy_score: int = Field(ge=1, le=3)
+
     structure_reasoning: str
     structure_score: int = Field(ge=1, le=3)
-    feasibility_reasoning: Optional[str] = None
-    feasibility_score: Optional[int] = Field(None, ge=1, le=3)
-    verdict: str = Field(description="reject, revise, or accept")
+
+    verdict: Literal["accept", "revise", "reject"]
+
     key_issues: List[str]
     improvement_suggestions: List[str]
 
+    
+class AnalysisEvaluationResponse(BaseModel):
+    evaluation: EvaluationSection
+
+class RecommendationEvaluationSection(BaseModel):
+    structure_score: int = Field(ge=1, le=3)
+    structure_reasoning: str
+    feasibility_score: int = Field(ge=1, le=3)
+    feasibility_reasoning: str
+    Recommendation_Count_score: int = Field(ge=1, le=3)
+    Recommendation_Count_reasoning: str
+    Analysis_Grounding_score: int = Field(ge=1, le=3)
+    Analysis_Grounding_reasoning: str
+    Action_Step_Completeness_score: int = Field(ge=1, le=3)
+    Action_Step_Completeness_reasoning: str
+    Priority_Alignment_score: int = Field(ge=1, le=3)
+    Priority_Alignment_reasoning: str
+    Tone_Audience_Compliance_score: int = Field(alias="Tone_&_Audience_Compliance_score", default=1, ge=1, le=3)
+    Tone_Audience_Compliance_reasoning: str = Field(alias="Tone_&_Audience_Compliance_reasoning")
+    Expected_Impact_Quality_score: int = Field(ge=1, le=3)
+    Expected_Impact_Quality_reasoning: str
+    instruction_adherence_reasoning: str
+    instruction_adherence_score: int = Field(ge=1, le=3)
+    verdict: str = Field(description="reject, revise, or accept")
+    key_issues: List[str]
+    improvement_suggestions: List[str]
 
 class EvaluationSection(BaseModel):
     # Step 1: Hallucination checklist (run before scoring)
@@ -224,7 +252,7 @@ class AnalysisEvaluationResponse(BaseModel):
     evaluation: EvaluationSection
 
 class RecommendationEvaluationResponse(BaseModel):
-    evaluation: EvaluationSection
+    evaluation: RecommendationEvaluationSection
 
 
 if __name__ == "__main__":

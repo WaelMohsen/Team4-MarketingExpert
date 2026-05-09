@@ -229,12 +229,15 @@ class ComparisonModule:
         if self.module_type == self.RECOMMENDATION:
             return [
                 "version",
-                "card_title",
-                "clarity",
-                "accuracy",
-                "structure",
-                "feasibility",
-                "overall",
+                "Structure",
+                "Feasibility",
+                "Recommendation_Count",
+                "Analysis_Grounding",
+                "Action_Step_Completeness",
+                "Priority_Alignment",
+                "Tone_Audience_Compliance",
+                "Expected_Impact_Quality",
+                "Overall",
             ]
 
         logger.error("Unsupported module_type provided: %s", self.module_type)
@@ -625,4 +628,4 @@ if __name__ == "__main__":
     # Compare the last 2 runs:
     # run_pipeline(last_n=2)
     # Compare all runs:
-    run_pipeline(last_n=None)
+    run_pipeline(last_n=2)

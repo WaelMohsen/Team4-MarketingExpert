@@ -920,282 +920,855 @@ TypeError: run_analysis_comparison() got an unexpected keyword argument 'analysi
 2026-04-29 16:23:35,541 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1\run_20260429_162250\results\analysis_evaluation_results.json
 2026-04-29 16:23:35,541 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1\run_20260429_162250\results\recommendation_evaluation_results.json
 2026-04-29 16:23:35,541 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
-2026-05-01 15:04:43,615 | INFO | root | Logging initialized.
-2026-05-01 15:04:43,615 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=None
-2026-05-01 15:04:43,616 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
-2026-05-01 15:04:43,617 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
-2026-05-01 15:04:43,650 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\analysis_evaluation_results.json
-2026-05-01 15:04:43,667 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_195840\results\recommendation_evaluation_results.json
-2026-05-01 15:04:43,677 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\analysis_evaluation_results.json
-2026-05-01 15:04:43,739 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260419_200423\results\recommendation_evaluation_results.json
-2026-05-01 15:04:43,740 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
-2026-05-01 15:04:43,740 | INFO | Comparison Module | Version summary started | module_type=analysis
-2026-05-01 15:04:43,740 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
-2026-05-01 15:04:43,838 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:43,839 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
-2026-05-01 15:04:43,840 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:44,119 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:44,213 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:45,974 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
-2026-05-01 15:04:45,994 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
-2026-05-01 15:04:45,994 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
-2026-05-01 15:04:45,995 | INFO | Comparison Module | Version summary started | module_type=recommendation
-2026-05-01 15:04:45,995 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
-2026-05-01 15:04:46,006 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,006 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
-2026-05-01 15:04:46,006 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,009 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,011 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,187 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
-2026-05-01 15:04:46,197 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
-2026-05-01 15:04:46,197 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
-2026-05-01 15:04:46,198 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
-2026-05-01 15:04:46,225 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\analysis_evaluation_results.json
-2026-05-01 15:04:46,258 | INFO | Comparison Module | Added recommendation result | version=run_20260419_195840 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_195840\results\recommendation_evaluation_results.json
-2026-05-01 15:04:46,267 | INFO | Comparison Module | Added analysis result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\analysis_evaluation_results.json
-2026-05-01 15:04:46,276 | INFO | Comparison Module | Added recommendation result | version=run_20260419_200423 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260419_200423\results\recommendation_evaluation_results.json
-2026-05-01 15:04:46,276 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
-2026-05-01 15:04:46,277 | INFO | Comparison Module | Version summary started | module_type=analysis
-2026-05-01 15:04:46,277 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
-2026-05-01 15:04:46,279 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:46,279 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
-2026-05-01 15:04:46,279 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:46,281 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:46,283 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
-2026-05-01 15:04:46,455 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
-2026-05-01 15:04:46,465 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
-2026-05-01 15:04:46,466 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
-2026-05-01 15:04:46,466 | INFO | Comparison Module | Version summary started | module_type=recommendation
-2026-05-01 15:04:46,466 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
-2026-05-01 15:04:46,474 | INFO | Comparison Module | CSV loaded successfully | rows=12 | columns=['version', 'card_title', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,474 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
-2026-05-01 15:04:46,474 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,476 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,478 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'feasibility', 'overall']
-2026-05-01 15:04:46,642 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
-2026-05-01 15:04:46,651 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
-2026-05-01 15:04:46,651 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
-2026-05-01 15:06:13,388 | INFO | root | Logging initialized.
-2026-05-01 15:07:55,622 | INFO | root | Logging initialized.
-2026-05-01 15:11:30,621 | INFO | root | Logging initialized.
-2026-05-01 15:12:22,467 | INFO | root | Logging initialized.
-2026-05-01 16:05:42,858 | INFO | root | Logging initialized.
-2026-05-01 16:10:47,519 | INFO | root | Logging initialized.
-2026-05-01 16:10:48,339 | INFO | llm_analysis_evaluator | Processing file: data\evaluation_runs\campaign_1_result.json
-2026-05-01 16:10:48,347 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
-2026-05-01 16:10:51,341 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
-2026-05-01 16:10:51,351 | ERROR | llm_analysis_evaluator | Failed to evaluate data\evaluation_runs\campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
-2026-05-01 16:16:02,823 | INFO | root | Logging initialized.
-2026-05-01 16:16:03,061 | INFO | llm_analysis_evaluator | Processing file: data\evaluation_runs\campaign_1_result.json
-2026-05-01 16:16:03,062 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
-2026-05-01 16:16:03,556 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
-2026-05-01 16:16:03,557 | ERROR | llm_analysis_evaluator | Failed to evaluate data\evaluation_runs\campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
-2026-05-01 16:16:14,704 | INFO | root | Logging initialized.
-2026-05-01 16:16:14,955 | INFO | llm_analysis_evaluator | Processing file: data\evaluation_runs\campaign_1_result.json
-2026-05-01 16:16:14,955 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
-2026-05-01 16:16:15,437 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
-2026-05-01 16:16:15,437 | ERROR | llm_analysis_evaluator | Failed to evaluate data\evaluation_runs\campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
-2026-05-01 16:18:36,506 | INFO | root | Logging initialized.
-2026-05-01 16:18:36,745 | INFO | llm_analysis_evaluator | Processing file: data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json
-2026-05-01 16:18:36,745 | WARNING | llm_analysis_evaluator | Skipping data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json: missing campaign data or analysis report.
-2026-05-01 16:20:03,919 | INFO | root | Logging initialized.
-2026-05-01 16:20:04,195 | INFO | llm_analysis_evaluator | Processing file: data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json
-2026-05-01 16:20:04,196 | WARNING | llm_analysis_evaluator | Skipping data\outputs\campaign_1\run_20260419_195840\results\analysis_result.json: missing campaign data or analysis report.
-2026-05-01 16:34:08,791 | INFO | root | Logging initialized.
-2026-05-01 16:34:09,040 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 16:34:09,047 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 16:34:09,530 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
-2026-05-01 16:34:09,531 | ERROR | llm_analysis_evaluator | Failed to evaluate data/evaluation_runs/campaign_1_result.json: OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
-2026-05-01 16:36:42,430 | INFO | root | Logging initialized.
-2026-05-01 16:36:42,692 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 16:36:42,693 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 16:36:46,316 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 16:36:46,461 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 16:37:38,695 | INFO | root | Logging initialized.
-2026-05-01 16:37:38,930 | INFO | llm_analysis_evaluator | Processing file: data/evaluation_runs/campaign_1_result.json
-2026-05-01 16:37:38,931 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
-2026-05-01 16:37:42,576 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 16:37:42,675 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 16:40:23,992 | INFO | root | Logging initialized.
-2026-05-01 16:40:24,233 | INFO | llm_analysis_evaluator | Processing file: data/evaluation_runs/campaign_2_result.json
-2026-05-01 16:40:24,234 | INFO | llm_analysis_evaluator | Executing analysis evaluation...
-2026-05-01 16:40:29,167 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 16:40:29,182 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:14:36,719 | INFO | root | Logging initialized.
-2026-05-01 17:14:36,965 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_2_result.json
-2026-05-01 17:14:36,974 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:14:41,146 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:14:41,156 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:15:21,334 | INFO | root | Logging initialized.
-2026-05-01 17:15:21,585 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_2_result.json
-2026-05-01 17:15:21,588 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:15:26,619 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:15:26,629 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:15:36,869 | INFO | root | Logging initialized.
-2026-05-01 17:15:37,122 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:15:37,123 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:15:39,885 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:15:39,903 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:16:49,164 | INFO | root | Logging initialized.
-2026-05-01 17:16:49,441 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:16:49,442 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:16:53,357 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:16:53,373 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:17:22,328 | INFO | root | Logging initialized.
-2026-05-01 17:17:22,627 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:17:22,628 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:17:27,158 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:17:27,181 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:18:18,903 | INFO | root | Logging initialized.
-2026-05-01 17:18:19,172 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:18:19,173 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:18:22,264 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:18:22,290 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:19:20,252 | INFO | root | Logging initialized.
-2026-05-01 17:19:20,493 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:19:20,495 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:19:23,222 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:19:23,240 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:19:31,633 | INFO | root | Logging initialized.
-2026-05-01 17:19:31,880 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:19:31,881 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:19:34,969 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:19:34,979 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:21:13,322 | INFO | root | Logging initialized.
-2026-05-01 17:21:13,582 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:21:13,585 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-01 17:21:17,647 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:21:17,660 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-01 17:21:49,930 | INFO | root | Logging initialized.
-2026-05-01 17:21:50,227 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-01 17:21:50,228 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-01 17:21:52,337 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-01 17:21:52,351 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-01\analysis_evaluation_results.json
-2026-05-02 11:13:23,384 | INFO | root | Logging initialized.
-2026-05-02 11:13:24,256 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 11:13:24,323 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 11:13:31,205 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 11:13:31,340 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 11:30:33,772 | INFO | root | Logging initialized.
-2026-05-02 11:30:34,038 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 11:30:34,040 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 11:30:39,445 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 11:30:39,546 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:08:30,728 | INFO | root | Logging initialized.
-2026-05-02 12:08:31,231 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:08:31,279 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:08:37,093 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:08:37,262 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:09:52,373 | INFO | root | Logging initialized.
-2026-05-02 12:09:52,639 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:09:52,641 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:09:56,918 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:09:56,930 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:24:47,990 | INFO | root | Logging initialized.
-2026-05-02 12:24:48,292 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:24:48,293 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:24:53,041 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:24:53,072 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:34:29,713 | INFO | root | Logging initialized.
-2026-05-02 12:34:29,975 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:34:29,976 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-02 12:34:33,850 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:34:33,861 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:34:42,285 | INFO | root | Logging initialized.
-2026-05-02 12:34:42,546 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:34:42,548 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:34:45,854 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:34:45,870 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:40:53,741 | INFO | root | Logging initialized.
-2026-05-02 12:40:53,990 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:40:53,991 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:40:58,020 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:40:58,121 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:52:07,339 | INFO | root | Logging initialized.
-2026-05-02 12:52:07,585 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:52:07,586 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:52:11,853 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:52:11,868 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:54:19,553 | INFO | root | Logging initialized.
-2026-05-02 12:54:19,815 | INFO | llm_analysis_evaluator | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:54:19,816 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
-2026-05-02 12:54:23,925 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:54:23,943 | INFO | llm_analysis_evaluator | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-02 12:54:33,452 | INFO | root | Logging initialized.
-2026-05-02 12:54:33,723 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-02 12:54:33,725 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-02 12:54:38,361 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-02 12:54:38,373 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: logs\2026-05-02\analysis_evaluation_results.json
-2026-05-06 09:31:11,750 | INFO | root | Logging initialized.
-2026-05-06 09:31:12,690 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:31:12,767 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:31:23,639 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:31:23,898 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'save_dir'
-2026-05-06 09:32:23,632 | INFO | root | Logging initialized.
-2026-05-06 09:32:23,887 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:32:23,888 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:32:31,422 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:32:31,433 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'save_dir'
-2026-05-06 09:33:13,005 | INFO | root | Logging initialized.
-2026-05-06 09:33:13,251 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:33:13,252 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:33:21,365 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:33:21,486 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'save_dir'
-2026-05-06 09:43:27,216 | INFO | root | Logging initialized.
-2026-05-06 09:43:27,458 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:43:27,460 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:43:33,418 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:43:33,437 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'output_dir'
-2026-05-06 09:43:33,437 | INFO | llm_analysis_evaluator_v2 | Processing File: \
-2026-05-06 09:43:57,830 | INFO | root | Logging initialized.
-2026-05-06 09:43:58,091 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:43:58,093 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:44:05,142 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:44:05,156 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'output_dir'
-2026-05-06 09:48:54,220 | INFO | root | Logging initialized.
-2026-05-06 09:48:54,461 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:48:54,462 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:49:01,393 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:49:01,419 | ERROR | llm_analysis_evaluator_v2 | Failed to evaluate data/evaluation_runs/campaign_1_result.json: save_results_to_json() got an unexpected keyword argument 'output_dir'
-2026-05-06 09:49:35,283 | INFO | root | Logging initialized.
-2026-05-06 09:49:35,539 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 09:49:35,541 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 09:49:43,747 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 09:49:43,759 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
-2026-05-06 10:04:16,573 | INFO | root | Logging initialized.
-2026-05-06 10:04:16,893 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 10:04:16,895 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 10:04:23,734 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 10:04:23,757 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
-2026-05-06 10:04:35,206 | INFO | root | Logging initialized.
-2026-05-06 10:04:35,460 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 10:04:35,461 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 10:04:43,600 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 10:04:43,620 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
-2026-05-06 10:21:53,168 | INFO | root | Logging initialized.
-2026-05-06 10:21:53,421 | INFO | llm_analysis_evaluator_v2 | Processing File: data/evaluation_runs/campaign_1_result.json
-2026-05-06 10:21:53,423 | INFO | llm_analysis_evaluator_v2 | Executing Analysis Evaluation...
-2026-05-06 10:22:00,216 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2026-05-06 10:22:00,228 | INFO | llm_analysis_evaluator_v2 | Evaluation results saved to: data/outputs/_global\2026-05-06\analysis_evaluation_results.json
-2026-05-09 09:43:57,840 | INFO | root | Logging initialized.
-2026-05-09 09:43:57,898 | INFO | root | Logging initialized.
-2026-05-09 09:43:57,934 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global\run_20260509_094357\results
-2026-05-09 09:43:57,935 | INFO | src.core.pipeline_engine | Registered module: Ingestion
-2026-05-09 09:43:57,935 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
-2026-05-09 09:43:57,936 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
-2026-05-09 09:43:57,937 | INFO | src.core.pipeline_engine | Starting pipeline execution...
-2026-05-09 09:43:57,937 | INFO | src.core.pipeline_engine | Running module: Ingestion
-2026-05-09 09:43:57,938 | ERROR | src.core.pipeline_engine | Error in module Ingestion: File not found: data\raw\ads_data.csv
-2026-05-09 09:43:57,939 | INFO | src.core.pipeline_engine | Pipeline execution finished.
-2026-05-09 09:43:57,939 | ERROR | __main__ | Preparation phase failed: ['Ingestion: File not found: data\\raw\\ads_data.csv']
-2026-05-09 09:53:50,352 | INFO | root | Logging initialized.
-2026-05-09 09:53:50,359 | INFO | root | Logging initialized.
-2026-05-09 09:53:50,368 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global\run_20260509_095350\results
-2026-05-09 09:53:50,369 | INFO | src.core.pipeline_engine | Registered module: Ingestion
-2026-05-09 09:53:50,369 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
-2026-05-09 09:53:50,369 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
-2026-05-09 09:53:50,369 | INFO | src.core.pipeline_engine | Starting pipeline execution...
-2026-05-09 09:53:50,369 | INFO | src.core.pipeline_engine | Running module: Ingestion
-2026-05-09 09:53:50,369 | ERROR | src.core.pipeline_engine | Error in module Ingestion: File not found: data\raw\ads_data.csv
-2026-05-09 09:53:50,370 | INFO | src.core.pipeline_engine | Pipeline execution finished.
-2026-05-09 09:53:50,370 | ERROR | __main__ | Preparation phase failed: ['Ingestion: File not found: data\\raw\\ads_data.csv']
+2026-05-02 14:43:16,544 | INFO | root | Logging initialized.
+2026-05-02 14:44:18,556 | INFO | root | Logging initialized.
+2026-05-02 14:44:18,593 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:20,007 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:20,009 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Resolve KPI and product mismatch in campaign setup': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:44:20,011 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:20,273 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:20,275 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Populate lead count and cost-per-lead (CPL) in reporting': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:44:20,276 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:20,562 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:20,563 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Tie conversions to downstream value (quality, conversion-to-customer and LTV)': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:44:20,565 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:20,792 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:20,793 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Address single-channel dependency by testing alternative channels': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:44:20,795 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:21,022 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:21,023 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Scale search investment cautiously given positive ROAS and low CPA': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:44:21,025 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:21,273 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:21,275 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Improve attribution and cross-channel reporting setup': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:44:21,276 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:44:21,491 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-05-02 14:44:21,492 | ERROR | recommendation_evaluator | Failed to evaluate recommendation 'Enable reach and audience saturation metrics': OpenAI API error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************yrEA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'code': 'invalid_api_key', 'param': None}, 'status': 401}
+2026-05-02 14:48:08,582 | INFO | root | Logging initialized.
+2026-05-02 14:48:08,617 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:12,258 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:12,271 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:14,511 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:14,515 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:17,153 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:17,157 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:19,089 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:19,090 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:21,170 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:21,174 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:24,650 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:24,654 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 14:48:26,540 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 14:48:26,552 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-02 16:35:45,073 | INFO | root | Logging initialized.
+2026-05-02 16:35:45,108 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 16:35:49,654 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:35:49,670 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-02 16:53:15,889 | INFO | root | Logging initialized.
+2026-05-02 16:53:15,889 | INFO | root | Logging initialized.
+2026-05-02 16:53:15,890 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global/run_20260502_165315/results
+2026-05-02 16:53:15,890 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-02 16:53:15,890 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-02 16:53:15,890 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-02 16:53:15,890 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-02 16:53:15,890 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-02 16:53:15,890 | ERROR | src.core.pipeline_engine | Error in module Ingestion: File not found: data/raw/your_data.csv
+2026-05-02 16:53:15,890 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-02 16:53:15,890 | ERROR | __main__ | Preparation phase failed: ['Ingestion: File not found: data/raw/your_data.csv']
+2026-05-02 16:55:31,024 | INFO | root | Logging initialized.
+2026-05-02 16:55:31,025 | INFO | root | Logging initialized.
+2026-05-02 16:55:31,026 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global/run_20260502_165531/results
+2026-05-02 16:55:31,026 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-02 16:55:31,026 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-02 16:55:31,026 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-02 16:55:31,026 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-02 16:55:31,026 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-02 16:55:31,037 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-02 16:55:31,044 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-02 16:55:31,091 | INFO | __main__ | Starting Granular Processing for 47 campaigns...
+2026-05-02 16:55:31,092 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-02 16:55:31,100 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-02 16:56:50,077 | INFO | root | Logging initialized.
+2026-05-02 16:56:50,078 | INFO | root | Logging initialized.
+2026-05-02 16:56:50,079 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global/run_20260502_165650/results
+2026-05-02 16:56:50,079 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-02 16:56:50,079 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-02 16:56:50,079 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-02 16:56:50,079 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-02 16:56:50,079 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-02 16:56:50,083 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-02 16:56:50,087 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-02 16:56:50,087 | INFO | __main__ | Limiting execution to first 1 rows.
+2026-05-02 16:56:50,163 | INFO | __main__ | Starting Granular Processing for 1 campaigns...
+2026-05-02 16:56:50,164 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-02 16:56:50,170 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-02 16:57:22,131 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:22,147 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1/run_20260502_165650/results/analysis_result.json
+2026-05-02 16:57:22,148 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-02 16:57:39,214 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:39,220 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1/run_20260502_165650/results/recommendation_result.json
+2026-05-02 16:57:39,220 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-02 16:57:39,222 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-02 16:57:43,147 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:43,152 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-02 16:57:43,153 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 16:57:45,660 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:45,665 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 16:57:48,243 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:48,252 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 16:57:50,452 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:50,456 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 16:57:52,408 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 16:57:52,413 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1/run_20260502_165650/results/analysis_evaluation_results.json
+2026-05-02 16:57:52,413 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1/run_20260502_165650/results/recommendation_evaluation_results.json
+2026-05-02 16:57:52,414 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-02 17:09:28,868 | INFO | root | Logging initialized.
+2026-05-02 17:09:28,911 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 17:09:31,871 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 17:09:31,885 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-02 17:33:06,748 | INFO | root | Logging initialized.
+2026-05-02 17:33:06,783 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 17:33:11,380 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 17:33:11,394 | ERROR | recommendation_evaluator | Failed to evaluate recommendations batch: unsupported operand type(s) for +: 'int' and 'NoneType'
+2026-05-02 17:37:41,444 | INFO | root | Logging initialized.
+2026-05-02 17:37:41,478 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 17:37:45,233 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 17:37:45,241 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-02 17:50:15,883 | INFO | root | Logging initialized.
+2026-05-02 17:50:15,917 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 17:50:20,047 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 17:50:20,064 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-02 19:07:08,379 | INFO | root | Logging initialized.
+2026-05-02 19:07:08,415 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 19:07:12,434 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 19:07:12,452 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-02 19:19:54,503 | INFO | root | Logging initialized.
+2026-05-02 19:19:54,539 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-02 19:20:00,431 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-02 19:20:00,448 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-02/recommendation_evaluation_results.json
+2026-05-04 17:38:07,397 | INFO | root | Logging initialized.
+2026-05-04 17:38:07,443 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-04 17:38:13,060 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:38:13,084 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-04/recommendation_evaluation_results.json
+2026-05-04 17:41:11,905 | INFO | root | Logging initialized.
+2026-05-04 17:41:11,905 | INFO | root | Logging initialized.
+2026-05-04 17:41:11,906 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global/run_20260504_174111/results
+2026-05-04 17:41:11,906 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-04 17:41:11,906 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-04 17:41:11,906 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-04 17:41:11,906 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-04 17:41:11,906 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-04 17:41:11,917 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-04 17:41:11,924 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-04 17:41:11,924 | INFO | __main__ | Limiting execution to first 1 rows.
+2026-05-04 17:41:12,002 | INFO | __main__ | Starting Granular Processing for 1 campaigns...
+2026-05-04 17:41:12,004 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-04 17:41:12,013 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-04 17:41:18,401 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:18,417 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1/run_20260504_174111/results/analysis_result.json
+2026-05-04 17:41:18,418 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-04 17:41:32,738 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:32,744 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1/run_20260504_174111/results/recommendation_result.json
+2026-05-04 17:41:32,744 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-04 17:41:32,746 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-04 17:41:38,871 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:38,881 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-04 17:41:38,882 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-04 17:41:44,204 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:44,210 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-04 17:41:49,734 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:49,741 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-04 17:41:54,242 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:54,265 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-04 17:41:59,201 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-04 17:41:59,207 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1/run_20260504_174111/results/analysis_evaluation_results.json
+2026-05-04 17:41:59,208 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1/run_20260504_174111/results/recommendation_evaluation_results.json
+2026-05-04 17:41:59,209 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-06 09:12:57,241 | INFO | root | Logging initialized.
+2026-05-06 09:12:57,293 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-06 09:13:02,316 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:13:02,338 | INFO | recommendation_evaluator | Recommendation evaluation results saved to: logs/2026-05-06/recommendation_evaluation_results.json
+2026-05-06 09:15:32,260 | INFO | root | Logging initialized.
+2026-05-06 09:15:32,261 | INFO | root | Logging initialized.
+2026-05-06 09:15:32,262 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global/run_20260506_091532/results
+2026-05-06 09:15:32,262 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-06 09:15:32,262 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-06 09:15:32,262 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-06 09:15:32,262 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-06 09:15:32,262 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-06 09:15:32,273 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-06 09:15:32,280 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-06 09:15:32,280 | INFO | __main__ | Limiting execution to first 1 rows.
+2026-05-06 09:15:32,364 | INFO | __main__ | Starting Granular Processing for 1 campaigns...
+2026-05-06 09:15:32,366 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-06 09:15:32,375 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-06 09:15:46,542 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:15:46,558 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1/run_20260506_091532/results/analysis_result.json
+2026-05-06 09:15:46,559 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-06 09:16:05,166 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:16:05,173 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1/run_20260506_091532/results/recommendation_result.json
+2026-05-06 09:16:05,173 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-06 09:16:05,174 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-06 09:16:08,803 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:16:08,810 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-06 09:16:08,812 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-06 09:16:11,661 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 09:16:11,668 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-06 09:16:11,668 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1/run_20260506_091532/results/recommendation_evaluation_results.json
+2026-05-06 09:16:11,669 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-06 10:39:30,938 | INFO | root | Logging initialized.
+2026-05-06 10:39:30,938 | INFO | root | Logging initialized.
+2026-05-06 10:39:30,939 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global/run_20260506_103930/results
+2026-05-06 10:39:30,939 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-06 10:39:30,939 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-06 10:39:30,939 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-06 10:39:30,939 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-06 10:39:30,939 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-06 10:39:30,944 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-06 10:39:30,948 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-06 10:39:30,948 | INFO | __main__ | Limiting execution to first 1 rows.
+2026-05-06 10:39:31,032 | INFO | __main__ | Starting Granular Processing for 1 campaigns...
+2026-05-06 10:39:31,033 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-06 10:39:31,040 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-06 10:39:43,594 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:39:43,617 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1/run_20260506_103930/results/analysis_result.json
+2026-05-06 10:39:43,618 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-06 10:39:52,903 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:39:52,907 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1/run_20260506_103930/results/recommendation_result.json
+2026-05-06 10:39:52,907 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-06 10:39:52,908 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-06 10:39:57,614 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:39:57,619 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-06 10:39:57,620 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-06 10:40:02,325 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 10:40:02,331 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1/run_20260506_103930/results/analysis_evaluation_results.json
+2026-05-06 10:40:02,331 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1/run_20260506_103930/results/recommendation_evaluation_results.json
+2026-05-06 10:40:02,331 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-06 11:51:34,018 | INFO | root | Logging initialized.
+2026-05-06 11:51:34,018 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=None
+2026-05-06 11:51:34,018 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-06 11:51:34,018 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260419_195840', 'run_20260419_200423', 'run_20260502_165531', 'run_20260502_165650', 'run_20260504_174111', 'run_20260506_091532', 'run_20260506_103930']
+2026-05-06 11:51:34,019 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 456, in build_campaign_temp_csvs
+    analysis_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 189, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 13:42:02,458 | INFO | root | Logging initialized.
+2026-05-09 13:42:02,458 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 13:42:02,458 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 13:42:02,459 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 13:42:02,459 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 456, in build_campaign_temp_csvs
+    analysis_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 189, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 13:52:26,700 | INFO | root | Logging initialized.
+2026-05-09 13:52:26,700 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 13:52:26,700 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 13:52:26,701 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 13:52:26,701 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 13:52:26,701 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 13:52:26,701 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 189, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 13:54:16,596 | INFO | root | Logging initialized.
+2026-05-09 13:54:16,596 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 13:54:16,596 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 13:54:16,597 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 13:54:16,597 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 13:54:16,597 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 13:54:16,597 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 13:54:16,598 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 189, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 13:59:47,588 | INFO | root | Logging initialized.
+2026-05-09 13:59:47,588 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 13:59:47,588 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 13:59:47,588 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 13:59:47,588 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 13:59:47,588 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 13:59:47,589 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 13:59:47,589 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 188, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 14:10:22,055 | INFO | root | Logging initialized.
+2026-05-09 14:10:22,055 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 14:10:22,055 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 14:10:22,056 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:10:22,056 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:10:22,056 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 14:10:22,056 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 14:10:22,057 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 188, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 14:16:46,776 | INFO | root | Logging initialized.
+2026-05-09 14:16:46,776 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 14:16:46,777 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 14:16:46,777 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:16:46,777 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:16:46,777 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 14:16:46,778 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 14:16:46,778 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 188, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 14:24:11,038 | INFO | root | Logging initialized.
+2026-05-09 14:24:11,038 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=1
+2026-05-09 14:24:11,038 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 14:24:11,039 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:24:11,039 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:24:11,039 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_103930']
+2026-05-09 14:24:11,040 | INFO | Comparison Module | Added analysis result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/analysis_evaluation_results.json
+2026-05-09 14:24:11,041 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 188, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 14:29:56,976 | INFO | root | Logging initialized.
+2026-05-09 14:29:56,976 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 14:29:56,976 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 14:29:56,977 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:29:56,977 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:29:56,977 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 14:29:56,977 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 456, in build_campaign_temp_csvs
+    analysis_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 43, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 180, in _append_rows_to_csv
+    writer.writerows(normalized_rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: I/O operation on closed file.
+2026-05-09 14:34:38,916 | INFO | root | Logging initialized.
+2026-05-09 14:34:38,916 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 14:34:38,917 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 14:34:38,917 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:34:38,917 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 14:34:38,917 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 14:34:38,918 | INFO | Comparison Module | Added recommendation result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/recommendation_evaluation_results.json
+2026-05-09 14:34:38,918 | INFO | Comparison Module | Added analysis result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/analysis_evaluation_results.json
+2026-05-09 14:34:38,918 | INFO | Comparison Module | Added recommendation result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/recommendation_evaluation_results.json
+2026-05-09 14:34:38,918 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:34:38,918 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-09 14:34:38,918 | INFO | Comparison Module | Loading comparison CSV | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:34:38,922 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:34:38,922 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-09 14:34:38,922 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:34:38,928 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:34:38,930 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:34:39,154 | INFO | Comparison Module | Plot saved successfully | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/analysis_comparison_plot.png
+2026-05-09 14:34:39,155 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:34:39,155 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:34:39,155 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-09 14:34:39,155 | INFO | Comparison Module | Loading comparison CSV | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:34:39,155 | INFO | Comparison Module | CSV loaded successfully | rows=20 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 14:34:39,156 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-09 14:34:39,156 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 14:34:39,157 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=9 | columns=['version']
+2026-05-09 14:34:39,157 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 14:34:39,158 | ERROR | Comparison Module | Failed to generate plot | module_type=recommendation | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/recommendation_comparison_plot.png
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 127, in plot_version_comparison
+    plot_df = version_summary.set_index("version")[metrics].T
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6352, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Structure', 'Feasibility', 'Recommendation_Count',\n       'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment',\n       'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall'],\n      dtype='str')] are in the [columns]"
+2026-05-09 14:34:39,161 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 612, in run_pipeline
+    run_recommendation_comparison(
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 536, in run_recommendation_comparison
+    recommendation_comparison.plot_version_comparison(
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 127, in plot_version_comparison
+    plot_df = version_summary.set_index("version")[metrics].T
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6352, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Structure', 'Feasibility', 'Recommendation_Count',\n       'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment',\n       'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall'],\n      dtype='str')] are in the [columns]"
+2026-05-09 14:37:09,525 | INFO | root | Logging initialized.
+2026-05-09 14:37:09,525 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=1
+2026-05-09 14:37:09,525 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 14:37:09,526 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:37:09,526 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_103930']
+2026-05-09 14:37:09,526 | INFO | Comparison Module | Added analysis result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/analysis_evaluation_results.json
+2026-05-09 14:37:09,526 | INFO | Comparison Module | Added recommendation result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/recommendation_evaluation_results.json
+2026-05-09 14:37:09,526 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:37:09,526 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-09 14:37:09,527 | INFO | Comparison Module | Loading comparison CSV | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:37:09,527 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:37:09,527 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-09 14:37:09,527 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:37:09,529 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=1 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:37:09,530 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 14:37:09,700 | INFO | Comparison Module | Plot saved successfully | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/analysis_comparison_plot.png
+2026-05-09 14:37:09,701 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 14:37:09,701 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:37:09,701 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-09 14:37:09,701 | INFO | Comparison Module | Loading comparison CSV | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 14:37:09,702 | INFO | Comparison Module | CSV loaded successfully | rows=10 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 14:37:09,702 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-09 14:37:09,702 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 14:37:09,703 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=9 | columns=['version']
+2026-05-09 14:37:09,703 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 14:37:09,704 | ERROR | Comparison Module | Failed to generate plot | module_type=recommendation | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/recommendation_comparison_plot.png
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 127, in plot_version_comparison
+    plot_df = version_summary.set_index("version")[metrics].T
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6352, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Structure', 'Feasibility', 'Recommendation_Count',\n       'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment',\n       'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall'],\n      dtype='str')] are in the [columns]"
+2026-05-09 14:37:09,706 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 612, in run_pipeline
+    run_recommendation_comparison(
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 536, in run_recommendation_comparison
+    recommendation_comparison.plot_version_comparison(
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 127, in plot_version_comparison
+    plot_df = version_summary.set_index("version")[metrics].T
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 4384, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6302, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 6352, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index(['Structure', 'Feasibility', 'Recommendation_Count',\n       'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment',\n       'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall'],\n      dtype='str')] are in the [columns]"
+2026-05-09 15:02:31,508 | INFO | root | Logging initialized.
+2026-05-09 15:02:31,508 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 15:02:31,508 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 15:02:31,509 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 15:02:31,509 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 15:02:31,509 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 15:02:31,510 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 189, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 15:34:48,483 | INFO | root | Logging initialized.
+2026-05-09 15:34:48,483 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 15:34:48,483 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 15:34:48,483 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 579, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 404, in build_campaign_temp_csvs
+    result_dirs = find_last_n_run_result_dirs(campaign_dir, last_n=last_n)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'find_last_n_run_result_dirs' is not defined. Did you mean: 'find_run_result_dirs'?
+2026-05-09 18:04:23,898 | INFO | root | Logging initialized.
+2026-05-09 18:04:23,898 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:04:23,898 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:04:23,899 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:04:23,899 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:04:23,899 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:04:23,899 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:04:23,900 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:08:21,068 | INFO | root | Logging initialized.
+2026-05-09 18:08:21,068 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:08:21,069 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:08:21,069 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:08:21,069 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:08:21,069 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:08:21,069 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:08:21,070 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 190, in _append_rows_to_csv
+    writer.writerows(rows)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 167, in writerows
+    return self.writer.writerows(map(self._dict_to_list, rowdicts))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:22:30,519 | INFO | root | Logging initialized.
+2026-05-09 18:22:30,520 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:22:30,520 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:22:30,520 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:22:30,520 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:22:30,520 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:22:30,521 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:22:30,521 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:24:19,390 | INFO | root | Logging initialized.
+2026-05-09 18:24:19,390 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:24:19,391 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:24:19,391 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:24:19,391 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:24:19,391 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:24:19,392 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:24:19,392 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:25:57,897 | INFO | root | Logging initialized.
+2026-05-09 18:25:57,897 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:25:57,897 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:25:57,898 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:25:57,898 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:25:57,898 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:25:57,898 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 456, in build_campaign_temp_csvs
+    analysis_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow("this row"+str(row))
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 18:28:11,328 | INFO | root | Logging initialized.
+2026-05-09 18:28:11,328 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:28:11,328 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:28:11,329 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:28:11,329 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:28:11,329 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 456, in build_campaign_temp_csvs
+    analysis_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow("this row"+str(row))
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'keys'
+2026-05-09 18:29:51,849 | INFO | root | Logging initialized.
+2026-05-09 18:29:51,849 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:29:51,849 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:29:51,849 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:29:51,849 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:29:51,850 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:29:51,850 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:34:11,674 | INFO | root | Logging initialized.
+2026-05-09 18:34:11,674 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:34:11,675 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:34:11,675 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:34:11,675 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:34:11,675 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:34:11,675 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:34:11,676 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:34:55,278 | INFO | root | Logging initialized.
+2026-05-09 18:34:55,278 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:34:55,278 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:34:55,278 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:34:55,278 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:34:55,278 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:34:55,279 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:34:55,279 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 44, in write_csv
+    self._append_rows_to_csv(rows, fieldnames)
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 191, in _append_rows_to_csv
+    writer.writerow(row)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 164, in writerow
+    return self.writer.writerow(self._dict_to_list(rowdict))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/csv.py", line 157, in _dict_to_list
+    wrong_fields = rowdict.keys() - self.fieldnames
+                   ^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'keys'
+2026-05-09 18:37:41,871 | INFO | root | Logging initialized.
+2026-05-09 18:37:41,871 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-09 18:37:41,872 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1
+2026-05-09 18:37:41,872 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:37:41,872 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:37:41,872 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260506_091532', 'run_20260506_103930']
+2026-05-09 18:37:41,872 | INFO | Comparison Module | Added analysis result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/analysis_evaluation_results.json
+2026-05-09 18:37:41,873 | INFO | Comparison Module | Added recommendation result | version=run_20260506_091532 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_091532/results/recommendation_evaluation_results.json
+2026-05-09 18:37:41,873 | INFO | Comparison Module | Added analysis result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/analysis_evaluation_results.json
+2026-05-09 18:37:41,873 | INFO | Comparison Module | Added recommendation result | version=run_20260506_103930 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/run_20260506_103930/results/recommendation_evaluation_results.json
+2026-05-09 18:37:41,873 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:37:41,873 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-09 18:37:41,873 | INFO | Comparison Module | Loading comparison CSV | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:37:41,874 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 18:37:41,874 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-09 18:37:41,874 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 18:37:41,876 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 18:37:41,877 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'structure', 'overall']
+2026-05-09 18:37:42,050 | INFO | Comparison Module | Plot saved successfully | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/analysis_comparison_plot.png
+2026-05-09 18:37:42,050 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_analysis_summary_input.csv
+2026-05-09 18:37:42,050 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:37:42,050 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-09 18:37:42,050 | INFO | Comparison Module | Loading comparison CSV | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:37:42,051 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 18:37:42,051 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-09 18:37:42,051 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 18:37:42,052 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 18:37:42,053 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-09 18:37:42,145 | INFO | Comparison Module | Plot saved successfully | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/recommendation_comparison_plot.png
+2026-05-09 18:37:42,145 | INFO | Comparison Module | Deleted file | path=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_1/comparison_results/_temp_recommendation_summary_input.csv
+2026-05-09 18:37:42,145 | INFO | Comparison Module | Processing campaign: /Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_2
+2026-05-09 18:37:42,145 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260419_195840', 'run_20260419_200423']
+2026-05-09 18:37:42,146 | INFO | Comparison Module | Added analysis result | version=run_20260419_195840 | file=/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/data/outputs/campaign_2/run_20260419_195840/results/analysis_evaluation_results.json
+2026-05-09 18:37:42,146 | ERROR | Comparison Module | Comparison pipeline failed
+Traceback (most recent call last):
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 601, in run_pipeline
+    analysis_temp_csv, recommendation_temp_csv = build_campaign_temp_csvs(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/comparson_module.py", line 467, in build_campaign_temp_csvs
+    recommendation_writer.write_csv()
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 35, in write_csv
+    json_type = self._detect_json_type(data)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marwa/Desktop/Marwa/NLP course/MarketingExpert/Team4-MarketingExpert/src/modules/comparsion/json_to_csv_writer.py", line 73, in _detect_json_type
+    raise ValueError("Invalid JSON format. Expected a dictionary.")
+ValueError: Invalid JSON format. Expected a dictionary.
