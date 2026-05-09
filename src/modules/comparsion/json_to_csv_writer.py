@@ -35,7 +35,8 @@ class JsonToCsvWriter:
         json_type = self._detect_json_type(data)
         rows = self._extract_rows(data, json_type)
         fieldnames = self._get_fieldnames(json_type)
-
+        print(rows)
+        print(fieldnames)
         if not rows:
             raise ValueError("No rows could be extracted from the JSON file.")
 
@@ -109,7 +110,8 @@ class JsonToCsvWriter:
 
     def _extract_rows(self, data: Any, json_type: str) -> List[Dict[str, Any]]:
         if json_type == self.ANALYSIS_TYPE:
-            return [self._build_analysis_row(data)]
+            return self._build_analysis_row(data)
+        
 
         if json_type == self.RECOMMENDATION_TYPE:
             return self._build_recommendation_rows(data)
@@ -134,8 +136,7 @@ class JsonToCsvWriter:
                 "Priority_Alignment",
                 "Tone_Audience_Compliance",
                 "Expected_Impact_Quality",
-                "Overall",
-            ]
+                "Overall"]
 
         raise ValueError(f"Unsupported JSON type: {json_type}")
 
@@ -150,10 +151,11 @@ class JsonToCsvWriter:
             "overall": scores.get("overall"),
         }
 
-    def _build_recommendation_rows(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        
-        scores = data.get("scores", {})
-        return{
+  
+    def _build_recommendation_rows(self, data: Dict[str, Any]) ->Dict[str, Any]:
+         scores = data.get("scores", {})
+
+         return  {
             "version": self.version,
             "Structure": scores.get("Structure"),
             "Feasibility": scores.get("Feasibility"),
@@ -167,7 +169,7 @@ class JsonToCsvWriter:
           }
        
 
-       
+     
 
     def _append_rows_to_csv(
         self,
@@ -177,9 +179,8 @@ class JsonToCsvWriter:
         """
         Append rows to CSV using the correct header.
         """
-        print(f"Appending row to CSV: {row}")
         file_exists = self.output_csv.exists()
-
+        print( "this row"+str(row))
         with open(self.output_csv, "a", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
 
@@ -187,3 +188,4 @@ class JsonToCsvWriter:
                 writer.writeheader()
 
             writer.writerow(row)
+   

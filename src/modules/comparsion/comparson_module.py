@@ -628,4 +628,4 @@ if __name__ == "__main__":
     # Compare the last 2 runs:
     # run_pipeline(last_n=2)
     # Compare all runs:
-    run_pipeline(last_n=None)
+    run_pipeline(last_n=2)
