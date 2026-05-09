@@ -25,7 +25,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Modular Ads Pipeline Engine - Strict Row-by-Row")
     parser.add_argument("--input-csv", type=str, default="data/raw/ads_data.csv")
     parser.add_argument("--output-base-dir", type=str, default="data/outputs/")
-    parser.add_argument("--row-limit", type=int, default=None, help="Limit the number of rows to process")
+    parser.add_argument("--row-limit", type=int, default=None, help="Limit the total number of rows to process")
+    parser.add_argument("--batch-size", type=int, default=6, help="Number of rows processed in a single LLM call (default: 6)")
     parser.add_argument("--skip-evaluation", action="store_true", help="Skip evaluation stage")
     return parser.parse_args()
 
@@ -68,7 +69,13 @@ def main():
         processed_df = processed_df.iloc[:args.row_limit]
         logger.info(f"Limiting execution to first {args.row_limit} rows.")
 
-    # 3. Phase B: Iterative Row-by-Row Processing
+    # 3. Phase B: Batch Processing
+    # Slice processed_df into batches of --batch-size rows.
+    # To change batch size at runtime: --batch-size N
+    # To change the permanent default: edit default=6 in parse_args() only.
+    batch_size = args.batch_size
+    total_rows = len(processed_df)
+
     granular_modules = [
         EnrichmentModule(),
         AnalysisModule(),
@@ -77,52 +84,53 @@ def main():
     if not args.skip_evaluation:
         granular_modules.append(EvaluationModule())
 
-    logger.info(f"Starting Granular Processing for {len(processed_df)} campaigns...")
+    logger.info(f"Starting Batch Processing: {total_rows} rows → batches of {batch_size}.")
 
-    for i, row in processed_df.iterrows():
-        campaign_name = f"campaign_{i+1}"
-        row_dir = os.path.join(args.output_base_dir, campaign_name, f"run_{timestamp}", "results")
-        os.makedirs(row_dir, exist_ok=True)
-        
-        logger.info(f"--- Processing {campaign_name} ---")
-        
-        # Create a fresh context for this specific row
-        row_context = ExecutionContext()
-        
-        # Pull campaign target from row data if available, fallback to defaults
+    for batch_start in range(0, total_rows, batch_size):
+        batch_end = min(batch_start + batch_size, total_rows)
+        df_batch = processed_df.iloc[batch_start:batch_end]
+
+        batch_label = f"batch_{batch_start + 1}_{batch_end}"
+        batch_dir = os.path.join(args.output_base_dir, batch_label, f"run_{timestamp}", "results")
+        os.makedirs(batch_dir, exist_ok=True)
+
+        logger.info(f"--- Processing {batch_label} (rows {batch_start + 1}–{batch_end}) ---")
+
+        # Derive metadata from the first row; all rows in a batch share
+        # the same campaign target and business domain.
+        first_row = df_batch.iloc[0]
+
         campaign_target = {
-            "primary_goal": str(row.get("primary_goal", "Unknown")),
+            "primary_goal": str(first_row.get("primary_goal", "Unknown")),
         }
-        
-        business_domain = {
-            "industry": str(row.get("industry", "Unknown")),
-            "offering": str(row.get("offering", "Unknown")),
-            "audience": str(row.get("audience", "Unknown")),
-            "funnel_stage": str(row.get("funnel_stage", "Unknown")),
-        }
-        
-        # Pass essential metadata
-        row_context.set_metadata("campaign_target", campaign_target)
-        row_context.set_metadata("business_domain", business_domain)
-        row_context.set_metadata("output_json_dir", row_dir) # Base for relative paths
-        
-        # This is where modules will save their individual results
-        row_context.runtime_output_path = row_dir
-        
-        # Important: The module expects a DataFrame in processed_df
-        # We wrap the single row in a DF
-        row_context.processed_df = pd.DataFrame([row])
 
-        # Execute granular modules manually for this context
+        business_domain = {
+            "industry":     str(first_row.get("industry",     "Unknown")),
+            "offering":     str(first_row.get("offering",     "Unknown")),
+            "audience":     str(first_row.get("audience",     "Unknown")),
+            "funnel_stage": str(first_row.get("funnel_stage", "Unknown")),
+        }
+
+        # Build a fresh context for this batch
+        batch_context = ExecutionContext()
+        batch_context.set_metadata("campaign_target",  campaign_target)
+        batch_context.set_metadata("business_domain",  business_domain)
+        batch_context.set_metadata("output_json_dir",  batch_dir)
+        batch_context.runtime_output_path = batch_dir
+
+        # Pass the full batch slice — modules receive a multi-row DataFrame
+        batch_context.processed_df = df_batch.reset_index(drop=True)
+
+        # Execute granular modules against the full batch context
         for module in granular_modules:
             try:
-                row_context = module.run(row_context)
-                module.save(row_context)
+                batch_context = module.run(batch_context)
+                module.save(batch_context)
             except Exception as e:
-                logger.error(f"Error in {module.name} for {campaign_name}: {e}")
-                row_context.errors.append(f"{module.name}: {e}")
+                logger.error(f"Error in {module.name} for {batch_label}: {e}")
+                batch_context.errors.append(f"{module.name}: {e}")
 
-    logger.info(f"All campaigns processed. Results available under: {args.output_base_dir}")
+    logger.info(f"All batches processed. Results available under: {args.output_base_dir}")
 
 if __name__ == "__main__":
     main()
