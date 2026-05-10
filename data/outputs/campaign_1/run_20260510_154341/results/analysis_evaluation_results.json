@@ -1,0 +1,22 @@
+{
+  "scores": {
+    "clarity": 3,
+    "accuracy": 3,
+    "structure": 3,
+    "overall": 3.0
+  },
+  "reasoning": {
+    "clarity": "The analysis clearly explains key metrics such as CTR, CPA, ROAS, and conversions and ties them specifically to campaign performance insights. The language is accessible and well-organized, making complex data easy to understand.",
+    "accuracy": "The analysis logically interprets the raw data without introducing unsupported assumptions or hallucinations. Each insight is supported by the provided metrics, such as CTR, CPC, conversions, and revenue, and aligns with standard digital marketing interpretations.",
+    "structure": "The report is well-structured into sections that logically follow the campaign performance narrative: Executive Summary, Budget & Efficiency, Results & Value, Cross-channel Risks, and Channel Notes. It also highlights missing info, maintaining comprehensive coverage."
+  },
+  "verdict": "accept",
+  "key_issues": [
+    "The analysis could be enhanced by including benchmarks or industry standards for CTR and CPA to contextualize the performance.",
+    "Providing suggestions for optimization based on the low CTR could make the report more actionable."
+  ],
+  "improvement_suggestions": [
+    "Include industry benchmarks to better evaluate relative performance.",
+    "Add specific recommendations for improving CTR and traffic quality."
+  ]
+}
