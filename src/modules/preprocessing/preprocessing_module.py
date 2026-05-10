@@ -5,6 +5,8 @@ from src.core.execution_context import ExecutionContext
 from .preprocessor import Preprocessor
 from src.shared.models.ads_schema import UnifiedAdsSchema
 
+from src.shared.utils.observability import observe, update_current_observation
+
 class PreprocessingModule(BaseModule):
     """
     Module for data cleaning, type enforcement, duplicate removal, 
@@ -16,6 +18,7 @@ class PreprocessingModule(BaseModule):
         self.schema = UnifiedAdsSchema()
         self.preprocessor = Preprocessor(schema=self.schema)
 
+    @observe(as_type="span", name="Preprocessing")
     def run(self, context: ExecutionContext) -> ExecutionContext:
         if context.raw_df is None:
             raise ValueError("Raw DataFrame not found in context. Ensure IngestionModule ran first.")
@@ -32,6 +35,15 @@ class PreprocessingModule(BaseModule):
         # Remove duplicates
         if context.get_metadata("remove_duplicates", True):
             df = self.preprocessor.remove_duplicates(df)
+
+        update_current_observation(
+            metadata={
+                "input_rows": str(len(context.raw_df)) if context.raw_df is not None else "0",
+                "output_rows": str(len(df)),
+                "parse_dates": str(context.get_metadata("parse_dates", True)),
+                "remove_duplicates": str(context.get_metadata("remove_duplicates", True))
+            }
+        )
 
         context.processed_df = df
         return context

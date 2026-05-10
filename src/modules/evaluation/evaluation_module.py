@@ -11,6 +11,8 @@ from .recommendation_evaluator import RecommendationEvaluator
 
 logger = logging.getLogger(__name__)
 
+from src.shared.utils.observability import observe, update_current_observation, log_evaluation_score
+
 class EvaluationModule(BaseModule):
     """
     Module for evaluating LLM outputs (Analysis and Recommendation).
@@ -22,6 +24,7 @@ class EvaluationModule(BaseModule):
         self.analysis_evaluator = AnalysisEvaluator()
         self.recommendation_evaluator = RecommendationEvaluator()
 
+    @observe(as_type="span", name="Evaluations")
     def run(self, context: ExecutionContext) -> ExecutionContext:
         evaluations: Dict[str, Any] = {}
         
@@ -41,6 +44,15 @@ class EvaluationModule(BaseModule):
                     save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None
                 )
                 evaluations["analysis"] = analysis_eval
+                
+                # Submit analysis scores to Langfuse
+                if isinstance(analysis_eval, dict):
+                    for key, val in analysis_eval.items():
+                        if isinstance(val, (int, float)):
+                            log_evaluation_score(name=f"analysis_{key}", value=float(val))
+                        elif isinstance(val, dict) and "score" in val:
+                            log_evaluation_score(name=f"analysis_{key}", value=float(val["score"]), comment=str(val.get("reason")))
+
             except Exception as e:
                 logger.error(f"Analysis evaluation failed: {e}")
 
@@ -48,12 +60,14 @@ class EvaluationModule(BaseModule):
         if context.recommendation_results:
             logger.info("Evaluating Recommendation cards...")
             try:
+                # Recommendation results should contain 'recommendations' list
                 recommendations = context.recommendation_results.get("recommendations", [])
                 rec_evals = []
                 
                 analysis_context = context.analysis_results
 
                 for rec in recommendations:
+                    rec_title = rec.get("title", "Unknown")
                     rec_eval = self.recommendation_evaluator.evaluate(
                         business_context=business_domain,
                         campaign_target=campaign_target,
@@ -63,10 +77,23 @@ class EvaluationModule(BaseModule):
                         save_dir=os.path.join(context.runtime_output_path, "prompts") if context.runtime_output_path else None
                     )
                     rec_evals.append({
-                        "card_title": rec.get("title"),
+                        "card_title": rec_title,
                         "evaluation": rec_eval
                     })
+                    
+                    # Submit recommendation scores to Langfuse
+                    if isinstance(rec_eval, dict):
+                        scores = rec_eval.get("scores", {})
+                        for key, val in scores.items():
+                            if isinstance(val, (int, float)):
+                                log_evaluation_score(
+                                    name=f"rec_{key}", 
+                                    value=float(val), 
+                                    comment=f"{rec_title}: {rec_eval.get('reasoning', {}).get(key, '')}"
+                                )
+
                 evaluations["recommendations"] = rec_evals
+
             except Exception as e:
                 logger.error(f"Recommendation evaluation failed: {e}")
 

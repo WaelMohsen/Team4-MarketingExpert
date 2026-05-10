@@ -5,6 +5,8 @@ from src.core.execution_context import ExecutionContext
 from .loader import DataLoader
 from src.shared.models.ads_schema import UnifiedAdsSchema
 
+from src.shared.utils.observability import observe, update_current_observation
+
 class IngestionModule(BaseModule):
     """
     Module for loading raw ads data and applying initial schema mapping.
@@ -15,6 +17,7 @@ class IngestionModule(BaseModule):
         self.loader = DataLoader()
         self.schema = UnifiedAdsSchema()
 
+    @observe(as_type="span", name="Ingestion")
     def run(self, context: ExecutionContext) -> ExecutionContext:
         source = context.get_metadata("input_csv")
         if not source:
@@ -28,6 +31,13 @@ class IngestionModule(BaseModule):
         
         # Validate schema
         self.schema.validate_required(context.raw_df)
+
+        update_current_observation(
+            metadata={
+                "source": str(source),
+                "rows_loaded": str(len(context.raw_df)) if context.raw_df is not None else "0"
+            }
+        )
         
         return context
 

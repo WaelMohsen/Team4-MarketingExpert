@@ -12,6 +12,8 @@ from src.shared.utils.prompt_registry import PromptRegistry
 
 logger = logging.getLogger(__name__)
 
+from src.shared.utils.observability import observe, update_current_observation
+
 class AnalysisModule(BaseModule):
     """
     Module for performing Stage 1 Analysis using an LLM.
@@ -26,6 +28,7 @@ class AnalysisModule(BaseModule):
             max_output_tokens=4000,
         )
 
+    @observe(as_type="span", name="Analysis")
     def run(self, context: ExecutionContext) -> ExecutionContext:
         if not context.enriched_data:
             raise ValueError("Enriched data not found in context. Ensure EnrichmentModule ran first.")
@@ -57,6 +60,13 @@ class AnalysisModule(BaseModule):
             business_domain=business_domain,
             campaign_target=campaign_target,
             goal_instructions=goal_instructions
+        )
+
+        update_current_observation(
+            metadata={
+                "primary_goal": str(primary_goal),
+                "goal_instructions_found": str(bool(goal_instructions))
+            }
         )
 
         # Generate Analysis

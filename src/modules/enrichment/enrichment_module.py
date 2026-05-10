@@ -7,6 +7,8 @@ from .platform_summary import build_platform_summary
 from src.modules.preprocessing.preprocessor import Preprocessor
 from src.shared.models.ads_schema import UnifiedAdsSchema
 
+from src.shared.utils.observability import observe, update_current_observation
+
 class EnrichmentModule(BaseModule):
     """
     Module for feature extraction and high-density campaign enrichment.
@@ -17,6 +19,7 @@ class EnrichmentModule(BaseModule):
         super().__init__(name)
         self.schema = UnifiedAdsSchema()
 
+    @observe(as_type="span", name="Enrichment")
     def run(self, context: ExecutionContext) -> ExecutionContext:
         if context.processed_df is None:
             raise ValueError("Row data not found in context.")
@@ -34,6 +37,13 @@ class EnrichmentModule(BaseModule):
         enriched_payload = {
             **base_summary
         }
+
+        update_current_observation(
+            metadata={
+                "primary_goal": str(primary_goal),
+                "enriched_fields": str(list(enriched_payload.keys()))
+            }
+        )
 
         context.enriched_data = {
             "campaign_data": enriched_payload,
