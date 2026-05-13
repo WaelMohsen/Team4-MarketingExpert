@@ -111,4 +111,4 @@ class UnifiedAdsSchema:
             # To keep it simple and safe for now: just take the last occurrence
             df = df.loc[:, ~df.columns.duplicated(keep="last")]
 
-        return df
+        return df
