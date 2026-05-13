@@ -81,6 +81,8 @@ class JsonToCsvWriter:
         "clarity",
         "accuracy",
         "structure",
+        "hallucination",''
+        'kpi_alignment',
         "overall",
       }
 
@@ -123,7 +125,7 @@ class JsonToCsvWriter:
         Return the correct CSV header for each JSON type.
         """
         if json_type == self.ANALYSIS_TYPE:
-            return ["version", "clarity", "accuracy", "structure", "overall"]
+            return ["version", "clarity", "accuracy", "structure", "hallucination","kpi_alignment","overall"]
 
         if json_type == self.RECOMMENDATION_TYPE:
             return [
@@ -142,12 +144,13 @@ class JsonToCsvWriter:
 
     def _build_analysis_row(self, data: Dict[str, Any]) -> Dict[str, Any]:
         scores = data.get("scores", {})
-
         return {
             "version": self.version,
             "clarity": scores.get("clarity"),
             "accuracy": scores.get("accuracy"),
             "structure": scores.get("structure"),
+            "hallucination" : scores.get("hallucination"),
+            "kpi_alignment": scores.get("kpi_alignment"),
             "overall": scores.get("overall"),
         }
 

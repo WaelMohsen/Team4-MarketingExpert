@@ -153,9 +153,6 @@ class EvaluationSectionV1(BaseModel):
     improvement_suggestions: List[str]
 
     
-class AnalysisEvaluationResponse(BaseModel):
-    evaluation: EvaluationSection
-
 class RecommendationEvaluationSection(BaseModel):
     structure_score: int = Field(ge=1, le=3)
     structure_reasoning: str
@@ -245,10 +242,8 @@ def validate_total_score(self):
         )
     return self
 
-
-
-
 class AnalysisEvaluationResponse(BaseModel):
+#   evaluation: EvaluationSectionV1
     evaluation: EvaluationSection
 
 class RecommendationEvaluationResponse(BaseModel):

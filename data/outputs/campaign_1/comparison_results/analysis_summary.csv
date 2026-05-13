@@ -1,3 +1,2 @@
-version,clarity,accuracy,structure,overall
-run_20260506_091532,0.0,0.0,3.0,1.0
-run_20260506_103930,3.0,3.0,3.0,3.0
+version,clarity,accuracy,hallucination,structure,kpi_alignment,overall
+run_20260512_214746,4.0,4.0,4.0,5.0,4.0,4.2

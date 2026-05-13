@@ -224,7 +224,7 @@ class ComparisonModule:
             ValueError: If module_type is not supported.
         """
         if self.module_type == self.ANALYSIS:
-            return ["version", "clarity", "accuracy", "structure", "overall"]
+            return ["version", "clarity", "accuracy", "hallucination","structure", "kpi_alignment","overall"]
 
         if self.module_type == self.RECOMMENDATION:
             return [
@@ -443,7 +443,6 @@ def build_campaign_temp_csvs(
     for results_dir in result_dirs:
         run_dir = results_dir.parent
         version = run_dir.name
-
         analysis_json = results_dir / "analysis_evaluation_results.json"
         recommendation_json = results_dir / "recommendation_evaluation_results.json"
 
