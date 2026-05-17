@@ -26,8 +26,13 @@ python run_pipeline.py --input-csv data/raw/your_data.csv
 ### Controlled Testing (Row Limit)
 To test the pipeline on a small subset of data (highly recommended for debugging):
 ```bash
-python run_pipeline.py --input-csv data/raw/your_data.csv --row-limit 3
+python run_pipeline.py --input-csv data/domain_data/domain_dataset_ver_*.csv --row-limit 3
 ```
+
+### Dynamic Campaign Grouping (Cohort Batching)
+If your input CSV includes an `index` column (e.g. `data/domain_data/domain_dataset_ver_3.csv`), the pipeline dynamically groups rows sharing the same index into a single campaign cohort (labeled as `campaign_1`, `campaign_2`, etc.). This processes the campaign across different platforms and execution dates together, with campaign objectives derived from the first row of each cohort. 
+
+If the `index` column is absent, the pipeline automatically falls back to standard chunk-based slicing of size `--batch-size` (default: 6).
 
 ### Skip Evaluation
 If you only want analysis results without running the AI auditor:

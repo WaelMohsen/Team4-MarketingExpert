@@ -2,13 +2,16 @@
 
 This guide explains the granular architecture and development standards for the Marketing Truth Engine.
 
-## 📐 Architectural Philosophy: Strict Granularity
-Unlike traditional marketing tools that aggregate data into high-level averages, this engine processes every campaign (row) as a **self-contained case study**.
+## 📐 Architectural Philosophy: Campaign Cohort Granularity
+Unlike traditional marketing tools that aggregate the entire advertising account into high-level averages, this engine processes every campaign cohort as a **self-contained case study**. 
+- A campaign cohort represents the **same campaign** tracked across multiple time periods and platforms (e.g. Google Ads, TikTok Ads, Meta Ads).
+- **Dynamic Campaign Cohorts**: If the source data contains an `index` column, the engine groups rows sharing the same index into a single cohort. If the `index` column is absent, it falls back to standard chunk-based batching.
+- **Goals and Objectives**: The goals, target audience, industry, and offering are derived from the *first row* of the campaign cohort (the source of truth), ensuring the entire campaign is analyzed under the correct strategic context.
 
 ### Benefits:
-- **No Data Leakage**: Row 1 performance never influences the analysis of Row 2.
-- **Auditability**: Every row has a clear audit trail from raw data to evaluation grade.
-- **Precision**: LLMs can focus on specific metadata (audience, industry) for a single campaign.
+- **Platform Comparison**: Evaluates cross-channel performance (comparing Google Ads, TikTok Ads, Meta Ads) for the same campaign.
+- **Temporal Analysis**: Tracks campaign metrics over time to identify trends, fatigue, and stability.
+- **Precision**: LLMs focus on specific metadata for a cohesive campaign cohort rather than isolated individual rows.
 
 ---
 
@@ -50,9 +53,9 @@ The quality of the AI output is audited by a separate LLM process using the exac
     3. Access it in your module via `PromptRegistry.YOUR_KEY.value`.
 
 ### 2. Handling Data
-- Avoid `groupby` or `sum()` logic within intelligence modules.
-- Assume the input is a **single-row DataFrame**.
-- Use `context.runtime_output_path` for all `save()` operations to ensure data ends up in the correct `campaign_{i}/run_TIMESTAMP/results/` folder.
+- Intelligence modules receive a multi-row DataFrame (campaign cohort) representing the same campaign across platforms and time.
+- The `EnrichmentModule` processes each row in the cohort individually using `build_platform_summary()` and collects them as a list of dicts.
+- Use `context.runtime_output_path` for all `save()` operations to ensure data ends up in the correct campaign/batch results folder.
 
 ### 3. Response Schemas
 - Define all LLM output formats in `src/shared/models/llm_responses.py`.
