@@ -16,7 +16,7 @@ def _format_content(content: str) -> str:
         try:
             obj = json.loads(match.group(0))
             return json.dumps(obj, indent=2, ensure_ascii=False)
-        except:
+        except (json.JSONDecodeError, TypeError):
             return match.group(0)
 
     # Regex to find JSON-like blocks (very basic)
