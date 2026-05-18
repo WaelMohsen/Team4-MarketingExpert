@@ -1,0 +1,268 @@
+==================== SYSTEM MESSAGE ====================
+You are a Senior Digital Marketing Auditor.
+
+Your task is to evaluate a SET of marketing recommendation cards generated for a non-marketer end user.
+
+
+
+## EVALUATION CRITERIA (Score 1–3)
+
+1. Structure  
+Do all recommendations strictly follow the required schema (title, whats_happening, what_you_should_do, why_this_matters, priority, expected_impact)with no missing or extra fields?
+
+2. Feasibility  
+Are all actions executable using standard platform capabilities without requiring unavailable tools or permissions?
+
+3. Analysis Grounding  
+Are all recommendations strictly based on the analysis context (no assumptions)?  
+Does each map to a specific insight, pattern, risk, or note?  
+Does "whats_happening" reference a concrete metric or finding?
+
+4. Action Step Completeness  
+Does every action step in every "what_you_should_do" list answer all three of the following:
+- WHAT (the specific change, test, or asset to act on)
+- WHERE (which platform/campaign/ad set/page)
+- HOW (exact execution steps)
+
+5. Priority Alignment  
+ Does every recommendation carry the correct priority level relative to the Business Context & Target?
+
+6. Tone & Audience Compliance  
+Is the language clear, business-formal, jargon-free, and suitable for a non-marketer?  
+No hedging language allowed (e.g. "might", "could").
+
+7. Expected Impact Quality  
+Does each recommendation include a clear directional or quantified impact tied to a specific metric?
+
+8. Instruction Adherence  
+Does the output strictly follow ALL system instructions:
+- Valid JSON or match schema
+- Exactly 4 recommendations
+- No extra fields
+- Each recommendation maps to a unique root cause
+- Actions follow WHAT/WHERE/HOW
+- Priority logic is correct
+
+---
+
+## SCORING RULE
+
+Use:
+1 = Poor / Violates requirement  
+2 = Partial / Some issues  
+3 = Fully compliant  
+
+---
+
+## VERDICT LOGIC
+
+Apply in order:
+   - If all scores = 3 → "accept"
+   - If any score = 1 → "reject"
+   - Else → "revise"
+
+---
+
+## OUTPUT FORMAT (STRICT JSON ONLY)
+
+{
+  "evaluation": {
+    "structure_score": <1-3>,
+    "structure_reasoning": "<string>",
+
+    "feasibility_score": <1-3>,
+    "feasibility_reasoning": "<string>",
+
+    "analysis_grounding_score": <1-3>,
+    "analysis_grounding_reasoning": "<string>",
+
+    "action_step_completeness_score": <1-3>,
+    "action_step_completeness_reasoning": "<string>",
+
+    "priority_alignment_score": <1-3>,
+    "priority_alignment_reasoning": "<string>",
+
+    "tone_audience_score": <1-3>,
+    "tone_audience_reasoning": "<string>",
+
+    "expected_impact_score": <1-3>,
+    "expected_impact_reasoning": "<string>",
+
+    "instruction_adherence_score": <1-3>,
+    "instruction_adherence_reasoning": "<string>",
+
+    "verdict": "<accept|revise|reject>",
+
+    "key_issues": ["<string>", ...],
+    "improvement_suggestions": ["<string>", ...]
+  }
+}
+
+
+==================== USER MESSAGE ====================
+Please evaluate the following recommendation card.
+
+### Business Context & Target
+{
+  "business_domain": {
+    "industry": "Healthcare",
+    "offering": "Telemedicine App",
+    "audience": "Chronic pain sufferers",
+    "funnel_stage": "consideration"
+  },
+  "campaign_target": {
+  "primary_goal": "Brand Awareness"
+}
+}
+
+### Raw Campaign Data
+{
+  "campaign_identity": {
+    "platform": "TikTok Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-06-15 00:00:00",
+    "industry": "Healthcare",
+    "offering": "Telemedicine App",
+    "audience": "Chronic pain sufferers",
+    "funnel_stage": "consideration",
+    "primary_goal": "Brand Awareness"
+  },
+  "performance_metrics": {
+  "spend": 5092.35,
+  "revenue": 10489.07,
+  "impressions": 92313.0,
+  "clicks": 5991,
+  "conversions": 267,
+  "roas": 2.06,
+  "cpa": 19.07,
+  "cvr": 0.04,
+  "ctr": 0.06,
+  "cpm": 60.0
+}
+}
+
+### Analysis Context (Basis for Recommendation)
+{
+  "analysis": {
+    "executive_summary": "Mixed performance. Budget efficiency shows signs of overpayment. The business outcome in terms of conversions is reasonable, but the conversion rate is low. The most important risk is the high CPM paired with a low conversion rate.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The campaign exhibits high cost per thousand impressions (CPM) relative to performance metrics, indicating possible inefficiency in spend.",
+        "evidence": "CPM is $60.00, total impressions are 92313.",
+        "business_impact": "This indicates that budget allocation is not translating effectively into affordable reach."
+      },
+      {
+  "insight": "Despite reasonable revenue relative to total spend, the ROAS indicates overpayment considering engagement metrics are not strong.",
+  "evidence": "Revenue is $10,489.07 with spend of $5,092.35, leading to a ROAS of 2.06.",
+  "business_impact": "While ROAS is above break-even, the overall efficiency suggests the spend may not be optimized for greater audience reach."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign generated a total of 267 conversions, but the quality of those conversions reflects a low engagement rate.",
+    "evidence": "267 conversions at a CPA of $19.07; conversion rate is 0.04 or 4%.",
+    "business_impact": "This shows some success in generating interest but indicates many impressions did not lead to engaged users."
+  },
+  {
+    "insight": "CTR and CVR metrics suggest that while impressions are high, the audience engagement remains low.",
+    "evidence": "CTR is 0.06 (6%) and CVR is 0.04 (4%).",
+    "business_impact": "High impressions but low engagement suggest that awareness is not translating to genuine interest in the app."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "The campaign's high CPM could signal overpayment for exposure without sufficient return in quality engagement.",
+    "evidence": "A CPM of $60.00 against a conversion rate of only 4%.",
+    "why_it_matters": "If this trend continues, it will hinder budget effectiveness and prevent optimal brand awareness."
+  },
+  {
+    "pattern_or_risk": "There is an evident discrepancy between impressions and audience engagement, indicating a potential disconnect in targeting or creative effectiveness.",
+    "evidence": "92313 impressions with a CTR of just 6%.",
+    "why_it_matters": "This may suggest the campaign is not resonating with the intended audience or lacks compelling content."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "TikTok Ads",
+        "what_we_see": [
+          "Total Spend: $5,092.35",
+          "Impressions: 92,313",
+          "Revenue: $10,489.07",
+          "Clicks: 5,991",
+          "Conversions: 267"
+        ],
+        "what_it_likely_means": [
+  "The high number of impressions suggests wide visibility among the target audience.",
+  "The low CTR and CVR likely indicate that while people see the ads, they are not engaging with them effectively."
+],
+        "risks_or_watchouts": [
+  "High CPM relative to ROAS indicates potential issues with cost efficiency."
+]
+      }
+    ],
+    "missing_info": [
+  "Engagement metrics such as likes, shares, or video completion rates are missing and would provide insight into the quality of awareness generated. This data is critical to understand if the impressions are truly meaningful or if they represent an empty reach."
+]
+  }
+}
+
+### Generated Recommendation (To Evaluate)
+[
+  {
+    "title": "Reduce CPM to Optimize Budget Effectiveness",
+    "whats_happening": "The campaign's CPM is high at $60.00, which indicates an inefficiency in budget allocation compared to performance metrics.",
+    "what_you_should_do": [
+      "Evaluate and test new bidding strategies to lower CPM on TikTok Ads.",
+      "Identify and optimize underperforming ad sets that may be driving up costs.",
+      "Consider reallocating budget towards high-performing creatives or targeting that are more cost-effective."
+    ],
+    "why_this_matters": "Lowering the CPM will allow more impressions within the same budget, enhancing brand awareness effectively.",
+    "priority": "High",
+    "expected_impact": "Estimated reduction of CPM by ~$10 could result in 15-20% more impressions.",
+    "owner_suggestion": "Paid Media Manager"
+  },
+  {
+  "title": "Improve Engagement Quality with Audience Insights",
+  "whats_happening": "There is a discrepancy between high impressions (92,313) and low engagement rates, with a CTR of 6% and a CVR of 4%.",
+  "what_you_should_do": [
+    "Conduct audience research to refine targeting for TikTok Ads, ensuring the messaging resonates with chronic pain sufferers.",
+    "A/B test different ad creatives to identify what drives higher engagement rates.",
+    "Implement strong calls-to-action that encourage user interaction and connection with the ad content."
+  ],
+  "why_this_matters": "Focusing on engagement quality will boost the effectiveness of impressions, turning awareness into meaningful interest.",
+  "priority": "High",
+  "expected_impact": "Expected increase in CTR by 10-15% with refined targeting and better creative.",
+  "owner_suggestion": "Creative Team"
+},
+  {
+  "title": "Monitor Frequency Levels to Avoid Ad Fatigue",
+  "whats_happening": "The frequency of ads may be approaching a risk threshold, potentially leading to ad fatigue and decreased engagement.",
+  "what_you_should_do": [
+    "Track frequency levels regularly on TikTok Ads and set alerts for when they exceed 4-5 for specific ads.",
+    "Consider rotating ad creatives more frequently or adjust the audience to prevent overexposure.",
+    "Analyze engagement trends closely to identify when engagement declines despite high frequency."
+  ],
+  "why_this_matters": "Preventing ad fatigue is crucial to maintain engagement levels and ensure that brand awareness remains high.",
+  "priority": "Medium",
+  "expected_impact": "Reducing frequent exposures can enhance user engagement, leading to better response rates and audience retention.",
+  "owner_suggestion": "Media Planning Team"
+},
+  {
+  "title": "Obtain Missing Engagement Metrics for Deeper Insights",
+  "whats_happening": "Current analysis lacks engagement metrics such as likes, shares, or video completion rates, which are essential for assessing the quality of brand awareness.",
+  "what_you_should_do": [
+    "First, obtain engagement metrics by accessing performance data from TikTok Ads.",
+    "After retrieval, analyze these metrics to correlate with impressions and engagement to better understand audience interaction.",
+    "Use insights gained to iterate on ad strategies based on audience preferences."
+  ],
+  "why_this_matters": "Understanding engagement metrics will provide critical insights into whether impressions convert to genuine interest, guiding future strategies.",
+  "priority": "Low",
+  "expected_impact": "Expected identification of key engagement drivers which could improve overall engagement and lower costs.",
+  "owner_suggestion": "Analytics Team"
+}
+]
+
+Strictly check if the recommendation is supported by the analysis context and aligns with the business goals.
+
+
+=========================================================

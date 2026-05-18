@@ -1,0 +1,267 @@
+==================== SYSTEM MESSAGE ====================
+You are a Senior Digital Marketing Auditor.
+
+Your task is to evaluate a SET of marketing recommendation cards generated for a non-marketer end user.
+
+
+
+## EVALUATION CRITERIA (Score 1–3)
+
+1. Structure  
+Do all recommendations strictly follow the required schema (title, whats_happening, what_you_should_do, why_this_matters, priority, expected_impact)with no missing or extra fields?
+
+2. Feasibility  
+Are all actions executable using standard platform capabilities without requiring unavailable tools or permissions?
+
+3. Analysis Grounding  
+Are all recommendations strictly based on the analysis context (no assumptions)?  
+Does each map to a specific insight, pattern, risk, or note?  
+Does "whats_happening" reference a concrete metric or finding?
+
+4. Action Step Completeness  
+Does every action step in every "what_you_should_do" list answer all three of the following:
+- WHAT (the specific change, test, or asset to act on)
+- WHERE (which platform/campaign/ad set/page)
+- HOW (exact execution steps)
+
+5. Priority Alignment  
+ Does every recommendation carry the correct priority level relative to the Business Context & Target?
+
+6. Tone & Audience Compliance  
+Is the language clear, business-formal, jargon-free, and suitable for a non-marketer?  
+No hedging language allowed (e.g. "might", "could").
+
+7. Expected Impact Quality  
+Does each recommendation include a clear directional or quantified impact tied to a specific metric?
+
+8. Instruction Adherence  
+Does the output strictly follow ALL system instructions:
+- Valid JSON or match schema
+- Exactly 4 recommendations
+- No extra fields
+- Each recommendation maps to a unique root cause
+- Actions follow WHAT/WHERE/HOW
+- Priority logic is correct
+
+---
+
+## SCORING RULE
+
+Use:
+1 = Poor / Violates requirement  
+2 = Partial / Some issues  
+3 = Fully compliant  
+
+---
+
+## VERDICT LOGIC
+
+Apply in order:
+   - If all scores = 3 → "accept"
+   - If any score = 1 → "reject"
+   - Else → "revise"
+
+---
+
+## OUTPUT FORMAT (STRICT JSON ONLY)
+
+{
+  "evaluation": {
+    "structure_score": <1-3>,
+    "structure_reasoning": "<string>",
+
+    "feasibility_score": <1-3>,
+    "feasibility_reasoning": "<string>",
+
+    "analysis_grounding_score": <1-3>,
+    "analysis_grounding_reasoning": "<string>",
+
+    "action_step_completeness_score": <1-3>,
+    "action_step_completeness_reasoning": "<string>",
+
+    "priority_alignment_score": <1-3>,
+    "priority_alignment_reasoning": "<string>",
+
+    "tone_audience_score": <1-3>,
+    "tone_audience_reasoning": "<string>",
+
+    "expected_impact_score": <1-3>,
+    "expected_impact_reasoning": "<string>",
+
+    "instruction_adherence_score": <1-3>,
+    "instruction_adherence_reasoning": "<string>",
+
+    "verdict": "<accept|revise|reject>",
+
+    "key_issues": ["<string>", ...],
+    "improvement_suggestions": ["<string>", ...]
+  }
+}
+
+
+==================== USER MESSAGE ====================
+Please evaluate the following recommendation card.
+
+### Business Context & Target
+{
+  "business_domain": {
+    "industry": "EdTech",
+    "offering": "Language Learning Platform",
+    "audience": "Career changers",
+    "funnel_stage": "retention"
+  },
+  "campaign_target": {
+  "primary_goal": "Traffic"
+}
+}
+
+### Raw Campaign Data
+{
+  "campaign_identity": {
+    "platform": "TikTok Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-22 00:00:00",
+    "industry": "EdTech",
+    "offering": "Language Learning Platform",
+    "audience": "Career changers",
+    "funnel_stage": "retention",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 6159.6,
+  "revenue": 64126.68,
+  "impressions": 135608,
+  "clicks": 5220.0,
+  "conversions": 411,
+  "roas": 10.41,
+  "cpa": 14.99,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.18,
+  "cpm": 50.0
+}
+}
+
+### Analysis Context (Basis for Recommendation)
+{
+  "analysis": {
+    "executive_summary": "Mixed performance overall; while spending yielded solid revenue outcomes, traffic quality appears weak as indicated by a low CTR and a higher CPC. The key risk is the low click-through rate which suggests potentially poor traffic quality, impacting downstream conversion effectiveness.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The spending indicates moderate efficiency with a good revenue outcome relative to costs, but the low CTR raises concerns about budget utilization.",
+        "evidence": "Spend: $6159.60, Revenue: $64126.68, ROAS: 10.41",
+        "business_impact": "A strong ROAS suggests effective revenue generation from the spend, but the traffic quality concerns may limit sustained performance."
+      },
+      {
+  "insight": "CPC is reasonable at $1.18, but the CTR is low at 0.04 (4%), indicating potential inefficiencies in how effectively the budget drives interest.",
+  "evidence": "CPC: $1.18, CTR: 0.04",
+  "business_impact": "While costs are manageable, the lower CTR could imply wasted spend on low-quality traffic."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign yielded a substantial number of conversions and revenue, but the conversion rate may be hindered by traffic quality issues.",
+    "evidence": "Conversions: 411, Revenue: $64126.68",
+    "business_impact": "High revenue and conversions are helpful, but the conversion quality should be assessed given the low CTR."
+  },
+  {
+    "insight": "Click-through rate (CTR) remains low at 0.04 along with a conversion rate (CVR) of 0.08, signaling concerns around the traffic's engagement and effectiveness.",
+    "evidence": "CTR: 0.04, CVR: 0.08",
+    "business_impact": "Low engagement rates could lead to lower quality conversions affecting retention."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "Low CTR under 5% suggests unengaging ad content or mismatched audience targeting.",
+    "evidence": "CTR: 0.04, Impressions: 135608, Clicks: 5220",
+    "why_it_matters": "If the ad does not attract sufficient clicks, it risks undermining future retention efforts."
+  },
+  {
+    "pattern_or_risk": "Although CPC is reasonable, the rising cost could indicate inefficiencies if not coupled with higher CTR.",
+    "evidence": "CPC: $1.18 with CTR: 0.04, indicating possible inefficiencies.",
+    "why_it_matters": "If CPC rises without improvement in performance metrics, campaign sustainability could be threatened."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "TikTok Ads",
+        "what_we_see": [
+          "Spend: $6159.60",
+          "Clicks: 5220",
+          "CTR: 0.04, indicating a low engagement rate."
+        ],
+        "what_it_likely_means": [
+  "Likely indicates either poor ad content or audience targeting that does not resonate with users."
+],
+        "risks_or_watchouts": [
+  "The low engagement signals a need to reassess targeting strategies to improve traffic quality."
+]
+      }
+    ],
+    "missing_info": [
+  "Landing page views data is missing which could provide insight into the user experience after clicking the ad; understanding the relationship between clicks and landing page views would clarify conversion pathway effectiveness.",
+  "High-level audience demographics and behaviors would help assess targeting effectiveness and identify if adjustments need to be made for improving CTR."
+]
+  }
+}
+
+### Generated Recommendation (To Evaluate)
+[
+  {
+    "title": "Improve Ad Engagement to Raise CTR",
+    "whats_happening": "The campaign's CTR is low at 0.04, indicating that the ad content may not be engaging enough or that the audience targeting is misaligned.",
+    "what_you_should_do": [
+      "Review current ad copy and creatives on TikTok Ads to identify elements that may not resonate with the audience.",
+      "Test alternative ad formats or messaging that highlight unique features of the Language Learning Platform that appeal to career changers.",
+      "Implement A/B testing for different ad designs and copy with a focus on messaging that emphasizes user benefits."
+    ],
+    "why_this_matters": "Improving the CTR will lead to higher traffic quality, directly influencing the number of users engaged with the platform, which is vital for retention efforts.",
+    "priority": "High",
+    "expected_impact": "Estimated 15-25% CTR improvement.",
+    "owner_suggestion": "Paid Media Manager"
+  },
+  {
+  "title": "Analyze Audience Targeting for Better Engagement",
+  "whats_happening": "There is potential mismatching in audience targeting given the low CTR of 0.04; this may indicate that the current audience does not find the ad relevant.",
+  "what_you_should_do": [
+    "First, obtain high-level audience demographics and behaviors by analyzing audience insights and engagement data from TikTok.",
+    "Based on the findings, refine audience segments to align better with those most likely to convert, such as focusing on interests related to career advancement or online learning.",
+    "Create tailored ad sets for each audience segment to test which group responds best to the messaging."
+  ],
+  "why_this_matters": "Improved targeting ensures that the ads reach the right users, likely increasing engagement and traffic quality, which are essential for successful retention.",
+  "priority": "High",
+  "expected_impact": "Potential 20-30% increase in CTR from better audience targeting.",
+  "owner_suggestion": "Audience Insights Team"
+},
+  {
+  "title": "Address CPC Increases Without CTR Improvement",
+  "whats_happening": "Despite a reasonable CPC of $1.18, its rise without a corresponding increase in CTR signals inefficiency in budget utilization on TikTok Ads.",
+  "what_you_should_do": [
+    "Monitor CPC trends weekly to establish if the cost continues to rise.",
+    "If CPC continues to increase while CTR remains low, pause underperforming ads and reallocate budget towards better-performing creatives.",
+    "Set clear performance benchmarks for CPC relative to CTR to guide budget allocation decisions."
+  ],
+  "why_this_matters": "Maintaining efficient spend is imperative to ensure continued revenue generation without waste, which supports sustainable campaign performance.",
+  "priority": "Medium",
+  "expected_impact": "Expect to stabilize CPC and potentially reduce it by $0.10-$0.15 through better ad allocation.",
+  "owner_suggestion": "Finance and Analytics Team"
+},
+  {
+  "title": "Evaluate Landing Page Effectiveness",
+  "whats_happening": "Missing landing page views data limits the understanding of user engagement post-click, which is crucial for assessing the effectiveness of the traffic driven by ads.",
+  "what_you_should_do": [
+    "First, obtain landing page views data by integrating tracking tools such as Google Analytics or other relevant analytics software on the landing page.",
+    "Analyze landing page behavior metrics (bounce rate, time on page, etc.) to identify any potential issues in converting clicks to meaningful engagement.",
+    "Utilize insights from landing page performance to refine both the ad messaging and the landing page itself, aligning them to better serve the target audience."
+  ],
+  "why_this_matters": "Understanding how users interact with the landing page can lead to improvements that convert clicks into long-term users, ultimately supporting retention efforts.",
+  "priority": "Low",
+  "expected_impact": "Insights will guide landing page optimizations that could improve conversion rates by 10-15%.",
+  "owner_suggestion": "Web/Tech Team"
+}
+]
+
+Strictly check if the recommendation is supported by the analysis context and aligns with the business goals.
+
+
+=========================================================

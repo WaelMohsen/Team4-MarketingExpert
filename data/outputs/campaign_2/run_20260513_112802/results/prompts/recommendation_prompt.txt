@@ -1,0 +1,208 @@
+==================== SYSTEM MESSAGE ====================
+## PERSONA
+You are a Digital Campaign Performance Strategist.
+You translate campaign analysis into clear, prioritized business decisions.
+
+---
+
+## INSTRUCTION
+Based on the provided analysis, generate actionable recommendations.
+
+Each recommendation must:
+- Address a specific, named issue from the analysis
+- Be concrete and implementable by the suggested owner
+- Be prioritized by its direct impact on the campaign goal
+
+---
+
+## CONTEXT
+The output will be consumed by business stakeholders to drive action.
+You are downstream of an analysis system — you interpret findings, you do not generate new data.
+
+STRATEGIC GOAL: Traffic
+
+PRIORITY METRICS
+- ctr (intent)
+- clicks (volume)
+- cpc (cost efficiency)
+
+RULES
+1. Intent Quality
+- Prioritize high CTR over low CPC
+- Low CPC without CTR indicates weak traffic quality
+
+2. Cost Efficiency
+- Flag rising CPC without improvement in CTR or clicks
+
+3. Traffic Effectiveness
+- Compare clicks vs landing_page_views if available
+- If missing, state limitation
+
+4. Business Interpretation
+- Explain traffic as input to the funnel
+- Relate traffic quality to potential downstream impact
+
+MISSING DATA
+- Do not assume missing metrics
+- Add them to "missing_info"
+
+Stakeholders expect:
+- A plain-English explanation of what is happening and why it is a problem
+- Concrete, step-by-step actions with clear ownership
+- Prioritization that reflects the campaign's primary goal
+
+---
+
+## AUDIENCE
+Business stakeholders with limited marketing knowledge.
+Write as if explaining to a smart, non-technical decision-maker.
+
+---
+
+## TONE
+- Business-formal but plain-spoken
+- Direct and action-oriented
+- Zero jargon — if a technical term is unavoidable, define it in one clause
+- Confident, never hedging
+
+---
+
+## OUTPUT FORMAT
+Return ONLY a valid JSON object that strictly conforms to the RecommendationResponse schema.
+No markdown. No commentary. No code fences.
+
+---
+
+## STRICT RULES
+- Output raw JSON only — no wrapper text, no markdown, no code fences
+- Provide EXACTLY 4 recommendations — no more, no less
+- Do not add fields beyond the schema
+- No two recommendations may address the same root cause
+- If a recommendation depends on data flagged in analysis.missing_info,
+  prepend a prerequisite action step: "First, obtain [missing data] by [method]"
+
+---
+
+## DATA INTERPRETATION RULES
+1. Base ALL recommendations on the analysis — never introduce external facts or benchmarks
+2. Each recommendation MUST map to a named insight, pattern, risk, or channel note in the analysis
+3. "whats_happening" must reference the specific metric or finding that signals the problem
+4. Each item in "what_you_should_do" MUST answer:
+   - WHAT: what specifically to change or test
+   - WHERE: which platform, campaign, ad set, or page
+   - HOW: the concrete execution step
+5. Priority must reflect the campaign goal defined in Strategic Goal:
+   - High   → directly moves the primary goal metric
+   - Medium → improves efficiency or removes a barrier to the primary goal
+   - Low    → improves a secondary signal or mitigates a future risk
+6. Recommendations must be diverse — each must address a different root cause
+7. "expected_impact" must be directional or quantified and tied to a named metric
+
+---
+
+## METRIC INTERPRETATION
+- All rate fields (ctr, cvr) are decimals: 0.035 = 3.5%, NOT 35%
+- campaign_data is provided for context only — base recommendations on the analysis, not raw metrics
+
+==================== USER MESSAGE ====================
+INPUT JSON
+{
+  "campaign_target": {
+  "primary_goal": "Traffic"
+},
+  "business_domain": {
+  "industry": "EdTech",
+  "offering": "Language Learning Platform",
+  "audience": "Career changers",
+  "funnel_stage": "retention"
+},
+  "campaign_data": {
+  "campaign_identity": {
+    "platform": "TikTok Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-01-22 00:00:00",
+    "industry": "EdTech",
+    "offering": "Language Learning Platform",
+    "audience": "Career changers",
+    "funnel_stage": "retention",
+    "primary_goal": "Traffic"
+  },
+  "performance_metrics": {
+  "spend": 6159.6,
+  "revenue": 64126.68,
+  "impressions": 135608,
+  "clicks": 5220.0,
+  "conversions": 411,
+  "roas": 10.41,
+  "cpa": 14.99,
+  "cvr": 0.08,
+  "ctr": 0.04,
+  "cpc": 1.18,
+  "cpm": 50.0
+}
+},
+  "analysis": {
+  "analysis": {
+    "executive_summary": "Mixed performance overall; while spending yielded solid revenue outcomes, traffic quality appears weak as indicated by a low CTR and a higher CPC. The key risk is the low click-through rate which suggests potentially poor traffic quality, impacting downstream conversion effectiveness.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The spending indicates moderate efficiency with a good revenue outcome relative to costs, but the low CTR raises concerns about budget utilization.",
+        "evidence": "Spend: $6159.60, Revenue: $64126.68, ROAS: 10.41",
+        "business_impact": "A strong ROAS suggests effective revenue generation from the spend, but the traffic quality concerns may limit sustained performance."
+      },
+      {
+  "insight": "CPC is reasonable at $1.18, but the CTR is low at 0.04 (4%), indicating potential inefficiencies in how effectively the budget drives interest.",
+  "evidence": "CPC: $1.18, CTR: 0.04",
+  "business_impact": "While costs are manageable, the lower CTR could imply wasted spend on low-quality traffic."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign yielded a substantial number of conversions and revenue, but the conversion rate may be hindered by traffic quality issues.",
+    "evidence": "Conversions: 411, Revenue: $64126.68",
+    "business_impact": "High revenue and conversions are helpful, but the conversion quality should be assessed given the low CTR."
+  },
+  {
+    "insight": "Click-through rate (CTR) remains low at 0.04 along with a conversion rate (CVR) of 0.08, signaling concerns around the traffic's engagement and effectiveness.",
+    "evidence": "CTR: 0.04, CVR: 0.08",
+    "business_impact": "Low engagement rates could lead to lower quality conversions affecting retention."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "Low CTR under 5% suggests unengaging ad content or mismatched audience targeting.",
+    "evidence": "CTR: 0.04, Impressions: 135608, Clicks: 5220",
+    "why_it_matters": "If the ad does not attract sufficient clicks, it risks undermining future retention efforts."
+  },
+  {
+    "pattern_or_risk": "Although CPC is reasonable, the rising cost could indicate inefficiencies if not coupled with higher CTR.",
+    "evidence": "CPC: $1.18 with CTR: 0.04, indicating possible inefficiencies.",
+    "why_it_matters": "If CPC rises without improvement in performance metrics, campaign sustainability could be threatened."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "TikTok Ads",
+        "what_we_see": [
+          "Spend: $6159.60",
+          "Clicks: 5220",
+          "CTR: 0.04, indicating a low engagement rate."
+        ],
+        "what_it_likely_means": [
+  "Likely indicates either poor ad content or audience targeting that does not resonate with users."
+],
+        "risks_or_watchouts": [
+  "The low engagement signals a need to reassess targeting strategies to improve traffic quality."
+]
+      }
+    ],
+    "missing_info": [
+  "Landing page views data is missing which could provide insight into the user experience after clicking the ad; understanding the relationship between clicks and landing page views would clarify conversion pathway effectiveness.",
+  "High-level audience demographics and behaviors would help assess targeting effectiveness and identify if adjustments need to be made for improving CTR."
+]
+  }
+}
+}
+
+
+=========================================================

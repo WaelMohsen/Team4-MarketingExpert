@@ -1,0 +1,270 @@
+==================== SYSTEM MESSAGE ====================
+You are a Senior Digital Marketing Auditor.
+
+Your task is to evaluate a SET of marketing recommendation cards generated for a non-marketer end user.
+
+
+
+## EVALUATION CRITERIA (Score 1–3)
+
+1. Structure  
+Do all recommendations strictly follow the required schema (title, whats_happening, what_you_should_do, why_this_matters, priority, expected_impact)with no missing or extra fields?
+
+2. Feasibility  
+Are all actions executable using standard platform capabilities without requiring unavailable tools or permissions?
+
+3. Analysis Grounding  
+Are all recommendations strictly based on the analysis context (no assumptions)?  
+Does each map to a specific insight, pattern, risk, or note?  
+Does "whats_happening" reference a concrete metric or finding?
+
+4. Action Step Completeness  
+Does every action step in every "what_you_should_do" list answer all three of the following:
+- WHAT (the specific change, test, or asset to act on)
+- WHERE (which platform/campaign/ad set/page)
+- HOW (exact execution steps)
+
+5. Priority Alignment  
+ Does every recommendation carry the correct priority level relative to the Business Context & Target?
+
+6. Tone & Audience Compliance  
+Is the language clear, business-formal, jargon-free, and suitable for a non-marketer?  
+No hedging language allowed (e.g. "might", "could").
+
+7. Expected Impact Quality  
+Does each recommendation include a clear directional or quantified impact tied to a specific metric?
+
+8. Instruction Adherence  
+Does the output strictly follow ALL system instructions:
+- Valid JSON or match schema
+- Exactly 4 recommendations
+- No extra fields
+- Each recommendation maps to a unique root cause
+- Actions follow WHAT/WHERE/HOW
+- Priority logic is correct
+
+---
+
+## SCORING RULE
+
+Use:
+1 = Poor / Violates requirement  
+2 = Partial / Some issues  
+3 = Fully compliant  
+
+---
+
+## VERDICT LOGIC
+
+Apply in order:
+   - If all scores = 3 → "accept"
+   - If any score = 1 → "reject"
+   - Else → "revise"
+
+---
+
+## OUTPUT FORMAT (STRICT JSON ONLY)
+
+{
+  "evaluation": {
+    "structure_score": <1-3>,
+    "structure_reasoning": "<string>",
+
+    "feasibility_score": <1-3>,
+    "feasibility_reasoning": "<string>",
+
+    "analysis_grounding_score": <1-3>,
+    "analysis_grounding_reasoning": "<string>",
+
+    "action_step_completeness_score": <1-3>,
+    "action_step_completeness_reasoning": "<string>",
+
+    "priority_alignment_score": <1-3>,
+    "priority_alignment_reasoning": "<string>",
+
+    "tone_audience_score": <1-3>,
+    "tone_audience_reasoning": "<string>",
+
+    "expected_impact_score": <1-3>,
+    "expected_impact_reasoning": "<string>",
+
+    "instruction_adherence_score": <1-3>,
+    "instruction_adherence_reasoning": "<string>",
+
+    "verdict": "<accept|revise|reject>",
+
+    "key_issues": ["<string>", ...],
+    "improvement_suggestions": ["<string>", ...]
+  }
+}
+
+
+==================== USER MESSAGE ====================
+Please evaluate the following recommendation card.
+
+### Business Context & Target
+{
+  "business_domain": {
+    "industry": "Healthcare",
+    "offering": "Telemedicine App",
+    "audience": "Chronic pain sufferers",
+    "funnel_stage": "consideration"
+  },
+  "campaign_target": {
+  "primary_goal": "Brand Awareness"
+}
+}
+
+### Raw Campaign Data
+{
+  "campaign_identity": {
+    "platform": "TikTok Ads",
+    "campaign_name": "Unknown",
+    "date": "2024-06-15 00:00:00",
+    "industry": "Healthcare",
+    "offering": "Telemedicine App",
+    "audience": "Chronic pain sufferers",
+    "funnel_stage": "consideration",
+    "primary_goal": "Brand Awareness"
+  },
+  "performance_metrics": {
+  "spend": 5092.35,
+  "revenue": 10489.07,
+  "impressions": 92313.0,
+  "clicks": 5991,
+  "conversions": 267,
+  "roas": 2.06,
+  "cpa": 19.07,
+  "cvr": 0.04,
+  "ctr": 0.06,
+  "cpm": 60.0
+}
+}
+
+### Analysis Context (Basis for Recommendation)
+{
+  "analysis": {
+    "executive_summary": "Mixed performance characterized by reasonable budget efficiency but moderate outcome quality, with a significant gap in engagement metrics.",
+    "budget_and_efficiency": [
+      {
+        "insight": "The CPM of $60 suggests a relatively high spending for brand awareness compared to typical standards, which may indicate overpayment for impressions.",
+        "evidence": "CPM $60, spend $5092.35, impressions 92313",
+        "business_impact": "This overpayment can strain future budgets and reduce overall ad reach."
+      },
+      {
+  "insight": "ROAS of 2.06 indicates a positive return for every dollar spent, signifying reasonable budget efficiency.",
+  "evidence": "Spend $5092.35, revenue $10489.07, ROAS 2.06",
+  "business_impact": "This return suggests effectiveness in generating revenue relative to ad spend."
+}
+    ],
+    "results_and_value": [
+  {
+    "insight": "The campaign generated 267 conversions from 5991 clicks, resulting in a conversion rate (CVR) of 0.04 or 4%.",
+    "evidence": "Conversions 267, clicks 5991, CVR 0.04",
+    "business_impact": "While this indicates some success in driving conversions, the conversion value might not be optimal for increasing brand awareness."
+  },
+  {
+    "insight": "A CTR of 0.06 or 6% reflects a moderate level of engagement with the ads.",
+    "evidence": "Clicks 5991, impressions 92313, CTR 0.06",
+    "business_impact": "While some engagement occurred, the low CTR questions the quality of brand awareness being established."
+  }
+],
+    "cross_channel_patterns_and_risks": [
+  {
+    "pattern_or_risk": "High CPM and low CTR point towards potential inefficiency in the ad spend.",
+    "evidence": "CPM $60, CTR 0.06",
+    "why_it_matters": "This pattern suggests that the cost of reaching the audience may not be translating effectively into interest or brand awareness."
+  },
+  {
+    "pattern_or_risk": "Conversion rate is notably low relative to impressions, suggesting a disconnect between visibility and actual interest.",
+    "evidence": "Impressions 92313, conversions 267, CVR 0.04",
+    "why_it_matters": "If visibility does not lead to conversions, future campaigns may waste resources on ineffective strategies."
+  }
+],
+    "channel_notes": [
+      {
+        "platform": "TikTok Ads",
+        "what_we_see": [
+          "Spend $5092.35",
+          "Impressions 92313",
+          "Clicks 5991",
+          "Conversions 267",
+          "CPM $60"
+        ],
+        "what_it_likely_means": [
+  "Potential overpayment for visibility with low engagement rates.",
+  "The audience may not find the ad compelling enough to convert or engage further."
+],
+        "risks_or_watchouts": [
+  "High CPM may limit budget flexibility for future campaigns."
+]
+      }
+    ],
+    "missing_info": [
+  "Engagement metrics such as video completion rates or interactions are absent, which are critical to evaluating the quality of brand awareness.",
+  "Data on audience demographics and segmentation would help assess whether the campaign effectively reached chronic pain sufferers.",
+  "Specific benchmarks for TikTok Ads performance for brand awareness in this industry are missing, which would provide context for the observed metrics."
+]
+  }
+}
+
+### Generated Recommendation (To Evaluate)
+[
+  {
+    "title": "Reduce CPM to Improve Cost Efficiency",
+    "whats_happening": "The CPM of $60 indicates potential overpayment for impressions in driving brand awareness. This high cost can strain future budgets.",
+    "what_you_should_do": [
+      "Evaluate different ad formats on TikTok Ads to find more cost-effective options.",
+      "Test adjusting targeting settings to reach a broader audience and potentially lower the CPM.",
+      "Implement A/B testing on ad creative to determine which variations drive lower CPM. "
+    ],
+    "why_this_matters": "Lowering CPM will enhance budget flexibility, allowing for more impressions and a greater outreach for brand awareness.",
+    "priority": "High",
+    "expected_impact": "Target to reduce CPM by ~$10, enhancing overall campaign reach.",
+    "owner_suggestion": "Paid Media Manager"
+  },
+  {
+  "title": "Increase Engagement to Boost Awareness Quality",
+  "whats_happening": "The CTR of 0.06 reflects only moderate engagement with the ads, indicating that while there are impressions, they may not effectively contribute to brand awareness.",
+  "what_you_should_do": [
+    "Refine the ad copy and creative on TikTok Ads to enhance relevance and appeal to chronic pain sufferers.",
+    "Incorporate interactive elements, such as polls or questions, to encourage user engagement.",
+    "Launch a campaign featuring testimonials or success stories to create a stronger connection with the audience."
+  ],
+  "why_this_matters": "Improving engagement quality directly contributes to effective brand awareness rather than just sheer visibility.",
+  "priority": "High",
+  "expected_impact": "Estimate a 20-30% lift in CTR with improved engagement strategies.",
+  "owner_suggestion": "Creative Team"
+},
+  {
+  "title": "Investigate Audiences to Optimize Targeting",
+  "whats_happening": "Absence of audience demographic data raises concerns about whether the campaign effectively reached the intended chronic pain sufferers, potentially leading to low conversion rates.",
+  "what_you_should_do": [
+    "First, obtain audience demographics by reviewing TikTok’s audience insights tool used during the campaign.",
+    "Analyze the data to assess audience alignment with the target segments of chronic pain sufferers.",
+    "Adjust targeting based on findings to ensure the ads better reach the relevant audiences."
+  ],
+  "why_this_matters": "Effective targeting can increase conversions and enhance overall brand awareness among the right audience.",
+  "priority": "Medium",
+  "expected_impact": "Aim to raise conversion rates and drive more relevant impressions, contributing to future sales.",
+  "owner_suggestion": "Data Analytics Team"
+},
+  {
+  "title": "Explore Improved Content for Higher Conversions",
+  "whats_happening": "The conversion rate of 0.04 suggests a disconnect between impressions and conversions, indicating that visibility isn't converting to brand interest.",
+  "what_you_should_do": [
+    "Conduct a review of landing page content linked from TikTok Ads to ensure it resonates with the audience's needs.",
+    "Implement user experience (UX) testing to identify barriers preventing conversions on the landing page.",
+    "Add clear calls-to-action (CTAs) in the ads that directly link to value propositions for chronic pain sufferers."
+  ],
+  "why_this_matters": "Enhancing the content can lead to better conversions, ensuring that increased awareness translates into tangible results and future sales.",
+  "priority": "Medium",
+  "expected_impact": "Project enhanced conversion rate by at least 1-2%, significantly raising total conversions from the existing impressions.",
+  "owner_suggestion": "Web/Tech Team"
+}
+]
+
+Strictly check if the recommendation is supported by the analysis context and aligns with the business goals.
+
+
+=========================================================

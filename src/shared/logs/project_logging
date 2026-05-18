@@ -2621,3 +2621,370 @@ ValueError: Missing required columns for 'analysis': ['hallucination']
 2026-05-12 22:21:58,965 | ERROR | __main__ | Error in Analysis for campaign_2: OpenAI API error: Could not parse response content as the length limit was reached - CompletionUsage(completion_tokens=4000, prompt_tokens=1600, total_tokens=5600, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cached_tokens=1024))
 2026-05-12 22:21:58,966 | ERROR | __main__ | Error in Recommendation for campaign_2: Analysis results not found in context. Ensure AnalysisModule ran first.
 2026-05-12 22:21:58,967 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-13 11:20:37,218 | INFO | root | Logging initialized.
+2026-05-13 11:20:37,241 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-13 11:20:37,242 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-05-13 11:20:37,242 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260512_222005']
+2026-05-13 11:20:37,264 | INFO | Comparison Module | Added analysis result | version=run_20260512_222005 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260512_222005\results\analysis_evaluation_results.json
+2026-05-13 11:20:37,274 | INFO | Comparison Module | Added recommendation result | version=run_20260512_222005 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260512_222005\results\recommendation_evaluation_results.json
+2026-05-13 11:20:37,274 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:20:37,274 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:20:37,274 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:20:37,393 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:20:37,394 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:20:37,394 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:20:37,446 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=1 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:20:37,460 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:20:38,262 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:20:38,272 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:20:38,272 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:20:38,272 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:20:38,272 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:20:38,281 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:20:38,282 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:20:38,282 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:20:38,284 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=1 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:20:38,286 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:20:38,470 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:20:38,479 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:20:38,479 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-05-13 11:20:38,480 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260512_222005']
+2026-05-13 11:20:38,480 | WARNING | Comparison Module | Missing analysis file: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260512_222005\results\analysis_evaluation_results.json
+2026-05-13 11:20:38,481 | WARNING | Comparison Module | Missing recommendation file: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260512_222005\results\recommendation_evaluation_results.json
+2026-05-13 11:20:38,481 | WARNING | Comparison Module | Analysis input CSV not found: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:20:38,481 | WARNING | Comparison Module | Recommendation input CSV not found: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:20:38,481 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
+2026-05-13 11:21:24,749 | INFO | root | Logging initialized.
+2026-05-13 11:21:24,774 | INFO | root | Logging initialized.
+2026-05-13 11:21:24,777 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global\run_20260513_112124\results
+2026-05-13 11:21:24,777 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-13 11:21:24,777 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-13 11:21:24,778 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-13 11:21:24,778 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-13 11:21:24,778 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-13 11:21:24,850 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-13 11:21:24,931 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-13 11:21:24,932 | INFO | __main__ | Limiting execution to first 3 rows.
+2026-05-13 11:21:26,043 | INFO | __main__ | Starting Granular Processing for 3 campaigns...
+2026-05-13 11:21:26,044 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-13 11:21:26,089 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:21:42,870 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:21:42,976 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1\run_20260513_112124\results\analysis_result.json
+2026-05-13 11:21:42,999 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:21:53,400 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:21:53,410 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1\run_20260513_112124\results\recommendation_result.json
+2026-05-13 11:21:53,410 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:21:53,513 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:21:57,932 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:21:58,020 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:21:58,021 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:22:05,574 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:22:05,661 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1\run_20260513_112124\results\analysis_evaluation_results.json
+2026-05-13 11:22:05,661 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1\run_20260513_112124\results\recommendation_evaluation_results.json
+2026-05-13 11:22:05,662 | INFO | __main__ | --- Processing campaign_2 ---
+2026-05-13 11:22:05,676 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:22:22,680 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:22:22,686 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_2\run_20260513_112124\results\analysis_result.json
+2026-05-13 11:22:22,687 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:22:33,685 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:22:33,699 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_2\run_20260513_112124\results\recommendation_result.json
+2026-05-13 11:22:33,700 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:22:33,704 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:22:42,536 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:22:42,544 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:22:42,547 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:22:59,027 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:22:59,041 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_2\run_20260513_112124\results\analysis_evaluation_results.json
+2026-05-13 11:22:59,044 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_2\run_20260513_112124\results\recommendation_evaluation_results.json
+2026-05-13 11:22:59,153 | INFO | __main__ | --- Processing campaign_3 ---
+2026-05-13 11:22:59,165 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:23:12,635 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:23:12,725 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_3\run_20260513_112124\results\analysis_result.json
+2026-05-13 11:23:12,726 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:23:28,007 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:23:28,045 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_3\run_20260513_112124\results\recommendation_result.json
+2026-05-13 11:23:28,046 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:23:28,046 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:23:43,148 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:23:43,166 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:23:43,167 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:23:50,310 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:23:50,318 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_3\run_20260513_112124\results\analysis_evaluation_results.json
+2026-05-13 11:23:50,318 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_3\run_20260513_112124\results\recommendation_evaluation_results.json
+2026-05-13 11:23:50,319 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-13 11:24:12,373 | INFO | root | Logging initialized.
+2026-05-13 11:24:12,373 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-13 11:24:12,374 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-05-13 11:24:12,375 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260512_222005', 'run_20260513_112124']
+2026-05-13 11:24:12,377 | INFO | Comparison Module | Added analysis result | version=run_20260512_222005 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260512_222005\results\analysis_evaluation_results.json
+2026-05-13 11:24:12,378 | INFO | Comparison Module | Added recommendation result | version=run_20260512_222005 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260512_222005\results\recommendation_evaluation_results.json
+2026-05-13 11:24:12,388 | INFO | Comparison Module | Added analysis result | version=run_20260513_112124 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260513_112124\results\analysis_evaluation_results.json
+2026-05-13 11:24:12,398 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112124 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260513_112124\results\recommendation_evaluation_results.json
+2026-05-13 11:24:12,398 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:12,398 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:24:12,399 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:12,413 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:24:12,414 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:24:12,414 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:12,418 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:12,420 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:12,695 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:24:12,713 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:12,713 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:12,713 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:24:12,713 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:12,726 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:12,726 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:24:12,726 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:12,732 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:12,734 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:12,995 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:24:13,004 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:13,004 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-05-13 11:24:13,005 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260512_222005', 'run_20260513_112124']
+2026-05-13 11:24:13,005 | WARNING | Comparison Module | Missing analysis file: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260512_222005\results\analysis_evaluation_results.json
+2026-05-13 11:24:13,005 | WARNING | Comparison Module | Missing recommendation file: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260512_222005\results\recommendation_evaluation_results.json
+2026-05-13 11:24:13,016 | INFO | Comparison Module | Added analysis result | version=run_20260513_112124 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260513_112124\results\analysis_evaluation_results.json
+2026-05-13 11:24:13,024 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112124 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260513_112124\results\recommendation_evaluation_results.json
+2026-05-13 11:24:13,024 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:13,025 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:24:13,025 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:13,032 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,033 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:24:13,033 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,035 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=1 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,127 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,286 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:24:13,294 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:13,294 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:13,294 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:24:13,295 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:13,302 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,303 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:24:13,303 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,305 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=1 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,308 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,500 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:24:13,509 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:13,509 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3
+2026-05-13 11:24:13,510 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_3 | selected_runs=['run_20260513_112124']
+2026-05-13 11:24:13,518 | INFO | Comparison Module | Added analysis result | version=run_20260513_112124 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\run_20260513_112124\results\analysis_evaluation_results.json
+2026-05-13 11:24:13,604 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112124 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\run_20260513_112124\results\recommendation_evaluation_results.json
+2026-05-13 11:24:13,604 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:13,604 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:24:13,604 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:13,618 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,619 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:24:13,619 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,621 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=1 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,623 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:24:13,805 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:24:13,813 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:24:13,813 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:13,813 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:24:13,813 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:13,816 | INFO | Comparison Module | CSV loaded successfully | rows=1 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,816 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:24:13,816 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,818 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=1 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:13,843 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:24:14,015 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:24:14,023 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:24:14,023 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully
+2026-05-13 11:25:26,349 | INFO | root | Logging initialized.
+2026-05-13 11:25:26,362 | INFO | root | Logging initialized.
+2026-05-13 11:25:26,367 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global\run_20260513_112526\results
+2026-05-13 11:25:26,367 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-13 11:25:26,368 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-13 11:25:26,368 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-13 11:25:26,368 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-13 11:25:26,368 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-13 11:25:26,378 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-13 11:25:26,388 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-13 11:25:26,388 | INFO | __main__ | Limiting execution to first 3 rows.
+2026-05-13 11:25:27,262 | INFO | __main__ | Starting Granular Processing for 3 campaigns...
+2026-05-13 11:25:27,263 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-13 11:25:27,276 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:25:39,463 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:25:39,476 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1\run_20260513_112526\results\analysis_result.json
+2026-05-13 11:25:39,478 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:25:50,651 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:25:50,668 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1\run_20260513_112526\results\recommendation_result.json
+2026-05-13 11:25:50,668 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:25:50,669 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:25:59,451 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:25:59,467 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:25:59,468 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:26:09,946 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:26:10,075 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1\run_20260513_112526\results\analysis_evaluation_results.json
+2026-05-13 11:26:10,076 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1\run_20260513_112526\results\recommendation_evaluation_results.json
+2026-05-13 11:26:10,077 | INFO | __main__ | --- Processing campaign_2 ---
+2026-05-13 11:26:10,089 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:26:19,681 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:26:19,687 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_2\run_20260513_112526\results\analysis_result.json
+2026-05-13 11:26:19,688 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:26:29,964 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:26:30,041 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_2\run_20260513_112526\results\recommendation_result.json
+2026-05-13 11:26:30,041 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:26:30,042 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:26:40,571 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:26:40,581 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:26:40,583 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:26:47,128 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:26:47,186 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_2\run_20260513_112526\results\analysis_evaluation_results.json
+2026-05-13 11:26:47,187 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_2\run_20260513_112526\results\recommendation_evaluation_results.json
+2026-05-13 11:26:47,188 | INFO | __main__ | --- Processing campaign_3 ---
+2026-05-13 11:26:47,199 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:27:00,325 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:27:00,423 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_3\run_20260513_112526\results\analysis_result.json
+2026-05-13 11:27:00,428 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:27:11,077 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:27:11,080 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_3\run_20260513_112526\results\recommendation_result.json
+2026-05-13 11:27:11,080 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:27:11,081 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:27:23,978 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:27:23,984 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:27:23,986 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:27:33,262 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:27:33,273 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_3\run_20260513_112526\results\analysis_evaluation_results.json
+2026-05-13 11:27:33,274 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_3\run_20260513_112526\results\recommendation_evaluation_results.json
+2026-05-13 11:27:33,274 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-13 11:28:02,793 | INFO | root | Logging initialized.
+2026-05-13 11:28:02,803 | INFO | root | Logging initialized.
+2026-05-13 11:28:02,902 | INFO | __main__ | Initialized Global Run Folder: data/outputs/_global\run_20260513_112802\results
+2026-05-13 11:28:02,902 | INFO | src.core.pipeline_engine | Registered module: Ingestion
+2026-05-13 11:28:02,903 | INFO | src.core.pipeline_engine | Registered module: Preprocessing
+2026-05-13 11:28:02,903 | INFO | __main__ | Executing Preparation Phase (Ingestion & Preprocessing)...
+2026-05-13 11:28:02,904 | INFO | src.core.pipeline_engine | Starting pipeline execution...
+2026-05-13 11:28:02,905 | INFO | src.core.pipeline_engine | Running module: Ingestion
+2026-05-13 11:28:02,931 | INFO | src.core.pipeline_engine | Running module: Preprocessing
+2026-05-13 11:28:02,937 | INFO | src.core.pipeline_engine | Pipeline execution finished.
+2026-05-13 11:28:02,937 | INFO | __main__ | Limiting execution to first 3 rows.
+2026-05-13 11:28:04,134 | INFO | __main__ | Starting Granular Processing for 3 campaigns...
+2026-05-13 11:28:04,136 | INFO | __main__ | --- Processing campaign_1 ---
+2026-05-13 11:28:04,166 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:28:20,869 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:28:20,990 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_1\run_20260513_112802\results\analysis_result.json
+2026-05-13 11:28:21,023 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:28:29,218 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:28:29,233 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_1\run_20260513_112802\results\recommendation_result.json
+2026-05-13 11:28:29,234 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:28:29,257 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:28:35,982 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:28:35,987 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:28:36,002 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:28:40,147 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:28:40,151 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_1\run_20260513_112802\results\analysis_evaluation_results.json
+2026-05-13 11:28:40,152 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_1\run_20260513_112802\results\recommendation_evaluation_results.json
+2026-05-13 11:28:40,153 | INFO | __main__ | --- Processing campaign_2 ---
+2026-05-13 11:28:40,170 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:28:54,345 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:28:54,360 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_2\run_20260513_112802\results\analysis_result.json
+2026-05-13 11:28:54,361 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:29:04,901 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:04,987 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_2\run_20260513_112802\results\recommendation_result.json
+2026-05-13 11:29:04,987 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:29:04,988 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:29:10,355 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:10,366 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:29:10,367 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:29:16,895 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:16,905 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_2\run_20260513_112802\results\analysis_evaluation_results.json
+2026-05-13 11:29:16,906 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_2\run_20260513_112802\results\recommendation_evaluation_results.json
+2026-05-13 11:29:16,907 | INFO | __main__ | --- Processing campaign_3 ---
+2026-05-13 11:29:16,924 | INFO | src.modules.analysis.analysis_module | Executing Stage 1: Analysis...
+2026-05-13 11:29:29,054 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:29,086 | INFO | src.modules.analysis.analysis_module | Analysis result saved to: data/outputs/campaign_3\run_20260513_112802\results\analysis_result.json
+2026-05-13 11:29:29,087 | INFO | src.modules.recommendation.recommendation_module | Executing Stage 2: Recommendations...
+2026-05-13 11:29:39,470 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:39,482 | INFO | src.modules.recommendation.recommendation_module | Recommendation result saved to: data/outputs/campaign_3\run_20260513_112802\results\recommendation_result.json
+2026-05-13 11:29:39,483 | INFO | src.modules.evaluation.evaluation_module | Evaluating Analysis results...
+2026-05-13 11:29:39,485 | INFO | llm_analysis_evaluator | Executing Analysis Evaluation...
+2026-05-13 11:29:46,735 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:46,743 | INFO | src.modules.evaluation.evaluation_module | Evaluating Recommendation cards...
+2026-05-13 11:29:46,746 | INFO | recommendation_evaluator | Executing Recommendation Evaluation...
+2026-05-13 11:29:52,155 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-13 11:29:52,247 | INFO | src.modules.evaluation.evaluation_module | Analysis evaluation results saved to: data/outputs/campaign_3\run_20260513_112802\results\analysis_evaluation_results.json
+2026-05-13 11:29:52,248 | INFO | src.modules.evaluation.evaluation_module | Recommendation evaluation results saved to: data/outputs/campaign_3\run_20260513_112802\results\recommendation_evaluation_results.json
+2026-05-13 11:29:52,249 | INFO | __main__ | All campaigns processed. Results available under: data/outputs/
+2026-05-13 11:30:13,319 | INFO | root | Logging initialized.
+2026-05-13 11:30:13,319 | INFO | Comparison Module | Starting multi-campaign comparison pipeline | last_n=2
+2026-05-13 11:30:13,320 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1
+2026-05-13 11:30:13,321 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_1 | selected_runs=['run_20260513_112526', 'run_20260513_112802']
+2026-05-13 11:30:13,422 | INFO | Comparison Module | Added analysis result | version=run_20260513_112526 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260513_112526\results\analysis_evaluation_results.json
+2026-05-13 11:30:13,445 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112526 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260513_112526\results\recommendation_evaluation_results.json
+2026-05-13 11:30:13,453 | INFO | Comparison Module | Added analysis result | version=run_20260513_112802 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260513_112802\results\analysis_evaluation_results.json
+2026-05-13 11:30:13,461 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112802 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\run_20260513_112802\results\recommendation_evaluation_results.json
+2026-05-13 11:30:13,461 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:13,462 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:30:13,462 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:13,471 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:30:13,471 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:30:13,472 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:13,475 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:13,478 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:14,461 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:30:14,486 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:14,487 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:14,487 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:30:14,487 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:14,500 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,500 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:30:14,500 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,504 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,507 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,762 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:30:14,771 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_1\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:14,771 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2
+2026-05-13 11:30:14,772 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_2 | selected_runs=['run_20260513_112526', 'run_20260513_112802']
+2026-05-13 11:30:14,781 | INFO | Comparison Module | Added analysis result | version=run_20260513_112526 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260513_112526\results\analysis_evaluation_results.json
+2026-05-13 11:30:14,789 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112526 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260513_112526\results\recommendation_evaluation_results.json
+2026-05-13 11:30:14,797 | INFO | Comparison Module | Added analysis result | version=run_20260513_112802 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260513_112802\results\analysis_evaluation_results.json
+2026-05-13 11:30:14,805 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112802 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\run_20260513_112802\results\recommendation_evaluation_results.json
+2026-05-13 11:30:14,805 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:14,805 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:30:14,805 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:14,812 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:30:14,812 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:30:14,812 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:14,814 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:14,816 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:14,977 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:30:14,986 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:14,986 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:14,986 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:30:14,986 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:14,989 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,989 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:30:14,989 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,991 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:14,993 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:15,188 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:30:15,196 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_2\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:15,197 | INFO | Comparison Module | Processing campaign: D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3
+2026-05-13 11:30:15,198 | INFO | Comparison Module | Building temporary campaign CSVs | campaign=campaign_3 | selected_runs=['run_20260513_112526', 'run_20260513_112802']
+2026-05-13 11:30:15,205 | INFO | Comparison Module | Added analysis result | version=run_20260513_112526 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\run_20260513_112526\results\analysis_evaluation_results.json
+2026-05-13 11:30:15,213 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112526 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\run_20260513_112526\results\recommendation_evaluation_results.json
+2026-05-13 11:30:15,222 | INFO | Comparison Module | Added analysis result | version=run_20260513_112802 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\run_20260513_112802\results\analysis_evaluation_results.json
+2026-05-13 11:30:15,236 | INFO | Comparison Module | Added recommendation result | version=run_20260513_112802 | file=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\run_20260513_112802\results\recommendation_evaluation_results.json
+2026-05-13 11:30:15,237 | INFO | Comparison Module | Initialized ComparisonModule | module_type=analysis | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:15,237 | INFO | Comparison Module | Version summary started | module_type=analysis
+2026-05-13 11:30:15,237 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:15,247 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'clarity', 'accuracy', 'structure', 'hallucination', 'kpi_alignment', 'overall']
+2026-05-13 11:30:15,247 | INFO | Comparison Module | CSV schema validation passed | module_type=analysis
+2026-05-13 11:30:15,247 | INFO | Comparison Module | Building version summary | module_type=analysis | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:15,249 | INFO | Comparison Module | Version summary completed | module_type=analysis | rows=2 | columns=['version', 'clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:15,251 | INFO | Comparison Module | Generating version comparison plot | module_type=analysis | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\analysis_comparison_plot.png | metrics=['clarity', 'accuracy', 'hallucination', 'structure', 'kpi_alignment', 'overall']
+2026-05-13 11:30:15,517 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\analysis_comparison_plot.png
+2026-05-13 11:30:15,529 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_analysis_summary_input.csv
+2026-05-13 11:30:15,530 | INFO | Comparison Module | Initialized ComparisonModule | module_type=recommendation | input_csv=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:15,530 | INFO | Comparison Module | Version summary started | module_type=recommendation
+2026-05-13 11:30:15,530 | INFO | Comparison Module | Loading comparison CSV | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:15,532 | INFO | Comparison Module | CSV loaded successfully | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:15,532 | INFO | Comparison Module | CSV schema validation passed | module_type=recommendation
+2026-05-13 11:30:15,533 | INFO | Comparison Module | Building version summary | module_type=recommendation | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:15,535 | INFO | Comparison Module | Version summary completed | module_type=recommendation | rows=2 | columns=['version', 'Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:15,537 | INFO | Comparison Module | Generating version comparison plot | module_type=recommendation | output_path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\recommendation_comparison_plot.png | metrics=['Structure', 'Feasibility', 'Recommendation_Count', 'Analysis_Grounding', 'Action_Step_Completeness', 'Priority_Alignment', 'Tone_Audience_Compliance', 'Expected_Impact_Quality', 'Overall']
+2026-05-13 11:30:15,810 | INFO | Comparison Module | Plot saved successfully | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\recommendation_comparison_plot.png
+2026-05-13 11:30:15,824 | INFO | Comparison Module | Deleted file | path=D:\Work Data\NLP Monitorship\Project\Team4-MarketingExpert\data\outputs\campaign_3\comparison_results\_temp_recommendation_summary_input.csv
+2026-05-13 11:30:15,824 | INFO | Comparison Module | Multi-campaign comparison pipeline finished successfully

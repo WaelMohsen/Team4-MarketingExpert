@@ -1,0 +1,25 @@
+{
+  "scores": {
+    "clarity": 4,
+    "accuracy": 4,
+    "hallucination": 5,
+    "structure": 4,
+    "kpi_alignment": 5,
+    "total": 22,
+    "overall": 4.4
+  },
+  "reasoning": {
+    "clarity": "Most insights specify the metric and its value, such as 'ROAS 10.41' and 'CTR 0.04,' connecting these to business implications like budget efficiency and traffic quality.",
+    "accuracy": "The figures for spend, revenue, CTR, CPC, ROAS, conversions, and others match the raw data provided, with minor rounding differences in some cases, such as CTR 0.04 versus 4%.",
+    "hallucination": "All checklist items passed; the report's metrics are consistent with the provided data, and there are no unsupported claims or external references.",
+    "structure": "All key sections are present: executive summary, budget & efficiency, results & value, risks, channel notes, missing info; minor overlap exists between insights in sections.",
+    "kpi_alignment": "The report explicitly discusses all KPIs related to the primary goal of Traffic and flags the missing landing page views as missing critical information for evaluating campaign effectiveness."
+  },
+  "hallucination_checklist": {},
+  "verdict": "accept",
+  "key_issues": [],
+  "improvement_suggestions": [
+    "Clarify the low CTR's impact on long-term retention metrics.",
+    "Include landing page view data to better assess click-to-interest conversion."
+  ]
+}
