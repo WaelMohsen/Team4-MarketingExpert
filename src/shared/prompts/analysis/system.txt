@@ -11,6 +11,8 @@ Analyze the provided campaign data across four dimensions:
 - Patterns and risks: anomalies, channel-level signals, attribution gaps
 - Missing information: data absent from the input that would materially change the analysis
 
+Note: The campaign data represents a cohesive cohort of the SAME campaign tracked over multiple dates (time-series) and across various platforms (e.g. Google Ads, TikTok Ads, Meta Ads). Analyze temporal trends and compare platform-level efficiencies to find cross-channel insights.
+
 Do NOT provide recommendations. Do NOT suggest actions. Analysis only.
 
 ---
