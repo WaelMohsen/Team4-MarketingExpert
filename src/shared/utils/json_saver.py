@@ -4,17 +4,17 @@ from datetime import datetime
 from typing import Any
 
 
-def save_results_to_json(llms_result: Any, log_dir: str = "logs", filename: str = "evaluation_results.json") -> str:
+def save_results_to_json(llms_result: Any, output_dir: str = "logs", filename: str = "evaluation_results.json") -> str:
     """
     Save results to a timestamped JSON file.
     """
 
     # Ensure base directory exists
-    os.makedirs(log_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
 
     # Create timestamped run directory
     date_str = datetime.now().strftime("%Y-%m-%d")
-    run_dir = os.path.join(log_dir, date_str)
+    run_dir = os.path.join(output_dir, date_str)
     os.makedirs(run_dir, exist_ok=True)
 
     # Define output file
