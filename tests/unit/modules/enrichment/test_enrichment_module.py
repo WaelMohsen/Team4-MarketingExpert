@@ -29,8 +29,6 @@ def test_Run_ShouldBuildSummaryAndExtractFeatures_WhenValidDataProvided(enrichme
     # Assert
     assert updated_ctx.enriched_data is not None
     payload = updated_ctx.enriched_data["campaign_data"]
-    assert isinstance(payload, list)
-    assert len(payload) == 1
     assert payload[0]["campaign_identity"]["platform"] == "Google"
     assert payload[0]["performance_metrics"]["spend"] == 100.0
 

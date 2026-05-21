@@ -135,14 +135,12 @@ def main():
         # Pass the full batch slice — modules receive a multi-row DataFrame
         batch_context.processed_df = df_batch.reset_index(drop=True)
 
-        # Execute granular modules against the full batch context
+        # Execute granular modules against the full batch context via PipelineEngine (LCEL)
+        batch_engine = PipelineEngine()
         for module in granular_modules:
-            try:
-                batch_context = module.run(batch_context)
-                module.save(batch_context)
-            except Exception as e:
-                logger.error(f"Error in {module.name} for {batch_label}: {e}")
-                batch_context.errors.append(f"{module.name}: {e}")
+            batch_engine.add_module(module)
+
+        batch_context = batch_engine.run(batch_context)
 
     logger.info(f"All batches processed. Results available under: {args.output_base_dir}")
 

@@ -5,7 +5,10 @@ This guide provides step-by-step instructions on how to execute every component 
 ## 1. Prerequisites
 Ensure your environment is set up:
 ```bash
-# Install dependencies
+# Install dependencies using uv (recommended)
+uv pip install -r requirements.txt
+
+# Or using standard pip
 pip install -r requirements.txt
 
 # Configure environment variables in .env
@@ -16,7 +19,10 @@ OPENAI_MODEL="gpt-4o-mini"
 ---
 
 ## 2. Running the Full Pipeline
-The primary entry point is `run_pipeline.py`. It executes the full flow (Ingestion → Prep → Enrichment → Analysis → Recommendation → Evaluation) in a granular loop.
+The primary entry point is `run_pipeline.py`. It executes the full flow (Ingestion → Prep → Enrichment → Analysis → Recommendation → Evaluation) using a LangChain Expression Language (LCEL) chain.
+
+> [!NOTE]
+> The orchestrator compiles and runs Phase A (Preparation) and Phase B (Batch processing) using native LangChain `Runnable` chains composed via the `|` operator. LLM calls utilize the standard `ChatOpenAI` wrapper and structural output models.
 
 ### Basic Run
 ```bash
