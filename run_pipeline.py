@@ -70,11 +70,31 @@ def main():
         logger.info(f"Limiting execution to first {args.row_limit} rows.")
 
     # 3. Phase B: Batch Processing
-    # Slice processed_df into batches of --batch-size rows.
-    # To change batch size at runtime: --batch-size N
-    # To change the permanent default: edit default=6 in parse_args() only.
-    batch_size = args.batch_size
-    total_rows = len(processed_df)
+    # Check if 'index' is in the processed DataFrame columns to group campaigns dynamically.
+    # Otherwise, fallback to slicing processed_df into batches of --batch-size rows.
+    if "index" in processed_df.columns:
+        # Group by 'index', preserving original order of index values
+        unique_indices = []
+        for idx in processed_df["index"]:
+            if idx not in unique_indices:
+                unique_indices.append(idx)
+        
+        batches = []
+        for idx in unique_indices:
+            df_grp = processed_df[processed_df["index"] == idx].copy()
+            batches.append((f"campaign_{idx}", df_grp))
+        
+        logger.info(f"Detected 'index' column. Grouped into {len(batches)} campaigns based on 'index'.")
+    else:
+        batch_size = args.batch_size
+        total_rows = len(processed_df)
+        batches = []
+        for batch_start in range(0, total_rows, batch_size):
+            batch_end = min(batch_start + batch_size, total_rows)
+            df_grp = processed_df.iloc[batch_start:batch_end].copy()
+            batches.append((f"batch_{batch_start + 1}_{batch_end}", df_grp))
+        
+        logger.info(f"Starting Batch Processing: {total_rows} rows → batches of {batch_size}.")
 
     granular_modules = [
         EnrichmentModule(),
@@ -84,17 +104,11 @@ def main():
     if not args.skip_evaluation:
         granular_modules.append(EvaluationModule())
 
-    logger.info(f"Starting Batch Processing: {total_rows} rows → batches of {batch_size}.")
-
-    for batch_start in range(0, total_rows, batch_size):
-        batch_end = min(batch_start + batch_size, total_rows)
-        df_batch = processed_df.iloc[batch_start:batch_end]
-
-        batch_label = f"batch_{batch_start + 1}_{batch_end}"
+    for batch_label, df_batch in batches:
         batch_dir = os.path.join(args.output_base_dir, batch_label, f"run_{timestamp}", "results")
         os.makedirs(batch_dir, exist_ok=True)
 
-        logger.info(f"--- Processing {batch_label} (rows {batch_start + 1}–{batch_end}) ---")
+        logger.info(f"--- Processing {batch_label} ({len(df_batch)} rows) ---")
 
         # Derive metadata from the first row; all rows in a batch share
         # the same campaign target and business domain.

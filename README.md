@@ -2,8 +2,11 @@
 
 A strictly granular, row-by-row Python pipeline that converts raw paid media performance data into structured, business-friendly LLM outputs using an iterative intelligence workflow.
 
-## 🏛️ Granular Architecture
-The engine is designed for **high-precision analysis**. Unlike traditional tools that aggregate data, this engine treats every single campaign (row) as an independent case study.
+## 🏛️ Campaign Cohort Architecture
+The engine is designed for **high-precision analysis**. Unlike traditional tools that aggregate all accounts into high-level averages, this engine treats every campaign cohort as a self-contained case study.
+- **Dynamic Campaign Grouping**: If an `index` column is present in the source CSV, the engine dynamically groups rows sharing the same index as a single campaign cohort. This aligns different platform touchpoints (e.g. Google Ads, TikTok Ads, Meta Ads) and different time periods for the same campaign.
+- **Backward Compatibility**: If no `index` column exists, it falls back to slicing rows in fixed batches of `--batch-size` (default: 6).
+- **Campaign Objectives**: The main objectives and goals (primary goal, industry, offering, target audience) are derived from the first row of each cohort (the cohort source of truth).
 
 ```mermaid
 flowchart TD
@@ -36,7 +39,7 @@ flowchart TD
         IN[Ingestion] --> PRE[Preprocessing & Validation]
     end
 
-    subgraph Phase B: Iterative Analysis [Row-by-Row]
+    subgraph Phase B: Iterative Analysis [Campaign-by-Campaign]
         PRE --> EN[Enrichment: Campaign Context Case]
         EN --> AN[Analysis: Context + Performance]
         AN --> RE[Recommendation: Context + Analysis]
@@ -49,8 +52,8 @@ flowchart TD
 1. **Ingestion**: Loads the source dataset.
 2. **Preprocessing**: Validates schema, cleans data, and standardizes columns globally for efficiency.
 
-### Phase B: Iterative Analysis (Row-by-Row)
-For **each row** in the dataset, the engine executes:
+### Phase B: Iterative Analysis (Campaign-by-Campaign)
+For **each campaign cohort** in the dataset, the engine executes:
 
 ```mermaid
 sequenceDiagram
@@ -61,8 +64,8 @@ sequenceDiagram
     participant EV as Evaluation
     participant FS as File System
     
-    P->>EN: Yield next campaign row
-    EN->>AN: Pass "Campaign Context Case" (Row + metadata)
+    P->>EN: Yield next campaign cohort
+    EN->>AN: Pass "Campaign Context Case" (Cohort + metadata)
     AN->>AN: LLM analyzes performance
     AN->>RE: Pass Context + Analysis Report
     AN->>EV: Pass Analysis for Quality Audit
@@ -73,8 +76,8 @@ sequenceDiagram
     RE->>FS: Save recommendation_result.json
 ```
 
-1. **Enrichment**: Generates a high-density "Campaign Context Case" including identity metadata (audience, industry) and performance metrics.
-2. **Analysis**: Performs deep-dive LLM performance assessment on the individual campaign utilizing full unified context (Domain, Targets, Data).
+1. **Enrichment**: Generates a high-density "Campaign Context Case" including identity metadata (audience, industry) and performance metrics for each platform/date in the cohort.
+2. **Analysis**: Performs deep-dive LLM performance assessment on the campaign cohort utilizing full unified context (Domain, Targets, Data).
 3. **Recommendation**: Generates actionable cards utilizing the complete context and the preceding Analysis report.
 4. **Evaluation**: Audits the quality of the AI outputs using a standardized prompt-based framework with full 360-degree context awareness (splitting Analysis and Recommendation grades into separate files).
 

@@ -201,6 +201,8 @@ Choose the higher priority ONLY if the issue directly affects the primary goal m
    * Be directional or quantified
    * Reflect realistic business impact
 
+8. The campaign data and analysis represent a cohort of the SAME campaign running across multiple platforms and dates. Design recommendations that optimize cross-channel budget allocation (shifting budget to higher-performing platforms) and suggest adjustments based on temporal performance trends.
+
 ---
 
 # MISSING DATA HANDLING

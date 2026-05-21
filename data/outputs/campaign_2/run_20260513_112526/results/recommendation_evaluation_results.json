@@ -1,0 +1,32 @@
+{
+  "scores": {
+    "Structure": 3,
+    "Feasibility": 3,
+    "Recommendation_Count": 3,
+    "Analysis_Grounding": 3,
+    "Action_Step_Completeness": 3,
+    "Priority_Alignment": 3,
+    "Tone_Audience_Compliance": 3,
+    "Expected_Impact_Quality": 3,
+    "Overall": 3.0
+  },
+  "reasoning": {
+    "Structure": "All recommendations follow the specified schema precisely, with no missing or extra fields, and each contains the required sections.",
+    "Feasibility": "Actions proposed involve standard platform features such as ad copy tweaking, A/B testing, analytics review, and audience refinement, which are feasible without special permissions or tools.",
+    "Recommendation_Count": "Exactly four recommendations are present, each targeting a distinct root cause identified in the analysis, with no duplicates or overlaps.",
+    "Analysis_Grounding": "Each recommendation clearly stems from the given insights and data: low CTR, missing landing page data, CPC inefficiencies, and low post-click conversion issues, directly tied to the analysis context.",
+    "Action_Step_Completeness": "Every 'what_you_should_do' item specifies what to do, where to implement it, and how to execute it, meeting all action step clarity requirements.",
+    "Priority_Alignment": "Priorities are consistent with the impact level and business context: increasing CTR and landing page analysis are high priority, audience targeting adjustments are medium, and engagement monitoring is low, aligning well with potential ROI and risk.",
+    "Tone_Audience_Compliance": "Language is clear, formal, jargon-appropriate, and suitable for a non-marketer stakeholder, without hedging or ambiguous phrasing.",
+    "Expected_Impact_Quality": "Each recommendation states a measurable or directional impact, like a 15-25% CTR increase, or cost efficiencies, providing clear expectations tied to metrics."
+  },
+  "verdict": "accept",
+  "key_issues": [
+    "Recommendations do not specify owner roles for all actions, which could aid accountability.",
+    "The low priority assigned to post-click engagement monitoring might undervalue its importance in improving overall campaign performance."
+  ],
+  "improvement_suggestions": [
+    "Include owner or responsible team name for each action for better accountability.",
+    "Reassess the priority level for monitoring engagement metrics, considering their importance in retention and long-term performance."
+  ]
+}

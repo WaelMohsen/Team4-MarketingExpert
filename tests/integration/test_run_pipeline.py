@@ -18,6 +18,7 @@ def test_MainPipelineFlow_ShouldExecuteAllModules_WhenValidArgsProvided():
     mock_args.input_csv = "data/test.csv"
     mock_args.output_base_dir = "data/outputs/"
     mock_args.row_limit = 1
+    mock_args.batch_size = 6
     mock_args.skip_evaluation = False
     mock_args.batch_size = 6
     

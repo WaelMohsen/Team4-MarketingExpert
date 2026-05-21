@@ -46,7 +46,7 @@ def test_Save_ShouldPersistEnrichedData_WhenOutputDirectoryExists(enrichment_mod
     # Arrange
     ctx = ExecutionContext()
     ctx.enriched_data = {
-        "campaign_data": {"id": 1},
+        "campaign_data": [{"id": 1}],
         "processed_df": pd.DataFrame({"a": [1]})
     }
     ctx.runtime_output_path = "test_enrich_dir"

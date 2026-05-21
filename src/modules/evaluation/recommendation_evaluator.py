@@ -30,7 +30,7 @@ class RecommendationEvaluator:
             max_output_tokens=2000
         )
 
-    def evaluate(self, business_context: Any, campaign_target: Any, campaign_data: Any, analysis_context: Any, recommendation: Any, save_dir: Optional[str] = None) -> Dict[str, Any]:
+    def evaluate(self, business_context: Any, campaign_target: Any, campaign_data: Any, analysis_context: Any, recommendations: List[Dict[str, Any]], save_dir: Optional[str] = None) -> Dict[str, Any]:
         """Runs the evaluation."""
         
         sys_text = self.loader.load_prompt_text(PromptRegistry.EVAL_RECOMMENDATION_SYSTEM.value)
@@ -45,7 +45,7 @@ class RecommendationEvaluator:
             user_text.replace("{{BUSINESS_CONTEXT}}", json.dumps(combined_context, indent=2))
             .replace("{{RAW_DATA}}", json.dumps(campaign_data, indent=2))
             .replace("{{ANALYSIS_CONTEXT}}", json.dumps(analysis_context, indent=2))
-            .replace("{{RECOMMENDATION}}", json.dumps(recommendation, indent=2))
+            .replace("{{RECOMMENDATION}}", json.dumps(recommendations, indent=2))
         )
         
         messages = [
@@ -65,23 +65,55 @@ class RecommendationEvaluator:
         
         return {
             "scores": {
-                "clarity": eval_data.get("clarity_score", 0),
-                "accuracy": eval_data.get("accuracy_score", 0),
-                "structure": eval_data.get("structure_score", 0),
-                "feasibility": eval_data.get("feasibility_score", 0),
-                "overall": (eval_data.get("clarity_score", 0) + eval_data.get("accuracy_score", 0) + 
-                           eval_data.get("structure_score", 0) + eval_data.get("feasibility_score", 0)) / 4
+                "Structure": eval_data.get("structure_score", 0),
+                "Feasibility": eval_data.get("feasibility_score", 0),
+                "Recommendation_Count": eval_data.get("Recommendation_Count_score", 0),
+                "Analysis_Grounding": eval_data.get("Analysis_Grounding_score", 0),
+                "Action_Step_Completeness": eval_data.get("Action_Step_Completeness_score", 0),
+                "Priority_Alignment": eval_data.get("Priority_Alignment_score", 0),
+                "Tone_Audience_Compliance": eval_data.get("Tone_Audience_Compliance_score", 0),
+                "Expected_Impact_Quality": eval_data.get("Expected_Impact_Quality_score", 0),
+                "Overall": (
+                    eval_data.get("structure_score", 0) + 
+                    eval_data.get("feasibility_score", 0) + 
+                    eval_data.get("Recommendation_Count_score", 0) + 
+                    eval_data.get("Analysis_Grounding_score", 0) +
+                    eval_data.get("Action_Step_Completeness_score", 0) + 
+                    eval_data.get("Priority_Alignment_score", 0) + 
+                    eval_data.get("Tone_Audience_Compliance_score", 0) + 
+                    eval_data.get("Expected_Impact_Quality_score", 0)
+                ) / 8
             },
             "reasoning": {
-                "clarity": eval_data.get("clarity_reasoning"),
-                "accuracy": eval_data.get("accuracy_reasoning"),
-                "structure": eval_data.get("structure_reasoning"),
-                "feasibility": eval_data.get("feasibility_reasoning"),
+                "Structure": eval_data.get("structure_reasoning"),
+                "Feasibility": eval_data.get("feasibility_reasoning"),
+                "Recommendation_Count": eval_data.get("Recommendation_Count_reasoning"),
+                "Analysis_Grounding": eval_data.get("Analysis_Grounding_reasoning"),
+                "Action_Step_Completeness": eval_data.get("Action_Step_Completeness_reasoning"),
+                "Priority_Alignment": eval_data.get("Priority_Alignment_reasoning"),
+                "Tone_Audience_Compliance": eval_data.get("Tone_Audience_Compliance_reasoning"),
+                "Expected_Impact_Quality": eval_data.get("Expected_Impact_Quality_reasoning"),
             },
             "verdict": eval_data.get("verdict"),
             "key_issues": eval_data.get("key_issues"),
             "improvement_suggestions": eval_data.get("improvement_suggestions"),
         }
+       
+
+    
+
+
+
+
+#for rec in recommendations:
+     #   try:
+       #     eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, rec)
+         #   results.append({
+         #       "recommendation_title": rec.get("title"),
+         #       "evaluation": eval_res
+         #   })
+        #except Exception as e:
+        #    logger.error(f"Failed to evaluate recommendation '{rec.get('title')}': {e}")
 
 def run_recommendation_evaluation(file_path: str):
     """Main execution loop for recommendation evaluation."""
@@ -101,49 +133,12 @@ def run_recommendation_evaluation(file_path: str):
     analysis_context = data.get('analysis_response')
     recommendations = data.get('recommendation_response', {}).get('recommendations', [])
 
-    if not recommendations and 'recommendations' in data:
-        recommendations = data['recommendations']
-        
-    if not campaign_data:
-        dir_name = os.path.dirname(file_path)
-        enriched_summary_path = os.path.join(dir_name, 'enriched_summary.json')
-        analysis_result_path = os.path.join(dir_name, 'analysis_result.json')
-        
-        if os.path.exists(enriched_summary_path):
-            try:
-                with open(enriched_summary_path, 'r', encoding='utf-8') as ef:
-                    enriched_data = json.load(ef)
-                    campaign_data = enriched_data
-                    if not business_context:
-                        identity = enriched_data.get('campaign_identity', {})
-                        business_context = {
-                            "industry": identity.get("industry", "Unknown"),
-                            "offering": identity.get("offering", "Unknown"),
-                            "audience": identity.get("audience", "Unknown"),
-                            "funnel_stage": identity.get("funnel_stage", "Unknown")
-                        }
-                    if not campaign_target:
-                        campaign_target = {"primary_goal": "Unknown"}
-            except Exception as e:
-                logger.warning(f"Could not load context from {enriched_summary_path}: {e}")
-                
-        if not analysis_context and os.path.exists(analysis_result_path):
-            try:
-                with open(analysis_result_path, 'r', encoding='utf-8') as af:
-                    analysis_context = json.load(af)
-            except Exception as e:
-                logger.warning(f"Could not load analysis from {analysis_result_path}: {e}")
-
-    results = []
-    for rec in recommendations:
-        try:
-            eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, rec)
-            results.append({
-                "recommendation_title": rec.get("title"),
-                "evaluation": eval_res
-            })
-        except Exception as e:
-            logger.error(f"Failed to evaluate recommendation '{rec.get('title')}': {e}")
+    try:
+        eval_res = evaluator.evaluate(business_context, campaign_target, campaign_data, analysis_context, recommendations)
+        results = eval_res
+    except Exception as e:
+        logger.error(f"Failed to evaluate recommendations: {e}")
+        return
 
     if results:
         save_path = save_results_to_json(results, filename="recommendation_evaluation_results.json")

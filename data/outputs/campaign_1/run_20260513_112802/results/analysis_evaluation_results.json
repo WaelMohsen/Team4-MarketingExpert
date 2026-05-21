@@ -1,0 +1,26 @@
+{
+  "scores": {
+    "clarity": 4,
+    "accuracy": 4,
+    "hallucination": 5,
+    "structure": 5,
+    "kpi_alignment": 5,
+    "total": 23,
+    "overall": 4.6
+  },
+  "reasoning": {
+    "clarity": "Most insights name specific metrics and connect them to business implications, such as the low CTR impacting traffic quality.",
+    "accuracy": "All metrics from the report, such as CPC: $1.26 and CTR: 0.04, match the raw data; minor rounding issues are present but accurate.",
+    "hallucination": "The report only contains metrics and interpretations directly supported by the raw data without unsupported claims or external benchmarks.",
+    "structure": "All required sections are present: Executive Summary, Budget & Efficiency, Results & Value, Risks, Channel Notes, and Missing Info.",
+    "kpi_alignment": "The report explicitly addresses the primary goal 'Traffic' and all KPIs provided, flagging missing data such as landing page views but not omitting any KPI from analysis."
+  },
+  "hallucination_checklist": {},
+  "verdict": "accept",
+  "key_issues": [],
+  "improvement_suggestions": [
+    "Consider providing absolute benchmarks or industry standards for CTR to contextualize the low value.",
+    "Include landing page engagement metrics for more complete traffic quality assessment.",
+    "Clarify whether any KPI fields were missing from the raw data and how this impacts analysis."
+  ]
+}
