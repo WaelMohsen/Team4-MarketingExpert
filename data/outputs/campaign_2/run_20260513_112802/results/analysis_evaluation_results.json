@@ -1,0 +1,28 @@
+{
+  "scores": {
+    "clarity": 4,
+    "accuracy": 5,
+    "hallucination": 4,
+    "structure": 5,
+    "kpi_alignment": 4,
+    "total": 22,
+    "overall": 4.4
+  },
+  "reasoning": {
+    "clarity": "Most insights specify the metric and its value, such as CTR at 0.04, and attempt to connect it to business impact, like traffic quality issues.",
+    "accuracy": "All figures used in the report (SPEND: 6159.6, REVENUE: 64126.68, CTR: 0.04, etc.) match exactly with the raw data; no inconsistencies are found.",
+    "hallucination": "All items in the hallucination checklist pass except for the 'no external benchmarks' and 'no trend claims' which aren't explicitly claimed or used; no unsupported statements are present.",
+    "structure": "The report contains all required sections: Executive Summary, Budget & Efficiency, Results & Value, Risks, Channel Notes, and Missing Info; the scope is correct.",
+    "kpi_alignment": "The analysis addresses the primary goal (Traffic) and discusses each KPI, although it does not explicitly flag any missing KPI data; it interprets the available metrics in the context of campaign performance."
+  },
+  "hallucination_checklist": {},
+  "verdict": "revise",
+  "key_issues": [
+    "Several insights lack clear business implications, especially how the low CTR impacts overall retention.",
+    "The report does not explicitly flag any KPI as missing or explain the absence of certain data fields."
+  ],
+  "improvement_suggestions": [
+    "Explain how the low CTR directly affects traffic quality and retention goals.",
+    "Explicitly flag if any KPIs are unavailable or not measured, to meet full KPI alignment."
+  ]
+}

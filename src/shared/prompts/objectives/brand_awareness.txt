@@ -1,0 +1,24 @@
+STRATEGIC GOAL: Brand Awareness
+
+PRIORITY METRICS: reach, impressions, cpm, frequency
+
+RULES
+1. Saturation & Fatigue Check
+- Monitor frequency levels (risk threshold: 4–5+)
+- Flag ad fatigue when frequency is high with declining engagement
+
+2. Cost Efficiency Analysis
+- Evaluate CPM trends against benchmarks
+- Identify overpayment for impressions
+
+3. Attention Quality vs Volume
+- Prioritize engagement rate and video completion rate over raw impressions
+- High reach without engagement is low-quality awareness
+
+4. Awareness-to-Future-Impact Link
+- Connect awareness metrics to downstream funnel potential
+- Explain how visibility contributes to future conversions and sales
+
+MISSING DATA
+- Do not assume engagement or view metrics if not provided
+- Clearly state when analysis is impression-only

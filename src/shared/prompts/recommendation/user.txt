@@ -1,0 +1,7 @@
+INPUT JSON
+{
+  "campaign_target": {{CAMPAIGN_TARGET}},
+  "business_domain": {{BUSINESS_DOMAIN}},
+  "campaign_data": {{CAMPAIGN_DATA}},
+  "analysis": {{ANALYSIS_JSON}}
+}

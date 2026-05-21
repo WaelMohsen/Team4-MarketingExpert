@@ -1,0 +1,21 @@
+Please evaluate the following campaign analysis report.
+
+### Campaign Context (Target & Domain)
+{{CAMPAIGN_CONTEXT}}
+
+### Raw Campaign Data
+{{RAW_DATA}}
+
+### Generated Analysis Report (To Evaluate)
+{{ANALYSIS_REPORT}}
+
+Evaluate the report strictly based on the provided context and data.
+
+- Verify that all insights and conclusions are supported by the data.
+- Identify any hallucinations (metrics, trends, or claims not present in the data).
+- Ensure the analysis addresses the campaign objective and key performance signals.
+- Check coverage of critical areas such as spend efficiency, engagement (CTR/clicks), conversions, and risks.
+- Assess whether insights are meaningful (not just descriptive) and supported by clear evidence.
+- Evaluate whether the analysis explains the business impact of the findings.
+
+Do not assume correctness. Base your evaluation only on the provided inputs.

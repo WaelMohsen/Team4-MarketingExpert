@@ -1,0 +1,222 @@
+import json
+import logging
+import os
+import re
+from datetime import datetime
+from typing import List, Dict, Any, Optional
+
+from ...shared.utils.prompt_loader import PromptLoader
+from src.shared.utils.prompt_builder import PromptBuilder
+from src.shared.utils.llm_client import LLMApiClient
+from src.shared.models.llm_responses import AnalysisEvaluationResponse
+from src.shared.utils.prompt_registry import PromptRegistry
+
+# Configure logging using shared structure
+try:
+    from src.shared.utils.logger import setup_logging
+    logger = setup_logging(module_name='llm_analysis_evaluator')
+    from src.shared.utils.json_saver import save_results_to_json
+except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
+
+class AnalysisEvaluator:
+    """
+    Evaluates campaign analysis reports using manual prompts and structured outputs.
+    Criteria: Clarity, Accuracy, Hallucination, Structure, KPI Alignment (each 1–5).
+    """
+    def __init__(self):
+        self.loader = PromptLoader.from_module_dir()
+        self.builder = PromptBuilder(loader=self.loader)
+        self.client = LLMApiClient(
+            model=os.getenv("EVALUATION_MODEL", "gpt-4.1-nano-2025-04-14"),
+            max_output_tokens=2000
+        )
+
+    def evaluate(
+        self,
+        campaign_data: Any,
+        analysis_report: Any,
+        campaign_target: Any,
+        business_domain: Any,
+        save_dir: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Runs the evaluation using LLMApiClient."""
+
+        # Full context passed as one block — includes all domain + target fields
+        context = {
+            "target": campaign_target,
+            "business_domain": business_domain
+        }
+
+        sys_text = self.loader.load_prompt_text(PromptRegistry.EVAL_ANALYSIS_SYSTEM.value)
+        user_text = self.loader.load_prompt_text(PromptRegistry.EVAL_ANALYSIS_USER.value)
+
+        # Extract only the fields explicitly referenced by name in the prompt steps
+        if not campaign_target:
+            raise ValueError("campaign_target is required for analysis evaluation")
+
+        primary_goal = campaign_target.get("primary_goal")
+        if not campaign_data:
+            raise ValueError("campaign_data is required for analysis evaluation")        
+        kpis_list = campaign_data.get("performance_metrics")
+
+        if not primary_goal:
+            raise ValueError("Missing campaign_target.primary_goal")
+
+        if not kpis_list:
+            raise ValueError("Missing campaign_target.kpis")
+
+        kpis = ", ".join(kpis_list)
+
+        user_text = (
+            user_text
+            .replace("{{PRIMARY_GOAL}}",     primary_goal)
+            .replace("{{KPIS}}",             kpis)
+            .replace("{{CAMPAIGN_CONTEXT}}", json.dumps(context, indent=2))
+            .replace("{{RAW_DATA}}",         json.dumps(campaign_data, indent=2))
+            .replace("{{ANALYSIS_REPORT}}",  json.dumps(analysis_report, indent=2))
+        )
+        
+        unresolved = re.findall(r"\{\{.*?\}\}", user_text)
+        if unresolved:
+            raise ValueError(f"Unresolved prompt placeholders found: {unresolved}")
+
+        messages = [
+            {"role": "system", "content": sys_text},
+            {"role": "user", "content": user_text}
+        ]
+
+        logger.info("Executing Analysis Evaluation...")
+        result = self.client.generate_json(
+            messages,
+            response_format=AnalysisEvaluationResponse,
+            save_dir=save_dir,
+            prompt_name="evaluation_analysis_prompt"
+        )
+
+        eval_data = result.get("evaluation", {})
+
+        # Collect all 5 scores
+        clarity_score       = eval_data.get("clarity_score", 0)
+        accuracy_score      = eval_data.get("accuracy_score", 0)
+        hallucination_score = eval_data.get("hallucination_score", 0)
+        structure_score     = eval_data.get("structure_score", 0)
+        kpi_alignment_score = eval_data.get("kpi_alignment_score", 0)
+
+        total_score = (
+            clarity_score
+            + accuracy_score
+            + hallucination_score
+            + structure_score
+            + kpi_alignment_score
+        )
+        overall_avg = round(total_score / 5, 2)
+
+        return {
+            "scores": {
+                "clarity":       clarity_score,
+                "accuracy":      accuracy_score,
+                "hallucination": hallucination_score,
+                "structure":     structure_score,
+                "kpi_alignment": kpi_alignment_score,
+                "total":         total_score,
+                "overall":       overall_avg,
+            },
+            "reasoning": {
+                "clarity":       eval_data.get("clarity_reasoning"),
+                "accuracy":      eval_data.get("accuracy_reasoning"),
+                "hallucination": eval_data.get("hallucination_reasoning"),
+                "structure":     eval_data.get("structure_reasoning"),
+                "kpi_alignment": eval_data.get("kpi_alignment_reasoning"),
+            },
+            "hallucination_checklist": eval_data.get("hallucination_checklist", {}),
+            "verdict":                 eval_data.get("verdict"),
+            "key_issues":              eval_data.get("key_issues"),
+            "improvement_suggestions": eval_data.get("improvement_suggestions"),
+        }
+
+
+def run_evaluation_pipeline(files: List[str]):
+    """Main execution loop for analysis evaluation."""
+    evaluator = AnalysisEvaluator()
+
+    for file_path in files:
+        if not os.path.exists(file_path):
+            logger.error(f"File not found: {file_path}")
+            continue
+
+        logger.info(f"Processing File: {file_path}")
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        campaign_data   = data.get('input_data') or data.get('campaign_data')
+        analysis_report = data.get('analysis_response')
+        campaign_target = data.get('campaign_target')
+        business_domain = data.get('business_domain')
+
+        # Fallback: if data is from data/outputs/.. directory structure
+        if analysis_report is None and 'analysis' in data:
+            analysis_report = data
+        
+        if campaign_data is None:
+            # Try to load enriched_summary.json from the same directory
+            dir_name = os.path.dirname(file_path)
+            enriched_summary_path = os.path.join(dir_name, 'enriched_summary.json')
+            if os.path.exists(enriched_summary_path):
+                try:
+                    with open(enriched_summary_path, 'r', encoding='utf-8') as ef:
+                        enriched_data = json.load(ef)
+                        campaign_data = enriched_data
+                        
+                        # Infer business domain and campaign target from enriched_data if missing
+                        if not business_domain:
+                            identity = enriched_data.get('campaign_identity', {})
+                            business_domain = {
+                                "industry": identity.get("industry", "Unknown"),
+                                "offering": identity.get("offering", "Unknown"),
+                                "audience": identity.get("audience", "Unknown"),
+                                "funnel_stage": identity.get("funnel_stage", "Unknown")
+                            }
+                        if not campaign_target:
+                            campaign_target = {
+                                "primary_goal": "Unknown" # Default if not found
+                            }
+                except Exception as e:
+                    logger.warning(f"Could not load context from {enriched_summary_path}: {e}")
+
+        if not all([campaign_data, analysis_report]):
+            logger.warning(f"Skipping {file_path}: missing required fields.")
+            continue
+
+
+        try:
+            comparison_results = evaluator.evaluate(
+                campaign_data, analysis_report, campaign_target, business_domain
+            )
+
+            # Save results
+            save_path = save_results_to_json(
+                comparison_results, filename="analysis_evaluation_results.json"
+            )
+            logger.info(f"Evaluation results saved to: {save_path}")
+
+            # Print summary
+            print("\nEvaluation Summary:")
+            print(json.dumps(comparison_results["scores"], indent=2))
+            print(f"Verdict: {comparison_results['verdict']}")
+
+        except Exception as e:
+            logger.error(f"Failed to evaluate {file_path}: {e}")
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--files", nargs="+", required=True)
+    args = parser.parse_args()
+
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    run_evaluation_pipeline(args.files)

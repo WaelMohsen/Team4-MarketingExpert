@@ -1,0 +1,56 @@
+{
+  "recommendations": [
+    {
+      "title": "Enhance Ad Targeting to Improve CTR",
+      "whats_happening": "The CTR is low at 4%, indicating that although traffic is coming in, it may not be from the right audience or lack intent.",
+      "what_you_should_do": [
+        "Refine targeting criteria to narrow focus on first-time investors with high intent",
+        "In Google Ads, adjust audience settings to include demographic and behavioral targeting",
+        "Test different ad copies and creatives that resonate with first-time investors to improve engagement"
+      ],
+      "why_this_matters": "Improving CTR can lead to higher quality traffic, ultimately increasing conversions and revenue from the campaign.",
+      "priority": "High",
+      "expected_impact": "An estimated 15-25% improvement in CTR, leading to more engaged potential customers.",
+      "owner_suggestion": "Paid Media Manager"
+    },
+    {
+      "title": "Evaluate and Optimize Landing Page",
+      "whats_happening": "Missing data on landing page views makes it hard to evaluate traffic effectiveness and engagement post-click.",
+      "what_you_should_do": [
+        "First, obtain landing page view data by implementing tracking on the website",
+        "Once data is acquired, analyze bounce rates and engagement metrics on the landing page",
+        "Adjust the landing page to ensure it aligns with ad messaging and optimizes user experience"
+      ],
+      "why_this_matters": "Understanding landing page performance helps assess the quality of traffic and opportunities to improve conversion rates.",
+      "priority": "High",
+      "expected_impact": "Enhanced landing page engagement could lead to higher conversions, potentially increasing CVR above 10%.",
+      "owner_suggestion": "Web/Tech Team"
+    },
+    {
+      "title": "Monitor CPC Trends Alongside CTR",
+      "whats_happening": "The CPC is stable at $1.26, but the low CTR raises concerns about the efficiency of ad spend with the current engagement levels.",
+      "what_you_should_do": [
+        "Implement weekly monitoring of CPC and CTR changes in Google Ads",
+        "If CPC rises without improving CTR, consider pausing or adjusting underperforming ads",
+        "Test lower bids on specific keywords to evaluate impact on CTR without drastically increasing costs"
+      ],
+      "why_this_matters": "Keeping CPC in check while improving CTR ensures that ad spend remains efficient and maximizing returns.",
+      "priority": "Medium",
+      "expected_impact": "Potentially reduce CPC by around $0.20 while improving CTR metrics.",
+      "owner_suggestion": "Paid Media Manager"
+    },
+    {
+      "title": "Test Different Ad Creatives",
+      "whats_happening": "Current ad creatives are likely not resonating well with the audience, contributing to low CTR and potential misalignment with the offering.",
+      "what_you_should_do": [
+        "Develop and rotate at least three new ad creatives focused on personal loan benefits for first-time investors",
+        "In Google Ads, run A/B tests comparing new creatives to existing ones for performance measurement",
+        "Use insights from A/B tests to understand what messaging drives higher engagement"
+      ],
+      "why_this_matters": "Refreshing ad creatives can attract better quality traffic, ultimately improving engagement and driving more traffic to the funnel.",
+      "priority": "Low",
+      "expected_impact": "Expected to improve CTR by 5-10% if more relevant creatives are introduced.",
+      "owner_suggestion": "Creative Team"
+    }
+  ]
+}

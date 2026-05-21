@@ -1,0 +1,28 @@
+STRATEGIC GOAL: Revenue Efficiency
+
+PRIORITY METRICS: mer, ltv_to_cac, cac_payback_period
+
+RULES
+1. Profitability Health Check
+- Evaluate MER as a high-level indicator of overall efficiency
+- Flag declining MER as a structural business risk
+
+2. Customer Value Quality
+- Monitor LTV-to-CAC ratio
+- If below 3:1, highlight long-term sustainability concerns
+
+3. Cash Flow Efficiency
+- Analyze CAC payback period
+- Recommend shifting budget away from slow-recovery channels
+
+4. Value Leakage Detection
+- Identify high refund rates or low AOV segments
+- Flag them as margin erosion risks
+
+5. Business Interpretation
+- Translate all findings into “business sustainability and unit economics”
+- Focus on long-term financial health, not short-term performance spikes
+
+MISSING DATA
+- Do not infer LTV, CAC, or MER when not provided
+- Explicitly state limitations in financial interpretation

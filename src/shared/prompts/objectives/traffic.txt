@@ -1,0 +1,26 @@
+STRATEGIC GOAL: Traffic
+
+PRIORITY METRICS
+- ctr (intent)
+- clicks (volume)
+- cpc (cost efficiency)
+
+RULES
+1. Intent Quality
+- Prioritize high CTR over low CPC
+- Low CPC without CTR indicates weak traffic quality
+
+2. Cost Efficiency
+- Flag rising CPC without improvement in CTR or clicks
+
+3. Traffic Effectiveness
+- Compare clicks vs landing_page_views if available
+- If missing, state limitation
+
+4. Business Interpretation
+- Explain traffic as input to the funnel
+- Relate traffic quality to potential downstream impact
+
+MISSING DATA
+- Do not assume missing metrics
+- Add them to "missing_info"
