@@ -14,20 +14,27 @@ def get_valid_recommendation_item():
 
 def get_valid_recommendation_output():
     return {
-        "recommendations": [get_valid_recommendation_item() for _ in range(5)]
+        "recommendations": [get_valid_recommendation_item() for _ in range(4)]
     }
 
 def test_ValidateRecommendationOutput_ShouldReturnTrue_WhenOutputIsValid():
     # Act & Assert
     assert validate_recommendation_output(get_valid_recommendation_output()) is True
 
-def test_ValidateRecommendationOutput_ShouldReturnFalse_WhenLessThan5ItemsProvided():
+def test_ValidateRecommendationOutput_ShouldReturnFalse_WhenNotExactly4ItemsProvided():
     # Arrange
     data = get_valid_recommendation_output()
-    data["recommendations"].pop() # Now 4 items
+    data["recommendations"].pop() # Now 3 items
     
     # Act & Assert
     assert validate_recommendation_output(data) is False
+
+    # Arrange
+    data2 = get_valid_recommendation_output()
+    data2["recommendations"].append(get_valid_recommendation_item()) # Now 5 items
+    
+    # Act & Assert
+    assert validate_recommendation_output(data2) is False
 
 def test_ValidateRecommendationOutput_ShouldReturnFalse_WhenFieldsAreMissing():
     # Arrange
@@ -65,7 +72,7 @@ def get_valid_analysis_output():
                     "platform": "Google Ads",
                     "what_we_see": ["High CPC"],
                     "what_it_likely_means": ["Increased competition"],
-                    "risks_or_watchouts": []
+                    "risks_or_watchouts": ["Monitor budget closely"]
                 }
             ],
             "missing_info": []

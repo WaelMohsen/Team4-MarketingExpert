@@ -29,8 +29,8 @@ def test_Run_ShouldBuildSummaryAndExtractFeatures_WhenValidDataProvided(enrichme
     # Assert
     assert updated_ctx.enriched_data is not None
     payload = updated_ctx.enriched_data["campaign_data"]
-    assert payload["campaign_identity"]["platform"] == "Google"
-    assert payload["performance_metrics"]["spend"] == 100.0
+    assert payload[0]["campaign_identity"]["platform"] == "Google"
+    assert payload[0]["performance_metrics"]["spend"] == 100.0
 
 def test_Run_ShouldRaiseValueError_WhenProcessedDfIsMissing(enrichment_module):
     """Verify error when processed_df is missing."""
