@@ -1,0 +1,35 @@
+entity,field,n_unique,values
+products,category,19,"spices, honey, bundles, coffee, sweets, snacks, rice, sugar, household_basics, oils, chocolate, beverages, flour, tea, frozen, pasta, bread, dairy, eggs"
+products,tags[],10,"artisan, single_origin, bestseller, gift_friendly, economy, ramadan_special, organic, sugar_free, new_arrival, bulk_pack"
+conversations,status,4,"closed, active, stuck_pending, pending_handoff"
+conversations,language,4,"ar, en, mixed, arabizi"
+conversations,cycle,3,"2, 3, 1"
+conversations,source.platform,3,"meta_ctwa, organic, direct"
+conversations,outcome.type,7,"delivered, ghosted, cancelled, refunded, active, stuck_pending, adversarial"
+conversations,outcome.status_history[].status,7,"pending, confirmed, processing, shipped, delivered, cancelled, refunded"
+conversations,messages[].direction,2,"inbound, outbound"
+conversations,customer.country,1,EG
+conversations,customer.city,15,"Cairo, Heliopolis, Alexandria, Giza, Maadi, Mohandessin, Mansoura, New Cairo, Sheikh Zayed, Tanta, 6 October, Zamalek, 6th October, Nasr City, Dokki"
+campaigns,objective,4,"OUTCOME_SALES, OUTCOME_LEADS, OUTCOME_AWARENESS, OUTCOME_ENGAGEMENT"
+campaigns,campaign_type,8,"seasonal, promotional, experimental, always_on, awareness, launch, scale, retention"
+campaigns,status,2,"COMPLETED, ACTIVE"
+campaigns,effective_status,2,"COMPLETED, ACTIVE"
+adsets,audience_type,6,"lookalike, broad, demographic, retargeting, interest_test, custom"
+adsets,optimization_goal,2,"CONVERSATIONS, REACH"
+adsets,billing_event,1,IMPRESSIONS
+adsets,bid_strategy,1,LOWEST_COST_WITHOUT_CAP
+adsets,status,2,"COMPLETED, ACTIVE"
+adsets,effective_status,2,"COMPLETED, ACTIVE"
+adsets,targeting.countries[],1,EG
+adsets,targeting.cities[],4,"Cairo, Alexandria, Mansoura, Tanta"
+adsets,targeting.genders[],2,"2, 1"
+adsets,targeting.age_min,4,"25, 28, 22, 30"
+adsets,targeting.age_max,4,"55, 50, 45, 60"
+adsets,lookalike_spec.source,9,"delivered_customers, cycle2_high_ltv, bundle_buyers, premium_customers, gift_buyers, ramadan_high_ltv_customers, cycle2_delivered_customers, sale_buyers, last_60d_buyers"
+adsets,lookalike_spec.ratio_percent,4,"1, 3, 5, 10"
+creatives,theme,7,"premium_heritage, value_discount, discovery, ramadan_seasonal, gift_positioning, urgency_scarcity, health_dietary"
+creatives,angle,28,"value, eid_gift, premium_heritage, scarcity, experimental, ramadan, ramadan_premium, ramadan_scarcity, experimental_intro, experimental_premium, summer_launch, new_arrivals, subscription_value, premium_scale, sale, sale_urgency, retargeting, retention_warm, health, gift_mom, gift_wedding, coffee_premium, diabetic, ramadan_limited, default_premium, spring_refresh, summer_refresh, ramadan_health"
+creatives,status,1,ACTIVE
+creatives,call_to_action.type,1,WHATSAPP_MESSAGE
+ads,status,1,COMPLETED
+ads,effective_status,1,COMPLETED
